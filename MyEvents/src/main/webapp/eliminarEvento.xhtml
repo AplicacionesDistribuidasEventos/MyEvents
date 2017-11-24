@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+
+<ui:define name="titulo">Eliminar Eventos</ui:define>
+	<ui:define name="contenido">
+	
+	<h:form>
+	
+
+	<h:dataTable var="listaeventos" style="color:black"
+	value="#{eventoController.listaEventos()}" border="2" class="table">	
+	
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Codigo</f:facet>
+			#{listaeventos.codigo}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Nombre</f:facet>
+			#{listaeventos.nombre}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Capacidad</f:facet>
+			#{listaeventos.capacidad}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Fecha Evento</f:facet>
+			#{listaeventos.fechaEvento}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Costo</f:facet>
+			#{listaeventos.costo}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Latitud</f:facet>
+			#{listaeventos.latitud}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Longitu</f:facet>
+			#{listaeventos.longitud}
+		</h:column>
+	
+	
+	
+	<h:column Style="color: black">
+					<f:facet name="header" Style="color: black">Acciones</f:facet>
+					<h:commandButton value="Eliminar" class="btn btn-danger"
+						action="#{eventoController.eliminar(listaeventos.codigo)}" />
+				</h:column>
+	
+	</h:dataTable>
+	
+	
+	</h:form>
+	
+	</ui:define>
+</ui:composition>
+
+	

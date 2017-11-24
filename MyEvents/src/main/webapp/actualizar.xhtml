@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+
+	<ui:define name="titulo">Usuarios</ui:define>
+	<ui:define name="contenido">
+
+		<h:form>
+			<h:dataTable var="vpersonas" style="color:black"
+				value="#{personaController.listaPersonas()}" border="2">
+
+				<h:column Style="color: black">
+					<f:facet name="header">Id</f:facet>
+		#{vpersonas.id}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Nombre:</f:facet>
+		#{vpersonas.nombre}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Apellido</f:facet>
+		#{vpersonas.apellido}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Cedula</f:facet>
+		#{vpersonas.cedula}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Correo</f:facet>
+		#{vpersonas.correo}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Perfil</f:facet>
+		#{vpersonas.perfil}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Contrasenia</f:facet>
+		#{vpersonas.contrasenia}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Fecha Nac.</f:facet>
+		#{vpersonas.fecha_nac}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Estado</f:facet>
+		#{vpersonas.estado}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header" Style="color: black">Acciones</f:facet>
+					<h:commandButton value="Modificar" class="btn btn-primary"
+						action="#{personaController.leer(vpersonas.id)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+

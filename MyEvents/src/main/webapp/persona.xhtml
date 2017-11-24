@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+
+	<ui:define name="titulo">Usuarios</ui:define>
+	<ui:define name="contenido">
+		<h:form>
+			<h1>Datos Personales</h1>
+			<h:outputLabel value="Id" />
+			<h:inputText value="#{personaController.personas.id}" />
+			<br />
+
+			<h:outputLabel value="Nombre" />
+			<h:inputText value="#{personaController.personas.nombre}" />
+			<br />
+
+			<h:outputLabel value="Apellido" />
+			<h:inputText value="#{personaController.personas.apellido}" />
+			<br />
+
+			<h:outputLabel value="Cedula" />
+			<h:inputText value="#{personaController.personas.cedula}" />
+			<br />
+
+			<h:outputLabel value="Apellido" />
+			<h:inputText value="#{personaController.personas.contrasenia}" />
+			<br />
+
+			<h:outputLabel value="Apellido" />
+			<h:inputText value="#{personaController.personas.correo}" />
+			<br />
+
+			<h:outputLabel value="Estado" />
+			<h:inputText value="#{personaController.personas.estado}" />
+			<br />
+
+			<h:outputLabel value="Fecha Nac." />
+			<h:inputText value="#{personaController.personas.fecha_nac}" />
+			<br />
+
+			<h:outputLabel value="Perfil" />
+			<h:inputText value="#{personaController.personas.perfil}" />
+			<br />
+
+			<h:commandButton action="#{personaController.modificar()}"
+				value="Guardar" />
+		</h:form>
+	</ui:define>
+</ui:composition>
