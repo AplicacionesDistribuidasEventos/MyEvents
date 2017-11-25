@@ -44,4 +44,15 @@ public class PersonaDAO {
 		
 		return lpersonas;
 	}
+	
+	public void guardar(Persona p) {
+		Persona aux = selectPersona(p.getId());
+		System.out.println("ID GUARDAR:" +p.getId());
+		if(aux!=null) {
+			updatePersona(p);
+		}else {
+			System.out.println("Grabando!");
+			insertPersona(p);	
+		}
+	}
 }

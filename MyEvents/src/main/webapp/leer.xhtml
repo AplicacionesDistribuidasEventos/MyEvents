@@ -8,7 +8,7 @@
 
 		<h:form>
 
-			<h:dataTable var="vpersonas" style="color:black"
+			<h:dataTable var="vpersonas" style="color:black" class="table table-hover"
 				value="#{personaController.listaPersonas()}" border="2">
 
 				<h:column Style="color: black">
@@ -44,11 +44,6 @@
 				<h:column Style="color: black">
 					<f:facet name="header">Contrasenia</f:facet>
 		#{vpersonas.contrasenia}
-		</h:column>
-
-				<h:column Style="color: black">
-					<f:facet name="header">Fecha Nac.</f:facet>
-		#{vpersonas.fecha_nac}
 		</h:column>
 
 				<h:column Style="color: black">
