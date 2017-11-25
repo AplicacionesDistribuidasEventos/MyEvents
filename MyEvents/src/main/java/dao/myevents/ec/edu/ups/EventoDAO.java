@@ -19,6 +19,20 @@ public class EventoDAO {
 	private EntityManager em;
 	
 	
+	
+	//Metodo para editar y guardar
+	
+	public void guardarEvento(Evento e) {
+		
+		
+		Evento auxe = leerEvento(e.getCodigo());
+		if(auxe!=null) {
+			updateEvento(e);
+		}else {
+			insertarEvento(e);
+		}
+	}
+	
 	//---METODOS CRUD
 	//Crear Evento
 	

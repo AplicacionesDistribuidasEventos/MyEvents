@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//TABLA EVENTO EN LA BASE DE DATOS
 
 @Entity
 @Table(name="EVENTO")
@@ -22,7 +23,6 @@ public class Evento {
 	@Id
 	@Column(name="even_codigo")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private int codigo;
 	
 	@Column(name="even_nombre")

@@ -25,81 +25,21 @@ public class EventoController {
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
-	private Evento auxEvento;
 	
-	
-	
-	/* Datos para la ubicacion
-	 */
-	private String latitud="-1";
-	private String longitud="-1"; 
-	private String descripcion;
-	private String elegimos;
-	private String latituddes;
-	private String longituddes;
+	private int id;
 	
 	
 	
 	
-	
-	
-	public String getLatitud() {
-		return latitud;
+
+	public int getId() {
+		return id;
 	}
 
 
-	public void setLatitud(String latitud) {
-		this.latitud = latitud;
-	}
-
-
-	public String getLongitud() {
-		return longitud;
-	}
-
-
-	public void setLongitud(String longitud) {
-		this.longitud = longitud;
-	}
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-	public String getElegimos() {
-		return elegimos;
-	}
-
-
-	public void setElegimos(String elegimos) {
-		this.elegimos = elegimos;
-	}
-
-
-	public String getLatituddes() {
-		return latituddes;
-	}
-
-
-	public void setLatituddes(String latituddes) {
-		this.latituddes = latituddes;
-	}
-
-
-	public String getLongituddes() {
-		return longituddes;
-	}
-
-
-	public void setLongituddes(String longituddes) {
-		this.longituddes = longituddes;
+	public void setId(int id) {
+		this.id = id;
+		loadEventoEditar(id);
 	}
 
 
@@ -113,19 +53,11 @@ public class EventoController {
 	}
 
 
-	public Evento getAuxEvento() {
-		return auxEvento;
-	}
-
-
-	public void setAuxEvento(Evento auxEvento) {
-		this.auxEvento = auxEvento;
-	}
-
-
 	@PostConstruct
 	public void init() {
 		evento = new Evento(); 
+		loadEvento();
+		
 	}
 
 
@@ -169,12 +101,24 @@ public class EventoController {
 		this.leventofecha = leventofecha;
 	}
 	
+	
+	public void loadEvento() {
+		
+		levento = evendao.listEvento();
+	}
+	
 	//----MANTENIMIENTO CONTROLLER
 	
-	
+	public String loadEventoEditar(int id) {
+		
+		evento = evendao.leerEvento(id);
+		
+		return "CrearEvento";
+	}
 	
 	public String insertar() {
-		evendao.insertarEvento(evento);
+		evendao.guardarEvento(evento);
+		loadEvento();
 		return "listarEventos";
 	}
 	
