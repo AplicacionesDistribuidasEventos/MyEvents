@@ -4,6 +4,12 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
+
+
+<f:metadata>
+<f:viewParam name="id" value="#{eventoController.id}"></f:viewParam>
+</f:metadata>
+
 	<ui:define name="titulo">Crear nuevo Eventos</ui:define>
 	
 	
@@ -37,7 +43,10 @@
 		<h:outputLabel value="Costo del Evento" for="costoEvento"/>
 		<h:inputText id="Costo" value="#{eventoController.evento.costo}" class="form-control" style="color:blue" />
 		<h:message for="costoEvento"/>
-				
+		
+		
+	
+		
 		
 	</h:panelGrid>
 		

@@ -2,14 +2,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
-	<h:head>
-	</h:head>
+
 	<ui:define name="titulo">Usuarios</ui:define>
 	<ui:define name="contenido">
 
 		<h:form>
-			<h:dataTable var="vpersonas" class="table table-hover" style="color:black"
-				value="#{personaController.listaPersonas()}" border="1">
+			<h:dataTable var="vpersonas" style="color:black"
+				value="#{personaController.listaPersonas()}" border="2">
 
 				<h:column Style="color: black">
 					<f:facet name="header">Id</f:facet>
@@ -47,25 +46,21 @@
 		</h:column>
 
 				<h:column Style="color: black">
+					<f:facet name="header">Fecha Nac.</f:facet>
+		#{vpersonas.fecha_nac}
+		</h:column>
+
+				<h:column Style="color: black">
 					<f:facet name="header">Estado</f:facet>
 		#{vpersonas.estado}
 		</h:column>
 
 				<h:column Style="color: black">
-					<center><f:facet name="header" Style="color: black">Acciones</f:facet></center>
-					<center>
-						<a href="recuperarPersona.xhtml?id=#{vpersonas.id}"
-							class="btn btn-info btn-lg"> Editar </a>
-					</center>
-					<br/>
-					<center>
-						<h:commandButton value="Eliminar" class="btn btn-danger"
-							action="#{personaController.eliminar(vpersonas.id)}"></h:commandButton>
-					</center>
+					<f:facet name="header" Style="color: black">Acciones</f:facet>
+					<h:commandButton value="Modificar" class="btn btn-primary"
+						action="#{personaController.leer(vpersonas.id)}" />
 				</h:column>
 			</h:dataTable>
-			<h:commandButton action="crear" value="Nuevo Usuario"
-				class="btn btn-primary" />
 		</h:form>
 	</ui:define>
 </ui:composition>

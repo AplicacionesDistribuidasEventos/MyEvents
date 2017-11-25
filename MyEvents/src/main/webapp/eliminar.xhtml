@@ -5,7 +5,6 @@
 
 	<ui:define name="titulo">Usuarios</ui:define>
 	<ui:define name="contenido">
-
 		<h:form>
 
 			<h:dataTable var="vpersonas" style="color:black"
@@ -56,6 +55,11 @@
 		#{vpersonas.estado}
 		</h:column>
 
+				<h:column Style="color: black">
+					<f:facet name="header" Style="color: black">Acciones</f:facet>
+					<h:commandButton value="Eliminar" class="btn btn-primary"
+						action="#{personaController.eliminar(vpersonas.id)}" />
+				</h:column>
 			</h:dataTable>
 
 		</h:form>
