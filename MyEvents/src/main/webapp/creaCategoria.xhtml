@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="titulo">Categoria</ui:define>
+	
+	
+	<ui:define name="contenido">
+		<h:form enctype="multipart/form-data" id="formulario">
+	
+	
+	<h1>Ingreso de Categorias</h1>
+	<br/>
+	<br/>
+	
+	
+	<h:panelGrid columns="3">
+	
+	
+		<h:outputLabel value="Codigo:" for="codigo"/>
+		<h:inputText id="codigo" value="#{categoriaController.categoria.id}" class="form-control"/>
+		<h:message for="codigo"/>
+	
+		<h:outputLabel value="Nombre Categoria:" for="nombCategoria"/>
+		<h:inputText id="nombCategoria" value="#{categoriaController.categoria.nombre}" class="form-control"/>
+		<h:message for="nombCategoria"/>
+		
+		<h:outputLabel value="Descripcion:" for="catDescripcion"/>
+		<h:inputTextarea id="catDescripcion" value="#{categoriaController.categoria.descipcion}" class="form-control" />
+		<h:message for="catDescripcion"/>
+				
+				
+		<h:commandButton action="#{categoriaController.guardar()}" value="Guardar" />
+
+</h:panelGrid>
+	
+	
+	</h:form>
+	</ui:define>
+</ui:composition>
+	

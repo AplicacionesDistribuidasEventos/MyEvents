@@ -2,8 +2,11 @@ package modelo.myevents.ec.edu.ups;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -14,6 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Persona {
 	@Id
 	@Column(name = "per_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 
 	@Column(name = "per_nombre")
@@ -25,13 +29,13 @@ public class Persona {
 	private String apellido;
 
 	@Column(name = "per_cedula")
-	@Size(max = 10)
+	@Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="Solo debe ingresar numeros")
 	@NotBlank(message = "Por favor ingrese la cedula")
 	private String cedula;
 
 	@Column(name = "per_correo")
 	@NotBlank(message = "Por favor ingrese el correo")
-	@Email
+	@Email(message="Formato del correo incorrecto")
 	private String correo;
 
 	@Column(name = "per_perfil")
@@ -40,9 +44,6 @@ public class Persona {
 	@Column(name = "per_contrasenia")
 	@Size(min = 4, message = "Debe ingresar un minimo de 4 caracteres")
 	private String contrasenia;
-
-	@Column(name = "per_fecha_nac")
-	private String fecha_nac;
 
 	@Column(name = "per_estado")
 	private String estado;
@@ -102,15 +103,7 @@ public class Persona {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-
-	public String getFecha_nac() {
-		return fecha_nac;
-	}
-
-	public void setFecha_nac(String fecha_nac) {
-		this.fecha_nac = fecha_nac;
-	}
-
+	
 	public String getEstado() {
 		return estado;
 	}
@@ -123,6 +116,6 @@ public class Persona {
 	public String toString() {
 		return "Personas [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", fecha_nac="
-				+ fecha_nac + ", estado=" + estado + "]";
+				+ ", estado=" + estado + "]";
 	}
 }
