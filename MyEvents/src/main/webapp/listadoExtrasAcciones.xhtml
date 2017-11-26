@@ -3,29 +3,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
 
-<ui:define name="titulo">Categoria</ui:define>
+<ui:define name="titulo">Extras</ui:define>
 	<ui:define name="contenido">
 	
 	<h:form>
 	
 
-	<h:dataTable var="listaCategoria" style="color:black"
-	value="#{categoriaController.categorias}" border="2" class="table">	
+	<h:dataTable var="listaExtra" style="color:black"
+	value="#{extraController.extras}" border="2" class="table">	
 	
 	
 		<h:column Style="color: black">
 			<f:facet name="header">Codigo</f:facet>
-			#{listaCategoria.id}
+			#{listaExtra.id}
 		</h:column>
 	
 		<h:column Style="color: black">
 			<f:facet name="header">Nombre</f:facet>
-			#{listaCategoria.nombre}
+			#{listaExtra.nombre}
 		</h:column>
 	
 		<h:column Style="color: black">
 			<f:facet name="header">Descripcion</f:facet>
-			#{listaCategoria.descipcion}
+			#{listaExtra.descipcion}
 		</h:column>
 		
 		
@@ -37,7 +37,7 @@
 					<!-- <h:commandButton value="Editar" class="btn btn-danger"
 						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
 						
-						<center><a href="editarCategoria.xhtml?id=#{listaCategoria.id}" class="btn btn-info btn-lg">
+						<center><a href="editarExtra.xhtml?id=#{listaExtra.id}" class="btn btn-info btn-lg">
           				<span class="glyphicon glyphicon-refresh"></span> Editar
         </a></center>
 				
@@ -51,15 +51,15 @@
 
 <h:column>
  <f:facet name="header">Eliminar</f:facet>
- <h:commandButton action="#{categoriaController.eliminaCategoria(listaCategoria.id)}" value="Eliminar" />
+ <h:commandButton action="#{extraController.eliminaExtra(listaExtra.id)}" value="Eliminar" />
 </h:column>
 		
 	
 	</h:dataTable>
 	
-	<h:commandButton action="creaCategoria" value="Crear nueva Categoria" />
+	<h:commandButton action="crearExtra" value="Crear nueva Extra" />
 
-<h:commandButton action="listadoCategoriaAcciones" value="Actualizar" />
+<h:commandButton action="listadoExtra" value="Actualizar" />
 	
 	
 	</h:form>

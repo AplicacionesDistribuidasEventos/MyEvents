@@ -1,0 +1,215 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<f:metadata>
+
+<f:viewParam name="id" value="#{localController.id}" />
+
+</f:metadata>
+
+	<ui:define name="titulo">Actualizar Datos Salon de Eventos</ui:define>
+	
+	
+	<ui:define name="contenido">
+		<h:form enctype="multipart/form-data" id="formulario">
+	
+	
+	<center><h2>Actualizar Datos del Salon de Eventos</h2></center>
+	<br/>
+	<br/>
+	
+	<center>
+
+	
+	<h:panelGrid columns="1">
+	
+	
+		<h:outputLabel value="Nombre del Local:" for="nombLocal"/>
+		<h:inputText id="nombLocal" value="#{localController.local.nombre}" class="form-control"/>
+		<h:message for="nombLocal"/>
+		
+		
+		
+		<h:outputLabel value="Descripcion:" for="descLocal"/>
+			
+		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
+		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
+		
+		<h:message for="descLocal"/>
+		
+		
+		
+		<h:outputLabel value="Capacidad:" for="capaLocal"/>
+		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" />
+		<h:message for="capaLocal"/>
+		
+		<h:outputLabel value="Puntuacion 1.Muy Malo  2.Malo  3.Regular  4.Bueno  5.Excelente" for="puntLocal"/>
+		<h:inputText id="puntLocal" value="#{localController.local.puntuacion}" class="form-control" />
+		<h:message for="puntLocal"/>
+		
+		<h:outputLabel value="Comentario:" for="comeLocal"/>
+			
+		<h:inputTextarea id="comeLocal" value="#{localController.local.comentario}" required="true"   
+		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
+		
+		<h:message for="comeLocal"/>
+		
+		<h:outputLabel value="Costo del local:" for="costolocal"/>
+		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"/>
+		<h:message for="costolocal"/>
+		
+		
+		
+				
+		
+
+</h:panelGrid>
+</center>
+
+<br/>
+	<i class="glyphicon glyphicon-pushpin">Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
+	<div class="form-group">
+				<div id="map"
+					style="width: 1500px; height: 400px; background: yellow"></div>
+				<div class="row">
+					<div class="col-lg-4">
+					
+						<label>Latitud:</label>
+						<h:inputText value="#{localController.local.latitud}"
+							id="txtLatitud" class="form-control" pt:placeholder="Latitud" />
+						<h:message for="txtLatitud" />
+					</div>
+
+					<div class="col-lg-4">
+						<label>Longitud:</label>
+						<h:inputText value="#{localController.local.longitud}"
+							id="txtLongitud" class="form-control" pt:placeholder="Longitud" />
+						<h:message for="txtLongitud" />
+					</div>
+				</div>
+			</div>
+
+		<br />
+		
+				
+		<center>
+			<script>
+			var map;
+			var markers = [];
+
+	function initMap() {
+  	map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    
+    center: {lat: -2.8788134, lng: -79.0023418}
+  });
+
+  map.addListener('click', function(event) {
+	    addMarker(event.latLng);
+	  });
+	  
+
+ 
+}
+	
+
+function addMarker(location) {
+	  var marker = new google.maps.Marker({
+	    position: location,
+	    map: map
+	  });
+	  clearMarkers()
+	  markers.push(marker);
+	  document.getElementById("formulario:txtLatitud").value=marker.getPosition().lat();
+	  document.getElementById("formulario:txtLongitud").value=marker.getPosition().lng();
+	  
+	}
+
+
+//Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i &lt; markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+    </script>
+    </center>
+			<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASLkk2gaelkLKJWMxWXf_mRH_Q4YKHdU0&amp;callback=initMap"></script>
+				
+				
+		
+		
+		<h:commandButton action="#{localController.insertar()}" value="Guardar" 
+		class="btn btn-success" />
+		<h:messages globalOnly="true"/>
+		
+		
+		<script type="text/javascript">
+			var localizado = -1;
+
+    if(navigator.geolocation) {
+
+    	 
+        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
+        
+
+        
+    } else {
+    	("Geolocation services are not supported by your web browser."); 
+    }
+
+
+function success(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var altitude = position.coords.altitude;
+    var accuracy = position.coords.accuracy;
+    if(localizado ==-1){
+    document.getElementById("formulario:txtLatitud").value=position.coords.latitude;
+    document.getElementById("formulario:txtLongitud").value=position.coords.longitude;
+    var ubicacionActual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    addMarker(ubicacionActual);
+    }
+    localizado = 1;
+
+    
+}
+
+function error(error) {
+    alert("Unable to retrieve your location due to " + error.code + ": " + error.message);
+}
+
+var geoOptions = {
+    enableHighAccuracy: true,
+    maximumAge: 30000,
+    timeout: 27000
+};
+
+</script>
+		
+	
+	</h:form>
+	</ui:define>
+</ui:composition>
+	

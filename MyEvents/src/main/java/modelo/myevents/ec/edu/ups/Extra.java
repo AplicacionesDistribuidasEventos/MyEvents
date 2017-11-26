@@ -2,29 +2,21 @@ package modelo.myevents.ec.edu.ups;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="CATEGORIA")
-public class Categoria {
+@Table(name="EXTRA")
+public class Extra {
 	
 	@Id
-	@Column(name="cat_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name="ext_id")
 	private int id;
 	
-	@Column(name="cat_nombre")
-	@NotBlank(message = "Por favor ingrese el nombre de la categoria")
-	@Size(min=3,max=20)
+	@Column(name="ext_nombre")
 	private String nombre;
 	
-	@Column(name="cat_descripcion")
+	@Column(name="ext_descripcion")
 	private String descipcion;
 
 	
@@ -60,7 +52,7 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + "]";
+		return "Extra [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + "]";
 	}
 	
 
