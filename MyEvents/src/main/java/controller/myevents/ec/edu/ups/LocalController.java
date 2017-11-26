@@ -2,18 +2,18 @@ package controller.myevents.ec.edu.ups;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.LocalDAO;
-import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 
 @ManagedBean
 public class LocalController {
 
 	
-	private Local local;
+	private Local local; 
 	
 	@Inject
 	private LocalDAO locdao;
@@ -30,6 +30,9 @@ public class LocalController {
 	private String elegimos;
 	private String latituddes;
 	private String longituddes;
+	
+	
+	
 	public Local getLocal() {
 		return local;
 	}
@@ -90,13 +93,19 @@ public class LocalController {
 	public void setLongituddes(String longituddes) {
 		this.longituddes = longituddes;
 	}
+	
+	@PostConstruct
+	public void init() {
+		local = new Local(); 
+	}
+
 
 	//----MANTENIMIENTO CONTROLLER
 	
 	public String insertar() {
 		
 		locdao.insertarLocal(local);
-		return "listarlocales";
+		return "Listarlocales";
 		
 	}
 	
@@ -115,7 +124,7 @@ public class LocalController {
 		locdao.deleteLocal(id);
 		return "eliminarLocal";
 	}
-	public List<Local> listaEventos(){
+	public List<Local> listaLocales(){
 		
 		listlocal = locdao.listlocal();
 		return listlocal;
