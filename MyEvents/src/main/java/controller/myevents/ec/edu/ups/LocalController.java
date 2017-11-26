@@ -21,6 +21,8 @@ public class LocalController {
 	private List<Local> listlocal;
 	private Local auxLocal;
 	
+	//  Atributo para la navegacion por codigo en JSF
+	private int id;
 
 	/* Datos para la ubicacion
 	 */
@@ -32,6 +34,16 @@ public class LocalController {
 	private String longituddes;
 	
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+		loadLocalEditar(id);
+	}
 	
 	public Local getLocal() {
 		return local;
@@ -97,14 +109,26 @@ public class LocalController {
 	@PostConstruct
 	public void init() {
 		local = new Local(); 
+		loadLocal();
 	}
 
-
+	public void loadLocal() {
+		
+		listlocal=locdao.listlocal();
+	}
+	
+	public String loadLocalEditar(int id) {
+		
+		local = locdao.leerLocal(id);
+		
+		return "CrearLocal";
+	}
+	
 	//----MANTENIMIENTO CONTROLLER
 	
 	public String insertar() {
-		
-		locdao.insertarLocal(local);
+		locdao.guardarLocal(local);
+		loadLocal();
 		return "Listarlocales";
 		
 	}
