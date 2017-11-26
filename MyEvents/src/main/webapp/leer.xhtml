@@ -7,8 +7,8 @@
 	<ui:define name="contenido">
 
 		<h:form>
-
-			<h:dataTable var="vpersonas" style="color:black"
+<h:outputText  value="El registro no contiene datos" rendered="#{empty  personaController.lpersonas}"></h:outputText>
+			<h:dataTable var="vpersonas" style="color:black" class="table table-hover"
 				value="#{personaController.listaPersonas()}" border="2">
 
 				<h:column Style="color: black">
@@ -43,12 +43,7 @@
 
 				<h:column Style="color: black">
 					<f:facet name="header">Contrasenia</f:facet>
-		#{vpersonas.contrasenia}
-		</h:column>
-
-				<h:column Style="color: black">
-					<f:facet name="header">Fecha Nac.</f:facet>
-		#{vpersonas.fecha_nac}
+		*****
 		</h:column>
 
 				<h:column Style="color: black">

@@ -2,13 +2,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
-
+	<h:head>
+	</h:head>
 	<ui:define name="titulo">Usuarios</ui:define>
 	<ui:define name="contenido">
 
 		<h:form>
-			<h:dataTable var="vpersonas" style="color:black"
-				value="#{personaController.listaPersonas()}" border="2">
+		<h:outputText  value="El registro no contiene datos" rendered="#{empty  personaController.lpersonas}"></h:outputText>
+			<h:dataTable var="vpersonas" class="table table-hover" style="color:black"
+				value="#{personaController.listaPersonas()}" border="1">
 
 				<h:column Style="color: black">
 					<f:facet name="header">Id</f:facet>
@@ -42,12 +44,7 @@
 
 				<h:column Style="color: black">
 					<f:facet name="header">Contrasenia</f:facet>
-		#{vpersonas.contrasenia}
-		</h:column>
-
-				<h:column Style="color: black">
-					<f:facet name="header">Fecha Nac.</f:facet>
-		#{vpersonas.fecha_nac}
+		******
 		</h:column>
 
 				<h:column Style="color: black">
@@ -56,11 +53,24 @@
 		</h:column>
 
 				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">Acciones</f:facet>
-					<h:commandButton value="Modificar" class="btn btn-primary"
-						action="#{personaController.leer(vpersonas.id)}" />
+					<center><f:facet name="header" Style="color: black">Editar</f:facet></center>
+					<center>
+						<a href="recuperarPersona.xhtml?id=#{vpersonas.id}"
+							class="btn btn-info btn-md"> Editar </a>
+					</center>
+					</h:column>
+					
+					<h:column>
+					<center><f:facet name="header" Style="color: black">Eliminar</f:facet></center>
+					<center>
+						<h:commandButton value="Eliminar" class="btn btn-danger btn-md"
+							action="#{personaController.eliminar(vpersonas.id)}"></h:commandButton>
+					</center>
 				</h:column>
+				
 			</h:dataTable>
+			<h:commandButton action="crearPersona" value="Nuevo Usuario"
+				class="btn btn-primary" />
 		</h:form>
 	</ui:define>
 </ui:composition>
