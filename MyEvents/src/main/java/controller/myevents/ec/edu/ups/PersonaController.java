@@ -4,17 +4,27 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Persona;
 
 @ManagedBean
+@ViewScoped
 public class PersonaController {
 
 	private Persona personas;
 	
 	private int id;
+	private String pactual;
+	
+	@NotBlank(message="Ingrese las contrasenias")
+	private String contrasenia;
+	private String conincidencia;
+	private String Loginexiste;
 
 	@Inject
 	private PersonaDAO pdao;
@@ -24,7 +34,34 @@ public class PersonaController {
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
+		lpersonas = listaPersonas();
 	}
+	
+
+	
+
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+	public String getConincidencia() {
+		return conincidencia;
+	}
+	public void setConincidencia(String conincidencia) {
+		this.conincidencia = conincidencia;
+	}
+	public String getLoginexiste() {
+		return Loginexiste;
+	}
+	public void setLoginexiste(String loginexiste) {
+		Loginexiste = loginexiste;
+	}
+
+
+
 
 	public Persona getPersonas() {
 		return personas;
@@ -51,28 +88,65 @@ public class PersonaController {
 		loadDatosEditar(id);
 	}
 
-	public String crear() {
-		if(validarCedula()==true) {
-			personas.setPerfil("USUARIO");
-			personas.setEstado("A");
-			pdao.guardar(personas);
-			System.out.println("Almacenado Usuario ..:" + personas.getId());
-		}else {
-			System.out.println("Cedula incorrecta");
-		}
+	public PersonaDAO getPdao() {
+		return pdao;
+	}
 
-		return "leer";
+
+
+
+
+	public void setPdao(PersonaDAO pdao) {
+		this.pdao = pdao;
+	}
+
+
+
+
+
+	public void crear() {
+		if(coincidirContrasenia()==true) {
+			if(validarCedula()==true) {
+				personas.setPerfil("USUARIO");
+				personas.setEstado("A");
+				pdao.guardar(personas);
+				inicializar();
+				init();
+				this.conincidencia="Grabado exitoso!";
+			}else {
+				System.out.println("Cedula incorrecta");
+				this.conincidencia="La cedula es incorrecta";
+			}	
+		}else {
+			this.conincidencia="Ingrese las mismas contrasenias";
+		}
+	}
+	
+	
+	public boolean coincidirContrasenia() {
+		if(personas.getContrasenia().equals(this.contrasenia)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void inicializar() {
+		personas.setCedula("");
+		personas.setApellido("");
+		personas.setNombre("");
+		personas.setContrasenia("");
 	}
 
 	public String modificar() {
-		System.out.println("Modificando Usuario..:" + personas);
-		pdao.updatePersona(personas);
-		return "leer";
+			personas.setContrasenia(pactual);
+			pdao.updatePersona(personas);
+			return "actualizar";
 	}
 
 	public String leer(int id) {
 		personas = pdao.selectPersona(id);
-		return "crear";
+		return "crearPersona";
 	}
 
 	public String eliminar(int id) {
@@ -123,6 +197,7 @@ public class PersonaController {
 	public String loadDatosEditar(int id) {
 		System.out.println("Cargando...Persona a Editar" + id);
 		personas = pdao.selectPersona(id);
+		pactual = personas.getContrasenia();
 		return "recuperaPersona";
 	}
 

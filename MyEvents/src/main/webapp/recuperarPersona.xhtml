@@ -1,7 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:hs="http://xmlns.jcp.org/jsf/html"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    template="blank.xhtml">
 
 <h:head></h:head>
 	<f:metadata>
@@ -11,41 +14,55 @@
 	<ui:define name="titulo">Usuarios</ui:define>
 	<ui:define name="contenido">
 
-
+		<center>
 		<h1>Ingreso Personas</h1>
-		<h:form>
-		<h:panelGrid columns="2">
+
+		<h:form >
+		<h:panelGrid columns="1">
 
 			<h:outputLabel value="Nombre: " for="nombre" />
-			<h:inputText value="#{personaController.personas.nombre}" id="nombre" class="form-control"/>
-			<h:message for="nombre" />
-			<br />
+					<h:inputText value="#{personaController.personas.nombre}"
+						id="nombre" class="form-control input-sm" pt:placeholder="Nombre" />
+					<h:message for="nombre" errorStyle="color:red; display:block" />
 
-			<h:outputLabel value="Apellido: " for="apellido" />
-			<h:inputText value="#{personaController.personas.apellido}"
-				id="apellido" class="form-control"/>
-			<h:message for="apellido" style="color:red"/>
-			<br />
 
-			<h:outputLabel value="Cedula: " for="cedula" />
-			<h:inputText value="#{personaController.personas.cedula}" id="cedula" class="form-control"/>
-			<h:message for="cedula" />
-			<br />
+					<h:outputLabel value="Apellido: " for="apellido" />
+					<h:inputText value="#{personaController.personas.apellido}"
+						id="apellido" class="form-control input-sm"
+						pt:placeholder="Apellido" />
+					<h:message for="apellido" errorStyle="color:red; display:block" />
+					<br />
 
-			<h:outputLabel value="Correo: " for="correo" />
-			<h:inputText value="#{personaController.personas.correo}" id="correo" class="form-control"/>
-			<h:message for="correo" />
-			<br />
+					<h:outputLabel value="Cedula: " for="cedula" />
+					<h:inputText value="#{personaController.personas.cedula}"
+						id="cedula" class="form-control input-sm"
+						pt:placeholder="##########" />
+					<h:message for="cedula" errorStyle="color:red; display:block" />
+					<br />
 
-			<h:outputLabel value="Contrasenia: " for="contrasenia" />
-			<h:inputText value="#{personaController.personas.contrasenia}"
-				id="contrasenia" class="form-control"/>
-			<h:message for="contrasenia" />
-			<br />
+					<h:outputLabel value="Correo: " for="correo" />
+					<h:inputText value="#{personaController.personas.correo}"
+						id="correo" class="form-control input-sm"
+						pt:placeholder="usuario@gmail.com" />
+					<h:message for="correo" errorStyle="color:red; display:block" />
+					<br />
+
+<!--					<h:outputLabel value="Contrasenia: " for="contrasenia" />
+					<h:inputText name="contrasenia" id="contrasenia"
+						value="#{personaController.personas.contrasenia}"
+						class="form-control input-sm" pt:placeholder="*****" />
+					<h:message for="contrasenia" errorStyle="color:red; display:block" />
+					<br />
+-->			
+			
 </h:panelGrid>
-			<h:commandButton action="#{personaController.crear()}" value="Crear Usuario" class="btn btn-primary" />
+			<h:commandButton action="#{personaController.modificar()}" value="Actualizar" class="btn btn-success btn-inline">
+			</h:commandButton>
+			<br/>
+			<br/>
+			<h:commandButton action="actualizar" value="Cancelar" class="btn btn-info btn-inline"/>
 		</h:form>
-
+</center>
 	</ui:define>
 </ui:composition>
 

@@ -35,7 +35,7 @@ public class Persona {
 
 	@Column(name = "per_correo")
 	@NotBlank(message = "Por favor ingrese el correo")
-	@Email(message="Formato del correo incorrecto")
+	@Pattern(regexp = ".+@.+\\.[a-z]+")
 	private String correo;
 
 	@Column(name = "per_perfil")
