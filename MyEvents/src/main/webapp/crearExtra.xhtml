@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="titulo">Extra</ui:define>
+	
+	
+	<ui:define name="contenido">
+		<h:form enctype="multipart/form-data" id="formulario">
+	
+	
+	<h1>Ingresar Extras</h1>
+	<br/>
+	<br/>
+	
+	
+	<h:panelGrid columns="3">
+	
+	
+		<h:outputLabel value="Codigo:" for="codigo"/>
+		<h:inputText id="codigo" value="#{extraController.extra.id}" class="form-control"/>
+		<h:message for="codigo"/>
+		
+		<h:outputLabel value="Nombre Extra:" for="nombExtra"/>
+		<h:inputText id="nombExtra" value="#{extraController.extra.nombre}" class="form-control"/>
+		<h:message for="nombExtra"/>
+	
+		<h:outputLabel value="Descripcion:" for="extDescripcion"/>
+		<h:inputTextarea id="extDescripcion" value="#{extraController.extra.descipcion}" class="form-control" />
+		<h:message for="extDescripcion"/>
+								
+		<h:commandButton action="#{extraController.guardar()}" value="Guardar" />
+
+</h:panelGrid>
+	
+	</h:form>
+	</ui:define>
+</ui:composition>
+	

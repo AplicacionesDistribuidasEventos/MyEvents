@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+
+<ui:define name="titulo">Listado de los Eventos</ui:define>
+	<ui:define name="contenido">
+	
+	<h:form>
+	
+
+	<h:dataTable var="listalocales" style="color:black"
+	value="#{localController.listaLocales()}" border="2" class="table">	
+	
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Codigo</f:facet>
+			#{listalocales.codigo}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Nombre</f:facet>
+			#{listalocales.nombre}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Descripcion</f:facet>
+			#{listalocales.descripcion}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Capacidad</f:facet>
+			#{listalocales.capacidad}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Puntuacion</f:facet>
+			#{listalocales.puntuacion}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Comentario</f:facet>
+			#{listalocales.comentario}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Costo</f:facet>
+			#{listalocales.costo}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Latitud</f:facet>
+			#{listalocales.latitud}
+		</h:column>
+		
+		<h:column Style="color: black">
+			<f:facet name="header">Longitud</f:facet>
+			#{listalocales.longitud}
+		</h:column>
+	
+		
+	<h:column Style="color: black">
+					<f:facet name="header" Style="color: black"><center>Accion Editar</center></f:facet>
+					<!-- <h:commandButton value="Editar" class="btn btn-danger"
+						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
+						
+						<center><a href="EditarLocal.xhtml?id=#{listalocales.codigo}" class="btn btn-info btn-lg">
+          				<span class="glyphicon glyphicon-refresh"></span> Editar
+        </a></center>
+				
+				</h:column>
+	
+	<h:column Style="color: black">
+					<f:facet name="header" Style="color: black">Accion Eliminar</f:facet>
+					<h:commandButton value="Eliminar" class="btn btn-danger"
+						action="#{localController.eliminar(listalocales.codigo)}" /> 
+				</h:column>
+				
+	
+	
+	</h:dataTable>
+	
+	
+	</h:form>
+	
+	</ui:define>
+</ui:composition>

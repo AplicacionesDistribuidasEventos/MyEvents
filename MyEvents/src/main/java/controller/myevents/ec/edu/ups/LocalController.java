@@ -2,18 +2,18 @@ package controller.myevents.ec.edu.ups;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.LocalDAO;
-import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 
 @ManagedBean
 public class LocalController {
 
 	
-	private Local local;
+	private Local local; 
 	
 	@Inject
 	private LocalDAO locdao;
@@ -21,6 +21,8 @@ public class LocalController {
 	private List<Local> listlocal;
 	private Local auxLocal;
 	
+	//  Atributo para la navegacion por codigo en JSF
+	private int id;
 
 	/* Datos para la ubicacion
 	 */
@@ -30,6 +32,19 @@ public class LocalController {
 	private String elegimos;
 	private String latituddes;
 	private String longituddes;
+	
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+		loadLocalEditar(id);
+	}
+	
 	public Local getLocal() {
 		return local;
 	}
@@ -90,13 +105,31 @@ public class LocalController {
 	public void setLongituddes(String longituddes) {
 		this.longituddes = longituddes;
 	}
+	
+	@PostConstruct
+	public void init() {
+		local = new Local(); 
+		loadLocal();
+	}
 
+	public void loadLocal() {
+		
+		listlocal=locdao.listlocal();
+	}
+	
+	public String loadLocalEditar(int id) {
+		
+		local = locdao.leerLocal(id);
+		
+		return "CrearLocal";
+	}
+	
 	//----MANTENIMIENTO CONTROLLER
 	
 	public String insertar() {
-		
-		locdao.insertarLocal(local);
-		return "listarlocales";
+		locdao.guardarLocal(local);
+		loadLocal();
+		return "Listarlocales";
 		
 	}
 	
@@ -115,7 +148,7 @@ public class LocalController {
 		locdao.deleteLocal(id);
 		return "eliminarLocal";
 	}
-	public List<Local> listaEventos(){
+	public List<Local> listaLocales(){
 		
 		listlocal = locdao.listlocal();
 		return listlocal;
