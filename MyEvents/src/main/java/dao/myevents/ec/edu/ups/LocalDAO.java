@@ -19,6 +19,18 @@ public class LocalDAO {
 	private EntityManager em;
 	
 
+	//Metodo para editar y guardar
+	
+	public void guardarLocal(Local l) {
+		
+		Local auxlocal = leerLocal(l.getCodigo());
+		if(auxlocal!=null) {
+			updateLocal(l);
+			
+		}else {
+			insertarLocal(l);
+		}
+	}
 
 	//---METODOS CRUD
 	//Crear LOCAL
