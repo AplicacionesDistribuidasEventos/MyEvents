@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:hs="http://xmlns.jcp.org/jsf/html"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head><title>Actulizar Asistencia Evento</title></h:head>
+
+	<f:metadata>
+	<f:viewParam name="id" value="#{asistenciaEventoController.id}"></f:viewParam>
+	</f:metadata>
+<h:body>
+
+	<ui:composition template="blank.xhtml">
+	<ui:define name="titulo">Asistencia Evento</ui:define>
+	<ui:define name="contenido">
+		<center>
+			<h1>Ingreso Asistencia Evento</h1>
+			<h:form role="form" id="formregistro">
+				<h:panelGrid columns="1">
+
+
+						<h:selectOneRadio value="#{asistenciaEventoController.asistenciaevento.estado}">
+							<f:selectItem itemValue="A" itemLabel="Asistire" />
+							<br/>
+							<f:selectItem itemValue="TA" itemLabel="Talvez asista" />
+							<br/>
+							<f:selectItem itemValue="NA" itemLabel="No asistire" />
+							<br/>
+						</h:selectOneRadio>
+
+
+					</h:panelGrid>
+				
+				
+				<h:commandButton value="Confirmar" id="Crear"
+					action="#{asistenciaEventoController.crear()}"
+					class="btn btn-success btn-inline">
+
+				</h:commandButton>
+				<br/>
+				<br/>
+				<h:commandButton action="listadoAsistenciaEvento" value="Cancelar" class="btn btn-info btn-inline"/>
+			</h:form>
+		</center>
+
+	</ui:define>
+</ui:composition>
+</h:body>
+</html>
+
+
