@@ -22,6 +22,7 @@ public class ExtraController {
 	private List<Extra> extras;
 	
 	private int id;
+	private int codigo;
 	
 	
 	@PostConstruct
@@ -37,6 +38,11 @@ public class ExtraController {
 	public int getId() {
 		return id;
 	}
+	//
+	public int getcodigo() {
+		return codigo;
+	}
+	//
 
 	public void setId(int id) {
 		this.id = id;
