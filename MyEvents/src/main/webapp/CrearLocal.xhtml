@@ -42,9 +42,27 @@
 		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" />
 		<h:message for="capaLocal"/>
 		
-		<h:outputLabel value="Puntuacion 1.Muy Malo  2.Malo  3.Regular  4.Bueno  5.Excelente" for="puntLocal"/>
-		<h:inputText id="puntLocal" value="#{localController.local.puntuacion}" class="form-control" />
-		<h:message for="puntLocal"/>
+		<h:panelGrid columns="1">
+
+
+						<h:selectOneRadio value="#{localController.local.puntuacion}">
+						
+						<h:outputLabel value="Puntuacion:" />
+						
+							<f:selectItem itemValue="1" itemLabel="Muy malo" />
+							
+							<f:selectItem itemValue="2" itemLabel="Malo" />
+						
+							<f:selectItem itemValue="3" itemLabel="Regular" />
+							
+							<f:selectItem itemValue="4" itemLabel="Bueno" />
+							
+							<f:selectItem itemValue="5" itemLabel="Excelente" />
+							
+						</h:selectOneRadio>
+
+
+					</h:panelGrid>
 		
 		<h:outputLabel value="Comentario:" for="comeLocal"/>
 			
