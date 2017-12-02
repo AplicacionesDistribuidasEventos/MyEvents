@@ -55,4 +55,21 @@ public class PersonaDAO {
 			insertPersona(p);	
 		}
 	}
+	
+	public List<Persona> login(String user, String pass) {
+		System.out.println("USUARIO: "+user+", Pass: "+pass);
+		String sql = "Select p from Persona p WHERE p.correo = '"+user+"' AND p.contrasenia='"+pass+"'";
+		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
+		List<Persona> personas = query.getResultList();
+		return personas;
+	}
+	
+	public List<Persona> verificaCorreo(String user)
+	{
+		String sql="Select p from Persona p WHERE p.correo = '"+user+"'";
+		TypedQuery<Persona> query=em.createQuery(sql,Persona.class);
+		List<Persona>personas=query.getResultList();
+		return personas;
+	}
+	
 }
