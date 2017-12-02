@@ -14,7 +14,7 @@
 	
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Codigo</f:facet>
+			<f:facet name="header">Código</f:facet>
 			#{listaCategoria.id}
 		</h:column>
 	
@@ -24,7 +24,7 @@
 		</h:column>
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Descripcion</f:facet>
+			<f:facet name="header">Descripción</f:facet>
 			#{listaCategoria.descipcion}
 		</h:column>
 		
@@ -44,19 +44,14 @@
 
 <!-- hasta aki -->
 
-<h:column>
- 		
-		<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">Accion Eliminar</f:facet>
-					<h:commandButton value="Eliminar" class="btn btn-danger"
-						action="#{categoriaController.eliminaCategoria(listaCategoria.id)}" /> 
-				</h:column>
-	
+<h:column>		
+		<f:facet name="header">Eliminar</f:facet>
+ 		<h:commandButton action="#{categoriaController.eliminaCategoria(listaCategoria.id)}" value="Eliminar" />
+</h:column>
+
 	</h:dataTable>
-	
 	<h:commandButton action="creaCategoria" value="Crear nueva Categoria" />
     <h:commandButton action="listadoCategoriaAcciones" value="Actualizar" />
-	
 	
 	</h:form>
 	

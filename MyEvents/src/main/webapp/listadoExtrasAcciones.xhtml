@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
 
-<ui:define name="titulo">Extras</ui:define>
+<ui:define name="titulo">Gestionar Extras</ui:define>
 	<ui:define name="contenido">
 	
 	<h:form>
@@ -14,7 +14,7 @@
 	
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Codigo</f:facet>
+			<f:facet name="header">Código</f:facet>
 			#{listaExtra.id}
 		</h:column>
 	
@@ -24,12 +24,10 @@
 		</h:column>
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Descripcion</f:facet>
+			<f:facet name="header">Descripción</f:facet>
 			#{listaExtra.descipcion}
 		</h:column>
 		
-		
-
 <!-- aki -->
 
 <h:column Style="color: black">
@@ -45,10 +43,6 @@
 
 <!-- hasta aki -->
 
-
-
-
-
 <h:column>
  <f:facet name="header">Eliminar</f:facet>
  <h:commandButton action="#{extraController.eliminaExtra(listaExtra.id)}" value="Eliminar" />
@@ -57,7 +51,7 @@
 	
 	</h:dataTable>
 	
-	<h:commandButton action="crearExtra" value="Crear nueva Extra" />
+	<h:commandButton action="crearExtra" value="Crear nuevo Extra" />
 
 <h:commandButton action="listadoExtra" value="Actualizar" />
 	
