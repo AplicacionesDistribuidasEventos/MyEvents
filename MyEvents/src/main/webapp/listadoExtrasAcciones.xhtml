@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+
+	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
+
+
+<ui:define name="titulo">Gestionar Extras</ui:define>
+
+
+<ui:define name="titulo">Extras</ui:define>
+
+	<ui:define name="contenido">
+	
+	<h:form>
+	
+
+	<h:dataTable var="listaExtra" style="color:black"
+	value="#{extraController.extras}" border="2" class="table">	
+	
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Código</f:facet>
+			#{listaExtra.id}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Nombre</f:facet>
+			#{listaExtra.nombre}
+		</h:column>
+	
+		<h:column Style="color: black">
+			<f:facet name="header">Descripción</f:facet>
+			#{listaExtra.descipcion}
+		</h:column>
+		
+<!-- aki -->
+
+<h:column Style="color: black">
+					<f:facet name="header" Style="color: black"><center>Accion Editar</center></f:facet>
+					<!-- <h:commandButton value="Editar" class="btn btn-danger"
+						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
+						
+						<center><a href="editarExtra.xhtml?id=#{listaExtra.id}" class="btn btn-info btn-lg">
+          				<span class="glyphicon glyphicon-refresh"></span> Editar
+        </a></center>
+				
+				</h:column>
+
+<!-- hasta aki -->
+
+<h:column>
+ <f:facet name="header">Eliminar</f:facet>
+ <h:commandButton action="#{extraController.eliminaExtra(listaExtra.id)}" value="Eliminar" />
+</h:column>
+		
+	
+	</h:dataTable>
+	
+	<h:commandButton action="crearExtra" value="Crear nuevo Extra" />
+
+<h:commandButton action="listadoExtra" value="Actualizar" />
+	
+	
+	</h:form>
+	
+	</ui:define>
+</ui:composition>
+
+	

@@ -62,37 +62,22 @@ public class Evento {
 	private double longitud;
 	*/
 	
+
 	//------relaciones entre evento a salon de recepciones y de evento a asistencia evento
 
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
 	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
 	private List<SalonRecepcion> salones;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
+	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
+	private List<AsistenciaEvento> AsistenciaEventos;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, orphanRemoval=true)
-	@JoinColumn(name="eve_asi_fk", referencedColumnName="even_codigo")
-	private List<AsistenciaEvento> asistencia;
-	
-
 	
 	//METHODS GETTERS AND SETTER
-	
-	
-	public List<SalonRecepcion> getSalones() {
-		return salones;
-	}
+		
 
-	public void setSalones(List<SalonRecepcion> salones) {
-		this.salones = salones;
-	}
-
-	public List<AsistenciaEvento> getAsistencia() {
-		return asistencia;
-	}
-
-	public void setAsistencia(List<AsistenciaEvento> asistencia) {
-		this.asistencia = asistencia;
-	}
 
 	public int getCodigo() {
 		return codigo;
@@ -142,12 +127,40 @@ public class Evento {
 	public void setFechaEvento(Date fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
+	
+	
+
+	public List<AsistenciaEvento> getAsistenciaEventos() {
+		return AsistenciaEventos;
+	}
+
+	public void setAsistenciaEventos(List<AsistenciaEvento> asistenciaEventos) {
+		AsistenciaEventos = asistenciaEventos;
+	}
+  
+  	public List<SalonRecepcion> getSalones() {
+		return salones;
+	}
+
+	public void setSalones(List<SalonRecepcion> salones) {
+		this.salones = salones;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", AsistenciaEventos="
+				+ AsistenciaEventos + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
+	}*/
+	
+	
 
 	
 			

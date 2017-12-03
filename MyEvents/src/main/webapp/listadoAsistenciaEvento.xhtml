@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
+
+	<ui:define name="titulo">Listado Asistencia Evento</ui:define>
+	<ui:define name="contenido">
+
+		<h:form>
+<h:outputText  value="El registro no contiene datos" rendered="#{empty  asistenciaEventoController.lasistenciaevento}"></h:outputText>
+			<h:dataTable var="laevento" style="color:black" class="table table-hover"
+				value="#{asistenciaEventoController.listaAsistenciaEvento()}" border="2">
+
+				<h:column Style="color: black">
+					<f:facet name="header">Id</f:facet>
+		#{laevento.codigo}
+		</h:column>
+
+
+				<h:column Style="color: black">
+					<f:facet name="header">Estado</f:facet>
+		#{laevento.estado}
+		</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+

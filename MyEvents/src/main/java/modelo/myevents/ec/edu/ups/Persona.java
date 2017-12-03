@@ -53,8 +53,18 @@ public class Persona {
 	private String estado;
 	
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
-	@JoinColumn(name="id", referencedColumnName="per_id")
+	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
+	
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
+	private List<Local> locales;
+	
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+	@JoinColumn(name="per_sal_fk", referencedColumnName="per_id")
+	private List<SalonRecepcion> srecepciones;
+
+
 
 	public int getId() {
 		return id;
@@ -119,11 +129,48 @@ public class Persona {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	
+
+	public List<AsistenciaEvento> getAeventos() {
+		return aeventos;
+	}
+
+	public void setAeventos(List<AsistenciaEvento> aeventos) {
+		this.aeventos = aeventos;
+	}
+
+	public List<Local> getLocales() {
+		return locales;
+	}
+
+	public void setLocales(List<Local> locales) {
+		this.locales = locales;
+	}
+
+	public List<SalonRecepcion> getSrecepciones() {
+		return srecepciones;
+	}
+
+	public void setSrecepciones(List<SalonRecepcion> srecepciones) {
+		this.srecepciones = srecepciones;
+	}
 
 	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
+				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+	}
+
+	
+
+	/*@Override
 	public String toString() {
 		return "Personas [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", fecha_nac="
 				+ ", estado=" + estado + "]";
-	}
+	}*/
+	
+	
 }
