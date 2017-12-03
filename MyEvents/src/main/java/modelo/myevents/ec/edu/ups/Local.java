@@ -1,11 +1,16 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -52,6 +57,27 @@ public class Local {
 	
 	private double longitud;
 	
+	
+	//----------------------Relacion 1..a..* entre entidades local y Evento
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
+	@JoinColumn(name="loc_eve_fk", referencedColumnName="local_codigo")
+	private List<Evento> evento ;
+	
+	
+	
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+	public List<Evento> getEvento() {
+		return evento;
+	}
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
+	}
 	public int getCodigo() {
 		return codigo;
 	}

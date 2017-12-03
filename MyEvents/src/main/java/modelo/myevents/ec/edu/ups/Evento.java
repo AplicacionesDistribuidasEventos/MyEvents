@@ -62,13 +62,22 @@ public class Evento {
 	private double longitud;
 	*/
 	
+
+	//------relaciones entre evento a salon de recepciones y de evento a asistencia evento
+
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
+	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
+	private List<SalonRecepcion> salones;
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
 	private List<AsistenciaEvento> AsistenciaEventos;
 	
+	
 	//METHODS GETTERS AND SETTER
 		
+
 
 	public int getCodigo() {
 		return codigo;
@@ -128,6 +137,15 @@ public class Evento {
 	public void setAsistenciaEventos(List<AsistenciaEvento> asistenciaEventos) {
 		AsistenciaEventos = asistenciaEventos;
 	}
+  
+  	public List<SalonRecepcion> getSalones() {
+		return salones;
+	}
+
+	public void setSalones(List<SalonRecepcion> salones) {
+		this.salones = salones;
+	}
+
 
 	@Override
 	public String toString() {
