@@ -24,23 +24,37 @@
 		<h:form enctype="multipart/form-data" id="formulario">
 	
 	
-	<center><h2>Actualizar Datos del Salon de Eventos</h2></center>
+	
+	<center><h2>SALON DE EVENTOS</h2></center>
+	
+	
+	<div class="form-group" align="center">
+				<h2>#{localController.local.nombre}</h2>
+				<hr class="star-primary" />
+			</div>
+			
 	<br/>
 	<br/>
 	
+	
+
 	<center>
 
 	
 	<h:panelGrid columns="1">
 	
 	
-		<h:outputLabel value="Nombre del Local:" for="nombLocal"/>
+		<div class="alert alert-info">
+			    <strong>Info!</strong> Los campos que contienen * son obligatorios.
+			</div>
+	
+		<h:outputLabel value="* Nombre del Local:" for="nombLocal"/>
 		<h:inputText id="nombLocal" value="#{localController.local.nombre}" class="form-control"/>
 		<h:message for="nombLocal"/>
 		
 		
 		
-		<h:outputLabel value="Descripcion:" for="descLocal"/>
+		<h:outputLabel value="* Descripcion:" for="descLocal"/>
 			
 		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
 		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
@@ -49,7 +63,7 @@
 		
 		
 		
-		<h:outputLabel value="Capacidad:" for="capaLocal"/>
+		<h:outputLabel value="* Capacidad:" for="capaLocal"/>
 		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" />
 		<h:message for="capaLocal"/>
 		
@@ -74,14 +88,14 @@
 
 			</h:panelGrid>	
 		
-		<h:outputLabel value="Comentario:" for="comeLocal"/>
+		<h:outputLabel value="* Comentario:" for="comeLocal"/>
 			
 		<h:inputTextarea id="comeLocal" value="#{localController.local.comentario}" required="true"   
 		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
 		
 		<h:message for="comeLocal"/>
 		
-		<h:outputLabel value="Costo del local:" for="costolocal"/>
+		<h:outputLabel value="* Costo del local:" for="costolocal"/>
 		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"/>
 		<h:message for="costolocal"/>
 		
@@ -94,7 +108,7 @@
 </center>
 
 <br/>
-	<i class="glyphicon glyphicon-pushpin">Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
+	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
 	<div class="form-group">
 				<div id="map"
 					style="width: 1500px; height: 400px; background: yellow"></div>
@@ -188,50 +202,7 @@ function deleteMarkers() {
 		<h:messages globalOnly="true"/>
 		
 		
-		<script type="text/javascript">
-			var localizado = -1;
-
-    if(navigator.geolocation) {
-
-    	 
-        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
-        
-
-        
-    } else {
-    	("Geolocation services are not supported by your web browser."); 
-    }
-
-
-function success(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    var altitude = position.coords.altitude;
-    var accuracy = position.coords.accuracy;
-    if(localizado ==-1){
-    document.getElementById("formulario:txtLatitud").value=position.coords.latitude;
-    document.getElementById("formulario:txtLongitud").value=position.coords.longitude;
-    var ubicacionActual = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    addMarker(ubicacionActual);
-    }
-    localizado = 1;
-
-    
-}
-
-function error(error) {
-    alert("Unable to retrieve your location due to " + error.code + ": " + error.message);
-}
-
-var geoOptions = {
-    enableHighAccuracy: true,
-    maximumAge: 30000,
-    timeout: 27000
-};
-
-</script>
-		
-	
+ 
 	</h:form>
 	</ui:define>
 </ui:composition>

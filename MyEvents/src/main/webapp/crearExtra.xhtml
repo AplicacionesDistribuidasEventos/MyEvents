@@ -20,17 +20,14 @@
 	
 	<h:panelGrid columns="3">
 	
-	
-		<h:outputLabel value="Código:" for="codigo"/>
-		<h:inputText id="codigo" value="#{extraController.extra.id}" class="form-control"/>
-		<h:message for="codigo"/>
-		
 		<h:outputLabel value="Nombre Extra:" for="nombExtra"/>
-		<h:inputText id="nombExtra" value="#{extraController.extra.nombre}" class="form-control"/>
+		<h:inputText id="nombExtra" value="#{extraController.extra.nombre}" class="form-control"
+					pt:placeholder="Ejm: Mariachis"/>
 		<h:message for="nombExtra"/>
 	
 		<h:outputLabel value="Descripción:" for="extDescripcion"/>
-		<h:inputTextarea id="extDescripcion" value="#{extraController.extra.descipcion}" class="form-control" />
+		<h:inputTextarea id="extDescripcion" value="#{extraController.extra.descipcion}" class="form-control" 
+						pt:placeholder="Ingrese una Descripción concreta"/>
 		<h:message for="extDescripcion"/>
 								
 		<h:commandButton action="#{extraController.guardar()}" value="Guardar" />

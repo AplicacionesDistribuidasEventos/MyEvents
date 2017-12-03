@@ -16,20 +16,25 @@
 	<center><h2>Ingreso de Salones de Eventos</h2></center>
 	<br/>
 	<br/>
+
+
 	
 	<center>
 
 	
 	<h:panelGrid columns="1">
 	
+			<div class="alert alert-info">
+			    <strong>Info!</strong> Los campos que contienen * son obligatorios.
+			</div>
 	
-		<h:outputLabel value="Nombre del Local:" for="nombLocal"/>
+		<h:outputLabel value="* Nombre del Local:" for="nombLocal"/>
 		<h:inputText id="nombLocal" value="#{localController.local.nombre}" class="form-control"/>
 		<h:message for="nombLocal"/>
 		
 		
 		
-		<h:outputLabel value="Descripcion:" for="descLocal"/>
+		<h:outputLabel value="* Descripcion:" for="descLocal"/>
 			
 		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
 		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
@@ -38,8 +43,9 @@
 		
 		
 		
-		<h:outputLabel value="Capacidad:" for="capaLocal"/>
-		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" />
+		<h:outputLabel value="* Capacidad:" for="capaLocal"/>
+		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" 
+		 onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
 		<h:message for="capaLocal"/>
 		
 		<h:panelGrid columns="1">
@@ -48,7 +54,7 @@
 						<h:selectOneRadio value="#{localController.local.puntuacion}">
 						
 						<h:outputLabel value="Puntuacion:" />
-						
+						    
 							<f:selectItem itemValue="1" itemLabel="Muy malo" />
 							
 							<f:selectItem itemValue="2" itemLabel="Malo" />
@@ -64,15 +70,16 @@
 
 					</h:panelGrid>
 		
-		<h:outputLabel value="Comentario:" for="comeLocal"/>
+		<h:outputLabel value="* Comentario:" for="comeLocal"/>
 			
 		<h:inputTextarea id="comeLocal" value="#{localController.local.comentario}" required="true"   
 		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
 		
 		<h:message for="comeLocal"/>
 		
-		<h:outputLabel value="Costo del local:" for="costolocal"/>
-		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"/>
+		<h:outputLabel value="* Costo del local:" for="costolocal"/>
+		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"
+		 onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
 		<h:message for="costolocal"/>
 		
 		
@@ -85,7 +92,7 @@
 </center>
 
 <br/>
-	<i class="glyphicon glyphicon-pushpin">Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
+	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
 	<div class="form-group">
 				<div id="map"
 					style="width: 1500px; height: 400px; background: yellow"></div>
@@ -186,7 +193,7 @@ function deleteMarkers() {
 
     	 
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);
-        
+        alert("ok");
 
         
     } else {

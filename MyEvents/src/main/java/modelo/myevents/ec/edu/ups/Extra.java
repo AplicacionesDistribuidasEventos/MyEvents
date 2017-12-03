@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="EXTRA")
@@ -16,12 +19,15 @@ public class Extra {
 	
 	@Id
 	@Column(name="ext_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
 	@Column(name="ext_nombre")
+	@Size(min=3,max=25)
 	private String nombre;
 	
 	@Column(name="ext_descripcion")
+	@Size(min=3,max=300)
 	private String descipcion;
 	
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
@@ -76,13 +82,5 @@ public class Extra {
 		return "Extra [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + ", salrecepciones="
 				+ salrecepciones + "]";
 	}
-
-
-	/*@Override
-	public String toString() {
-		return "Extra [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + "]";
-	}*/
-	
-
 }
 
