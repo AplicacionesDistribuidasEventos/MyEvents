@@ -7,8 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+//import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,8 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
-@ViewScoped
+//@ViewScoped
+@SessionScoped
 public class PersonaController {
 
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
