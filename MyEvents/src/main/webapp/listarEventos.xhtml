@@ -8,7 +8,7 @@
 	
 	<h:form>
 	
-
+	<h:outputText  value="El registro no contiene datos" rendered="#{empty  eventoController.levento}"></h:outputText>
 	<h:dataTable var="listaeventos" style="color:black"
 	value="#{eventoController.listaEventos()}" border="2" class="table" styleClass="table table-striped table-bordered">	
 	
