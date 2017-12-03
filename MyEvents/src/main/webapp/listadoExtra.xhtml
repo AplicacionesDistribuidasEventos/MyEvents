@@ -1,9 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+
 	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
 
-<ui:define name="titulo">Extra</ui:define>
+<ui:define name="titulo">Listado de Extra</ui:define>
 	<ui:define name="contenido">
 	
 	<h:form>
@@ -14,7 +15,7 @@
 	
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Codigo</f:facet>
+			<f:facet name="header">Código</f:facet>
 			#{listaExtra.id}
 		</h:column>
 	
@@ -24,7 +25,7 @@
 		</h:column>
 	
 		<h:column Style="color: black">
-			<f:facet name="header">Descripcion</f:facet>
+			<f:facet name="header">Descripción</f:facet>
 			#{listaExtra.descipcion}
 		</h:column>
 		

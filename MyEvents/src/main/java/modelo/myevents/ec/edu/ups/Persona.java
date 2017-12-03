@@ -1,15 +1,20 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -35,7 +40,6 @@ public class Persona {
 
 	@Column(name = "per_correo")
 	@NotBlank(message = "Por favor ingrese el correo")
-	@Pattern(regexp = ".+@.+\\.[a-z]+")
 	private String correo;
 
 	@Column(name = "per_perfil")
@@ -47,6 +51,18 @@ public class Persona {
 
 	@Column(name = "per_estado")
 	private String estado;
+	
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
+	private List<AsistenciaEvento> aeventos;
+	
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
+	private List<Local> locales;
+	
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+	@JoinColumn(name="per_sal_fk", referencedColumnName="per_id")
+	private List<SalonRecepcion> srecepciones;
 
 	public int getId() {
 		return id;
@@ -111,11 +127,48 @@ public class Persona {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	
+
+	public List<AsistenciaEvento> getAeventos() {
+		return aeventos;
+	}
+
+	public void setAeventos(List<AsistenciaEvento> aeventos) {
+		this.aeventos = aeventos;
+	}
+
+	public List<Local> getLocales() {
+		return locales;
+	}
+
+	public void setLocales(List<Local> locales) {
+		this.locales = locales;
+	}
+
+	public List<SalonRecepcion> getSrecepciones() {
+		return srecepciones;
+	}
+
+	public void setSrecepciones(List<SalonRecepcion> srecepciones) {
+		this.srecepciones = srecepciones;
+	}
 
 	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
+				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+	}
+
+	
+
+	/*@Override
 	public String toString() {
 		return "Personas [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", fecha_nac="
 				+ ", estado=" + estado + "]";
-	}
+	}*/
+	
+	
 }

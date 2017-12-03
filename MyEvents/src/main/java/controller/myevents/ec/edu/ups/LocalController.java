@@ -138,6 +138,7 @@ public class LocalController {
 		return null;
 	}
 	
+	
 	public String leer(int id) {
 		
 		local = locdao.leerLocal(id);
