@@ -26,11 +26,13 @@
 		
 		<h:outputLabel value="Descripción:" for="catDescripcion"/>
 		<h:inputTextarea id="catDescripcion" value="#{categoriaController.categoria.descipcion}" class="form-control" 
-					pt:placeholder="Ingrese una Descripción concreta" />
+					pt:placeholder="Ingrese una Descripción concreta"
+					requiredMessage="Ingrese una descripcion" cols="100" rows="5" />
 		<h:message for="catDescripcion"/>
 				
 				
-		<h:commandButton action="#{categoriaController.guardar()}" value="Guardar" />
+		<h:commandButton action="#{categoriaController.guardar()}" value="Guardar" 
+			class="btn btn-success"/>
 
 </h:panelGrid>
 	

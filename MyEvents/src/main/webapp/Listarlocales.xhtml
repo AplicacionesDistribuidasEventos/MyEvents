@@ -10,7 +10,7 @@
 	
 	<h:form>
 	
-
+	<h:outputText  value="El registro no contiene datos" rendered="#{empty  localController.listlocal}"></h:outputText>
 	<h:dataTable var="listalocales" style="color:black"
 	value="#{localController.listaLocales()}" border="2" class="table" styleClass="table table-striped table-bordered">	
 	

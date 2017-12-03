@@ -49,10 +49,11 @@
 
 <!-- hasta aki -->
 
-<h:column>
- <f:facet name="header">Eliminar</f:facet>
- <h:commandButton action="#{extraController.eliminaExtra(listaExtra.id)}" value="Eliminar" />
-</h:column>
+	<h:column Style="color: black">
+					<f:facet name="header" Style="color: black">Accion Eliminar</f:facet>
+					<h:commandButton value="Eliminar" class="btn btn-danger"
+						action="#{extraController.eliminaExtra(listaExtra.id)}" />
+				</h:column>
 		
 	
 	</h:dataTable>
@@ -66,5 +67,3 @@
 	
 	</ui:define>
 </ui:composition>
-
-	
