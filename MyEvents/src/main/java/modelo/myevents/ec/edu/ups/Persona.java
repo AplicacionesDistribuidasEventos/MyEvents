@@ -53,6 +53,7 @@ public class Persona {
 	private String estado;
 	
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
+
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
 	
@@ -63,6 +64,7 @@ public class Persona {
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
 	@JoinColumn(name="per_sal_fk", referencedColumnName="per_id")
 	private List<SalonRecepcion> srecepciones;
+
 
 	public int getId() {
 		return id;
