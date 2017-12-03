@@ -2,12 +2,17 @@ package modelo.myevents.ec.edu.ups;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,9 +62,37 @@ public class Evento {
 	private double longitud;
 	*/
 	
+	//------relaciones entre evento a salon de recepciones y de evento a asistencia evento
+
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
+	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
+	private List<SalonRecepcion> salones;
+	
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="eve_asi_fk", referencedColumnName="even_codigo")
+	private List<AsistenciaEvento> asistencia;
+	
+
+	
 	//METHODS GETTERS AND SETTER
 	
 	
+	public List<SalonRecepcion> getSalones() {
+		return salones;
+	}
+
+	public void setSalones(List<SalonRecepcion> salones) {
+		this.salones = salones;
+	}
+
+	public List<AsistenciaEvento> getAsistencia() {
+		return asistencia;
+	}
+
+	public void setAsistencia(List<AsistenciaEvento> asistencia) {
+		this.asistencia = asistencia;
+	}
 
 	public int getCodigo() {
 		return codigo;

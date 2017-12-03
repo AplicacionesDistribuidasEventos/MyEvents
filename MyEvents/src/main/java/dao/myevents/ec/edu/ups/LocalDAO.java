@@ -46,7 +46,7 @@ public class LocalDAO {
 		em.merge(l);
 	}
 	
-	//Metodo para Leer Local
+	//Metodo para Leer Loal
 	public Local leerLocal(int id) {
 		
 		Local l = em.find(Local.class, id);

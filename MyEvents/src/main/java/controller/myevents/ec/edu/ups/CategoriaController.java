@@ -79,7 +79,7 @@ public class CategoriaController {
 	public String eliminaCategoria(int id){
 		
 		catedao.eliminarCategoria(id);
-		return "litadoCategoriaAcciones";
+		return "listadoCategoriaAcciones";
 		
 	}//fin elimina categoria
 	

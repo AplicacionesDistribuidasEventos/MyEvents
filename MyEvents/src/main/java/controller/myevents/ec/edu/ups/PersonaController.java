@@ -1,29 +1,76 @@
 package controller.myevents.ec.edu.ups;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Persona;
+import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
+@ViewScoped
 public class PersonaController {
 
-	private Persona personas;
+	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
+	private Persona personas;
+
 	private int id;
+	private String pactual;
+
+	@NotBlank(message = "Ingrese las contrasenias")
+	private String contrasenia;
+	private String conincidencia;
+	private String Loginexiste;
 
 	@Inject
 	private PersonaDAO pdao;
 
 	private List<Persona> lpersonas;
 
+	private Persona myUser;
+
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
+		lpersonas = listaPersonas();
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public String getConincidencia() {
+		return conincidencia;
+	}
+
+	public void setConincidencia(String conincidencia) {
+		this.conincidencia = conincidencia;
+	}
+
+	public String getLoginexiste() {
+		return Loginexiste;
+	}
+
+	public void setLoginexiste(String loginexiste) {
+		Loginexiste = loginexiste;
 	}
 
 	public Persona getPersonas() {
@@ -51,28 +98,68 @@ public class PersonaController {
 		loadDatosEditar(id);
 	}
 
-	public String crear() {
-		if(validarCedula()==true) {
-			personas.setPerfil("USUARIO");
-			personas.setEstado("A");
-			pdao.guardar(personas);
-			System.out.println("Almacenado Usuario ..:" + personas.getId());
-		}else {
-			System.out.println("Cedula incorrecta");
-		}
+	public PersonaDAO getPdao() {
+		return pdao;
+	}
 
-		return "leer";
+	public void setPdao(PersonaDAO pdao) {
+		this.pdao = pdao;
+	}
+
+	public Persona getMyUser() {
+		return myUser;
+	}
+
+	public void setMyUser(Persona myUser) {
+		this.myUser = myUser;
+	}
+
+	public void crear() {
+		if (coincidirContrasenia() == true) {
+			if (validarCedula() == true) {
+				if(validarCorreo()==true) {
+					personas.setPerfil("USUARIO");
+					personas.setEstado("A");
+					pdao.guardar(personas);
+					inicializar();
+					init();
+					this.conincidencia = "Grabado exitoso!";	
+				}else {
+					this.conincidencia = "El formato del correo es incorrecto";
+				}
+			} else {
+				System.out.println("Cedula incorrecta");
+				this.conincidencia = "La cedula es incorrecta";
+			}
+		} else {
+			this.conincidencia = "Ingrese las mismas contrasenias";
+		}	
+	}
+
+	public boolean coincidirContrasenia() {
+		if (personas.getContrasenia().equals(this.contrasenia)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void inicializar() {
+		personas.setCedula("");
+		personas.setApellido("");
+		personas.setNombre("");
+		personas.setContrasenia("");
 	}
 
 	public String modificar() {
-		System.out.println("Modificando Usuario..:" + personas);
+		personas.setContrasenia(pactual);
 		pdao.updatePersona(personas);
-		return "leer";
+		return "actualizar";
 	}
 
 	public String leer(int id) {
 		personas = pdao.selectPersona(id);
-		return "crear";
+		return "crearPersona";
 	}
 
 	public String eliminar(int id) {
@@ -120,10 +207,72 @@ public class PersonaController {
 		return resultado;
 	}
 	
+	public boolean validarCorreo() {
+		String email = personas.getCorreo();
+		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+	}
+
+
 	public String loadDatosEditar(int id) {
 		System.out.println("Cargando...Persona a Editar" + id);
 		personas = pdao.selectPersona(id);
+		pactual = personas.getContrasenia();
 		return "recuperaPersona";
+	}
+
+	public void iniciarSesion() {
+		if (pdao.login(personas.getCorreo(), personas.getContrasenia()).size() != 0) {
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("username",
+					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getCorreo());
+			session.setAttribute("perfil",
+					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil());
+			session.setAttribute("estado",
+					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getEstado());
+			this.Loginexiste = " ";
+			if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("USUARIO")) {
+				FacesContext contex = FacesContext.getCurrentInstance();
+				try {
+					contex.getExternalContext().redirect("mainUser.xhtml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")) {
+					FacesContext contexA= FacesContext.getCurrentInstance();;
+					try {
+						contexA.getExternalContext().redirect("pmantenimiento.xhtml");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		} else {
+			personas.setCorreo("");
+			personas.setContrasenia("");
+			this.Loginexiste = "El usuario o la contrasenia son incorrectos";
+		}
+	}
+	
+	public void cargarDatosUsuario() {
+		myUser = new Persona();
+		HttpSession session = SessionUtils.getSession();
+		String nus = (String) session.getAttribute("username");
+		if(pdao.verificaCorreo(nus).size()!=0) {
+			List<Persona> lusuario = new ArrayList<Persona>();
+			lusuario = pdao.verificaCorreo(nus);
+			myUser = lusuario.get(0);
+		}else {
+			FacesContext contex = FacesContext.getCurrentInstance();
+	        try {
+				contex.getExternalContext().redirect( "login.xhtml" );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
 	}
 
 }
