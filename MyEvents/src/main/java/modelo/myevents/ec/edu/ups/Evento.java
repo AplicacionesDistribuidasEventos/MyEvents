@@ -2,12 +2,17 @@ package modelo.myevents.ec.edu.ups;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,9 +62,13 @@ public class Evento {
 	private double longitud;
 	*/
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
+	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
+	private List<AsistenciaEvento> AsistenciaEventos;
+	
 	//METHODS GETTERS AND SETTER
-	
-	
+		
 
 	public int getCodigo() {
 		return codigo;
@@ -109,12 +118,31 @@ public class Evento {
 	public void setFechaEvento(Date fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
+	
+	
+
+	public List<AsistenciaEvento> getAsistenciaEventos() {
+		return AsistenciaEventos;
+	}
+
+	public void setAsistenciaEventos(List<AsistenciaEvento> asistenciaEventos) {
+		AsistenciaEventos = asistenciaEventos;
+	}
 
 	@Override
 	public String toString() {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", AsistenciaEventos="
+				+ AsistenciaEventos + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
+	}*/
+	
+	
 
 	
 			
