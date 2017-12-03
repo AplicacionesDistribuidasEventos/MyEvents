@@ -88,15 +88,5 @@ public class Categoria {
 		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + ", eventos=" + eventos
 				+ "]";
 	}
-
-
-	/*@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + "]";
-	}*/
-	
-	
-	
-
 }
 
