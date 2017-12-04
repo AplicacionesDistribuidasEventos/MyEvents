@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
+	<h:head>
+	</h:head>
+	<ui:define name="titulo">Usuarios</ui:define>
+	<ui:define name="contenido">
+
+		<h:form>
+			<h:outputText value="El registro no contiene datos"
+				rendered="#{empty  salonRecepcionController.salonrecepcion}"></h:outputText>
+			<h:dataTable var="lsrecepcion" style="color:black"
+				class="table table-hover"
+				value="#{salonRecepcionController.listaSalonRecepcion()}"
+				border="2">
+
+				<h:column Style="color: black">
+					<f:facet name="header">Id</f:facet>
+		#{lsrecepcion.id}
+		</h:column>
+
+
+				<h:column Style="color: black">
+					<f:facet name="header">Estado</f:facet>
+		#{lsrecepcion.estado}
+		</h:column>
+				<h:column Style="color: black">
+					<center>
+						<f:facet name="header" Style="color: black">Editar</f:facet>
+					</center>
+					<center>
+						<a href="recuperarSalonRecepcion.xhtml?id=#{lsrecepcion.id}"
+							class="btn btn-info btn-md"> Editar </a>
+					</center>
+				</h:column>
+
+				<h:column>
+					<center>
+						<f:facet name="header" Style="color: black">Eliminar</f:facet>
+					</center>
+					<center>
+						<h:commandButton value="Eliminar" class="btn btn-danger btn-md"
+							action="#{salonRecepcionController.eliminar(lsrecepcion.id)}"></h:commandButton>
+					</center>
+				</h:column>
+
+			</h:dataTable>
+			<h:commandButton action="creaSalonRecepcion" value="Nuevo Salon Recepcion"
+				class="btn btn-primary" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
