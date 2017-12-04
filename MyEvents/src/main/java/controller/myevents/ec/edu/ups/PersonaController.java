@@ -27,7 +27,7 @@ public class PersonaController {
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
-	private Persona personas;
+	private Persona personas = null;
 
 	private int id;
 	private String pactual;
@@ -157,7 +157,7 @@ public class PersonaController {
 			personas.setContrasenia(pactual);
 			pdao.updatePersona(personas);
 			return "mainUser.xhtml";
-		}else if(myUser.getPerfil().equals("ADMIN-SUPER")) {
+		}else if(myUser.getPerfil().equals("ADMIN")) {
 			personas.setContrasenia(pactual);
 			pdao.updatePersona(personas);
 			return "pages-blank.xhtml";
@@ -247,20 +247,28 @@ public class PersonaController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")) {
-					FacesContext contexA= FacesContext.getCurrentInstance();;
+			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
+					FacesContext contexAS= FacesContext.getCurrentInstance();;
 					try {
-						contexA.getExternalContext().redirect("pmantenimiento.xhtml");
+						contexAS.getExternalContext().redirect("pages-blank.xhtml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+			}else if(pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")){
+				FacesContext contexAS= FacesContext.getCurrentInstance();;
+				try {
+					contexAS.getExternalContext().redirect("mainAdmin.xhtml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		} else {
+		} 
 			personas.setCorreo("");
 			personas.setContrasenia("");
 			this.Loginexiste = "El usuario o la contrasenia son incorrectos";
-		}
+
 	}
 	
 	public void cargarDatosUsuario() {
