@@ -39,7 +39,7 @@ public class Persona {
 	private String cedula;
 
 	@Column(name = "per_correo")
-	@NotBlank(message = "Por favor ingrese el correo")
+	@NotBlank(message = "Por favor ingrese el correo") 
 	private String correo;
 
 	@Column(name = "per_perfil")
