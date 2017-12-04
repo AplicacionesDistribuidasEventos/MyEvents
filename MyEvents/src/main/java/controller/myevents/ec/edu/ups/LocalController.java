@@ -7,9 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.LocalDAO;
-import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Local;
-import modelo.myevents.ec.edu.ups.Persona;
 
 @ManagedBean
 public class LocalController {
@@ -19,9 +17,6 @@ public class LocalController {
 	
 	@Inject
 	private LocalDAO locdao;
-	
-	@Inject
-	private PersonaDAO pdao;
 	
 	private List<Local> listlocal;
 	private Local auxLocal;
@@ -134,24 +129,8 @@ public class LocalController {
 	public String insertar() {
 		locdao.guardarLocal(local);
 		loadLocal();
-		return "Listarlocales";
+		return "AccionesLocal";
 		
-	}
-	//toomo 1 ID
-	public String insertarLocalAdmin() {
-		Persona p = new Persona();
-		local.setCapacidad("200");
-		local.setComentario("Buenazo");
-		local.setCosto("200.90");
-		local.setDescripcion("Esta description");
-		local.setNombre("Guayuzo");
-		local.setPuntuacion("1");
-		p = pdao.selectPersona(1);
-		listlocal.add(local);
-		p.setLocales(listlocal);
-		System.out.println(p.getApellido() +" "+ p.getCorreo()+" "+p.getLocales().get(0).getCapacidad());
-		pdao.updatePersona(p);
-		return null;
 	}
 	
 	public String actualizar() {
@@ -174,5 +153,8 @@ public class LocalController {
 		listlocal = locdao.listlocal();
 		return listlocal;
 	}
+	
+	
+	
 	
 }
