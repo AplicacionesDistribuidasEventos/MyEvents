@@ -21,7 +21,6 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
-//@ViewScoped
 @SessionScoped
 public class PersonaController {
 
@@ -154,9 +153,15 @@ public class PersonaController {
 	}
 
 	public String modificar() {
-		personas.setContrasenia(pactual);
-		pdao.updatePersona(personas);
-		return "actualizar";
+		if(myUser.getPerfil().equals("USUARIO")) {
+			personas.setContrasenia(pactual);
+			pdao.updatePersona(personas);
+			return "mainUser.xhtml";
+		}else if(myUser.getPerfil().equals("ADMIN")) {
+			personas.setContrasenia(pactual);
+			pdao.updatePersona(personas);
+			return "pages-blank.xhtml";
+		}return null;
 	}
 
 	public String leer(int id) {
@@ -269,12 +274,33 @@ public class PersonaController {
 		}else {
 			FacesContext contex = FacesContext.getCurrentInstance();
 	        try {
-				contex.getExternalContext().redirect( "login.xhtml" );
+				contex.getExternalContext().redirect( "index.xhtml" );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
 	}
+	
+	public String cerrarSesion() {
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		return "index.xhtml";
+	}
+	
+	 public void verificaSesion(){
+		 HttpSession session = SessionUtils.getSession();
+			String nusv = (String) session.getAttribute("username");
+				if(nusv!=null){
+					System.out.println("si tiene sesion");
+					FacesContext contex = FacesContext.getCurrentInstance();
+			        try {
+						contex.getExternalContext().redirect( "sesion.jsf" );
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+	 }
 
 }
