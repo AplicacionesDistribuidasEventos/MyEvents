@@ -151,7 +151,7 @@ public class EventoController {
 	
 	//------------------Agregar un evento A local Maestro-Detalle
 	
-		public String insertarEvento(){
+		public String insertarEvento(){ 
 			
 			Local loc = new Local();   			//Instnacias Local 
 			loc = locdao.leerLocal(id); 		//Leer id del local
