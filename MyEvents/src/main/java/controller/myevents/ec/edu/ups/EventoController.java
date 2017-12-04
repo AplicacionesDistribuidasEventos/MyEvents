@@ -169,7 +169,7 @@ public class EventoController {
 	
 	public String insertarEvento(){
 		
-		Local loc = new Local();   			//Instnacias Local
+		Local loc = new Local();   			//Instnacias Local 
 		loc = locdao.leerLocal(id); 		//Leer id del local
 		levento.add(evento); 				//agregar la instancia evento a la lista eventos
 		loc.setEvento(levento); 			// llamar las lista de evento en el local
