@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml">
+
+	<ui:define name="titulo">Listado Salon Recepción</ui:define>
+	<ui:define name="contenido">
+
+		<h:form>
+<h:outputText  value="El registro no contiene datos" rendered="#{empty  salonRecepcionController.salonrecepcion}"></h:outputText>
+			<h:dataTable var="lsrecepcion" style="color:black" class="table table-hover"
+				value="#{salonRecepcionController.listaSalonRecepcion()}" border="2">
+
+				<h:column Style="color: black">
+					<f:facet name="header">Id</f:facet>
+		#{lsrecepcion.id}
+		</h:column>
+
+
+				<h:column Style="color: black">
+					<f:facet name="header">Estado</f:facet>
+		#{lsrecepcion.estado}
+		</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
