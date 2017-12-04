@@ -9,7 +9,10 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.EventoDAO;
+import dao.myevents.ec.edu.ups.LocalDAO;
 import modelo.myevents.ec.edu.ups.Evento;
+import modelo.myevents.ec.edu.ups.Local;
+
 
 
 
@@ -21,16 +24,28 @@ public class EventoController {
 	
 	@Inject
 	private EventoDAO evendao;
+	@Inject
+	private LocalDAO locdao;
 	
+	//List para llenar los locales
 	private List<Evento> levento;
+	
 	private List<Evento> leventocercano;
+	
 	private List<Evento> leventofecha;
 	
 	private int id;
 	
-	
-	
-	
+
+	public LocalDAO getLocdao() {
+		return locdao;
+	}
+
+
+	public void setLocdao(LocalDAO locdao) {
+		this.locdao = locdao;
+	}
+
 
 	public int getId() {
 		return id;
@@ -119,7 +134,7 @@ public class EventoController {
 	public String insertar() {
 		evendao.guardarEvento(evento);
 		loadEvento();
-		return "listarEventos";
+		return "eliminarEvento";
 	}
 	
 	public String actualizar() {
@@ -148,6 +163,19 @@ public class EventoController {
 		return("mapas_veterinarias");
 	}
 	*/
+	
+	
+	//------------------Agregar un evento A local Maestro-Detalle
+	
+	public String insertarEvento(){
+		
+		Local loc = new Local();   			//Instnacias Local
+		loc = locdao.leerLocal(id); 		//Leer id del local
+		levento.add(evento); 				//agregar la instancia evento a la lista eventos
+		loc.setEvento(levento); 			// llamar las lista de evento en el local
+		locdao.updateLocal(loc); 			//Actualizar el local con eventos
+		return null;
+	}
 }
 
 

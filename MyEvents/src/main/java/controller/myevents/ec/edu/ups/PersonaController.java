@@ -16,8 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.validator.constraints.NotBlank;
 
 import dao.myevents.ec.edu.ups.PersonaDAO;
+import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
+
 
 @ManagedBean
 @ViewScoped
@@ -35,6 +37,8 @@ public class PersonaController {
 	private String contrasenia;
 	private String conincidencia;
 	private String Loginexiste;
+	
+	
 
 	@Inject
 	private PersonaDAO pdao;
@@ -42,12 +46,17 @@ public class PersonaController {
 	private List<Persona> lpersonas;
 
 	private Persona myUser;
+	
+
 
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
 		lpersonas = listaPersonas();
 	}
+
+	
+
 
 	public String getContrasenia() {
 		return contrasenia;
@@ -243,7 +252,7 @@ public class PersonaController {
 			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")) {
 					FacesContext contexA= FacesContext.getCurrentInstance();;
 					try {
-						contexA.getExternalContext().redirect("pmantenimiento.xhtml");
+						contexA.getExternalContext().redirect("pages-blank.xhtml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -275,4 +284,6 @@ public class PersonaController {
 		}
 	}
 
+		
+	
 }

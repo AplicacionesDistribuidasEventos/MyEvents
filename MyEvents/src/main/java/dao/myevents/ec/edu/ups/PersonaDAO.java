@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import modelo.myevents.ec.edu.ups.Persona;
 
 
@@ -71,5 +70,6 @@ public class PersonaDAO {
 		List<Persona>personas=query.getResultList();
 		return personas;
 	}
+	
 	
 }

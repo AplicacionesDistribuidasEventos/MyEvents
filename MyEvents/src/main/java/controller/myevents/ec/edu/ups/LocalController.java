@@ -129,7 +129,7 @@ public class LocalController {
 	public String insertar() {
 		locdao.guardarLocal(local);
 		loadLocal();
-		return "Listarlocales";
+		return "AccionesLocal";
 		
 	}
 	
@@ -153,5 +153,8 @@ public class LocalController {
 		listlocal = locdao.listlocal();
 		return listlocal;
 	}
+	
+	
+	
 	
 }

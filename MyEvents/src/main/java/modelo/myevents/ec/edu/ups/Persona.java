@@ -1,5 +1,6 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "PERSONA")
-public class Persona {
+public class Persona implements Serializable{
 	@Id
 	@Column(name = "per_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
