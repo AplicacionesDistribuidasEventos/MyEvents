@@ -9,37 +9,68 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.EventoDAO;
+import dao.myevents.ec.edu.ups.LocalDAO;
 import modelo.myevents.ec.edu.ups.Evento;
+import modelo.myevents.ec.edu.ups.Local;
 
 
 
 @ManagedBean
 public class EventoController {
-
-	
-	private Evento evento;
 	
 	@Inject
 	private EventoDAO evendao;
+	
+	@Inject
+	private LocalDAO locdao;
+	
+	private Evento evento;
+	private Local recupelocal;
 	
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
 	
+	
+	/* Variables para controlar ID de la naveacion
+	 */
 	private int id;
+	private int id2;
 	
+
 	
-	
-	
+	/* Getters and Setters
+	 */
+	public Local getRecupelocal() {
+		return recupelocal;
+	}
+
+	public void setRecupelocal(Local recupelocal) {
+		this.recupelocal = recupelocal;
+	}
+
+	public LocalDAO getLocdao() {
+		return locdao;
+	}
+
+	public void setLocdao(LocalDAO locdao) {
+		this.locdao = locdao;
+	}
 
 	public int getId() {
 		return id;
 	}
 
+	
+	/* RECUPERAR ID PARA LA NAVEGACION DE LOCALES Y EVENTOS
+	 * Sett ID
+	 */
 
 	public void setId(int id) {
 		this.id = id;
 		loadEventoEditar(id);
+		loadID(id);
+		InsertarEventoLocalGloba();
 	}
 
 
@@ -51,7 +82,15 @@ public class EventoController {
 	public void setEvendao(EventoDAO evendao) {
 		this.evendao = evendao;
 	}
+	
 
+	public int getId2() {
+		return id2;
+	}
+
+	public void setId2(int id2) {
+		this.id2 = id2;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -107,7 +146,14 @@ public class EventoController {
 		levento = evendao.listEvento();
 	}
 	
-	//----MANTENIMIENTO CONTROLLER
+	
+	public void loadID(int id) {
+		id2 = id;
+	}
+	
+	
+	/* Mantenimiento Controlladores del EventoController
+	 */
 	
 	public String loadEventoEditar(int id) {
 		
@@ -142,12 +188,21 @@ public class EventoController {
 		levento = evendao.listEvento();
 		return levento;
 	}
-	/*
-	public String cargarMapa(Evento e ){
-		auxEvento = e;
-		return("mapas_veterinarias");
-	}
-	*/
+	
+	
+	/* Metodo para Agregar un evento a un local
+	 */
+	
+		public String InsertarEventoLocalGloba(){ 
+
+			recupelocal=locdao.leerLocal(id2); 
+			recupelocal.getEvento().add(evento);
+			locdao.updateLocal(recupelocal); 
+			
+			return null;  
+		}
+	
+	
 }
 
 
