@@ -157,7 +157,7 @@ public class PersonaController {
 			personas.setContrasenia(pactual);
 			pdao.updatePersona(personas);
 			return "mainUser.xhtml";
-		}else if(myUser.getPerfil().equals("ADMIN")) {
+		}else if(myUser.getPerfil().equals("ADMIN-SUPER")) {
 			personas.setContrasenia(pactual);
 			pdao.updatePersona(personas);
 			return "pages-blank.xhtml";
