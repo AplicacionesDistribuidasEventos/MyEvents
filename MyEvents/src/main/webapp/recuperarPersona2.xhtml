@@ -1,45 +1,70 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="pages-blank.xhtml">
+
+	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml"
+
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="titulo">Ingrese Salon de Eventos</ui:define>
 	
+	
 	<f:metadata>
 
-	<f:viewParam name="id" value="#{localController.id2}"></f:viewParam>
+<f:viewParam name="id" value="#{personaController.id}" />
 
-	</f:metadata>
+</f:metadata>
 
+
+	<ui:define name="titulo">Categoria</ui:define>
 	<ui:define name="contenido">
-		<h:form id="formulario">
 	
 	
-	<center><h2>Ingreso de Salones de Eventos</h2></center>
+		<h:form enctype="multipart/form-data" id="formulario">
+	
+	
+	<h1>Actualizar Categoria</h1>
 	<br/>
 	<br/>
-
-
 	
-	<center>
-
 	
-	<h:panelGrid columns="1">
+	<h:panelGrid columns="3">
+	
+	
+		<h:outputLabel value="Codigo:" for="codigo"/>
+		<h:inputText id="codigo" value="#{personaController.personas.id}" class="form-control"/>
+		<h:message for="codigo"/>
+	
+		<h:outputLabel value="Nombre Categoria:" for="nombCategoria"/>
+		<h:inputText id="nombCategoria" value="#{personaController.personas.nombre}" class="form-control"/>
+		<h:message for="nombCategoria"/>
+		
+		<h:outputLabel value="Descripcion:" for="catDescripcion"/>
+		<h:inputTextarea id="catDescripcion" value="#{personaController.personas.apellido}" class="form-control" />
+		<h:message for="catDescripcion"/>
+				
+				
+		<h:commandButton action="#{personaController.agregaLocal()}" value="Guardar" />
+
+</h:panelGrid>
 	
 			<div class="alert alert-info">
 			    <strong>Info!</strong> Los campos que contienen * son obligatorios.
 			</div>
-		
-		<h:outputLabel value="* Descripción:" for="descLocal"/>
-		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
-		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
-		<h:message for="descLocal"/>
-		
-				<h:outputLabel value="* Nombre del Local:" for="nombLocal"/>
+	
+		<h:outputLabel value="* Nombre del Local:" for="nombLocal"/>
 		<h:inputText id="nombLocal" value="#{localController.local.nombre}" class="form-control"/>
 		<h:message for="nombLocal"/>
+		
+		
+		
+		<h:outputLabel value="* Descripcion:" for="descLocal"/>
+			
+		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
+		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
+		
+		<h:message for="descLocal"/>
+		
 		
 		
 		<h:outputLabel value="* Capacidad:" for="capaLocal"/>
@@ -52,7 +77,7 @@
 
 						<h:selectOneRadio value="#{localController.local.puntuacion}">
 						
-						<h:outputLabel value="Puntuación:" />
+						<h:outputLabel value="Puntuacion:" />
 						    
 							<f:selectItem itemValue="1" itemLabel="Muy malo" />
 							
@@ -76,8 +101,10 @@
 		
 		<h:message for="comeLocal"/>
 		
-		<h:outputLabel value="* Costo del local:" />
-		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"/>
+		<h:outputLabel value="* Costo del local:" for="costolocal"/>
+		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"
+		 onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+		<h:message for="costolocal"/>
 		
 		
 		
@@ -85,11 +112,11 @@
 				
 		
 
-</h:panelGrid>
-</center>
+
+
 
 <br/>
-	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicación del salon de Eventos</i><br/><br/>
+	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
 	<div class="form-group">
 				<div id="map"
 					style="width: 1500px; height: 400px; background: yellow"></div>
@@ -175,10 +202,7 @@ function deleteMarkers() {
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASLkk2gaelkLKJWMxWXf_mRH_Q4YKHdU0&amp;callback=initMap"></script>
 				
-				
-		
-		
-		<h:commandButton action="#{localController.insertarLocalAdmin()}" value="Guardar" 
+		<h:commandButton action="#{personaController.agregaLocal()}" value="Guardar" 
 		class="btn btn-success" />
 		<h:messages globalOnly="true"/>
 		
@@ -190,6 +214,7 @@ function deleteMarkers() {
 
     	 
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);
+        alert("ok");
 
         
     } else {
@@ -229,3 +254,4 @@ var geoOptions = {
 	</h:form>
 	</ui:define>
 </ui:composition>
+	
