@@ -174,7 +174,7 @@ public class EventoController {
 		levento.add(evento); 				//agregar la instancia evento a la lista eventos
 		loc.setEvento(levento); 			// llamar las lista de evento en el local
 		locdao.updateLocal(loc); 			//Actualizar el local con eventos
-		return null;
+		return null; 
 	}
 }
 
