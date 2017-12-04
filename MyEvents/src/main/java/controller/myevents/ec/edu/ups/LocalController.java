@@ -51,6 +51,7 @@ public class LocalController {
 		this.id = id;
 		loadLocalEditar(id);
 		loadId(id);
+		insertarLocalAdmin();
 	}
 	
 	public Local getLocal() {
@@ -122,6 +123,7 @@ public class LocalController {
 
 	public void setId2(int id2) {
 		this.id2 = id2;
+		
 	}
 
 	@PostConstruct
@@ -144,7 +146,7 @@ public class LocalController {
 	
 	public void loadId(int id) {
 		id2 = id;
-	}
+	} 
 	
 	//----MANTENIMIENTO CONTROLLER
 	
@@ -157,21 +159,9 @@ public class LocalController {
 	}
 	//toomo 1 ID
 	public String insertarLocalAdmin() {
-		p = new Persona();
-		System.out.println("ESTE ID: ");
-/*		local.setCapacidad("200");
-		local.setComentario("Buenazo");
-		local.setCosto("200.90");
-		local.setDescripcion("Esta description");
-		local.setNombre("Guayuzo");
-		local.setPuntuacion("1");
-		*/
 		p = pdao.selectPersona(id2);
-		listlocal.add(local);
-		p.setLocales(listlocal);
+		p.getLocales().add(local);
 		pdao.updatePersona(p); 
-
-		//locdao.updateLocal(p.setLocales(listlocal));
 		return null;
 		
 	}
