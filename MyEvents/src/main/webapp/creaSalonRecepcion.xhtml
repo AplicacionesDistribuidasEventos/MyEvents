@@ -6,19 +6,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
     xmlns:hs="http://xmlns.jcp.org/jsf/html"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-    <h:head><title>Crear Asistencia Evento</title></h:head>
+    <h:head><title>Crear Salon Recepción</title></h:head>
 <h:body>
 
 	<ui:composition template="pages-blank.xhtml">
-	<ui:define name="titulo">Asistencia Evento</ui:define>
+	<ui:define name="titulo">Asistencia Salon Recepción</ui:define>
 	<ui:define name="contenido">
 		<center>
-			<h1>Ingreso Asistencia Evento</h1>
+			<h1>Ingreso Salon Recepción</h1>
 			<h:form role="form" id="formregistro">
 				<h:panelGrid columns="1">
 
 
-						<h:selectOneRadio value="#{asistenciaEventoController.asistenciaevento.estado}">
+						<h:selectOneRadio value="#{salonRecepcionController.salonrecepcion.estado}">
 							<f:selectItem itemValue="A" itemLabel="Asistire" />
 							<br/>
 							<f:selectItem itemValue="TA" itemLabel="Talvez asista" />
@@ -32,7 +32,7 @@
 				
 				
 				<h:commandButton value="Confirmar" id="Crear"
-					action="#{asistenciaEventoController.crear()}"
+					action="#{salonRecepcionController.crear()}"
 					class="btn btn-success btn-inline">
 
 				</h:commandButton>

@@ -38,7 +38,5 @@ public class SalonRecepcion {
 	@Override
 	public String toString() {
 		return "SalonRecepcion [id=" + id + ", estado=" + estado + "]";
-	}
-	
-	
+	}		
 }
