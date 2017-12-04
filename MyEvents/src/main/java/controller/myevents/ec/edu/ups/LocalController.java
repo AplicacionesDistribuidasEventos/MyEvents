@@ -170,6 +170,7 @@ public class LocalController {
 		listlocal.add(local);
 		p.setLocales(listlocal);
 		pdao.updatePersona(p); 
+
 		//locdao.updateLocal(p.setLocales(listlocal));
 		return null;
 		
@@ -198,6 +199,8 @@ public class LocalController {
 		return listlocal;
 	}
 	
-	
-	
+
 }//fin localController
+
+
+
