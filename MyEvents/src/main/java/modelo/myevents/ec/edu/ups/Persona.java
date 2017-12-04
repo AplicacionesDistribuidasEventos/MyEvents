@@ -51,7 +51,7 @@ public class Persona {
 
 	@Column(name = "per_estado")
 	private String estado;
-	
+	 
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
