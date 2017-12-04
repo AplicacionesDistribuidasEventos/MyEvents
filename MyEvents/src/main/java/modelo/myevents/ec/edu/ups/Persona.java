@@ -164,13 +164,5 @@ public class Persona {
 	}
 
 	
-
-	/*@Override
-	public String toString() {
-		return "Personas [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", fecha_nac="
-				+ ", estado=" + estado + "]";
-	}*/
-	
 	
 }
