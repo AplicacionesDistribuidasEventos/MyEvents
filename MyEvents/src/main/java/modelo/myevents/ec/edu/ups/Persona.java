@@ -54,13 +54,14 @@ public class Persona {
 	@Column(name = "per_estado")
 	private String estado;
 
+
 	 /*Listado Tipo Asistencia Eventos, unidireccional
 	  * */
+
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
 	
-
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 

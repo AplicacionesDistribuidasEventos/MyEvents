@@ -72,4 +72,13 @@ public class PersonaDAO {
 		return personas;
 	}
 	
+	//Recuperar lista de personas por el id enviado
+	
+	public List<Persona> listPersonaID(int id){
+		String sql = "Select p from Persona p WHERE p.id = '"+id+"'";
+		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
+		List<Persona>personas= query.getResultList();
+		return personas;
+	}
+	
 }

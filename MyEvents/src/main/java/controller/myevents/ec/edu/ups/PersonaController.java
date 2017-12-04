@@ -41,6 +41,20 @@ public class PersonaController {
 	private String contrasenia;
 	private String conincidencia;
 	private String Loginexiste;
+	
+	/*Varibles donde almaceno los valores de la consulta maestro-detalles
+	 * */
+	private String nusuario;
+	private String nlocal;
+	private String ndescripcion;
+	private String ncapacidad;
+	private String ncosto;
+	
+	private int idrecuprerar; //-----------agregado
+	
+	/*DEFINICION DE VARIABLES PARA LA RECUPERACION DE LA LISTA(PERSONA-LOCAL-EVENTO)
+	 * */
+	 private List<Persona> ListPerID;
 
 	@Inject
 	private PersonaDAO pdao;
@@ -53,7 +67,97 @@ public class PersonaController {
 	public void init() {
 		personas = new Persona();
 		lpersonas = listaPersonas();
+		ListPerID = new ArrayList<Persona>();
+		consultaLocalEventos();
 	}
+	
+	
+
+	public String getNusuario() {
+		return nusuario;
+	}
+
+
+
+	public void setNusuario(String nusuario) {
+		this.nusuario = nusuario;
+	}
+
+
+
+	public String getNlocal() {
+		return nlocal;
+	}
+
+
+
+	public void setNlocal(String nlocal) {
+		this.nlocal = nlocal;
+	}
+
+
+
+	public String getNdescripcion() {
+		return ndescripcion;
+	}
+
+
+
+	public void setNdescripcion(String ndescripcion) {
+		this.ndescripcion = ndescripcion;
+	}
+
+
+
+	public String getNcapacidad() {
+		return ncapacidad;
+	}
+
+
+
+	public void setNcapacidad(String ncapacidad) {
+		this.ncapacidad = ncapacidad;
+	}
+
+
+
+	public String getNcosto() {
+		return ncosto;
+	}
+
+
+
+	public void setNcosto(String ncosto) {
+		this.ncosto = ncosto;
+	}
+
+
+
+	public int getIdrecuprerar() {
+		return idrecuprerar;
+	}
+ 
+
+
+	public void setIdrecuprerar(int idrecuprerar) {
+		this.idrecuprerar = idrecuprerar;
+		loadid(idrecuprerar);
+		consultaLocalEventos();
+	}
+
+
+
+	public List<Persona> getListPerID() {
+		return ListPerID;
+	}
+
+
+
+	public void setListPerID(List<Persona> listPerID) {
+		ListPerID = listPerID;
+	}
+
+
 
 	public String getContrasenia() {
 		return contrasenia;
@@ -351,6 +455,26 @@ public class PersonaController {
 						e.printStackTrace();
 					}
 				}
+	 }
+	 /*OBTENCION DE LA LISTA MAESTRA (PERSONA)
+	  * */
+	 public String consultaLocalEventos() {
+		 
+		 System.out.println("ID: "+idrecuprerar+" "+ "ENTRA");
+		 ListPerID = pdao.listPersonaID(idrecuprerar);
+		 for(Persona p: ListPerID) {
+			 System.out.println("CED===================================="+p.getCedula());
+			 nusuario = p.getNombre();
+			 nlocal = p.getLocales().get(0).getNombre();
+			 ndescripcion = p.getLocales().get(0).getDescripcion();
+			 ncapacidad = p.getLocales().get(0).getCapacidad();
+			 ncosto = p.getLocales().get(0).getCosto();
+		 }
+		 return null;
+	 }
+	 public void loadid(int id) {
+		 idrecuprerar=id;
+		 
 	 }
 
 }
