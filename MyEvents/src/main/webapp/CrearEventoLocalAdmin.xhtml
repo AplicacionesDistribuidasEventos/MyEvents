@@ -6,6 +6,9 @@
 
 	<ui:define name="titulo">Crear nuevo Eventos</ui:define>
 	
+	<f:metadata>
+	<f:viewParam name="id" value="#{eventoController.id2}"></f:viewParam>
+	</f:metadata>
 	
 	<ui:define name="contenido">
 		<h:form enctype="multipart/form-data" id="formulario">
@@ -49,11 +52,8 @@
 		
 	</h:panelGrid>
 	
-		<span class="glyphicon glyphicon-pencil"></span> 
-		<h:outputLabel value="* Descripción:" for="descEvento"/> 
-
+		
 		<span class="glyphicon glyphicon-pencil"></span> <h:outputLabel value="* Descripcion:" for="descEvento"/> 
-
 		<!--  <h:inputText id="descEvento" value="#{eventoController.evento.descripcion}" class="form-control" style="color:blue" pt:placeholder="Descripcion del Evento"/>-->
 		<br/>
 		<h:inputTextarea id="descEvento" value="#{eventoController.evento.descripcion}" required="true"   
@@ -63,7 +63,7 @@
 		
 				<br/>
 				<br/>
-	<h:commandButton action="#{eventoController.insertar()}" value="Guardar" 
+	<h:commandButton action="#{eventoController.InsertarEventoLocalGloba()}" value="Guardar" 
 		class="btn btn-success" />
 		<h:messages globalOnly="true"/>
 	</h:form>

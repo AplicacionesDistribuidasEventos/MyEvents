@@ -60,7 +60,7 @@ public class Local {
 	
 	//----------------------Relacion 1..a..* entre entidades local y Evento
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="loc_eve_fk", referencedColumnName="local_codigo")
 	private List<Evento> evento ;
 	
