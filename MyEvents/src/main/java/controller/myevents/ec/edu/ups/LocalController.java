@@ -168,10 +168,7 @@ public class LocalController {
 		p = pdao.selectPersona(id2);
 		listlocal.add(local);
 		p.setLocales(listlocal);
-		System.out.println(p.getApellido());
-		System.out.println(p.getApellido() +" "+ p.getCorreo()+" "+p.getLocales().get(0).getCapacidad() +" "+p.getLocales().get(0).getComentario());
-//		System.out.println(p.getLocales().get(0).getCosto() +" "+ p.getLocales().get(0).getDescripcion()+" "+p.getLocales().get(0).getNombre()+" "+p.getLocales().get(0).getPuntuacion());
-		pdao.updatePersona(p);
+		pdao.updatePersona(p); 
 		return null;
 	}
 	
