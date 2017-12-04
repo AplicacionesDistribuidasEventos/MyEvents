@@ -7,8 +7,7 @@
 	<ui:define name="contenido">
 	
 	<h:form>
-	
-
+	<h:outputText  value="El registro no contiene datos" rendered="#{empty  categoriaController.categorias}"></h:outputText>
 	<h:dataTable var="listaCategoria" style="color:black"
 	value="#{categoriaController.categorias}" border="2" class="table">	
 	

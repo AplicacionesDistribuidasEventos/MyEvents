@@ -9,7 +9,7 @@
 	
 	<h:form>
 	
-
+	<h:outputText  value="El registro no contiene datos" rendered="#{empty  extraController.extras}"></h:outputText>
 	<h:dataTable var="listaExtra" style="color:black"
 	value="#{extraController.extras}" border="2" class="table">	
 	

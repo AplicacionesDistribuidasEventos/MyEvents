@@ -5,9 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import modelo.myevents.ec.edu.ups.Categoria;
+import javax.persistence.TypedQuery;
 import modelo.myevents.ec.edu.ups.SalonRecepcion;
 
 @Stateless
@@ -17,37 +15,39 @@ public class SalonRecepcionDAO {
 	@Inject
 	private EntityManager em;
 	
-	public void guardarSalonRepcion(){
-		
-		
+	public void insertarSRecepcion(SalonRecepcion sr){
+		em.merge(sr);
+		System.out.println("Salon-Recepcion Grabado");		
 	}
 	
-	
-	public void insertarSalonRecepcion(){
-		
-		
-	}
-	
-	
-	public void ActualizaSalonRecepcion(){
-		
-	}
-	
-	public SalonRecepcion leerSalonRecepcion(int id){
-		
-		SalonRecepcion sr = em.find(SalonRecepcion.class, id);
-		return sr;
-		
-	}
-	
-	public void eliminarSalonRecepcion(){
-		
-	}
-	
-	public List<SalonRecepcion> listSalonRecepcion(){
-		Query query = em.createQuery("SELECT sr FROM SalonRecepcion sr", SalonRecepcion.class);
-		List<SalonRecepcion> listado = query.getResultList();
-		return listado;
+	public void updateSRecepcion(SalonRecepcion sr) {
+		em.merge(sr);
+		System.out.println("Salon-Recepcion Update");
 	}
 
+	public void removeSRecepcion(int id) {
+		em.remove(selectSRecepcion(id));
+		System.out.println("Salon-Recepcion Remove");
+	}
+
+	public SalonRecepcion selectSRecepcion(int id) {
+		SalonRecepcion  srecepcion = em.find(SalonRecepcion.class, id);
+		return srecepcion;
+	}
+
+	public List<SalonRecepcion> listSRecepcion() {
+		String sql = "select slr from SalonRecepcion slr";
+		TypedQuery<SalonRecepcion> query = em.createQuery(sql, SalonRecepcion.class);
+		List<SalonRecepcion> lsrecepcion = query.getResultList();
+		return lsrecepcion;
+	}
+
+	public void guardar(SalonRecepcion srecepcion) {
+		SalonRecepcion aux = selectSRecepcion(srecepcion.getId());
+		if(aux!=null) {
+			updateSRecepcion(srecepcion);
+		}else {
+			insertarSRecepcion(srecepcion);
+		}
+	}
 }

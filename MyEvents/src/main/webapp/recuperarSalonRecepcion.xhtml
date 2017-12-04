@@ -6,7 +6,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
     xmlns:hs="http://xmlns.jcp.org/jsf/html"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-    <h:head><title>Crear Asistencia Evento</title></h:head>
+    <h:head><title>Actulizar Asistencia Evento</title></h:head>
+
+	<f:metadata>
+	<f:viewParam name="id" value="#{asistenciaEventoController.id}"></f:viewParam>
+	</f:metadata>
 <h:body>
 
 	<ui:composition template="pages-blank.xhtml">
@@ -38,7 +42,7 @@
 				</h:commandButton>
 				<br/>
 				<br/>
-				<h:commandButton action="actualizar" value="Cancelar" class="btn btn-info btn-inline"/>
+				<h:commandButton action="listadoAsistenciaEvento" value="Cancelar" class="btn btn-info btn-inline"/>
 			</h:form>
 		</center>
 
@@ -46,3 +50,5 @@
 </ui:composition>
 </h:body>
 </html>
+
+

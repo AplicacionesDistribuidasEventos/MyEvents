@@ -7,16 +7,23 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.LocalDAO;
+import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Local;
+import modelo.myevents.ec.edu.ups.Persona;
 
 @ManagedBean
 public class LocalController {
 
-	
+	private int id2;
 	private Local local; 
+	
+	private Persona p ;
 	
 	@Inject
 	private LocalDAO locdao;
+	
+	@Inject
+	private PersonaDAO pdao;
 	
 	private List<Local> listlocal;
 	private Local auxLocal;
@@ -43,6 +50,7 @@ public class LocalController {
 	public void setId(int id) {
 		this.id = id;
 		loadLocalEditar(id);
+		loadId(id);
 	}
 	
 	public Local getLocal() {
@@ -106,6 +114,16 @@ public class LocalController {
 		this.longituddes = longituddes;
 	}
 	
+	
+	
+	public int getId2() {
+		return id2;
+	}
+
+	public void setId2(int id2) {
+		this.id2 = id2;
+	}
+
 	@PostConstruct
 	public void init() {
 		local = new Local(); 
@@ -124,17 +142,43 @@ public class LocalController {
 		return "CrearLocal";
 	}
 	
+	public void loadId(int id) {
+		id2 = id;
+	}
+	
 	//----MANTENIMIENTO CONTROLLER
 	
 	public String insertar() {
 		locdao.guardarLocal(local);
 		loadLocal();
-		return "Listarlocales";
+
+		return null;
 		
 	}
+	//toomo 1 ID
+	public String insertarLocalAdmin() {
+		p = new Persona();
+		System.out.println("ESTE ID: ");
+/*		local.setCapacidad("200");
+		local.setComentario("Buenazo");
+		local.setCosto("200.90");
+		local.setDescripcion("Esta description");
+		local.setNombre("Guayuzo");
+		local.setPuntuacion("1");
+		*/
+		p = pdao.selectPersona(id2);
+		listlocal.add(local);
+		p.setLocales(listlocal);
+		pdao.updatePersona(p); 
+		//locdao.updateLocal(p.setLocales(listlocal));
+		return null;
+		
+	}
+
 	
 	public String actualizar() {
 		locdao.updateLocal(local);
+		
 		return null;
 	}
 	
@@ -154,4 +198,6 @@ public class LocalController {
 		return listlocal;
 	}
 	
-}
+	
+	
+}//fin localController

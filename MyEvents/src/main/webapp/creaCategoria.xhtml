@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" template="pages-blank.xhtml"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Categoria</ui:define>
+	<ui:define name="titulo">Ingresar Categoria</ui:define>
 	
 	
 	<ui:define name="contenido">
@@ -20,15 +20,19 @@
 	
 	
 		<h:outputLabel value="Nombre Categoria:" for="nombCategoria"/>
-		<h:inputText id="nombCategoria" value="#{categoriaController.categoria.nombre}" class="form-control"/>
+		<h:inputText id="nombCategoria" value="#{categoriaController.categoria.nombre}" class="form-control"
+					pt:placeholder="Ejm: Deportivo" />
 		<h:message for="nombCategoria"/>
 		
-		<h:outputLabel value="Descripcion:" for="catDescripcion"/>
-		<h:inputTextarea id="catDescripcion" value="#{categoriaController.categoria.descipcion}" class="form-control" />
+		<h:outputLabel value="Descripción:" for="catDescripcion"/>
+		<h:inputTextarea id="catDescripcion" value="#{categoriaController.categoria.descipcion}" class="form-control" 
+					pt:placeholder="Ingrese una Descripción concreta"
+					requiredMessage="Ingrese una descripcion" cols="100" rows="5" />
 		<h:message for="catDescripcion"/>
 				
 				
-		<h:commandButton action="#{categoriaController.guardar()}" value="Guardar" />
+		<h:commandButton action="#{categoriaController.guardar()}" value="Guardar" 
+			class="btn btn-success"/>
 
 </h:panelGrid>
 	
