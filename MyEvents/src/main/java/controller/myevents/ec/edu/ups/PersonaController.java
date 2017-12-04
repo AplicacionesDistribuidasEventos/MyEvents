@@ -21,13 +21,14 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
+//@ViewScoped
 @SessionScoped
 public class PersonaController {
 
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
-	private Persona personas = null;
+	private Persona personas;
 
 	private int id;
 	private String pactual;
@@ -153,15 +154,9 @@ public class PersonaController {
 	}
 
 	public String modificar() {
-		if(myUser.getPerfil().equals("USUARIO")) {
-			personas.setContrasenia(pactual);
-			pdao.updatePersona(personas);
-			return "mainUser.xhtml";
-		}else if(myUser.getPerfil().equals("ADMIN")) {
-			personas.setContrasenia(pactual);
-			pdao.updatePersona(personas);
-			return "pages-blank.xhtml";
-		}return null;
+		personas.setContrasenia(pactual);
+		pdao.updatePersona(personas);
+		return "actualizar";
 	}
 
 	public String leer(int id) {
@@ -247,28 +242,20 @@ public class PersonaController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
-					FacesContext contexAS= FacesContext.getCurrentInstance();;
+			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")) {
+					FacesContext contexA= FacesContext.getCurrentInstance();;
 					try {
-						contexAS.getExternalContext().redirect("pages-blank.xhtml");
+						contexA.getExternalContext().redirect("pmantenimiento.xhtml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			}else if(pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")){
-				FacesContext contexAS= FacesContext.getCurrentInstance();;
-				try {
-					contexAS.getExternalContext().redirect("mainAdmin.xhtml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
-		} 
+		} else {
 			personas.setCorreo("");
 			personas.setContrasenia("");
 			this.Loginexiste = "El usuario o la contrasenia son incorrectos";
-
+		}
 	}
 	
 	public void cargarDatosUsuario() {
@@ -282,33 +269,12 @@ public class PersonaController {
 		}else {
 			FacesContext contex = FacesContext.getCurrentInstance();
 	        try {
-				contex.getExternalContext().redirect( "index.xhtml" );
+				contex.getExternalContext().redirect( "login.xhtml" );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
 	}
-	
-	public String cerrarSesion() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "index.xhtml";
-	}
-	
-	 public void verificaSesion(){
-		 HttpSession session = SessionUtils.getSession();
-			String nusv = (String) session.getAttribute("username");
-				if(nusv!=null){
-					System.out.println("si tiene sesion");
-					FacesContext contex = FacesContext.getCurrentInstance();
-			        try {
-						contex.getExternalContext().redirect( "sesion.jsf" );
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-	 }
 
 }

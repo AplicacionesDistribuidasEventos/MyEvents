@@ -14,11 +14,8 @@
   <meta name="keywords" content="global, template, html, sass, jquery"/>
   <meta name="author" content="Bucky Maler"/>
   <link rel="stylesheet" href="resources/usuarionavegacion/assets/css/main.css"/>
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
 </h:head>
-<body style="background-color:black;">
+<body>
 
 <!-- notification for small viewports and landscape oriented smartphones -->
 <div class="device-notification">
@@ -37,10 +34,9 @@
           <a class="header--logo" href="#0">
             <img src="resources/usuarionavegacion/assets/img/logo.png" alt="Global"/>
             #{personaController.cargarDatosUsuario()}
-            <p style="color:white">MyEvents</p><a style="color:white">#{personaController.myUser.correo}</a>
-            <a style="color:white">#{personaController.myUser.nombre} #{personaController.myUser.apellido}</a>
-            <h:form><h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/></h:form>
+            <p>MyEvents</p><p>#{personaController.myUser.correo}</p>
           </a>
+          <button class="header--cta cta">Hire Us</button>
           <div class="header--nav-toggle">
             <span></span>
           </div>
@@ -58,15 +54,15 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h2 style="color: white">Bienvenido a<br/>MyEvents</h2>
-                <h1 style="color: white">#{personaController.myUser.nombre}</h1>
+                <h1>MyEvents<br/>la app<br/>de los eventos en Cuenca</h1>
+                <button class="cta">Salir
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                   <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
                     <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
                   </g>
                   </svg>
                   <span class="btn-background"></span>
-
+                </button>
                 <img src="resources/usuarionavegacion/assets/img/introduction-visual.png" alt="Welcome"/>
               </div>
               <div class="intro--options">
@@ -90,10 +86,10 @@
             
               <h2>Datos Informativos</h2>
 			<h:form>
-			<h3 style="color:white">Nombre: #{personaController.myUser.nombre}</h3>
-			<h3 style="color:white">Apellido: #{personaController.myUser.apellido}</h3>
-			<h3 style="color:white">Cedula: #{personaController.myUser.cedula}</h3>
-			<h3 style="color:white">Correo: #{personaController.myUser.correo}</h3>
+			Nombre: #{personaController.myUser.nombre}
+			Apellido: #{personaController.myUser.apellido}
+			Cedula: #{personaController.myUser.cedula}
+			Correo: #{personaController.myUser.correo}
 			<a href="editUser.xhtml?id=#{personaController.myUser.id}"
 							class="btn btn-info btn-md"> Editar </a>
 			</h:form>
