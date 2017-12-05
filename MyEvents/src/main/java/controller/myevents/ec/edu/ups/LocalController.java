@@ -129,6 +129,7 @@ public class LocalController {
 		
 	} 
 
+
 	@PostConstruct
 	public void init() {
 		local = new Local(); 
@@ -148,8 +149,28 @@ public class LocalController {
 		id2 = id;
 	} 
 
+	/* METODO PARA AGREGAR LOCAL A LA PERSONA
+	 */
 	
+	public String insertarLocalAdmin() {
+		p = pdao.selectPersona(id2);
+		p.getLocales().add(local);
+		pdao.updatePersona(p); 
+		return null;
+		
+	}
 	
+	/* MANTENIMIENTO CONTROLLER
+	 */
+	
+	public String insertar() {
+		locdao.guardarLocal(local);
+		loadLocal();
+
+		return null;
+	}
+
+
 	/* METODO PARA AGREGAR LOCAL A LA PERSONA
 	 */
 	
@@ -168,10 +189,9 @@ public class LocalController {
 	public String insertar() {
 		locdao.guardarLocal(local);
 		loadLocal();
-
 		return null;
 	}
-	
+
 	public String actualizar() {
 		locdao.updateLocal(local);
 		
@@ -194,6 +214,7 @@ public class LocalController {
 	}
 	
 
-}
+}//fin localController
+
 
 
