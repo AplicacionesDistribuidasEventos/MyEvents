@@ -87,10 +87,11 @@ public class EventoController {
 		loadID(id);
 
 		insertarEventoLocalGloba();
-		
+
 		loadCId(id);//agregado
 		/////agregar///
 		insertaCategoriaAdmin();
+
 
 	}
 
