@@ -70,7 +70,9 @@ public class EventoController {
 		this.id = id;
 		loadEventoEditar(id);
 		loadID(id);
-		InsertarEventoLocalGloba();
+
+		insertarEventoLocalGloba();
+
 	}
 
 
@@ -193,7 +195,8 @@ public class EventoController {
 	/* Metodo para Agregar un evento a un local
 	 */
 	
-		public String InsertarEventoLocalGloba(){ 
+		public String insertarEventoLocalGloba(){ 
+
 
 			recupelocal=locdao.leerLocal(id2); 
 			recupelocal.getEvento().add(evento);

@@ -127,7 +127,8 @@ public class LocalController {
 	public void setId2(int id2) {
 		this.id2 = id2;
 		
-	}
+	} 
+
 
 	@PostConstruct
 	public void init() {
@@ -147,10 +148,7 @@ public class LocalController {
 	public void loadId(int id) {
 		id2 = id;
 	} 
-<<<<<<< HEAD
-=======
-	
-	
+
 	/* METODO PARA AGREGAR LOCAL A LA PERSONA
 	 */
 	
@@ -161,7 +159,6 @@ public class LocalController {
 		return null;
 		
 	}
->>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 	
 	/* MANTENIMIENTO CONTROLLER
 	 */
@@ -172,31 +169,29 @@ public class LocalController {
 
 		return null;
 	}
-<<<<<<< HEAD
-	//toomo 1 ID
-	public String insertarLocalAdmin() {
-		p = new Persona();
-		System.out.println("ESTE ID: ");
-/*		local.setCapacidad("200");
-		local.setComentario("Buenazo");
-		local.setCosto("200.90");
-		local.setDescripcion("Esta description");
-		local.setNombre("Guayuzo");
-		local.setPuntuacion("1");
-		*/
-		p = pdao.selectPersona(id2);
-		listlocal.add(local);
-		p.setLocales(listlocal);
-		pdao.updatePersona(p); 
 
-		//locdao.updateLocal(p.setLocales(listlocal));
+
+	/* METODO PARA AGREGAR LOCAL A LA PERSONA
+	 */
+	
+	public String insertarLocalAdmin() {
+		p = pdao.selectPersona(id2);
+		p.getLocales().add(local);
+		pdao.updatePersona(p); 
 		return null;
 		
 	}
 
-=======
->>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 	
+	/* MANTENIMIENTO CONTROLLER
+	 */
+	
+	public String insertar() {
+		locdao.guardarLocal(local);
+		loadLocal();
+		return null;
+	}
+
 	public String actualizar() {
 		locdao.updateLocal(local);
 		
@@ -219,11 +214,7 @@ public class LocalController {
 	}
 	
 
-<<<<<<< HEAD
 }//fin localController
 
-=======
-}
->>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 
 
