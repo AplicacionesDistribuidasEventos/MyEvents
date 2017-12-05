@@ -147,6 +147,7 @@ public class LocalController {
 	public void loadId(int id) {
 		id2 = id;
 	} 
+
 	
 	
 	/* METODO PARA AGREGAR LOCAL A LA PERSONA
@@ -159,6 +160,7 @@ public class LocalController {
 		return null;
 		
 	}
+
 	
 	/* MANTENIMIENTO CONTROLLER
 	 */
