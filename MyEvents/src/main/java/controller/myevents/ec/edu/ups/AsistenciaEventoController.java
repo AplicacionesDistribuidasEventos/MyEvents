@@ -34,9 +34,6 @@ public class AsistenciaEventoController {
 		cargarEstado(id);
 	}
 
-
-
-
 	public AsistenciaEvento getAsistenciaevento() {
 		return asistenciaevento;
 	}
