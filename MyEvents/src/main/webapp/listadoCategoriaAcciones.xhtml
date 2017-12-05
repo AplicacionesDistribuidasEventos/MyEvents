@@ -49,6 +49,17 @@
 					<h:commandButton value="Eliminar" class="btn btn-danger"
 						action="#{categoriaController.eliminaCategoria(listaCategoria.id)}" />
 				</h:column>
+				
+				
+				<h:column Style="color: black">
+					<f:facet name="header" Style="color: black"><center>Agregar Categoria</center></f:facet>
+					<!-- <h:commandButton value="Editar" class="btn btn-danger"
+						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
+						
+						<center><a href="crearAdminCategoria.xhtml?id=#{listaCategoria.id}" class="btn btn-info btn-lg">
+          				<span class="glyphicon glyphicon-refresh"></span> Agregar
+        </a></center>		
+				</h:column>
 
 	</h:dataTable>
 	<h:commandButton action="creaCategoria" value="Crear nueva Categoria" />
