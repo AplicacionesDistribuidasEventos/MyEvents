@@ -54,16 +54,19 @@ public class Persona {
 	@Column(name = "per_estado")
 	private String estado;
 
+
 	 /*Listado Tipo Asistencia Eventos, unidireccional
 	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
 	
-
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
+
+	 /*Listado Tipo Locales, unidireccional
+	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
 	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
 	private List<Local> locales;
@@ -172,5 +175,5 @@ public class Persona {
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
 				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
-	
+
 }

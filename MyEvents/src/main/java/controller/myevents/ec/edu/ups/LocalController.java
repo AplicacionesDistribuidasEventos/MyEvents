@@ -14,10 +14,6 @@ import modelo.myevents.ec.edu.ups.Persona;
 @ManagedBean
 public class LocalController {
 
-	private int id2;
-	private Local local; 
-	
-	private Persona p ;
 	
 	@Inject
 	private LocalDAO locdao;
@@ -25,11 +21,18 @@ public class LocalController {
 	@Inject
 	private PersonaDAO pdao;
 	
+	private Local local; 
+	private Persona p ;
+	
+	/* Objetos lista
+	 */
 	private List<Local> listlocal;
 	private Local auxLocal;
 	
-	//  Atributo para la navegacion por codigo en JSF
+	/* Atributos para la navegacion por codigo en JSF
+	 */ 
 	private int id;
+	private int id2;
 
 	/* Datos para la ubicacion
 	 */
@@ -40,8 +43,8 @@ public class LocalController {
 	private String latituddes;
 	private String longituddes;
 	
-	
-	
+	/* Getters and Setters
+	 */
 	
 	public int getId() {
 		return id;
@@ -124,7 +127,8 @@ public class LocalController {
 	public void setId2(int id2) {
 		this.id2 = id2;
 		
-	}
+	} 
+
 
 	@PostConstruct
 	public void init() {
@@ -133,31 +137,22 @@ public class LocalController {
 	}
 
 	public void loadLocal() {
-		
 		listlocal=locdao.listlocal();
 	}
 	
 	public String loadLocalEditar(int id) {
-		
 		local = locdao.leerLocal(id);
-		
 		return "CrearLocal";
 	}
 	
 	public void loadId(int id) {
 		id2 = id;
 	} 
-	
-	//----MANTENIMIENTO CONTROLLER
-	
-	public String insertar() {
-		locdao.guardarLocal(local);
-		loadLocal();
 
-		return null;
-		
-	}
-	//toomo 1 ID
+
+	/* METODO PARA AGREGAR LOCAL A LA PERSONA
+	 */
+	
 	public String insertarLocalAdmin() {
 		p = pdao.selectPersona(id2);
 		p.getLocales().add(local);
@@ -167,6 +162,15 @@ public class LocalController {
 	}
 
 	
+	/* MANTENIMIENTO CONTROLLER
+	 */
+	
+	public String insertar() {
+		locdao.guardarLocal(local);
+		loadLocal();
+		return null;
+	}
+
 	public String actualizar() {
 		locdao.updateLocal(local);
 		
@@ -184,7 +188,6 @@ public class LocalController {
 		return "eliminarLocal";
 	}
 	public List<Local> listaLocales(){
-		
 		listlocal = locdao.listlocal();
 		return listlocal;
 	}

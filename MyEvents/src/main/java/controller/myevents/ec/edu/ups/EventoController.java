@@ -17,10 +17,6 @@ import modelo.myevents.ec.edu.ups.Local;
 
 @ManagedBean
 public class EventoController {
-
-	
-	private Evento evento;
-	private Local local;
 	
 	@Inject
 	private EventoDAO evendao;
@@ -28,24 +24,55 @@ public class EventoController {
 	@Inject
 	private LocalDAO locdao;
 	
+	private Evento evento;
+	private Local recupelocal;
+	
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
 	
+	
+	/* Variables para controlar ID de la naveacion
+	 */
 	private int id;
+	private int id2;
 	
+
 	
-	
-	
+	/* Getters and Setters
+	 */
+	public Local getRecupelocal() {
+		return recupelocal;
+	}
+
+	public void setRecupelocal(Local recupelocal) {
+		this.recupelocal = recupelocal;
+	}
+
+	public LocalDAO getLocdao() {
+		return locdao;
+	}
+
+	public void setLocdao(LocalDAO locdao) {
+		this.locdao = locdao;
+	}
 
 	public int getId() {
 		return id;
 	}
 
+	
+	/* RECUPERAR ID PARA LA NAVEGACION DE LOCALES Y EVENTOS
+	 * Sett ID
+	 */
 
 	public void setId(int id) {
 		this.id = id;
 		loadEventoEditar(id);
+		loadID(id);
+
+		insertarEventoLocalGloba();
+
 	}
 
 
@@ -57,7 +84,15 @@ public class EventoController {
 	public void setEvendao(EventoDAO evendao) {
 		this.evendao = evendao;
 	}
+	
 
+	public int getId2() {
+		return id2;
+	}
+
+	public void setId2(int id2) {
+		this.id2 = id2;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -113,7 +148,14 @@ public class EventoController {
 		levento = evendao.listEvento();
 	}
 	
-	//----MANTENIMIENTO CONTROLLER
+	
+	public void loadID(int id) {
+		id2 = id;
+	}
+	
+	
+	/* Mantenimiento Controlladores del EventoController
+	 */
 	
 	public String loadEventoEditar(int id) {
 		
@@ -150,17 +192,26 @@ public class EventoController {
 	}
 	
 	
-	//------------------Agregar un evento A local Maestro-Detalle
+	/* Metodo para Agregar un evento a un local
+	 */
 	
-		public String InsertarEventoLocal(){ 
+		public String insertarEventoLocalGloba(){ 
+
+
+			recupelocal=locdao.leerLocal(id2); 
+			recupelocal.getEvento().add(evento);
+			locdao.updateLocal(recupelocal); 
 			
-			Local loc = new Local();   			//Instnacias Local 
-			loc = locdao.leerLocal(id); 		//Leer id del local
-			levento.add(evento); 				//agregar la instancia evento a la lista eventos
-			loc.setEvento(levento); 			// llamar las lista de evento en el local
-			locdao.updateLocal(loc); 			//Actualizar el local con eventos
 			return null;  
 		}
 	
 	
 }
+
+
+
+
+
+
+
+

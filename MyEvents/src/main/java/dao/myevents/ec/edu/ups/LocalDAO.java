@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-
+ 
 import modelo.myevents.ec.edu.ups.Local;
 
 
