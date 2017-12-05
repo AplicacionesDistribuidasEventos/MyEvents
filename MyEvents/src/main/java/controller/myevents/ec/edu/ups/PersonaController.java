@@ -22,7 +22,7 @@ import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
 @SessionScoped
-public class PersonaController {
+public class PersonaController { 
 
 	/*
 	 * Variable para la validacion de la cedula
