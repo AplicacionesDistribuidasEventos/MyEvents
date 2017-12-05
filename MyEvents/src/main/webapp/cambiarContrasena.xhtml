@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+
+	<f:metadata>
+	<f:viewParam name="id" value="#{personaController.id}"></f:viewParam>
+	</f:metadata>
+	
+	<ui:define name="titulo"> Cambiar Contraseña</ui:define>
+	<ui:define name="contenido">
+		<center>
+		<h1>Cambiar Contraseña</h1>
+		<h:form>
+		<h:panelGrid> columns="1">
+		
+		<h:outputLabel value="Nombre: " for="contrasenia" />
+			<h:inputText value="#{personaController.personas.contrasenia}"
+				id="nombre" class="form-control input-sm" pt:placeholder="Contrasenia" />
+		
+		
+		</h:panelGrid>
+		
+		</h:form>
+		
+		</center>
+	
+	
+	
+	
+	
+	
+	</ui:define>
+<body> 
+
+</body> 
+</html>

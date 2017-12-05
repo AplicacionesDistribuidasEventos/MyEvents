@@ -11,6 +11,8 @@
 		<h:form enctype="multipart/form-data" id="formulario">
 	
 	
+	
+	
 	<center><h2>INGRESO DE EVENTOS</h2></center>
 	
 	<br/>
@@ -33,8 +35,8 @@
 		
 		
 		
-		<h:outputLabel value="* Fecha del Evento: (yyyy/mm/dd)" for="fechaEvento" />
-		<h:inputText id="fecha" value="#{eventoController.evento.fechaEvento}" class="form-control" style="color:blue" pt:placeholder="Fecha del Evento">
+		<h:outputLabel value="* Fecha del Evento: " for="fechaEvento" />
+		<h:inputText id="fecha" value="#{eventoController.evento.fechaEvento}" class="form-control" style="color:blue" pt:placeholder="yyyy/mm/dd">
 		<f:convertDateTime pattern="yyyy/mm/dd" />
 		</h:inputText>
 		<h:message for="fechaEvento"/>
@@ -48,8 +50,7 @@
 	</h:panelGrid>
 	
 		
-		<span class="glyphicon glyphicon-pencil"></span> 
-		<h:outputLabel value="* Descripción:" for="descEvento"/> 
+		<span class="glyphicon glyphicon-pencil"></span> <h:outputLabel value="* Descripcion:" for="descEvento"/> 
 		<!--  <h:inputText id="descEvento" value="#{eventoController.evento.descripcion}" class="form-control" style="color:blue" pt:placeholder="Descripcion del Evento"/>-->
 		<br/>
 		<h:inputTextarea id="descEvento" value="#{eventoController.evento.descripcion}" required="true"   
