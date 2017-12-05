@@ -448,7 +448,7 @@ public class PersonaController {
 			        		contex.getExternalContext().redirect( "mainUser.html" );	
 			        	}else if(myUser.getPerfil().equals("ADMIN")){
 			        		contex.getExternalContext().redirect( "mainAdmin.html" );
-			        	}
+			        	} 
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block

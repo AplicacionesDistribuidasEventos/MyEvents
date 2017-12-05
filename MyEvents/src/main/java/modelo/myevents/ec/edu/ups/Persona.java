@@ -1,5 +1,5 @@
 package modelo.myevents.ec.edu.ups;
-
+  
 import java.util.List;
 
 import javax.persistence.CascadeType;
