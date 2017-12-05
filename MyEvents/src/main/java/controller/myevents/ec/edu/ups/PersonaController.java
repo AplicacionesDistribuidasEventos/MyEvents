@@ -306,7 +306,8 @@ public class PersonaController {
 		System.out.println("ACTUALIZAR ADMIN :"+personas.getCedula());
 		System.out.println("ELSE IF ADMIN");
 		pdao.updatePersona(personas);
-		return "pages-blanck";
+		return "pages-blank";
+
 	}return null;
 		}catch (Exception e) {
 		// TODO: handle exception

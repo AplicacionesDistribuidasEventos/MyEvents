@@ -50,12 +50,9 @@ public class EventoController {
 	/* Getters and Setters
 	 */
 	
-	
-	
 	public int getId3() {
 		return id3;
 	}
-
 
 	public List<Evento> getListadoFiltrado() {
 		return listadoFiltrado;
@@ -117,8 +114,8 @@ public class EventoController {
 		loadCId(id);//agregado
 		/////agregar///
 		insertaCategoriaAdmin();
-		buscar();
 
+		//buscar();
 
 	}
 
