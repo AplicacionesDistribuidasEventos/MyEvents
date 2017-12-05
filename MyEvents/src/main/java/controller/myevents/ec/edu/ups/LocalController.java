@@ -127,7 +127,7 @@ public class LocalController {
 	public void setId2(int id2) {
 		this.id2 = id2;
 		
-	}
+	} 
 
 	@PostConstruct
 	public void init() {
