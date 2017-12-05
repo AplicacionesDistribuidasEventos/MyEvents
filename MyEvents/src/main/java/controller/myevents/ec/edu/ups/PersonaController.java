@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -34,6 +35,7 @@ public class PersonaController {
 
 	private int id;
 	private String pactual;
+	private int idEditUser;
 
 	/*Definicion de variables para la validacion-coincidencia del numero de cedula ingresado
 	 * */
@@ -198,7 +200,8 @@ public class PersonaController {
 	public void setLpersonas(List<Persona> lpersonas) {
 		this.lpersonas = lpersonas;
 	}
-
+/*Recuperacion de los Ids que son pasados como URL
+ * */
 	public int getId() {
 		return id;
 	}
@@ -206,6 +209,15 @@ public class PersonaController {
 	public void setId(int id) {
 		this.id = id;
 		loadDatosEditar(id);
+	}
+
+	public int getIdEditUser() {
+		return idEditUser;
+	}
+
+	public void setIdEditUser(int idEditUser) {
+		this.idEditUser = idEditUser;
+		loadDatosEditar(idEditUser);
 	}
 
 	public PersonaDAO getPdao() {
@@ -224,6 +236,9 @@ public class PersonaController {
 		this.myUser = myUser;
 	}
 
+	public String redirectmainAdmin() {
+		return "mainAmin.xhtml";
+	}
 	/*Creacion del objeto Persona condicinamiento segun las sentencias de validacion
 	 * */
 	public void crear() {
@@ -273,15 +288,24 @@ public class PersonaController {
 	 * Modificacion de los objetos de tipo Persona(USUARIO/ADMIN)
 	 */
 	public String modificar() {
-		if(myUser.getPerfil().equals("USUARIO")) {
-			personas.setContrasenia(pactual);
-			pdao.updatePersona(personas);
-			return "mainUser.xhtml";
-		}else if(myUser.getPerfil().equals("ADMIN")) {
-			personas.setContrasenia(pactual);
-			pdao.updatePersona(personas);
-			return "pages-blank.xhtml";
-		}return null;
+		try{
+			System.out.println(personas.getPerfil());
+			if(myUser.getPerfil().equals("USUARIO")) {
+				personas.setContrasenia(pactual);
+				pdao.updatePersona(personas);
+				return "mainUser";
+			}else if(myUser.getPerfil().equals("ADMIN")) {
+				personas.setContrasenia(pactual);
+				System.out.println("ACTUALIZAR ADMIN :"+personas.getCedula());
+				System.out.println("ELSE IF ADMIN");
+				pdao.updatePersona(personas);
+				return "mainAdmin";
+	}return null;
+		}catch (Exception e) {
+		// TODO: handle exception
+			e.printStackTrace();
+		return null;
+		}
 	}
 
 	/*
@@ -360,7 +384,13 @@ public class PersonaController {
 		System.out.println("Cargando...Persona a Editar" + id);
 		personas = pdao.selectPersona(id);
 		pactual = personas.getContrasenia();
-		return "recuperaPersona";
+		if(personas.getPerfil().equals("USUARIO")) {
+			return "recuperaPersona";	
+		}else if(personas.getPerfil().equals("ADMIN")) {
+			System.out.println("LOAD DATOS ");
+			return "editAdmin";	
+		}
+		return null;
 	}
 
 	/*inicilizar una Sesion HTTP y establecimiento de parametros en session, FacesContext acceso tanto al contexto de JSF como HTTP
@@ -368,33 +398,35 @@ public class PersonaController {
 	public void iniciarSesion() {
 		if (pdao.login(personas.getCorreo(), personas.getContrasenia()).size() != 0) {
 			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username",
-					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getCorreo());
-			session.setAttribute("perfil",
-					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil());
-			session.setAttribute("estado",
-					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getEstado());
+			session.setAttribute("username",pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getCorreo());
+			session.setAttribute("perfil",pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil());
+			session.setAttribute("estado",pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getEstado());
 			this.Loginexiste = " ";
+			FacesContext contex = FacesContext.getCurrentInstance();
 			if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("USUARIO")) {
-				FacesContext contex = FacesContext.getCurrentInstance();
+
+				System.out.println("CONTEXTO USER");
 				try {
 					contex.getExternalContext().redirect("mainUser.xhtml");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
-					FacesContext contexAS= FacesContext.getCurrentInstance();;
+			} 
+			/*else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
+					//FacesContext contexAS= FacesContext.getCurrentInstance();
 					try {
-						contexAS.getExternalContext().redirect("pages-blank.xhtml");
+						contex.getExternalContext().redirect("pages-blank.xhtml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			}else if(pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")){
-				FacesContext contexAS= FacesContext.getCurrentInstance();;
+			}*/
+			else if(pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")){
+				//FacesContext contexAS= FacesContext.getCurrentInstance();
+				System.out.println("CONTEXTO ADMINN");
 				try {
-					contexAS.getExternalContext().redirect("mainAdmin.xhtml");
+					contex.getExternalContext().redirect("mainAdmin.xhtml");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -412,19 +444,27 @@ public class PersonaController {
 		myUser = new Persona();
 		HttpSession session = SessionUtils.getSession();
 		String nus = (String) session.getAttribute("username");
-		if(pdao.verificaCorreo(nus).size()!=0) {
-			List<Persona> lusuario = new ArrayList<Persona>();
-			lusuario = pdao.verificaCorreo(nus);
-			myUser = lusuario.get(0);
-		}else {
-			FacesContext contex = FacesContext.getCurrentInstance();
-	        try {
-				contex.getExternalContext().redirect( "index.xhtml" );
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+		System.out.println("NUS "+nus);
+		try {		
+			if(pdao.verificaCorreo(nus).size()!=0) {
+				List<Persona> lusuario = new ArrayList<Persona>();
+				lusuario = pdao.verificaCorreo(nus);
+				myUser = lusuario.get(0);
+				System.out.println("MYUSER EMAIL: "+myUser.getCorreo());
+			}else {
+				FacesContext contex = FacesContext.getCurrentInstance();
+		        try {
+					contex.getExternalContext().redirect( "index.xhtml" );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+		}catch(Exception e) {
+			System.out.println("Error al cargar");
+			e.printStackTrace();
 		}
+
 	}
 	
 	/*Metodo Utilizado para la eliminacion de una sesion HTTP, con su respectiva navegacion
@@ -476,5 +516,8 @@ public class PersonaController {
 		 idrecuprerar=id;
 		 
 	 }
-
+	 public void loadidUser(int id) {
+		 idEditUser=id;
+		 
+	 }
 }
