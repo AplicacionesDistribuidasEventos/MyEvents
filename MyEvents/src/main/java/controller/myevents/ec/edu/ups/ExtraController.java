@@ -66,8 +66,7 @@ public class ExtraController {
 	public void loadExtra(){
 		
 		extras = extdao.listExtra();
-	}
-	
+	}	
 	
 	public String loadExtraEditar(int id){
 		
@@ -96,7 +95,4 @@ public class ExtraController {
 		//return null;
 		return "listadoExtra";
 	}
-	
-
 }//fin clase
-

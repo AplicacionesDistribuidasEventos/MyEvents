@@ -41,7 +41,7 @@ public class Persona {
 	private String cedula;
 
 	@Column(name = "per_correo")
-	@NotBlank(message = "Por favor ingrese el correo")
+	@NotBlank(message = "Por favor ingrese el correo") 
 	private String correo;
 
 	@Column(name = "per_perfil")
@@ -57,15 +57,24 @@ public class Persona {
 
 	 /*Listado Tipo Asistencia Eventos, unidireccional
 	  * */
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
 	
+<<<<<<< HEAD
 
 
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
+=======
+	 /*Listado Tipo Locales, unidireccional
+	  * */
+>>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
 	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
@@ -175,5 +184,9 @@ public class Persona {
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
 				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'RamaEdwinQuishpe' of https://github.com/AplicacionesDistribuidasEventos/MyEvents.git
 	
 }
