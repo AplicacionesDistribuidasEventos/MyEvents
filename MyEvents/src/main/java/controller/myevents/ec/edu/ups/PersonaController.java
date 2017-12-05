@@ -413,7 +413,7 @@ public class PersonaController {
 					e.printStackTrace();
 				}
 			} 
-			/*else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
+			else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN-SUPER")) {
 					//FacesContext contexAS= FacesContext.getCurrentInstance();
 					try {
 						contex.getExternalContext().redirect("pages-blank.xhtml");
@@ -421,7 +421,7 @@ public class PersonaController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			}*/
+			}
 			else if(pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")){
 				//FacesContext contexAS= FacesContext.getCurrentInstance();
 				System.out.println("CONTEXTO ADMINN");
