@@ -45,7 +45,7 @@ public class EventoDAO {
 		System.out.println("Updating............"+e.getCodigo()+
 				e.getNombre());
 		em.merge(e);
-	}
+	} 
 	
 	//Metodo para Leer Evento
 	public Evento leerEvento(int id) {
