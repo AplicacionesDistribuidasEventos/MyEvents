@@ -65,7 +65,7 @@ public class Evento {
 
 	//------relaciones entre evento a salon de recepciones y de evento a asistencia evento
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
 	private List<SalonRecepcion> salones;
 	

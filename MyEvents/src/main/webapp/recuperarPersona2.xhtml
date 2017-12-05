@@ -9,20 +9,44 @@
 	<ui:define name="titulo">Ingrese Salon de Eventos</ui:define>
 	
 	
+	<f:metadata>
+
+<f:viewParam name="id" value="#{personaController.id}" />
+
+</f:metadata>
+
+
+	<ui:define name="titulo">Categoria</ui:define>
 	<ui:define name="contenido">
+	
+	
 		<h:form enctype="multipart/form-data" id="formulario">
 	
 	
-	<center><h2>Ingreso de Salones de Eventos</h2></center>
+	<h1>Actualizar Categoria</h1>
 	<br/>
 	<br/>
-
-
 	
-	<center>
-
 	
-	<h:panelGrid columns="1">
+	<h:panelGrid columns="3">
+	
+	
+		<h:outputLabel value="Codigo:" for="codigo"/>
+		<h:inputText id="codigo" value="#{personaController.personas.id}" class="form-control"/>
+		<h:message for="codigo"/>
+	
+		<h:outputLabel value="Nombre Categoria:" for="nombCategoria"/>
+		<h:inputText id="nombCategoria" value="#{personaController.personas.nombre}" class="form-control"/>
+		<h:message for="nombCategoria"/>
+		
+		<h:outputLabel value="Descripcion:" for="catDescripcion"/>
+		<h:inputTextarea id="catDescripcion" value="#{personaController.personas.apellido}" class="form-control" />
+		<h:message for="catDescripcion"/>
+				
+				
+		<h:commandButton action="#{personaController.agregaLocal()}" value="Guardar" />
+
+</h:panelGrid>
 	
 			<div class="alert alert-info">
 			    <strong>Info!</strong> Los campos que contienen * son obligatorios.
@@ -88,8 +112,8 @@
 				
 		
 
-</h:panelGrid>
-</center>
+
+
 
 <br/>
 	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicacion del salon de Eventos</i><br/><br/>
@@ -178,10 +202,7 @@ function deleteMarkers() {
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASLkk2gaelkLKJWMxWXf_mRH_Q4YKHdU0&amp;callback=initMap"></script>
 				
-				
-		
-		
-		<h:commandButton action="#{localController.insertar()}" value="Guardar" 
+		<h:commandButton action="#{personaController.agregaLocal()}" value="Guardar" 
 		class="btn btn-success" />
 		<h:messages globalOnly="true"/>
 		
@@ -193,7 +214,7 @@ function deleteMarkers() {
 
     	 
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);
-    
+        alert("ok");
 
         
     } else {
