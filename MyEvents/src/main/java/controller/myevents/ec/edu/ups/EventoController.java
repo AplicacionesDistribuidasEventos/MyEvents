@@ -1,15 +1,15 @@
 package controller.myevents.ec.edu.ups;
 
-
-
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
+import dao.myevents.ec.edu.ups.CategoriaDAO;
 import dao.myevents.ec.edu.ups.EventoDAO;
 import dao.myevents.ec.edu.ups.LocalDAO;
+import modelo.myevents.ec.edu.ups.Categoria;
 import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 
@@ -24,8 +24,12 @@ public class EventoController {
 	@Inject
 	private LocalDAO locdao;
 	
+	@Inject
+	private CategoriaDAO catedao;
+	
 	private Evento evento;
 	private Local recupelocal;
+	private Categoria c;
 	
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
@@ -36,11 +40,22 @@ public class EventoController {
 	 */
 	private int id;
 	private int id2;
-	
+	private int id3;
 
 	
 	/* Getters and Setters
 	 */
+	
+	public int getId3() {
+		return id3;
+	}
+
+
+	public void setId3(int id3) {
+		this.id3 = id3;
+		
+	}
+	
 	public Local getRecupelocal() {
 		return recupelocal;
 	}
@@ -72,6 +87,11 @@ public class EventoController {
 		loadID(id);
 
 		insertarEventoLocalGloba();
+
+		loadCId(id);//agregado
+		/////agregar///
+		insertaCategoriaAdmin();
+
 
 	}
 
@@ -153,6 +173,10 @@ public class EventoController {
 		id2 = id;
 	}
 	
+	public void loadCId(int id) {
+		id3 = id;
+	} 
+	
 	
 	/* Mantenimiento Controlladores del EventoController
 	 */
@@ -204,14 +228,14 @@ public class EventoController {
 			
 			return null;  
 		}
+		
+		public String insertaCategoriaAdmin(){
+			c = catedao.leerCategoria(id3);
+			c.getEventos().add(evento);
+			catedao.actualizarCategoria(c);
+			return null;
+					
+		}
 	
 	
-}
-
-
-
-
-
-
-
-
+}//fin clase EventoController
