@@ -21,7 +21,7 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
-@SessionScoped
+@SessionScoped 
 public class PersonaController { 
 
 	/*
