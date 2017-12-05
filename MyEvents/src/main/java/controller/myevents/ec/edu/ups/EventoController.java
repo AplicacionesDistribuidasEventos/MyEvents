@@ -1,15 +1,15 @@
 package controller.myevents.ec.edu.ups;
 
-
-
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
+import dao.myevents.ec.edu.ups.CategoriaDAO;
 import dao.myevents.ec.edu.ups.EventoDAO;
 import dao.myevents.ec.edu.ups.LocalDAO;
+import modelo.myevents.ec.edu.ups.Categoria;
 import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 
@@ -24,23 +24,64 @@ public class EventoController {
 	@Inject
 	private LocalDAO locdao;
 	
+	@Inject
+	private CategoriaDAO catedao;
+	
 	private Evento evento;
 	private Local recupelocal;
+	private Categoria c;
 	
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
+	
+	//Busqueda de locales
+	private List<Evento> listadoFiltrado;
+	private String filtro;
 	
 	
 	/* Variables para controlar ID de la naveacion
 	 */
 	private int id;
 	private int id2;
-	
+	private int id3;
 
 	
 	/* Getters and Setters
 	 */
+	
+	
+	
+	public int getId3() {
+		return id3;
+	}
+
+
+	public List<Evento> getListadoFiltrado() {
+		return listadoFiltrado;
+	}
+
+
+	public void setListadoFiltrado(List<Evento> listadoFiltrado) {
+		this.listadoFiltrado = listadoFiltrado;
+	}
+
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+
+	public void setId3(int id3) {
+		this.id3 = id3;
+		
+	}
+	
 	public Local getRecupelocal() {
 		return recupelocal;
 	}
@@ -70,7 +111,15 @@ public class EventoController {
 		this.id = id;
 		loadEventoEditar(id);
 		loadID(id);
+
 		insertarEventoLocalGloba();
+
+		loadCId(id);//agregado
+		/////agregar///
+		insertaCategoriaAdmin();
+		buscar();
+
+
 	}
 
 
@@ -151,6 +200,10 @@ public class EventoController {
 		id2 = id;
 	}
 	
+	public void loadCId(int id) {
+		id3 = id;
+	} 
+	
 	
 	/* Mantenimiento Controlladores del EventoController
 	 */
@@ -195,20 +248,29 @@ public class EventoController {
 	
 		public String insertarEventoLocalGloba(){ 
 
+
 			recupelocal=locdao.leerLocal(id2); 
 			recupelocal.getEvento().add(evento);
 			locdao.updateLocal(recupelocal); 
 			
 			return null;  
 		}
+		
+		public String insertaCategoriaAdmin(){
+			c = catedao.leerCategoria(id3);
+			c.getEventos().add(evento);
+			catedao.actualizarCategoria(c);
+			return null;
+					
+		}
 	
+		
+			public String buscar(){
+			
+				System.out.println("INGRESO AL METODO ==================");
+			listadoFiltrado = evendao.getEventosPorNombre(filtro);
+					
+			return null;
+		}
 	
-}
-
-
-
-
-
-
-
-
+}//fin clase EventoController

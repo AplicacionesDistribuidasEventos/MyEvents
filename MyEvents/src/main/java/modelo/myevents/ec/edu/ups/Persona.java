@@ -1,5 +1,5 @@
 package modelo.myevents.ec.edu.ups;
-
+  
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,7 +41,7 @@ public class Persona {
 	private String cedula;
 
 	@Column(name = "per_correo")
-	@NotBlank(message = "Por favor ingrese el correo")
+	@NotBlank(message = "Por favor ingrese el correo") 
 	private String correo;
 
 	@Column(name = "per_perfil")
@@ -61,12 +61,12 @@ public class Persona {
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos;
 	
-
-
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
 
+	 /*Listado Tipo Locales, unidireccional
+	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
 	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
 	private List<Local> locales;
@@ -175,5 +175,5 @@ public class Persona {
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
 				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
-	
+
 }
