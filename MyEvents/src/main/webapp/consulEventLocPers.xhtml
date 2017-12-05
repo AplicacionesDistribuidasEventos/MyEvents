@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:h="http://java.sun.com/jsf/html">     
+    
+<h:head></h:head> 
+
+<f:metadata>
+<f:viewParam name="id" value="#{personaController.idrecuprerar}" />
+</f:metadata>    
+            
+<body>            
+<h:form>     
+<h2>Usuario: #{personaController.nusuario}</h2>   s
+<h3>Descripcion:  #{personaController.ndescripcion} </h3>
+<h3>Local:  #{personaController.nlocal} </h3>
+<h3>Capacidad:  #{personaController.ncapacidad} </h3>
+
+<h:dataTable  value="#{personaController.listPerID}" var="personas" class="table">
+				<h:column>
+				<f:facet name="header">Codigo</f:facet>
+				#{personas.locales.get(0).codigo}
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Nombre</f:facet>
+				#{personas.locales.get(0).nombre}
+				</h:column>
+				         
+				<h:column>
+				<f:facet name="header">Capacidad</f:facet>
+				#{personas.locales.get(0).capacidad} 
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Costo</f:facet>
+				#{personas.locales.get(0).costo}      
+				</h:column>
+				             
+				<h:column>
+				<f:facet name="header">Descripcion</f:facet>
+				#{personas.locales.get(0).descripcion}
+				</h:column> 
+				<!-- 
+				COLOCAR UN BOTON DONDE DEVUELVA SI EXISTE REGISTROS UN CUADRO SINO SIMPLEMENTE Q NO HAY NADA ASOCIADO
+				<h:column>
+				<f:facet name="header">Evento</f:facet>
+				#{personas.locales.get(0).evento.get(0).nombre}
+				</h:column>
+				
+				<h:column>  
+				<f:facet name="header">Fecha</f:facet>
+				#{personas.locales.get(0).evento.get(0).fechaEvento}
+				</h:column>
+				-->
+</h:dataTable>
+<h:commandButton action="mainAdmin" value="Principal" class="btn btn-info"/>
+<h:commandButton action="mainAdmin" value="cancelar" class="btn btn-info"/>
+</h:form>
+
+</body> 
+</html>
