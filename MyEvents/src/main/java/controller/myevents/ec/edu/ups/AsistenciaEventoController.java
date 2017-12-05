@@ -24,6 +24,7 @@ public class AsistenciaEventoController {
 	public void init() {
 		asistenciaevento = new AsistenciaEvento();
 		listaAsistenciaEvento();
+		
 	}
 	
 	public int getId() {
