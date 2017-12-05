@@ -14,13 +14,15 @@
   <meta name="keywords" content="global, template, html, sass, jquery"/>
   <meta name="author" content="Bucky Maler"/>
   <link rel="stylesheet" href="resources/usuarionavegacion/assets/css/main.css"/>
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </h:head>
 
 	<f:metadata>
 	<f:viewParam name="id" value="#{personaController.id}"></f:viewParam>
 	</f:metadata>
 
-<body>
+<body style="background-color:black;">
 
 <!-- notification for small viewports and landscape oriented smartphones -->
 <div class="device-notification">
@@ -39,7 +41,7 @@
           <a class="header--logo" href="#0">
             <img src="resources/usuarionavegacion/assets/img/logo.png" alt="Global"/>
             #{personaController.cargarDatosUsuario()}
-            <p>MyEvents</p><p>#{personaController.myUser.correo}</p>
+            <p>MyEvents</p><a style="color:white">#{personaController.myUser.correo}</a>
           </a>
           <button class="header--cta cta">Hire Us</button>
           <div class="header--nav-toggle">
@@ -55,31 +57,31 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h5>Edicion Usuario</h5>
+                <h5 style="color:white">Edicion Usuario</h5>
                 <h:form>
                 		<h:panelGrid columns="1">
 
-			<h:outputLabel value="Nombre: " for="nombre" />
+			<h:outputLabel value="Nombre: " for="nombre" style="color:white"/>
 					<h:inputText value="#{personaController.personas.nombre}"
 						id="nombre" class="form-control input-sm" pt:placeholder="Nombre" style="color: black"/>
 					<h:message for="nombre" errorStyle="color:red; display:block" />
 
 
-					<h:outputLabel value="Apellido: " for="apellido" />
+					<h:outputLabel value="Apellido: " for="apellido" style="color:white"/>
 					<h:inputText value="#{personaController.personas.apellido}"
 						id="apellido" class="form-control input-sm"
 						pt:placeholder="Apellido" style="color: black"/>
 					<h:message for="apellido" errorStyle="color:red; display:block" />
 					<br />
 
-					<h:outputLabel value="Cedula: " for="cedula" />
+					<h:outputLabel value="Cedula: " for="cedula" style="color:white"/>
 					<h:inputText value="#{personaController.personas.cedula}"
 						id="cedula" class="form-control input-sm"
 						pt:placeholder="##########" style="color: black"/>
 					<h:message for="cedula" errorStyle="color:red; display:block" />
 					<br />
 
-					<h:outputLabel value="Correo: " for="correo" />
+					<h:outputLabel value="Correo: " for="correo" style="color:white"/>
 					<h:inputText value="#{personaController.personas.correo}"
 						id="correo" class="form-control input-sm"
 						pt:placeholder="usuario@gmail.com" style="color: black"/>
@@ -88,7 +90,7 @@
 
 </h:panelGrid>
 			<h:commandButton action="#{personaController.modificar()}" value="Actualizar" class="btn btn-success btn-inline"/>
-			<h:commandButton action="mainUser" value="Cancelar" />
+			<h:commandButton action="mainUser" value="Cancelar" class="btn btn-danger"/>
                 </h:form>
                 <img src="resources/usuarionavegacion/assets/img/introduction-visual.png" alt="Welcome"/>
               </div>

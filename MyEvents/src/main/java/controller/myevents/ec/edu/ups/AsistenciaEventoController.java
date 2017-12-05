@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.AsistenciaEventoDAO;
 import modelo.myevents.ec.edu.ups.AsistenciaEvento;
-
+ 
 @ManagedBean
 public class AsistenciaEventoController {
 	

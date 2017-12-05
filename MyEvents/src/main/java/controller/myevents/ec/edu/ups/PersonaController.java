@@ -21,14 +21,14 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 
 @ManagedBean
-@SessionScoped
-public class PersonaController {
+@SessionScoped 
+public class PersonaController { 
 
 	/*
 	 * Variable para la validacion de la cedula
 	 */
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";   
 	
 	private Persona personas = null;
 

@@ -144,7 +144,7 @@ public class LocalController {
 	
 	public void loadId(int id) {
 		id2 = id;
-	}
+	} 
 	
 	//----MANTENIMIENTO CONTROLLER
 	
