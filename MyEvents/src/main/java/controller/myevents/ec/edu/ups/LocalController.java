@@ -157,7 +157,7 @@ public class LocalController {
 		p = pdao.selectPersona(id2);
 		p.getLocales().add(local);
 		pdao.updatePersona(p); 
-		return null;
+		return "AccionesLocal";
 		
 	}
 

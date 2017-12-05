@@ -300,6 +300,14 @@ public class PersonaController {
 				System.out.println("ELSE IF ADMIN");
 				pdao.updatePersona(personas);
 				return "mainAdmin";
+				
+	}else if(myUser.getPerfil().equals("ADMIN-SUPER")) {
+		personas.setContrasenia(pactual);
+		System.out.println("ACTUALIZAR ADMIN :"+personas.getCedula());
+		System.out.println("ELSE IF ADMIN");
+		pdao.updatePersona(personas);
+		return "pages-blank";
+
 	}return null;
 		}catch (Exception e) {
 		// TODO: handle exception

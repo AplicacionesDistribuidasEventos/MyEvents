@@ -58,6 +58,14 @@
             <span class="nav-link-text">Crear Evento</span>
           </a>
         </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Detalle de Locales-Evento</span>
+          </a>
+        </li>
+
       </ul>
       
       <ul class="navbar-nav sidenav-toggler">
@@ -173,8 +181,7 @@
         </li>
         <li class="breadcrumb-item active">My Dashboard</li>
       </ol>
-      
-
+     
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -201,6 +208,8 @@
               </div>
               <div class="mr-5">Editar Perfil</div>
             </div>
+            
+            
             <a class="card-footer text-white clearfix small z-1" href="editAdmin.xhtml?id=#{personaController.myUser.id}">
               <span class="float-left">Ir a Editar</span>
               <span class="float-right">
@@ -211,6 +220,7 @@
         </div>
       </div>
 
+<!--   CAMBIOS DE LOS BOTONES EN LA PAGINA 
 
 <a href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}"  
 							class="btn btn-info btn-md"> Consultar </a>
@@ -218,10 +228,18 @@
 <br />
 	<br />
 <a href="crearAdminLocal.xhtml?id=#{personaController.myUser.id}"  
-							class="btn btn-info btn-md"> Ingresar Locales </a> <!-- CAMBIO RECIENTE AQUI VA id -->
+							class="btn btn-info btn-md"> Ingresar Locales </a>  CAMBIO RECIENTE AQUI VA id 
+-->
+	<h:form>
+	
+	<h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/>
+	
 
+	
+	</h:form>
 
 <h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/>
+
 
 
       <div class="row">

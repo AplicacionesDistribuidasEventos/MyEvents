@@ -35,6 +35,10 @@ public class EventoController {
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
 	
+	//Busqueda de locales
+	private List<Evento> listadoFiltrado;
+	private String filtro;
+	
 	
 	/* Variables para controlar ID de la naveacion
 	 */
@@ -48,6 +52,25 @@ public class EventoController {
 	
 	public int getId3() {
 		return id3;
+	}
+
+	public List<Evento> getListadoFiltrado() {
+		return listadoFiltrado;
+	}
+
+
+	public void setListadoFiltrado(List<Evento> listadoFiltrado) {
+		this.listadoFiltrado = listadoFiltrado;
+	}
+
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 
@@ -92,6 +115,7 @@ public class EventoController {
 		/////agregar///
 		insertaCategoriaAdmin();
 
+		//buscar();
 
 	}
 
@@ -237,5 +261,13 @@ public class EventoController {
 					
 		}
 	
+		
+			public String buscar(){
+			
+				System.out.println("INGRESO AL METODO ==================");
+			listadoFiltrado = evendao.getEventosPorNombre(filtro);
+					
+			return null;
+		}
 	
 }//fin clase EventoController
