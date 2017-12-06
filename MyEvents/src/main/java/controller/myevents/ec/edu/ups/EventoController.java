@@ -134,7 +134,6 @@ public class EventoController {
 	/* RECUPERAR ID PARA LA NAVEGACION DE LOCALES Y EVENTOS
 	 * Sett ID
 	 */
-
 	public void setId(int id) {
 		this.id = id;
 		loadEventoEditar(id);
