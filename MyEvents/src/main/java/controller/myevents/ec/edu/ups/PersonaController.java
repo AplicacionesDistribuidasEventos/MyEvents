@@ -177,7 +177,7 @@ public class PersonaController {
 	public void setLpersonas(List<Persona> lpersonas) {
 		this.lpersonas = lpersonas;
 	}
-	
+
 /*Recuperacion de los Ids que son pasados como URL
  * */
 	public int getId() {

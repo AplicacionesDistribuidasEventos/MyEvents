@@ -139,6 +139,7 @@ public class EventoController {
 		this.id = id;
 		loadEventoEditar(id);
 		loadID(id);
+
 		insertarEventoLocalGloba();
 
 		loadCId(id);//agregado

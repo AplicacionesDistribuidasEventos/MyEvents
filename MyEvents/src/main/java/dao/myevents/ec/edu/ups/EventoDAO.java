@@ -68,11 +68,8 @@ public class EventoDAO {
 		return levento;
 	}
 	
-	///Filtro de busqueda para los eventos...
-	
-	public List<Evento> getEventosPorNombre(String filtro){
-		
-		
+	///Filtro de busqueda para los eventos...	
+public List<Evento> getEventosPorNombre(String filtro){		
 		String sql = "SELECT p FROM Evento p "
 					+ "WHERE nombre like ? ";
 		
@@ -80,6 +77,7 @@ public class EventoDAO {
 		q.setParameter(1, "%"+filtro+"%");
 		List<Evento> alumno = q.getResultList();
 		return alumno;
-	}
+
+}
 	
 }
