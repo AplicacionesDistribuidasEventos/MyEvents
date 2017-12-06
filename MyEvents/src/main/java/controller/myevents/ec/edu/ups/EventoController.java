@@ -111,6 +111,26 @@ public class EventoController {
 		return id;
 	}
 
+	
+	/* RECUPERAR ID PARA LA NAVEGACION DE LOCALES Y EVENTOS
+	 * Sett ID
+	 */
+
+	public void setId(int id) {
+		this.id = id;
+		loadEventoEditar(id);
+		loadID(id);
+
+		insertarEventoLocalGloba();
+
+		loadCId(id);//agregado
+		/////agregar///
+		insertaCategoriaAdmin();
+
+		//buscar();
+
+	}
+
 	public EventoDAO getEvendao() {
 		return evendao;
 	}
