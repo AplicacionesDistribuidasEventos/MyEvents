@@ -20,7 +20,6 @@ public class EventoDAO {
 	private EntityManager em;
 	
 	
-	
 	//Metodo para editar y guardar
 	
 	public void guardarEvento(Evento e) {
@@ -69,13 +68,8 @@ public class EventoDAO {
 		return levento;
 	}
 	
-	///Filtro de busqueda para los eventos...
-	
-	
-	
-public List<Evento> getEventosPorNombre(String filtro){
-		
-		
+	///Filtro de busqueda para los eventos...	
+public List<Evento> getEventosPorNombre(String filtro){		
 		String sql = "SELECT p FROM Evento p "
 					+ "WHERE nombre like ? ";
 		
@@ -83,6 +77,7 @@ public List<Evento> getEventosPorNombre(String filtro){
 		q.setParameter(1, "%"+filtro+"%");
 		List<Evento> alumno = q.getResultList();
 		return alumno;
+
 }
 	
 }

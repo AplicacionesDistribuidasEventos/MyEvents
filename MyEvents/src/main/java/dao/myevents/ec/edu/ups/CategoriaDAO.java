@@ -15,6 +15,9 @@ public class CategoriaDAO {
 	@Inject
 	private EntityManager em;
 	
+	/*
+	 * Metodo para guardar y editar
+	 */
 	public void guardarCategoria(Categoria c){
 		
 		Categoria aux = leerCategoria(c.getId());
@@ -31,20 +34,23 @@ public class CategoriaDAO {
 		
 	}
 	
+	//---METODOS CRUD
+	
+	///Inserta una categoria
 	public void insetarCategoria(Categoria c){
 		
 		em.persist(c);
 		
 	}
 	
+	////Actualizar Categoria
 	public void actualizarCategoria(Categoria c){
 		
-		//System.out.println("Updating............"+c.getId() +
-		//		c.getDescipcion());
 		em.merge(c);
 		
 	}
 	
+	/// Lee o buscar categoria
 	public Categoria leerCategoria(int id){
 		
 		Categoria c = em.find(Categoria.class, id);
@@ -52,6 +58,7 @@ public class CategoriaDAO {
 		
 	}
 	
+	/// Eliminar Categoria
 	public void eliminarCategoria(int id){
 		
 		Categoria c = leerCategoria(id);
@@ -59,6 +66,7 @@ public class CategoriaDAO {
 		
 	}
 	
+	/// Listar categoria
 	public List<Categoria> listCategoria(){
 		
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
@@ -66,11 +74,5 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
-	/*public List<Evento> listEvento(){
-		String sql = "Select e from Evento e";
-		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
-		List<Evento> levento = query.getResultList();
-		return levento;
-	}*/
-
+	
 }

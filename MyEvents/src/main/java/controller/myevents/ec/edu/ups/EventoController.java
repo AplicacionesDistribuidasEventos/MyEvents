@@ -27,6 +27,10 @@ public class EventoController {
 	@Inject
 	private CategoriaDAO catedao;
 	
+	
+	/*
+	 * Declaracion de variables
+	 */
 	private Evento evento;
 	private Local recupelocal;
 	private Categoria c;
@@ -46,6 +50,14 @@ public class EventoController {
 	private int id2;
 	private int id3;
 
+	
+	@PostConstruct
+	public void init() {
+		evento = new Evento(); 
+		loadEvento();
+		
+	}
+	
 	
 	/* Getters and Setters
 	 */
@@ -119,7 +131,6 @@ public class EventoController {
 
 	}
 
-
 	public EventoDAO getEvendao() {
 		return evendao;
 	}
@@ -137,12 +148,24 @@ public class EventoController {
 	public void setId2(int id2) {
 		this.id2 = id2;
 	}
+	
+	//////////////Fin Getter and Setter///////////////
+	
+	/* RECUPERAR ID PARA LA NAVEGACION DE LOCALES Y EVENTOS
+	 * Sett ID
+	 */
 
-	@PostConstruct
-	public void init() {
-		evento = new Evento(); 
-		loadEvento();
-		
+	public void setId(int id) {
+		this.id = id;
+		loadEventoEditar(id);
+		loadID(id);
+
+		insertarEventoLocalGloba();
+
+		loadCId(id);//agregado
+		/////agregar///
+		insertaCategoriaAdmin();
+
 	}
 
 

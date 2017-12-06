@@ -21,8 +21,13 @@ public class LocalController {
 	@Inject
 	private PersonaDAO pdao;
 	
+	/*
+	 * Declaracion de variables
+	 * 
+	 */
 	private Local local; 
 	private Persona p ;
+	
 	
 	/* Objetos lista
 	 */
@@ -42,6 +47,13 @@ public class LocalController {
 	private String elegimos;
 	private String latituddes;
 	private String longituddes;
+	
+	
+	@PostConstruct
+	public void init() {
+		local = new Local(); 
+		loadLocal();
+	}
 	
 	/* Getters and Setters
 	 */
@@ -119,7 +131,6 @@ public class LocalController {
 	}
 	
 	
-	
 	public int getId2() {
 		return id2;
 	}
@@ -129,12 +140,8 @@ public class LocalController {
 		
 	} 
 
+	////////////fin Getter and Setter///////
 
-	@PostConstruct
-	public void init() {
-		local = new Local(); 
-		loadLocal();
-	}
 
 	public void loadLocal() {
 		listlocal=locdao.listlocal();

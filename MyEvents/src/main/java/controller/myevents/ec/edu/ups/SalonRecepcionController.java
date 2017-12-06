@@ -13,18 +13,21 @@ import modelo.myevents.ec.edu.ups.SalonRecepcion;
 @ManagedBean
 public class SalonRecepcionController {
 	
+	@Inject
+	private SalonRecepcionDAO srdao;
+	
+	///Declaracion de variables
 	private SalonRecepcion salonrecepcion;
 	private List<SalonRecepcion> lsalonrecepcion;
 	private int id;
-	
-	@Inject
-	private SalonRecepcionDAO srdao;
 	
 	@PostConstruct
 	public void init() {
 		salonrecepcion = new SalonRecepcion();
 		listaSalonRecepcion();
 	}
+	
+	/////Inicio de get and set /////////////////////
 	
 	public int getId() {
 		return id;
@@ -33,7 +36,6 @@ public class SalonRecepcionController {
 		this.id = id;
 		cargarEstado(id);
 	}
-
 
 	public SalonRecepcion getSalonrecepcion() {
 		return salonrecepcion;
@@ -47,9 +49,10 @@ public class SalonRecepcionController {
 	public void setLsalonrecepcion(List<SalonRecepcion> lsalonrecepcion) {
 		this.lsalonrecepcion = lsalonrecepcion;
 	}
+	
+	///////////// Fin de get and sett ////////////////////
 
 	public String crear() {
-		//aedao.insertAEvento(asistenciaevento);
 		srdao.guardar(salonrecepcion);
 		return "listadoSalonRecepcion";
 	}
