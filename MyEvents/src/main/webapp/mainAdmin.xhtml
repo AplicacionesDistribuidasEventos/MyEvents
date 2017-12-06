@@ -34,7 +34,7 @@
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
       
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="mainAdmin.xhtml">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Inicio</span>
           </a>
@@ -56,6 +56,12 @@
           <a class="nav-link" href="AccionesLocal.xhtml">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Crear Evento</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Detalle de Locales-Evento</span>
           </a>
         </li>
       </ul>
@@ -210,19 +216,6 @@
           </div>
         </div>
       </div>
-
-
-<a href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}"  
-							class="btn btn-info btn-md"> Consultar </a>
-
-<br />
-	<br />
-<a href="crearAdminLocal.xhtml?id=#{personaController.myUser.id}"  
-							class="btn btn-info btn-md"> Ingresar Locales </a> <!-- CAMBIO RECIENTE AQUI VA id -->
-
-
-<h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/>
-
 
       <div class="row">
       </div>
@@ -743,7 +736,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login.html">salir</a>
           </div>
         </div>
       </div>
