@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+/*ENTIDAD LOCAL SALON DE EVENTOS
+ * */
 @Entity
 @Table(name="LOCAL")
 public class Local {

@@ -73,94 +73,71 @@ public class PersonaController {
 		consultaLocalEventos();
 	}
 	
-	
+	/*
+	 * 
+	 * Inicion de 
+	 *     Getter and Setter
+	 */
 
 	public String getNusuario() {
 		return nusuario;
 	}
 
-
-
 	public void setNusuario(String nusuario) {
 		this.nusuario = nusuario;
 	}
-
-
 
 	public String getNlocal() {
 		return nlocal;
 	}
 
-
-
 	public void setNlocal(String nlocal) {
 		this.nlocal = nlocal;
 	}
-
-
 
 	public String getNdescripcion() {
 		return ndescripcion;
 	}
 
-
-
 	public void setNdescripcion(String ndescripcion) {
 		this.ndescripcion = ndescripcion;
 	}
-
-
 
 	public String getNcapacidad() {
 		return ncapacidad;
 	}
 
-
-
 	public void setNcapacidad(String ncapacidad) {
 		this.ncapacidad = ncapacidad;
 	}
-
-
 
 	public String getNcosto() {
 		return ncosto;
 	}
 
-
-
 	public void setNcosto(String ncosto) {
 		this.ncosto = ncosto;
 	}
-
-
 
 	public int getIdrecuprerar() {
 		return idrecuprerar;
 	}
  
-
-
 	public void setIdrecuprerar(int idrecuprerar) {
 		this.idrecuprerar = idrecuprerar;
 		loadid(idrecuprerar);
 		consultaLocalEventos();
 	}
 
-
-
 	public List<Persona> getListPerID() {
 		return ListPerID;
 	}
-
-
 
 	public void setListPerID(List<Persona> listPerID) {
 		ListPerID = listPerID;
 	}
 
-
-
+	
 	public String getContrasenia() {
 		return contrasenia;
 	}
@@ -200,6 +177,7 @@ public class PersonaController {
 	public void setLpersonas(List<Persona> lpersonas) {
 		this.lpersonas = lpersonas;
 	}
+
 /*Recuperacion de los Ids que son pasados como URL
  * */
 	public int getId() {
@@ -300,6 +278,14 @@ public class PersonaController {
 				System.out.println("ELSE IF ADMIN");
 				pdao.updatePersona(personas);
 				return "mainAdmin";
+				
+	}else if(myUser.getPerfil().equals("ADMIN-SUPER")) {
+		personas.setContrasenia(pactual);
+		System.out.println("ACTUALIZAR ADMIN :"+personas.getCedula());
+		System.out.println("ELSE IF ADMIN");
+		pdao.updatePersona(personas);
+		return "pages-blank";
+
 	}return null;
 		}catch (Exception e) {
 		// TODO: handle exception

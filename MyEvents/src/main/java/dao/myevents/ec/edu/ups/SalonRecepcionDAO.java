@@ -15,33 +15,14 @@ public class SalonRecepcionDAO {
 	@Inject
 	private EntityManager em;
 	
-	public void insertarSRecepcion(SalonRecepcion sr){
-		em.merge(sr);
-		System.out.println("Salon-Recepcion Grabado");		
-	}
+	/*
+	 * 
+	 * Metodos CRUD
+	 * 
+	 */
 	
-	public void updateSRecepcion(SalonRecepcion sr) {
-		em.merge(sr);
-		System.out.println("Salon-Recepcion Update");
-	}
-
-	public void removeSRecepcion(int id) {
-		em.remove(selectSRecepcion(id));
-		System.out.println("Salon-Recepcion Remove");
-	}
-
-	public SalonRecepcion selectSRecepcion(int id) {
-		SalonRecepcion  srecepcion = em.find(SalonRecepcion.class, id);
-		return srecepcion;
-	}
-
-	public List<SalonRecepcion> listSRecepcion() {
-		String sql = "select slr from SalonRecepcion slr";
-		TypedQuery<SalonRecepcion> query = em.createQuery(sql, SalonRecepcion.class);
-		List<SalonRecepcion> lsrecepcion = query.getResultList();
-		return lsrecepcion;
-	}
-
+	
+	/// Insertar y Actualizar Salon Recepcion
 	public void guardar(SalonRecepcion srecepcion) {
 		SalonRecepcion aux = selectSRecepcion(srecepcion.getId());
 		if(aux!=null) {
@@ -50,4 +31,38 @@ public class SalonRecepcionDAO {
 			insertarSRecepcion(srecepcion);
 		}
 	}
-}
+	
+	/// Agregar Salon Recepcion
+	public void insertarSRecepcion(SalonRecepcion sr){
+		em.merge(sr);
+		System.out.println("Salon-Recepcion Grabado");		
+	}
+	
+	/// Actualizar Salon Recepcion
+	public void updateSRecepcion(SalonRecepcion sr) {
+		em.merge(sr);
+		System.out.println("Salon-Recepcion Update");
+	}
+	
+	/// Eliminar Salon Recepcion
+	public void removeSRecepcion(int id) {
+		em.remove(selectSRecepcion(id));
+		System.out.println("Salon-Recepcion Remove");
+	}
+
+	/// Leer Salon Recepcion
+	public SalonRecepcion selectSRecepcion(int id) {
+		SalonRecepcion  srecepcion = em.find(SalonRecepcion.class, id);
+		return srecepcion;
+	}
+
+	/// Listar Salon Recepcion
+	public List<SalonRecepcion> listSRecepcion() {
+		String sql = "select slr from SalonRecepcion slr";
+		TypedQuery<SalonRecepcion> query = em.createQuery(sql, SalonRecepcion.class);
+		List<SalonRecepcion> lsrecepcion = query.getResultList();
+		return lsrecepcion;
+	}
+
+	
+} // fin de la clase 

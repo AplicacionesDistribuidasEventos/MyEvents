@@ -17,12 +17,14 @@ public class ExtraController {
 	@Inject
 	private ExtraDAO extdao;
 	
+	/*
+	 * Declaracion de variables
+	 */
+	
 	private Extra extra = null;
 	
 	private List<Extra> extras;
-	
 	private int id;
-	
 	
 	@PostConstruct
 	public void init(){
@@ -32,7 +34,7 @@ public class ExtraController {
 		
 	}
 
-	////getter and setter
+	////getter and setter/////////////////
 	
 	public int getId() {
 		return id;

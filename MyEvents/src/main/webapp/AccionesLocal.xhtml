@@ -5,6 +5,7 @@
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
+
 <h:head>
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -31,50 +32,38 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
-    <a class="navbar-brand" href="mainAdmin.xhtml">Administrador #{personaController.myUser.correo}</a>
+    <a class="navbar-brand" href="index.html">Administrador #{personaController.myUser.correo}</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
       
-       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="mainAdmin.xhtml">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Inicio</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="editAdmin.xhtml?id=#{personaController.myUser.id}">
-            <i class="fa fa-fw fa-area-chart"></i>Editar Perfil
-            <span class="nav-link-text"> #{personaController.myUser.correo}</span>
+          <a class="nav-link">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Mi Perfil</span>
           </a>
           
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="crearAdminLocal.xhtml?id=#{personaController.myUser.id}">
+          <a class="nav-link" href="tables.html">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Gest. Salones</span>
+            <span class="nav-link-text">Gestion de Salones</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="AccionesLocal.xhtml">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Crear Evento</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Detalle de Locales-Evento</span>
-          </a>
-        </li>
+        
 
       </ul>
 
 
-      
-
+     
 
     </div>
   </nav>
@@ -82,7 +71,6 @@
     <div class="container-fluid">
 
 	
-
 <h:form>
 	
 
@@ -180,6 +168,7 @@
 	</h:dataTable>
 	
 	
+	
 		
 	
 	
@@ -216,7 +205,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="mainAdmin.xhtml">Logout</a>
+            <a class="btn btn-primary" href="login.html">Logout</a>
           </div>
         </div>
       </div>

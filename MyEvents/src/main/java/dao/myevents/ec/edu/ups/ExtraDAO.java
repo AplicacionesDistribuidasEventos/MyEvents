@@ -66,11 +66,6 @@ public class ExtraDAO {
 		return listado;
 	}
 	
-	/*public List<Evento> listEvento(){
-		String sql = "Select e from Evento e";
-		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
-		List<Evento> levento = query.getResultList();
-		return levento;
-	}*/
+	
 
 }

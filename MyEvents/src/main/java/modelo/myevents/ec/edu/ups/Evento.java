@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -54,6 +55,11 @@ public class Evento {
 	@Temporal(value= TemporalType.DATE)
 	@NotNull 
 	private Date fechaEvento;
+	
+	
+	@ManyToOne
+	private Categoria categoria;
+	
 	/*
 	@Column(name="even_latiud")
 	private double latitud;
@@ -77,8 +83,6 @@ public class Evento {
 	
 	//METHODS GETTERS AND SETTER
 		
-
-
 	public int getCodigo() {
 		return codigo;
 	}
@@ -93,6 +97,14 @@ public class Evento {
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public String getNombre() {
