@@ -29,10 +29,7 @@ public class CategoriaController {
 		
 		categoria=new Categoria();
 		loadCategoria();
-		
-		categoria.addEvento(new Evento());
-		
-		
+			
 	}
 
 	////getter and setter
