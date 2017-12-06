@@ -1,5 +1,6 @@
 package modelo.myevents.ec.edu.ups;
   
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -57,10 +58,10 @@ public class Persona {
 
 	 /*Listado Tipo Asistencia Eventos, unidireccional
 	  * */
-	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
+/*	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
-	private List<AsistenciaEvento> aeventos;
-	
+	private List<AsistenciaEvento> aeventos =new ArrayList<>();
+*/	
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
@@ -69,13 +70,13 @@ public class Persona {
 	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
 	@JoinColumn(name="per_loc_fk", referencedColumnName="per_id")
-	private List<Local> locales;
+	private List<Local> locales=new ArrayList<>();
 	
 	 /*Listado Tipo Salon Recepciones, unidireccional
 	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_sal_fk", referencedColumnName="per_id")
-	private List<SalonRecepcion> srecepciones;
+	private List<SalonRecepcion> srecepciones=new ArrayList<>();
 
 
 
@@ -144,7 +145,7 @@ public class Persona {
 	}
 	
 	
-
+/*
 	public List<AsistenciaEvento> getAeventos() {
 		return aeventos;
 	}
@@ -152,7 +153,7 @@ public class Persona {
 	public void setAeventos(List<AsistenciaEvento> aeventos) {
 		this.aeventos = aeventos;
 	}
-
+*/
 	public List<Local> getLocales() {
 		return locales;
 	}
@@ -173,7 +174,7 @@ public class Persona {
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
-				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+				+ ", aeventos="  + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
 
 }

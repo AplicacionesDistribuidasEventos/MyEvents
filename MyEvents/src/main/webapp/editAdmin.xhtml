@@ -2,8 +2,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:hs="http://xmlns.jcp.org/jsf/html"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:hs="http://xmlns.jcp.org/jsf/html" 
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">   
 
 <h:head>
   <meta charset="utf-8"/>
@@ -24,14 +24,15 @@
 </h:head>
 
 <f:metadata>
-<f:viewParam name="id" value="#{personaController.idrecuprerar}" />  
-</f:metadata>   
+	<f:viewParam name="id" value="#{personaController.idEditUser}"></f:viewParam>
+	</f:metadata>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
-    <a class="navbar-brand" href="index.html">Administrador #{personaController.myUser.correo}</a>
+    <a class="navbar-brand" href="index.xhtml">Administrador #{personaController.myUser.correo}</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,17 +45,22 @@
             <span class="nav-link-text">Inicio</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Mi Perfil</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="crearAdminLocal.xhtml?id=#{personaController.myUser.id}">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Gest. Salones</span>
           </a>
-          
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="AccionesLocal.xhtml">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Gestion de Salones</span>
+            <span class="nav-link-text">Crear Evento</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="consulEventLocPers.xhtml?id=#{personaController.myUser.id}">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Detalle de Locales-Evento</span>
           </a>
         </li>
         
@@ -70,49 +76,45 @@
   <div class="content-wrapper">
     <div class="container-fluid">
 
-<h:form>     
+				<h5>Edicion Usuario</h5>
+				<h:form>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Nombre: " for="nombre"/>
+						<h:inputText value="#{personaController.personas.nombre}"
+							id="nombre" class="form-control input-sm" pt:placeholder="Nombre"
+							style="color: black" />
+						<h:message for="nombre" errorStyle="color:red; display:block" />
 
-          <a class="nav-link">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Detalle de Locales-Evento</span>
-          </a>
 
-<h:dataTable value="#{personaController.listPerID}" var="personas" class="table">
-				
-				<h:column>
-				<f:facet name="header">Nombre del Salon</f:facet>
-				#{personas.locales.get(0).nombre}
-				</h:column>
-				         
-				<h:column>
-				<f:facet name="header">Capacidad</f:facet>
-				#{personas.locales.get(0).capacidad} 
-				</h:column>
-				
-				<h:column>
-				<f:facet name="header">Costo</f:facet> 
-				#{personas.locales.get(0).costo}      
-				</h:column>
-				             
-				<h:column>
-				<f:facet name="header">Descripcion</f:facet>
-				#{personas.locales.get(0).descripcion}
-				</h:column> 
-				<!-- COLOCAR UN BOTON DONDE DEVUELVA SI EXISTE REGISTROS UN CUADRO SINO SIMPLEMENTE Q NO HAY NADA ASOCIADO-->
-				<h:column>
-				<f:facet name="header">Evento</f:facet>
-				#{personas.locales.get(0).evento.get(0).nombre}
-				</h:column>
-				
-				<h:column>  
-				<f:facet name="header">Fecha</f:facet>
-				#{personas.locales.get(0).evento.get(0).fechaEvento}
-				</h:column>
-				
-</h:dataTable>
-<h:commandButton action="mainAdmin" value="Principal" class="btn btn-info"/>
-<h:commandButton action="mainAdmin" value="cancelar" class="btn btn-info"/>
-</h:form>
+						<h:outputLabel value="Apellido: " for="apellido"
+							style="color:white" />
+						<h:inputText value="#{personaController.personas.apellido}"
+							id="apellido" class="form-control input-sm"
+							pt:placeholder="Apellido" style="color: black" />
+						<h:message for="apellido" errorStyle="color:red; display:block" />
+						<br />
+
+						<h:outputLabel value="Cedula: " for="cedula"/>
+						<h:inputText value="#{personaController.personas.cedula}"
+							id="cedula" class="form-control input-sm"
+							pt:placeholder="##########" style="color: black" />
+						<h:message for="cedula" errorStyle="color:red; display:block" />
+						<br />
+
+						<h:outputLabel value="Correo: " for="correo"/>
+						<h:inputText value="#{personaController.personas.correo}"
+							id="correo" class="form-control input-sm"
+							pt:placeholder="usuario@gmail.com" style="color: black" />
+						<h:message for="correo" errorStyle="color:red; display:block" />
+						<br />
+
+					</h:panelGrid>
+					<h:commandButton action="#{personaController.modificar()}"
+						value="Actualizar" class="btn btn-success btn-inline" actionListener="editUser.xhtml"/>
+					<h:commandButton actionListener="mainAdmin.xhtml" value="Cancelar"
+						class="btn btn-danger" />
+				</h:form>
+
 
 
 
