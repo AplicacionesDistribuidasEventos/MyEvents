@@ -17,7 +17,7 @@
 <h3>Local:  #{personaController.nlocal} </h3>
 <h3>Capacidad:  #{personaController.ncapacidad} </h3>
 
-<h:dataTable  value="#{personaController.listPerID}" var="personas" class="table">
+<h:dataTable class="table table-bordered" value="#{personaController.listPerID}" var="personas" class="table">
 				<h:column>
 				<f:facet name="header">Codigo</f:facet>
 				#{personas.locales.get(0).codigo}

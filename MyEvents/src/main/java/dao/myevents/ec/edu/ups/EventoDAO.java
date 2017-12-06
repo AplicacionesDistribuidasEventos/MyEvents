@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import modelo.myevents.ec.edu.ups.Evento;
@@ -17,7 +18,6 @@ public class EventoDAO {
 
 	@Inject
 	private EntityManager em;
-	
 	
 	
 	//Metodo para editar y guardar
@@ -66,6 +66,20 @@ public class EventoDAO {
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
 		List<Evento> levento = query.getResultList();
 		return levento;
+	}
+	
+	///Filtro de busqueda para los eventos...
+	
+	public List<Evento> getEventosPorNombre(String filtro){
+		
+		
+		String sql = "SELECT p FROM Evento p "
+					+ "WHERE nombre like ? ";
+		
+		Query q = em.createQuery(sql, Evento.class);
+		q.setParameter(1, "%"+filtro+"%");
+		List<Evento> alumno = q.getResultList();
+		return alumno;
 	}
 	
 }

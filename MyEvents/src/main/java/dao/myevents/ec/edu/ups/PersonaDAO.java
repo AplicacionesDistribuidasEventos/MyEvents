@@ -17,25 +17,39 @@ public class PersonaDAO {
 	private EntityManager em;
 
 
+	/*
+	 *Metodo para Insertar
+	 */
 	public void insertPersona(Persona p) {
 		em.persist(p);
 	}
 
+	/*
+	 *Metodo para Actualizar
+	 */
 	public void updatePersona(Persona p) {
 		System.out.println("Updating..."+p.getId()+p.getCorreo()+p.getContrasenia());
 		em.merge(p);
 	}
-
+	/*
+	 *Metodo para buscar
+	 */
 	public Persona selectPersona(int id) {
 		Persona p = em.find(Persona.class, id);
 		return p;
 	}
 
+	/*
+	 *Metodo para eliminar
+	 */
 	public void deletePersona(int id) {
 		Persona p = selectPersona(id);
 		em.remove(p);
 	}
 
+	/*
+	 *SQl consulta a la base
+	 */
 	public List<Persona> listPersonas() {
 		String sql = "select p from Persona p";
 		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
@@ -72,7 +86,9 @@ public class PersonaDAO {
 		return personas;
 	}
 	
-	//Recuperar lista de personas por el id enviado
+	/*
+	 * Recuperar lista de personas por el id enviado
+	 */
 	
 	public List<Persona> listPersonaID(int id){
 		String sql = "Select p from Persona p WHERE p.id = '"+id+"'";

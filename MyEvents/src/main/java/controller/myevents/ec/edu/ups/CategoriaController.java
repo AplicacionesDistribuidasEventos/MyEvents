@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.CategoriaDAO;
 import modelo.myevents.ec.edu.ups.Categoria;
+import modelo.myevents.ec.edu.ups.Evento;
 
 @ManagedBean
 public class CategoriaController {
@@ -28,6 +29,9 @@ public class CategoriaController {
 		
 		categoria=new Categoria();
 		loadCategoria();
+		
+		categoria.addEvento(new Evento());
+		
 		
 	}
 
@@ -85,16 +89,20 @@ public class CategoriaController {
 	
 	public String guardar(){
 		
-		System.out.println(categoria);
-		
-		//PracticaDAO pdao= new PracticaDAO(); no es valido
-		
+		System.out.println(categoria);	
 		catedao.guardarCategoria(categoria);
 		loadCategoria();
 		
 		//return null;
 		return "listadoCategoria";
 	}
+	
+	public String agregaCategoria(){
+		
+		categoria.getEventos().add(new Evento());
+		return null;
+	}
+	
 	
 
 }//fin clase

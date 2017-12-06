@@ -19,6 +19,7 @@ public class AsistenciaEvento {
 	@Column(name="aev_estado")
 	private String estado;
 	
+	///get and set
 	public int getCodigo() {
 		return codigo;
 	}

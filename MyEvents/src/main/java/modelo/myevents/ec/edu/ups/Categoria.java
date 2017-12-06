@@ -1,5 +1,6 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,12 +37,16 @@ public class Categoria {
 	@Column(name="cat_descripcion")
 	private String descipcion;
 	
+	/*
+	 * Cruce de Tabla
+	 */
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="eve_cat_id", referencedColumnName="cat_id")
 	private List<Evento> eventos;
 	
-	
+	/// Inicio de get and set
 	public int getId() {
 		return id;
 	}
@@ -87,6 +92,14 @@ public class Categoria {
 	public String toString() {
 		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + ", eventos=" + eventos
 				+ "]";
+	}
+	
+	public void addEvento(Evento evento){
+		if (eventos == null){
+			eventos = new ArrayList<>();
+			eventos.add(evento);
+			
+		}
 	}
 }
 

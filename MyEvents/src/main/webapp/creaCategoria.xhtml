@@ -37,6 +37,39 @@
 </h:panelGrid>
 	
 	
+	<h:form>
+	<br/>
+			Ingrese Local: <h:inputText value="#{eventoController.filtro}"/>
+         <h:commandButton value="Buscar" action="#{eventoController.buscar()}"/>
+         
+         <br />
+         <br />
+         
+         <h:dataTable var="eve" value="#{eventoController.listadoFiltrado}" border="2">
+			
+			
+			
+			<h:column Style="color: black">
+			<f:facet name="header">Codigo</f:facet>
+				#{eve.codigo}
+			</h:column>
+			
+			<h:column Style="color: black">
+			<f:facet name="header">Nombre</f:facet>
+				#{eve.nombre}
+			</h:column>
+			
+			<h:column Style="color: black">
+			<f:facet name="header">Costo</f:facet>
+				#{eve.costo}
+			</h:column>
+			<!-- hasta aki -->
+			
+		
+		</h:dataTable>
+		
+</h:form>
+	
 	</h:form>
 	</ui:define>
 </ui:composition>
