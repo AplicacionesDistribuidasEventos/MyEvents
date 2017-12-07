@@ -165,10 +165,9 @@
             </div>
           </form>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#{personaController.cerrarSesion()}">
-            <i class="fa fa-fw fa-sign-out"></i>Salir </a>
-        </li>
+        <h:form>
+        <h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/>
+        </h:form>
       </ul>
     </div>
   </nav>
