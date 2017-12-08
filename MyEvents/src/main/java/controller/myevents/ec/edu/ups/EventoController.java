@@ -257,7 +257,7 @@ public class EventoController {
 		
 		public String insertaCategoriaAdmin(){
 			c = catedao.leerCategoria(id3);
-			c.getEventos().add(evento);
+			//c.getEventos().add(evento);
 			catedao.actualizarCategoria(c);
 			return null;
 					
