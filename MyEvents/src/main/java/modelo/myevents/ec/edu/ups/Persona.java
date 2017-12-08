@@ -58,10 +58,10 @@ public class Persona {
 
 	 /*Listado Tipo Asistencia Eventos, unidireccional
 	  * */
-/*	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
 	@JoinColumn(name="per_aev_fk", referencedColumnName="per_id")
 	private List<AsistenciaEvento> aeventos =new ArrayList<>();
-*/	
+
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
@@ -145,7 +145,7 @@ public class Persona {
 	}
 	
 	
-/*
+
 	public List<AsistenciaEvento> getAeventos() {
 		return aeventos;
 	}
@@ -153,7 +153,7 @@ public class Persona {
 	public void setAeventos(List<AsistenciaEvento> aeventos) {
 		this.aeventos = aeventos;
 	}
-*/
+
 	public List<Local> getLocales() {
 		return locales;
 	}
@@ -174,7 +174,17 @@ public class Persona {
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
-				+ ", aeventos="  + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
+				+ ", aeventos="  + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+	}*/
+	
+	
+	
 
 }

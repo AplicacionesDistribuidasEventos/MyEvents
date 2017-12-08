@@ -46,6 +46,7 @@ public class Categoria {
 	@JoinColumn(name="eve_cat_id", referencedColumnName="cat_id")
 	private List<Evento> eventos;
 	
+	
 	/// Inicio de get and set
 	public int getId() {
 		return id;
@@ -75,6 +76,12 @@ public class Categoria {
 	public void setDescipcion(String descipcion) {
 		this.descipcion = descipcion;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + "]";
+	}
 	
 	
 
@@ -87,13 +94,6 @@ public class Categoria {
 		this.eventos = eventos;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + ", eventos=" + eventos
-				+ "]";
-	}
-	
 	public void addEvento(Evento evento){
 		if (eventos == null){
 			eventos = new ArrayList<>();
@@ -102,4 +102,6 @@ public class Categoria {
 		}
 	}
 }
+
+
 
