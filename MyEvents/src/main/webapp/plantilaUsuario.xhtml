@@ -318,20 +318,20 @@ http://www.templatemo.com/tm-486-new-event
 
 			<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
 				<h:form action="#" method="post">
-					<h:inputText value="#{personaController.personas.nombre}" name="nombre" class="form-control" id="nombre" pt:placeholder="Nombre"/>
-					<h:inputText value="#{personaController.personas.apellido}" name="apellido" class="form-control" id="apellido" pt:placeholder="Apellido"/>
-					<h:inputText value="#{personaController.personas.cedula}" name="cedula" class="form-control" id="cedula" pt:placeholder="Cedula"/>
-					<h:inputText value="#{personaController.personas.correo}" name="correo" class="form-control" id="correo" pt:placeholder="Correo"/>
-					<h:inputSecret value="#{personaController.personas.contrasenia}" name="contrasenia" class="form-control input-sm" id="contrasenia" pt:placeholder="Contrasena" />
+					<h:inputText value="#{personaController.personas.nombre}" name="nombre" class="form-control" id="nombre" pt:placeholder="Nombre" required="Debe proporcionar un nombre"/>
+					<h:inputText value="#{personaController.personas.apellido}" name="apellido" class="form-control" id="apellido" pt:placeholder="Apellido" required="Debe proporcionar un apellido"/>
+					<h:inputText value="#{personaController.personas.cedula}" name="cedula" class="form-control" id="cedula" pt:placeholder="Cedula" required="Debe proporcionar una cedula"/>
+					<h:inputText value="#{personaController.personas.correo}" name="correo" class="form-control" id="correo" pt:placeholder="Correo" required="Debe proporcionar un correo"/>
+					<h:inputSecret value="#{personaController.personas.contrasenia}" name="contrasenia" class="form-control input-sm" id="contrasenia" pt:placeholder="Contrasena" required="Debe proporcionar una contrasenia"/>
 					<h:message for="contrasenia" errorStyle="color:red; display:block" />
-					<h:inputSecret value="#{personaController.contrasenia}" name="rcontrasenia" class="form-control input-sm" id="rcontrasenia" pt:placeholder="Repita la contrasena" />
-					<h:message for="rcontrasenia" errorStyle="color:red; display:block" />
+					<h:inputSecret value="#{personaController.contrasenia}" name="rcontrasenia" class="form-control input-sm" id="rcontrasenia" pt:placeholder="Repita la contrasena" required="Debe proporcionar nuevamente la contrasenia"/>
+					<h:message for="rcontrasenia" errorStyle="color:red; display:block" />	
 					
 					<h:outputText id="muestraValor" value="#{personaController.conincidencia}" errorStyle="color:red; display:block"/>
 					
 					<div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
 						<h:commandButton type="submit" value="Registrar" id="Crear" action="#{personaController.crear()}" class="form-control">
-						<f:ajax execute="rcontrasenia contrasenia cedula correo nombre apellido formregistro" render="muestraValor rcontrasenia contrasenia cedula correo nombre apellido formregistro" ></f:ajax>
+						<f:ajax execute="rcontrasenia contrasenia cedula correo nombre apellido" render="muestraValor rcontrasenia contrasenia cedula correo nombre apellido" ></f:ajax>
 						</h:commandButton>
 					</div>
 				</h:form>
