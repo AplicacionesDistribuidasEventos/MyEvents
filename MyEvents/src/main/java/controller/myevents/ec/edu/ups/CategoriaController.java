@@ -153,11 +153,13 @@ public class CategoriaController {
 		return "listadoCategoria";
 	}
 	
+
 	/**
 	 * Agrega categoria.
 	 *
 	 * @return the string
 	 */
+
 	public String agregaCategoria(){
 		
 		categoria.getEventos().add(new Evento());

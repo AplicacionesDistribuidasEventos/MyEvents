@@ -32,6 +32,7 @@ public class LocalController {
 	@Inject
 	private PersonaDAO pdao;
 	
+
 	/** The local. */
 	private Local local; 
 	
@@ -39,6 +40,7 @@ public class LocalController {
 	private Persona p ;
 	
 	
+
 	/** The listlocal. */
 	private List<Local> listlocal;
 	
@@ -71,9 +73,11 @@ public class LocalController {
 	/** The longituddes. */
 	private String longituddes;
 	
+
 	private Part fotoPerfil;
 	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
 	private String nombreArchivoPerfil;
+  
 	/**
 	 * Inits the.
 	 */
@@ -321,8 +325,8 @@ public class LocalController {
 	public void setLongituddes(String longituddes) {
 		this.longituddes = longituddes;
 	}
-	
-	
+
+
 	/**
 	 * Gets the id 2.
 	 *
@@ -331,6 +335,7 @@ public class LocalController {
 	public int getId2() {
 		return id2;
 	}
+  
 
 	/**
 	 * Sets the id 2.
@@ -341,6 +346,7 @@ public class LocalController {
 		this.id2 = id2;
 		
 	} 
+
 
 	/**
 	 * Load local.

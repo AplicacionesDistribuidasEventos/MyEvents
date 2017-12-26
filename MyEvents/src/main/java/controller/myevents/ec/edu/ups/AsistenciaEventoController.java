@@ -10,10 +10,12 @@ import javax.inject.Inject;
 import dao.myevents.ec.edu.ups.AsistenciaEventoDAO;
 import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class AsistenciaEventoController.
  */
+
 @ManagedBean
 public class AsistenciaEventoController {
 	
@@ -60,12 +62,12 @@ public class AsistenciaEventoController {
 
 
 
-
 	/**
 	 * Gets the asistenciaevento.
 	 *
 	 * @return the asistenciaevento
 	 */
+
 	public AsistenciaEvento getAsistenciaevento() {
 		return asistenciaevento;
 	}

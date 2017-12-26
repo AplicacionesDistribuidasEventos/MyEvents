@@ -63,13 +63,11 @@ public class Evento {
 	@NotNull 
 	private Date fechaEvento;
 	
-	
+
 	/** The categoria. */
 	@ManyToOne
 	private Categoria categoria;
 	
-	
-	/** The latitud. */
 	@Column(name="even_latiud")
 	private double latitud;
 	
@@ -78,7 +76,6 @@ public class Evento {
 	private double longitud;
 	
 	
-
 	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
 
 	/** The salones. */
@@ -93,8 +90,6 @@ public class Evento {
 	private List<AsistenciaEvento> AsistenciaEventos;
 	
 	
-	
-		
 	/**
 	 * Gets the codigo.
 	 *
@@ -130,6 +125,7 @@ public class Evento {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 
 	/**
 	 * Gets the categoria.
@@ -276,9 +272,5 @@ public class Evento {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
 				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
 	}*/
-	
-	
-
-	
 			
 }

@@ -44,16 +44,13 @@ public class Categoria {
 	@Column(name="cat_descripcion")
 	private String descipcion;
 	
-	
-	
 	/** The eventos. */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="eve_cat_id", referencedColumnName="cat_id")
 	private List<Evento> eventos;
 	
-	
-	
+
 	/**
 	 * Gets the id.
 	 *

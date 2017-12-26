@@ -22,12 +22,12 @@ public class SalonRecepcionController {
 	private SalonRecepcionDAO srdao;
 	
 	/** The salonrecepcion. */
-	
 	private SalonRecepcion salonrecepcion;
 	
 	/** The lsalonrecepcion. */
 	private List<SalonRecepcion> lsalonrecepcion;
 	
+
 	/** The id. */
 	private int id;
 	
@@ -40,13 +40,13 @@ public class SalonRecepcionController {
 		listaSalonRecepcion();
 	}
 	
-	
-	
+
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
+  
 	public int getId() {
 		return id;
 	}
@@ -61,11 +61,13 @@ public class SalonRecepcionController {
 		cargarEstado(id);
 	}
 
+
 	/**
 	 * Gets the salonrecepcion.
 	 *
 	 * @return the salonrecepcion
 	 */
+
 	public SalonRecepcion getSalonrecepcion() {
 		return salonrecepcion;
 	}

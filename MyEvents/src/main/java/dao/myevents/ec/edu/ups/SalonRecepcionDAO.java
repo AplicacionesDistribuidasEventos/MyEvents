@@ -20,9 +20,7 @@ public class SalonRecepcionDAO {
 	@Inject
 	private EntityManager em;
 	
-	
-	
-	
+
 	/**
 	 * Actualizar.
 	 *
@@ -38,17 +36,19 @@ public class SalonRecepcionDAO {
 		}
 	}
 	
+
 	/**
 	 * Insertar Srecepcion.
 	 *
 	 * @param sr the sr
 	 */
-	
+
 	public void insertarSRecepcion(SalonRecepcion sr){
 		em.merge(sr);
 		System.out.println("Salon-Recepcion Grabado");		
 	}
 	
+
 	/**
 	 * Update Srecepcion.
 	 *
@@ -60,6 +60,7 @@ public class SalonRecepcionDAO {
 		System.out.println("Salon-Recepcion Update");
 	}
 	
+
 	/**
 	 * Removes the Srecepcion.
 	 *
@@ -71,17 +72,19 @@ public class SalonRecepcionDAO {
 		System.out.println("Salon-Recepcion Remove");
 	}
 
+
 	/**
 	 * Select Srecepcion (leer salon).
 	 *
 	 * @param id the id
 	 * @return the salon recepcion
 	 */
-	
+  
 	public SalonRecepcion selectSRecepcion(int id) {
 		SalonRecepcion  srecepcion = em.find(SalonRecepcion.class, id);
 		return srecepcion;
 	}
+
 
 	/**
 	 * List Srecepcion.
@@ -96,5 +99,6 @@ public class SalonRecepcionDAO {
 		return lsrecepcion;
 	}
 
-	
-} 
+
+} // fin de la clase 
+

@@ -30,7 +30,6 @@ public class AsistenciaEvento {
 	 *
 	 * @return the codigo
 	 */
-	///get and set
 	public int getCodigo() {
 		return codigo;
 	}

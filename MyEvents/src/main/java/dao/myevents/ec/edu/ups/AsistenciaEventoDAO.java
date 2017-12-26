@@ -20,8 +20,7 @@ public class AsistenciaEventoDAO {
 	@Inject
 	private EntityManager em;
 	
-	
-	
+
 	/**
 	 * Actualizar AsistenciaEvento.
 	 *
@@ -37,23 +36,23 @@ public class AsistenciaEventoDAO {
 		}
 	}
 	
+
 	/**
 	 * Insert A evento.
 	 *
 	 * @param ae the ae
 	 */
-	
 	public void insertAEvento(AsistenciaEvento ae) {
 		em.persist(ae);
 		System.out.println("Asistencia-Evento Grabado");
 	}
+
 
 	/**
 	 * Update A evento.
 	 *
 	 * @param ae the ae
 	 */
-	
 	public void updateAEvento(AsistenciaEvento ae) {
 		em.merge(ae);
 		System.out.println("Asistencia-Evento Update");
@@ -64,11 +63,11 @@ public class AsistenciaEventoDAO {
 	 *
 	 * @param id the id
 	 */
-	
 	public void removeAEvento(int id) {
 		em.remove(selectAEvento(id));
 		System.out.println("Asistencia-Evento Remove");
 	}
+
 
 	/**
 	 * Select A evento.
@@ -76,7 +75,6 @@ public class AsistenciaEventoDAO {
 	 * @param id the id
 	 * @return the asistencia evento
 	 */
-
 	public AsistenciaEvento selectAEvento(int id) {
 		AsistenciaEvento aevento = em.find(AsistenciaEvento.class, id);
 		return aevento;
@@ -87,7 +85,6 @@ public class AsistenciaEventoDAO {
 	 *
 	 * @return the list
 	 */
-	
 	public List<AsistenciaEvento> listAEvento() {
 		String sql = "select aev from AsistenciaEvento aev";
 		TypedQuery<AsistenciaEvento> query = em.createQuery(sql, AsistenciaEvento.class);

@@ -25,7 +25,6 @@ public class CategoriaDAO {
 	 *
 	 * @param c the c
 	 */
-	
 	public void guardarCategoria(Categoria c){
 		
 		Categoria aux = leerCategoria(c.getId());
@@ -48,32 +47,31 @@ public class CategoriaDAO {
 	 *
 	 * @param c the c
 	 */
-	
 	public void insetarCategoria(Categoria c){
 		
 		em.persist(c);
 		
 	}
 	
+
 	/**
 	 * Actualizar categoria.
 	 *
 	 * @param c the c
 	 */
-	
 	public void actualizarCategoria(Categoria c){
 		
 		em.merge(c);
 		
 	}
 	
+
 	/**
 	 * Leer categoria.
 	 *
 	 * @param id the id
 	 * @return the categoria
 	 */
-	
 	public Categoria leerCategoria(int id){
 		
 		Categoria c = em.find(Categoria.class, id);
@@ -81,6 +79,7 @@ public class CategoriaDAO {
 		
 	}
 	
+
 	/**
 	 * Eliminar categoria.
 	 *
@@ -99,7 +98,6 @@ public class CategoriaDAO {
 	 *
 	 * @return the list
 	 */
-
 	public List<Categoria> listCategoria(){
 		
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);

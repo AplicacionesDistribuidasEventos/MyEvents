@@ -36,6 +36,11 @@ public class EventoController {
 	
 	
 	/** The evento. */
+
+	/*
+	 * Declaracion de variables
+	 */
+
 	private Evento evento;
 	
 	/** The recupelocal. */
@@ -73,9 +78,11 @@ public class EventoController {
 	private int id3;
 
 	
+
 	/**
 	 * Inits the.
 	 */
+
 	@PostConstruct
 	public void init() {
 		evento = new Evento(); 
@@ -84,6 +91,8 @@ public class EventoController {
 	}
 	
 	
+	/* Getters and Setters
+	 */
 	
 	/**
 	 * Gets the id 3.
@@ -94,11 +103,13 @@ public class EventoController {
 		return id3;
 	}
 
+
 	/**
 	 * Gets the listado filtrado.
 	 *
 	 * @return the listado filtrado
 	 */
+
 	public List<Evento> getListadoFiltrado() {
 		return listadoFiltrado;
 	}
@@ -227,13 +238,14 @@ public class EventoController {
 		this.id2 = id2;
 	}
 	
+
 		
 	/**
 	 * Sets the id.
 	 *
 	 * @param id the new id
 	 */
-	
+
 	public void setId(int id) {
 		this.id = id;
 		loadEventoEditar(id);

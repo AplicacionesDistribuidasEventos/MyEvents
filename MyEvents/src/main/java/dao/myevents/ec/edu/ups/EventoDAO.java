@@ -101,13 +101,14 @@ public class EventoDAO {
 		return levento;
 	}
 	
+
 	/**
 	 * Gets the eventos por nombre.
 	 *
 	 * @param filtro the filtro
 	 * @return the eventos por nombre
 	 */
-		
+  
 public List<Evento> getEventosPorNombre(String filtro){		
 		String sql = "SELECT p FROM Evento p "
 					+ "WHERE nombre like ? ";

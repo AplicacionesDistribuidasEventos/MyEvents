@@ -24,10 +24,14 @@ public class ExtraController {
 	
 	
 	/** The extra. */
+	/*
+	 * Declaracion de variables
+	 */
 	private Extra extra = null;
 	
 	/** The extras. */
 	private List<Extra> extras;
+
 	
 	/** The id. */
 	private int id;
@@ -35,6 +39,9 @@ public class ExtraController {
 	/**
 	 * Inits the.
 	 */
+	private int id;
+	
+
 	@PostConstruct
 	public void init(){
 		
@@ -42,8 +49,6 @@ public class ExtraController {
 		loadExtra();
 		
 	}
-
-
 	
 	/**
 	 * Gets the id.
