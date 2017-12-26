@@ -9,14 +9,21 @@ import javax.persistence.Query;
 
 import modelo.myevents.ec.edu.ups.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CategoriaDAO.
+ */
 @Stateless
 public class CategoriaDAO {
 	
+	/** The em. */
 	@Inject
 	private EntityManager em;
 	
-	/*
-	 * Metodo para guardar y editar
+	/**
+	 * Actualizar categoria.
+	 *
+	 * @param c the c
 	 */
 	public void guardarCategoria(Categoria c){
 		
@@ -34,23 +41,37 @@ public class CategoriaDAO {
 		
 	}
 	
-	//---METODOS CRUD
 	
-	///Inserta una categoria
+	/**
+	 * Insetar categoria.
+	 *
+	 * @param c the c
+	 */
 	public void insetarCategoria(Categoria c){
 		
 		em.persist(c);
 		
 	}
 	
-	////Actualizar Categoria
+
+	/**
+	 * Actualizar categoria.
+	 *
+	 * @param c the c
+	 */
 	public void actualizarCategoria(Categoria c){
 		
 		em.merge(c);
 		
 	}
 	
-	/// Lee o buscar categoria
+
+	/**
+	 * Leer categoria.
+	 *
+	 * @param id the id
+	 * @return the categoria
+	 */
 	public Categoria leerCategoria(int id){
 		
 		Categoria c = em.find(Categoria.class, id);
@@ -58,7 +79,13 @@ public class CategoriaDAO {
 		
 	}
 	
-	/// Eliminar Categoria
+
+	/**
+	 * Eliminar categoria.
+	 *
+	 * @param id the id
+	 */
+	
 	public void eliminarCategoria(int id){
 		
 		Categoria c = leerCategoria(id);
@@ -66,7 +93,11 @@ public class CategoriaDAO {
 		
 	}
 	
-	/// Listar categoria
+	/**
+	 * List categoria.
+	 *
+	 * @return the list
+	 */
 	public List<Categoria> listCategoria(){
 		
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);

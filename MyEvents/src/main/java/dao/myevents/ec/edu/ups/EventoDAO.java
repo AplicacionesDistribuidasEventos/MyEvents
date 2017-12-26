@@ -13,15 +13,23 @@ import modelo.myevents.ec.edu.ups.Evento;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventoDAO.
+ */
 @Stateless
 public class EventoDAO {
 
+	/** The em. */
 	@Inject
 	private EntityManager em;
 	
 	
-	//Metodo para editar y guardar
-	
+	/**
+	 * Actualizar evento.
+	 *
+	 * @param e the e
+	 */
 	public void guardarEvento(Evento e) {
 		
 		
@@ -33,34 +41,59 @@ public class EventoDAO {
 		}
 	}
 	
-	//---METODOS CRUD
-	//Crear Evento
 	
+	/**
+	 * Insertar evento.
+	 *
+	 * @param e the e
+	 */
 	public void insertarEvento(Evento e) {
 		em.persist(e);		
 	}
 	
-	//Metodo para Actualizar Evento
+	/**
+	 * Update evento.
+	 *
+	 * @param e the e
+	 */
+	
 	public void updateEvento(Evento e) {
 		System.out.println("Updating............"+e.getCodigo()+
 				e.getNombre());
 		em.merge(e);
 	} 
 	
-	//Metodo para Leer Evento
+	/**
+	 * Leer evento.
+	 *
+	 * @param id the id
+	 * @return the evento
+	 */
+	
 	public Evento leerEvento(int id) {
 		
 		Evento e = em.find(Evento.class, id);
 		return e;
 		
 	}
-	//Metodo para Eliminar Evento
+	
+	/**
+	 * Delete evento.
+	 *
+	 * @param id the id
+	 */
+	
 	public void deleteEvento (int id) {
 		Evento e = leerEvento(id);
 		em.remove(e);
 	}
 	
-	//Metodo para Listar Eventos
+	/**
+	 * List evento.
+	 *
+	 * @return the list
+	 */
+	
 	public List<Evento> listEvento(){
 		String sql = "Select e from Evento e";
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
@@ -68,7 +101,14 @@ public class EventoDAO {
 		return levento;
 	}
 	
-	///Filtro de busqueda para los eventos...	
+
+	/**
+	 * Gets the eventos por nombre.
+	 *
+	 * @param filtro the filtro
+	 * @return the eventos por nombre
+	 */
+  
 public List<Evento> getEventosPorNombre(String filtro){		
 		String sql = "SELECT p FROM Evento p "
 					+ "WHERE nombre like ? ";

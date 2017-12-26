@@ -22,45 +22,83 @@ import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 import validacionesnegocio.myevents.ec.edu.ups.Validacion;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PersonaController.
+ */
 @ManagedBean
 @SessionScoped
-public class PersonaController {  
+public class PersonaController { 
+
+	/** The Constant PATTERN_EMAIL (validacion de la cedula). */
 	
+	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";   
+
+	
+	/** The personas. */
 	private Persona personas = null;
 	private Validacion v;
 
+	/** The id. */
 	private int id;
+	
+	/** The pactual. */
 	private String pactual;
+	
+	/** The id edit user. */
 	private int idEditUser;
 
-	/*Definicion de variables para la validacion-coincidencia del numero de cedula ingresado
-	 * */
+	/** The contrasenia. */
+	
 	@NotBlank(message = "Ingrese las contrasenias")
 	private String contrasenia;
+	
+	/** The conincidencia. */
 	private String conincidencia;
+	
+	/** The Loginexiste. */
 	private String Loginexiste;
 	
-	/*Varibles donde almaceno los valores de la consulta maestro-detalles
-	 * */
+	
+	/**
+	 * The nusuario.
+	 * Varibles donde se almacena los valores de la consulta maestro-detalles
+	 */
+	
 	private String nusuario;
+	
+	/** The nlocal. */
 	private String nlocal;
+	
+	/** The ndescripcion. */
 	private String ndescripcion;
+	
+	/** The ncapacidad. */
 	private String ncapacidad;
+	
+	/** The ncosto. */
 	private String ncosto;
 	
-	private int idrecuprerar; //-----------agregado
+	/** The idrecuprerar. */
+	private int idrecuprerar; 
 	
-	/*DEFINICION DE VARIABLES PARA LA RECUPERACION DE LA LISTA(PERSONA-LOCAL-EVENTO)
-	 * */
+	/** The List per ID. */
 	 private List<Persona> ListPerID;
 
+	/** The pdao. */
 	@Inject
 	private PersonaDAO pdao;
 
+	/** The lpersonas. */
 	private List<Persona> lpersonas;
 
+	/** The my user. */
 	private Persona myUser;
 
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
@@ -76,146 +114,326 @@ public class PersonaController {
 	 *     Getter and Setter
 	 */
 
+	/**
+	 * Gets the nusuario.
+	 *
+	 * @return the nusuario
+	 */
 	public String getNusuario() {
 		return nusuario;
 	}
 
+
+	/**
+	 * Sets the nusuario.
+	 *
+	 * @param nusuario the new nusuario
+	 */
 	public void setNusuario(String nusuario) {
 		this.nusuario = nusuario;
 	}
 
+
+	/**
+	 * Gets the nlocal.
+	 *
+	 * @return the nlocal
+	 */
 	public String getNlocal() {
 		return nlocal;
 	}
 
+
+	/**
+	 * Sets the nlocal.
+	 *
+	 * @param nlocal the new nlocal
+	 */
 	public void setNlocal(String nlocal) {
 		this.nlocal = nlocal;
 	}
 
+
+	/**
+	 * Gets the ndescripcion.
+	 *
+	 * @return the ndescripcion
+	 */
 	public String getNdescripcion() {
 		return ndescripcion;
 	}
 
+
+	/**
+	 * Sets the ndescripcion.
+	 *
+	 * @param ndescripcion the new ndescripcion
+	 */
 	public void setNdescripcion(String ndescripcion) {
 		this.ndescripcion = ndescripcion;
 	}
 
+
+	/**
+	 * Gets the ncapacidad.
+	 *
+	 * @return the ncapacidad
+	 */
 	public String getNcapacidad() {
 		return ncapacidad;
 	}
 
+
+	/**
+	 * Sets the ncapacidad.
+	 *
+	 * @param ncapacidad the new ncapacidad
+	 */
 	public void setNcapacidad(String ncapacidad) {
 		this.ncapacidad = ncapacidad;
 	}
 
+	/**
+	 * Gets the ncosto.
+	 *
+	 * @return the ncosto
+	 */
 	public String getNcosto() {
 		return ncosto;
 	}
 
+
+	/**
+	 * Sets the ncosto.
+	 *
+	 * @param ncosto the new ncosto
+	 */
 	public void setNcosto(String ncosto) {
 		this.ncosto = ncosto;
 	}
 
+
+	/**
+	 * Gets the idrecuprerar.
+	 *
+	 * @return the idrecuprerar
+	 */
 	public int getIdrecuprerar() {
 		return idrecuprerar;
 	}
  
+
+	/**
+	 * Sets the idrecuprerar.
+	 *
+	 * @param idrecuprerar the new idrecuprerar
+	 */
 	public void setIdrecuprerar(int idrecuprerar) {
 		this.idrecuprerar = idrecuprerar;
 		loadid(idrecuprerar);
 		consultaLocalEventos();
 	}
 
+
+	/**
+	 * Gets the list per ID.
+	 *
+	 * @return the list per ID
+	 */
 	public List<Persona> getListPerID() {
 		return ListPerID;
 	}
 
+
+	/**
+	 * Sets the list per ID.
+	 *
+	 * @param listPerID the new list per ID
+	 */
 	public void setListPerID(List<Persona> listPerID) {
 		ListPerID = listPerID;
 	}
 
 	
+	/**
+	 * Gets the contrasenia.
+	 *
+	 * @return the contrasenia
+	 */
 	public String getContrasenia() {
 		return contrasenia;
 	}
 
+	/**
+	 * Sets the contrasenia.
+	 *
+	 * @param contrasenia the new contrasenia
+	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
 
+	/**
+	 * Gets the conincidencia.
+	 *
+	 * @return the conincidencia
+	 */
 	public String getConincidencia() {
 		return conincidencia;
 	}
 
+	/**
+	 * Sets the conincidencia.
+	 *
+	 * @param conincidencia the new conincidencia
+	 */
 	public void setConincidencia(String conincidencia) {
 		this.conincidencia = conincidencia;
 	}
 
+	/**
+	 * Gets the loginexiste.
+	 *
+	 * @return the loginexiste
+	 */
 	public String getLoginexiste() {
 		return Loginexiste;
 	}
 
+	/**
+	 * Sets the loginexiste.
+	 *
+	 * @param loginexiste the new loginexiste
+	 */
 	public void setLoginexiste(String loginexiste) {
 		Loginexiste = loginexiste;
 	}
 
+	/**
+	 * Gets the personas.
+	 *
+	 * @return the personas
+	 */
 	public Persona getPersonas() {
 		return personas;
 	}
 
+	/**
+	 * Sets the personas.
+	 *
+	 * @param personas the new personas
+	 */
 	public void setPersonas(Persona personas) {
 		this.personas = personas;
 	}
 
+	/**
+	 * Gets the lpersonas.
+	 *
+	 * @return the lpersonas
+	 */
 	public List<Persona> getLpersonas() {
 		return lpersonas;
 	}
 
+	/**
+	 * Sets the lpersonas.
+	 *
+	 * @param lpersonas the new lpersonas
+	 */
 	public void setLpersonas(List<Persona> lpersonas) {
 		this.lpersonas = lpersonas;
 	}
 
-/*Recuperacion de los Ids que son pasados como URL
- * */
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(int id) {
 		this.id = id;
 		loadDatosEditar(id);
 	}
 
+	/**
+	 * Gets the id edit user.
+	 *
+	 * @return the id edit user
+	 */
 	public int getIdEditUser() {
 		return idEditUser;
 	}
 
+	/**
+	 * Sets the id edit user.
+	 *
+	 * @param idEditUser the new id edit user
+	 */
 	public void setIdEditUser(int idEditUser) {
 		this.idEditUser = idEditUser;
 		loadDatosEditar(idEditUser);
 	}
 
+	/**
+	 * Gets the pdao.
+	 *
+	 * @return the pdao
+	 */
 	public PersonaDAO getPdao() {
 		return pdao;
 	}
 
+	/**
+	 * Sets the pdao.
+	 *
+	 * @param pdao the new pdao
+	 */
 	public void setPdao(PersonaDAO pdao) {
 		this.pdao = pdao;
 	}
 
+	/**
+	 * Gets the my user.
+	 *
+	 * @return the my user
+	 */
 	public Persona getMyUser() {
 		return myUser;
 	}
 
+	/**
+	 * Sets the my user.
+	 *
+	 * @param myUser the new my user
+	 */
 	public void setMyUser(Persona myUser) {
 		this.myUser = myUser;
 	}
 
+	/**
+	 * Redirectmain admin.
+	 *
+	 * @return the string
+	 */
 	public String redirectmainAdmin() {
 		return "mainAmin.xhtml";
 	}
-	/*Creacion del objeto Persona condicinamiento segun las sentencias de validacion
-	 * */
+	
+	/**
+	 * Crear.
+	 * Creacion del objeto Persona condicinamiento segun las sentencias de validacion
+	 */
+	 
 	public void crear() {
 		if (coincidirContrasenia() == true) {
 			if (v.validarCedula(personas.getCedula()) == true) {
@@ -247,9 +465,13 @@ public class PersonaController {
 		}
 	}
 
-	/*
-	 * Comparacion de los 2 campos referentes a la contrasenia, devolucion(true/false), segun sea la cedula valida o no valida respectivamente.
+	/**
+	 * Coincidir contrasenia.
+	 *Comparacion de los 2 campos referentes a la contrasenia, devolucion(true/false), 
+	 *segun sea la cedula valida o no valida respectivamente.
+	 * @return true, if successful
 	 */
+	
 	public boolean coincidirContrasenia() {
 		if (personas.getContrasenia().equals(this.contrasenia)) {
 			return true;
@@ -258,9 +480,13 @@ public class PersonaController {
 		}
 	}
 
-	/*
-	 * Setea las variable como vacias, ocupado al momento de haber creado el usuario y dejar los h:inputText del JSF en blanco
+	/**
+	 * Inicializar.
+	 * Setea las variable como vacias, ocupado al momento 
+	 * de haber creado el usuario y dejar los h:inputText del JSF en blanco
 	 */
+	
+	
 	public void inicializar() {
 		personas.setCedula("");
 		personas.setApellido("");
@@ -268,9 +494,12 @@ public class PersonaController {
 		personas.setContrasenia("");
 	}
 
-	/*
-	 * Modificacion de los objetos de tipo Persona(USUARIO/ADMIN)
+	/**
+	 * Modificar.
+	 *Modificacion de los objetos de tipo Persona(USUARIO/ADMIN)
+	 * @return the string
 	 */
+	 
 	public String modificar() {
 		try{
 			System.out.println(personas.getPerfil());
@@ -300,32 +529,53 @@ public class PersonaController {
 		}
 	}
 
-	/*
-	 * Metodo leer, donde dirije a el archivo crearPersona, dado como parametro un Id
+	/**
+	 * Metodo Leer.
+	 *Dirije a el archivo crearPersona, dado como parametro un Id
+	 * @param id the id
+	 * @return the string
 	 */
+
+	 
 	public String leer(int id) {
 		personas = pdao.selectPersona(id);
 		return "crearPersona";
 	}
 
-	/*
-	 * Metodo eliminar, llama al metodo Delete de PersonaDAO, parametro Id, para eliminar un registro especifica
+	/**
+	 * Eliminar.
+	 *Metodo eliminar, llama al metodo Delete de PersonaDAO, 
+	 *parametro Id, para eliminar un registro especifica
+	 * @param id the id
+	 * @return the string
 	 */
+	
+	 
 	public String eliminar(int id) {
 		pdao.deletePersona(id);
 		System.out.println("Eliminado Usuario ..:" + personas);
 		return "actualizar";
 	}
 
-	/*
-	 * Metodo listado, devuelve un objeto Listado de tipo Persona(Devuelve todas las personas)
+	/**
+	 * Lista personas, devuelve un objeto Listado de tipo Persona(Devuelve todas las personas).
+	 *
+	 * @return the list
 	 */
+	
+	
 	public List<Persona> listaPersonas() {
 		lpersonas = pdao.listPersonas();
 		return lpersonas;
 	}
 
-	//Metodo para cargar Datos de una persona, pasado un parametro Id especifico, navegacion hacia recuperarPersona
+		
+	/**
+	 * Load datos editar.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	public String loadDatosEditar(int id) {
 		System.out.println("Cargando...Persona a Editar" + id);
 		personas = pdao.selectPersona(id);
@@ -339,8 +589,11 @@ public class PersonaController {
 		return null;
 	}
 
-	/*inicilizar una Sesion HTTP y establecimiento de parametros en session, FacesContext acceso tanto al contexto de JSF como HTTP
-	 * */
+	/**
+	 * IniciarSesion
+	 * inicilizar una Sesion HTTP y establecimiento de parametros en session, FacesContext acceso tanto al contexto de JSF como HTTP.
+	 */
+	
 	public void iniciarSesion() {
 		if (pdao.login(personas.getCorreo(), personas.getContrasenia()).size() != 0) {
 			HttpSession session = SessionUtils.getSession();
@@ -384,8 +637,10 @@ public class PersonaController {
 			this.Loginexiste = "El usuario o la contrasenia son incorrectos";
 	}
 	
-	/*Cargar datos del usuario obtenidos en session(HTTP) y su respectiva validacion
-	 * */
+	/**
+	 * Cargar datos usuario obtenidos en session(HTTP) y su respectiva validacion.
+	 */
+	
 	public void cargarDatosUsuario() {
 		myUser = new Persona();
 		HttpSession session = SessionUtils.getSession();
@@ -413,16 +668,23 @@ public class PersonaController {
 
 	}
 	
-	/*Metodo Utilizado para la eliminacion de una sesion HTTP, con su respectiva navegacion
-	 * */
+	/**
+	 * Cerrar sesion.
+	 *Metodo Utilizado para la eliminacion de una sesion HTTP, con su respectiva navegacion
+	 * @return the string
+	 */
+	
+	 
 	public String cerrarSesion() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		return "index.xhtml";
 	}
 	
-	/*Metodo Utilizado para la verificacion de la sesion establecida, con un respectivo contexto hacia la pagina de inicio 
-	 * */
+	/**
+	 * Verifica sesion.
+	 */
+	
 	 public void verificaSesion(){
 		 HttpSession session = SessionUtils.getSession();
 			String nusv = (String) session.getAttribute("username");
@@ -442,8 +704,13 @@ public class PersonaController {
 					}
 				}
 	 }
-	 /*OBTENCION DE LA LISTA MAESTRA (PERSONA)
-	  * */
+	 
+ 	/**
+ 	 * Consulta local eventos.
+ 	 *
+ 	 * @return the string
+ 	 */
+ 	
 	 public String consultaLocalEventos() {
 		 
 		 System.out.println("ID: "+idrecuprerar+" "+ "ENTRA");
@@ -458,11 +725,23 @@ public class PersonaController {
 		 }
 		 return null;
 	 }
-	 public void loadid(int id) {
+	 
+ 	/**
+ 	 * Loadid.
+ 	 *
+ 	 * @param id the id
+ 	 */
+ 	public void loadid(int id) {
 		 idrecuprerar=id;
 		 
 	 }
-	 public void loadidUser(int id) {
+	 
+ 	/**
+ 	 * Loadid user.
+ 	 *
+ 	 * @param id the id
+ 	 */
+ 	public void loadidUser(int id) {
 		 idEditUser=id;
 	 }
 }
