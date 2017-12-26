@@ -53,9 +53,11 @@ public class PersonaDAO {
 	public List<Persona> listPersonas() {
 		String sql = "select p from Persona p";
 		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
-		System.out.println("2");
 		List<Persona> lpersonas = query.getResultList();
-		
+		for(Persona p : lpersonas) {
+			p.getAeventos().size();
+			p.getSrecepciones().size();
+		}
 		return lpersonas;
 	}
 	
@@ -75,6 +77,10 @@ public class PersonaDAO {
 		String sql = "Select p from Persona p WHERE p.correo = '"+user+"' AND p.contrasenia='"+pass+"'";
 		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
 		List<Persona> personas = query.getResultList();
+		for(Persona p : personas) {
+			p.getAeventos().size();
+			p.getSrecepciones().size();
+		}
 		return personas;
 	}
 	
@@ -83,6 +89,21 @@ public class PersonaDAO {
 		String sql="Select p from Persona p WHERE p.correo = '"+user+"'";
 		TypedQuery<Persona> query=em.createQuery(sql,Persona.class);
 		List<Persona>personas=query.getResultList();
+		for(Persona p : personas) {
+			p.getAeventos().size();
+			p.getSrecepciones().size();
+		}
+		return personas;
+	}
+	
+	public List<Persona> existeCedula(String cedula) {
+		String jpql = "Select p from Persona p WHERE p.cedula = '"+cedula+"'";
+		TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
+		List<Persona> personas = query.getResultList();
+		for(Persona p : personas) {
+			p.getAeventos().size();
+			p.getSrecepciones().size();
+		}
 		return personas;
 	}
 	

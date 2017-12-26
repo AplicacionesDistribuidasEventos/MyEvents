@@ -20,18 +20,14 @@ import org.hibernate.validator.constraints.NotBlank;
 import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Persona;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
+import validacionesnegocio.myevents.ec.edu.ups.Validacion;
 
 @ManagedBean
 @SessionScoped
-public class PersonaController { 
-
-	/*
-	 * Variable para la validacion de la cedula
-	 */
-	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";   
+public class PersonaController {  
 	
 	private Persona personas = null;
+	private Validacion v;
 
 	private int id;
 	private String pactual;
@@ -70,12 +66,13 @@ public class PersonaController {
 		personas = new Persona();
 		lpersonas = listaPersonas();
 		ListPerID = new ArrayList<Persona>();
+		v = new Validacion();
 		consultaLocalEventos();
 	}
 	
 	/*
 	 * 
-	 * Inicion de 
+	 * Inicio de 
 	 *     Getter and Setter
 	 */
 
@@ -221,15 +218,24 @@ public class PersonaController {
 	 * */
 	public void crear() {
 		if (coincidirContrasenia() == true) {
-			if (validarCedula() == true) {
-				if(validarCorreo()==true) {
-					personas.setPerfil("USUARIO");
-					personas.setEstado("A");
-					pdao.guardar(personas);
-					inicializar();
-					init();
-					this.conincidencia = "Grabado exitoso!";	
-				}else {
+			if (v.validarCedula(personas.getCedula()) == true) {
+				if (v.validarCorreo(personas.getCorreo()) == true) {
+					// SI ESQUE EXISTE UN MISMO EMAIL
+					if (pdao.verificaCorreo(personas.getCorreo()).size()==0) {
+						if(pdao.existeCedula(personas.getCedula()).size()==0) {
+							personas.setPerfil("USUARIO");
+							personas.setEstado("A");
+							pdao.guardar(personas);
+							inicializar();
+							init();
+							this.conincidencia = "Grabado exitoso!";	
+						}else {
+							this.conincidencia ="La cedula ya se encuentra registrada";
+						}
+					} else {
+						this.conincidencia = "El correo ya se encuentra registrado";
+					}
+				} else {
 					this.conincidencia = "El formato del correo es incorrecto";
 				}
 			} else {
@@ -238,7 +244,7 @@ public class PersonaController {
 			}
 		} else {
 			this.conincidencia = "Ingrese las mismas contrasenias";
-		}	
+		}
 	}
 
 	/*
@@ -318,52 +324,6 @@ public class PersonaController {
 		lpersonas = pdao.listPersonas();
 		return lpersonas;
 	}
-
-	/*Metodo util en la validacion de la cedula
-	 * */
-	public boolean validarCedula() {
-		String ced = personas.getCedula();
-		int sum_t = 0;
-		int res = 0;
-		for (int i = 0; i < 9; i++) {
-			char b = ced.charAt(i);
-			int a = b - 48;
-			if (i == 0) {
-				a = a * 2;
-			} else {
-				if (i % 2 == 0) {
-					a = a * 2;
-				} else {
-					a = a * 1;
-				}
-			}
-			if (a > 9) {
-				a = a - 9;
-			}
-			sum_t = sum_t + a;
-		}
-		res = sum_t % 10;
-		if (res != 0) {
-			res = 10 - res;
-		}
-		boolean resultado = false;
-		if (res == Integer.parseInt(ced.substring(9, 10))) {
-			resultado = true;
-		} else {
-			resultado = false;
-		}
-		return resultado;
-	}
-	
-	/*Metodo para la validacion de un correo electronico
-	 * */
-	public boolean validarCorreo() {
-		String email = personas.getCorreo();
-		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-	}
-
 
 	//Metodo para cargar Datos de una persona, pasado un parametro Id especifico, navegacion hacia recuperarPersona
 	public String loadDatosEditar(int id) {
@@ -504,6 +464,5 @@ public class PersonaController {
 	 }
 	 public void loadidUser(int id) {
 		 idEditUser=id;
-		 
 	 }
 }
