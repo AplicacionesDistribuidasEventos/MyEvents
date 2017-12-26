@@ -9,12 +9,22 @@ import javax.persistence.Query;
 
 import modelo.myevents.ec.edu.ups.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExtraDAO.
+ */
 @Stateless
 public class ExtraDAO {
 	
+	/** The em. */
 	@Inject
 	private EntityManager em;
 	
+	/**
+	 * Guardar extra.
+	 *
+	 * @param e the e
+	 */
 	public void guardarExtra(Extra e){
 		
 		Extra aux = leerExtra(e.getId());
@@ -31,12 +41,22 @@ public class ExtraDAO {
 		
 	}
 	
+	/**
+	 * Insetar extra.
+	 *
+	 * @param e the e
+	 */
 	public void insetarExtra(Extra e){
 		
 		em.persist(e);
 		
 	}
 	
+	/**
+	 * Actualizar extra.
+	 *
+	 * @param e the e
+	 */
 	public void actualizarExtra(Extra e){
 		
 		//System.out.println("Updating............"+c.getId() +
@@ -45,6 +65,12 @@ public class ExtraDAO {
 		
 	}
 	
+	/**
+	 * Leer extra.
+	 *
+	 * @param id the id
+	 * @return the extra
+	 */
 	public Extra leerExtra(int id){
 		
 		Extra e = em.find(Extra.class, id);
@@ -52,6 +78,11 @@ public class ExtraDAO {
 		
 	}
 	
+	/**
+	 * Eliminar extra.
+	 *
+	 * @param id the id
+	 */
 	public void eliminarExtra(int id){
 		
 		Extra e = leerExtra(id);
@@ -59,6 +90,11 @@ public class ExtraDAO {
 		
 	}
 	
+	/**
+	 * List extra.
+	 *
+	 * @return the list
+	 */
 	public List<Extra> listExtra(){
 		
 		Query query = em.createQuery("SELECT e FROM Extra e", Extra.class);
@@ -66,11 +102,6 @@ public class ExtraDAO {
 		return listado;
 	}
 	
-	/*public List<Evento> listEvento(){
-		String sql = "Select e from Evento e";
-		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
-		List<Evento> levento = query.getResultList();
-		return levento;
-	}*/
+	
 
 }

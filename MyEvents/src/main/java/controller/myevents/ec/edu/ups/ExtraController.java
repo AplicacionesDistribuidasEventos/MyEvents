@@ -10,20 +10,31 @@ import javax.inject.Inject;
 import dao.myevents.ec.edu.ups.ExtraDAO;
 import modelo.myevents.ec.edu.ups.Extra;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExtraController.
+ */
 @ManagedBean
 public class ExtraController {
 	
 	
+	/** The extdao. */
 	@Inject
 	private ExtraDAO extdao;
 	
+	
+	/** The extra. */
 	private Extra extra = null;
 	
+	/** The extras. */
 	private List<Extra> extras;
 	
+	/** The id. */
 	private int id;
 	
-	
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	public void init(){
 		
@@ -32,42 +43,81 @@ public class ExtraController {
 		
 	}
 
-	////getter and setter
+
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(int id) {
 		this.id = id;
-		loadExtraEditar(id);//parametros
+		loadExtraEditar(id);
 	}
 	
+	/**
+	 * Gets the extra.
+	 *
+	 * @return the extra
+	 */
 	public Extra getExtra() {
 		return extra;
 	}
 
 	
+	/**
+	 * Sets the extra.
+	 *
+	 * @param extra the new extra
+	 */
 	public void setExtra(Extra extra) {
 		this.extra = extra;
 	}
 
 	
+	/**
+	 * Gets the extras.
+	 *
+	 * @return the extras
+	 */
 	public List<Extra> getExtras() {
 		return extras;
 	}
 
+	/**
+	 * Sets the categorias.
+	 *
+	 * @param extras the new categorias
+	 */
 	public void setCategorias(List<Extra> extras) {
 		this.extras = extras;
 	}
 	
 /////////////Controller mantenimiento
 
-	public void loadExtra(){
+	/**
+ * Load extra.
+ */
+public void loadExtra(){
 		
 		extras = extdao.listExtra();
 	}	
 	
+	/**
+	 * Load extra editar.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	public String loadExtraEditar(int id){
 		
 		System.out.println("Cargando datos de categoria a editar" + id);
@@ -76,13 +126,24 @@ public class ExtraController {
 		
 	}//fin editar
 	
+	/**
+	 * Elimina extra.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	public String eliminaExtra(int id){
 		
 		extdao.eliminarExtra(id);
 		return "litadoExtraAcciones";
 		
-	}//fin elimina categoria
+	}
 	
+	/**
+	 * Guardar.
+	 *
+	 * @return the string
+	 */
 	public String guardar(){
 		
 		System.out.println(extra);
@@ -95,4 +156,4 @@ public class ExtraController {
 		//return null;
 		return "listadoExtra";
 	}
-}//fin clase
+}

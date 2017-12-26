@@ -9,11 +9,22 @@ import javax.persistence.Query;
 
 import modelo.myevents.ec.edu.ups.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CategoriaDAO.
+ */
 @Stateless
 public class CategoriaDAO {
 	
+	/** The em. */
 	@Inject
 	private EntityManager em;
+	
+	/**
+	 * Actualizar categoria.
+	 *
+	 * @param c the c
+	 */
 	
 	public void guardarCategoria(Categoria c){
 		
@@ -31,19 +42,37 @@ public class CategoriaDAO {
 		
 	}
 	
+	
+	/**
+	 * Insetar categoria.
+	 *
+	 * @param c the c
+	 */
+	
 	public void insetarCategoria(Categoria c){
 		
 		em.persist(c);
 		
 	}
 	
+	/**
+	 * Actualizar categoria.
+	 *
+	 * @param c the c
+	 */
+	
 	public void actualizarCategoria(Categoria c){
 		
-		//System.out.println("Updating............"+c.getId() +
-		//		c.getDescipcion());
 		em.merge(c);
 		
 	}
+	
+	/**
+	 * Leer categoria.
+	 *
+	 * @param id the id
+	 * @return the categoria
+	 */
 	
 	public Categoria leerCategoria(int id){
 		
@@ -52,6 +81,12 @@ public class CategoriaDAO {
 		
 	}
 	
+	/**
+	 * Eliminar categoria.
+	 *
+	 * @param id the id
+	 */
+	
 	public void eliminarCategoria(int id){
 		
 		Categoria c = leerCategoria(id);
@@ -59,6 +94,12 @@ public class CategoriaDAO {
 		
 	}
 	
+	/**
+	 * List categoria.
+	 *
+	 * @return the list
+	 */
+
 	public List<Categoria> listCategoria(){
 		
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
@@ -66,11 +107,5 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
-	/*public List<Evento> listEvento(){
-		String sql = "Select e from Evento e";
-		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
-		List<Evento> levento = query.getResultList();
-		return levento;
-	}*/
-
+	
 }
