@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="plantillaUsuario.xhtml">
+
+	<!-- Definicion del titulo respecto a la plantilla -->
+	<ui:define name="titulo">MyEvents - Categorias</ui:define>
+
+	<!-- Defininionc del encabezado respecto a la plantilla -->
+	<ui:define name="encabezado">Categorias de Eventos</ui:define>
+
+	<!-- Definicion del contenido respecto a la plantilla -->
+	<ui:define name="contenido">
+
+		<h:form>
+			<h:outputText value="El registro no contiene datos"
+				rendered="#{empty  categoriaController.categorias}"></h:outputText>
+			<h:dataTable var="listaCategoria" style="color:black"
+				value="#{categoriaController.categorias}" border="2" class="table">
+
+				<h:column Style="color: black">
+					<f:facet name="header">Nombre</f:facet>
+			#{listaCategoria.nombre}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Descripcion</f:facet>
+			#{listaCategoria.descipcion}
+		</h:column>
+		
+						<h:column Style="color: black">
+					<f:facet name="header">Visualizar Eventos</f:facet>
+			<a href="eventosCategoria.xhtml?id=#{listaCategoria.id}"
+							class="btn btn-info btn-md"> Ver Eventos </a>
+		</h:column>
+
+
+			</h:dataTable>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
