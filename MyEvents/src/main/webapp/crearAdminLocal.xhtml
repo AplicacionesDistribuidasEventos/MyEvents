@@ -22,7 +22,7 @@
 		</f:metadata>
 
 
-		<h:form id="formulario">
+		<h:form  enctype="multipart/form-data" id="formulario">
 			<center>
 				<h:panelGrid columns="1">
 
@@ -30,17 +30,18 @@
 						<strong>Info!</strong> Los campos que contienen * son
 						obligatorios.
 					</div>
+					
+					<h:outputLabel value="* Nombre del Local:" for="nombLocal" />
+					<h:inputText id="nombLocal" value="#{localController.local.nombre}"
+						class="form-control" />
+					<h:message for="nombLocal" />
+
 
 					<h:outputLabel value="* Descripción:" for="descLocal" />
 					<h:inputTextarea id="descLocal"
 						value="#{localController.local.descripcion}" required="true"
 						requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
 					<h:message for="descLocal" />
-
-					<h:outputLabel value="* Nombre del Local:" for="nombLocal" />
-					<h:inputText id="nombLocal" value="#{localController.local.nombre}"
-						class="form-control" />
-					<h:message for="nombLocal" />
 
 
 					<h:outputLabel value="* Capacidad:" for="capaLocal" />
@@ -84,17 +85,21 @@
 						class="form-control" />
 
 
-					<div class="form-group">
-						<h:outputLabel value="Seleccione una foto de perfil" />
-						<h:inputFile id="subidaFP" value="#{localController.fotoPerfil}" />
-						<h:message for="subidaFP" />
-					</div>
-
+					
+<div class="form-group">
+				<h:outputLabel value="Seleccione una foto de perfil" />
+				<h:inputFile id="subidaFP" value="#{localController.fotoPerfil}"/>
+				<h:message for="subidaFP" />
+			</div>
+			
 
 
 
 				</h:panelGrid>
 
+
+			
+				
 			</center>
 
 			<br />

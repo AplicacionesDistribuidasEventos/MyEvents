@@ -75,7 +75,7 @@ public class LocalController {
 	
 
 	private Part fotoPerfil;
-	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
+	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imageness";					  
 	private String nombreArchivoPerfil;
   
 	/**
@@ -384,6 +384,18 @@ public class LocalController {
 	 * @return the string
 	 */
 	public String insertarLocalAdmin() {
+		if(fotoPerfil!=null){
+			saveFotoLocal();
+			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
+		}else{	
+			if(!local.getFotoPerfil().equals("imagenes/local1.jpg"))
+				{
+				local.setFotoPerfil(auxLocal.getFotoPerfil());			
+				}else{
+					local.setFotoPerfil("imagenes/local1.jpg");
+				}
+			
+		}
 		
 		p = pdao.selectPersona(id2);
 		p.getLocales().add(local);
