@@ -154,9 +154,18 @@ public class PersonaDAO {
 	 * @return the list
 	 */
 	public List<Persona> listPersonaID(int id){
-		String sql = "Select p from Persona p WHERE p.id = '"+id+"'";
-		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
+		int i = 0;
+		String jpql = "Select p from Persona p WHERE p.id = '"+id+"' ";
+		TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
 		List<Persona>personas= query.getResultList();
+		for(Persona p : personas) {
+			i++;
+			System.out.println("INGRESA FOR : "+i);
+			p.getLocales().size();
+			p.getAeventos().size();
+			/*Comprobar para los eventos que se dan en dicho local*/
+			p.getLocales().get(0).getEvento().size();
+		}
 		return personas;
 	}
 	

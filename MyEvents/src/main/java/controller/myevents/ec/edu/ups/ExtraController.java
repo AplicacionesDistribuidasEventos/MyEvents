@@ -31,10 +31,6 @@ public class ExtraController {
 	
 	/** The extras. */
 	private List<Extra> extras;
-
-	
-	/** The id. */
-	private int id;
 	
 	/**
 	 * Inits the.
