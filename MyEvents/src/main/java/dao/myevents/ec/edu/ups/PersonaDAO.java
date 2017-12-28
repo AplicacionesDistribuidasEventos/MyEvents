@@ -106,7 +106,6 @@ public class PersonaDAO {
 	 * @return the list
 	 */
 	public List<Persona> login(String user, String pass) {
-		System.out.println("USUARIO: "+user+", Pass: "+pass);
 		String sql = "Select p from Persona p WHERE p.correo = '"+user+"' AND p.contrasenia='"+pass+"'";
 		TypedQuery<Persona> query = em.createQuery(sql, Persona.class);
 		List<Persona> personas = query.getResultList();
@@ -154,17 +153,17 @@ public class PersonaDAO {
 	 * @return the list
 	 */
 	public List<Persona> listPersonaID(int id){
-		int i = 0;
 		String jpql = "Select p from Persona p WHERE p.id = '"+id+"' ";
 		TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
 		List<Persona>personas= query.getResultList();
+		System.out.println("LISTPERSID DAO");
 		for(Persona p : personas) {
-			i++;
-			System.out.println("INGRESA FOR : "+i);
 			p.getLocales().size();
 			p.getAeventos().size();
 			/*Comprobar para los eventos que se dan en dicho local*/
+			if(!p.getLocales().isEmpty()) {
 			p.getLocales().get(0).getEvento().size();
+			}
 		}
 		return personas;
 	}

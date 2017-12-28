@@ -22,48 +22,49 @@
 				<f:viewParam name="id" value="#{personaController.idrecuprerar}" />
 			</f:metadata>
 			
-			<h:dataTable value="#{personaController.listPerID}" var="personas"
-				class="table">
+			<h:outputText value="El registro no contiene datos"
+				rendered="#{empty  personaController.plelist}"></h:outputText>
+			<h:dataTable value="#{personaController.plelist}" var="persona"
+				class="table" rendered="#{not empty personaController.plelist}">
 
 				<h:column>
 					<f:facet name="header">Nombre del Salon</f:facet>
-				#{personas.locales.get(0).nombre}
+				#{persona.l_nombre}
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Capacidad</f:facet>
-				#{personas.locales.get(0).capacidad} 
+				#{persona.l_capacidad} 
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Costo</f:facet> 
-				#{personas.locales.get(0).costo}      
+				#{persona.l_costo}      
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Descripcion</f:facet>
-				#{personas.locales.get(0).descripcion}
+				#{persona.l_descripcion}
 				</h:column>
  
 				<h:column>
 					<f:facet name="header">Evento</f:facet>
-				#{personaController.enombre}
+				#{persona.e_nombre}
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Fecha</f:facet>
-				#{personaController.efecha}
+				#{persona.e_fecha}
+				
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Descripcion</f:facet>
-				#{personaController.edescripcion}
+				#{persona.e_descripcion}
 				</h:column>
  
 			</h:dataTable>
 			<h:commandButton action="mainAdmin" value="Principal"
-				class="btn btn-info" />
-			<h:commandButton action="mainAdmin" value="cancelar"
 				class="btn btn-info" />
 		</h:form>
 	</ui:define>
