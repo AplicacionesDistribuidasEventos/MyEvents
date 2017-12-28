@@ -98,6 +98,9 @@ public class EventoDAO {
 		String sql = "Select e from Evento e";
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
 		List<Evento> levento = query.getResultList();
+		for(Evento eve : levento) {
+			eve.getAsistenciaEventos().size();
+		}
 		return levento;
 	}
 	
