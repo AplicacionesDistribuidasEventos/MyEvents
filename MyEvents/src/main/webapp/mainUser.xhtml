@@ -1,177 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:hs="http://xmlns.jcp.org/jsf/html"
-	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-<h:head>
-  <title>Principal usuario</title>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="description" content="HTML5 website template"/>
-  <meta name="keywords" content="global, template, html, sass, jquery"/>
-  <meta name="author" content="Bucky Maler"/>
-  <link rel="stylesheet" href="resources/usuarionavegacion/assets/css/main.css"/>
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  template="plantillaUsuario.xhtml">
+<!-- Definicion del titulo respecto a la plantilla -->
+<ui:define name="titulo">MyEvents - Usuario</ui:define>
 
-</h:head>
-<body style="background-color:black;">
+<!-- Defininionc del encabezado respecto a la plantilla -->
+<ui:define name="encabezado">Bienvenido a MyEvents.</ui:define>
 
-<!-- notification for small viewports and landscape oriented smartphones -->
-<div class="device-notification">
-  <a class="device-notification--logo" href="#0">
-    <img src="resources/usuarionavegacion/assets/img/logo.png" alt="Global"/>
-    <p>MyEvents</p>
-  </a>
-  <p class="device-notification--message">Global has so much to offer that we must request you orient your device to portrait or find a larger screen. You won't be disappointed.</p>
-</div>
-
-<div class="perspective effect-rotate-left">
-  <div class="container"><div class="outer-nav--return"></div>
-    <div id="viewport" class="l-viewport">
-      <div class="l-wrapper">
-        <header class="header">
-          <a class="header--logo" href="#0">
-            <img src="resources/usuarionavegacion/assets/img/logo.png" alt="Global"/>
-            #{personaController.cargarDatosUsuario()}
-            <p style="color:white">MyEvents</p><a style="color:white">#{personaController.myUser.correo}</a>
-            <a style="color:white">#{personaController.myUser.nombre} #{personaController.myUser.apellido}</a>
-            <h:form><h:commandButton action="#{personaController.cerrarSesion()}" value="Salir" class="btn btn-danger"/></h:form>
-          </a>
-          <div class="header--nav-toggle">
-            <span></span>
-          </div>
-        </header>
-        <nav class="l-side-nav">
-          <ul class="side-nav">
-            <li class="is-active"><span>Home</span></li>
-            <li><span>Datos informativos</span></li>
-            <li><span>Editar</span></li>
-            <li><span>Eventos</span></li>
-            <li><span>Salir</span></li>
-          </ul>
-        </nav>
-        <ul class="l-main-content main-content">
-          <li class="l-section section section--is-active">
-            <div class="intro">
-              <div class="intro--banner">
-                <h2 style="color: white">Bienvenido a<br/>MyEvents</h2>
-                <h1 style="color: white">#{personaController.myUser.nombre}</h1>
-                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
-                  <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
-                    <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
-                  </g>
-                  </svg>
-                  <span class="btn-background"></span>
-
-                <img src="resources/usuarionavegacion/assets/img/introduction-visual.png" alt="Welcome"/>
-              </div>
-              <div class="intro--options">
-                <a href="#0">
-                  <h3>Funcionalidades &amp; en los eventos</h3>
-                  <p>Localiza tus eventos con nuestro sistema de GPS</p>
-                </a>
-                <a href="#0">
-                  <h3>Cercania</h3>
-                  <p>Apuntate a los eventos mas cercanos a tu lugar.</p>
-                </a>
-                <a href="#0">
-                  <h3>Salon &amp; Eventos</h3>
-                  <p>Adquiere cuentas premium para postear tu salon de eventos.</p>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="l-section section">
-            <div class="work">
-            
-              <h2>Datos Informativos</h2>
-			<h:form>
-			<h3 style="color:white">Nombre: #{personaController.myUser.nombre}</h3>
-			<h3 style="color:white">Apellido: #{personaController.myUser.apellido}</h3>
-			<h3 style="color:white">Cedula: #{personaController.myUser.cedula}</h3>
-			<h3 style="color:white">Correo: #{personaController.myUser.correo}</h3>
-			<a href="editUser.xhtml?id=#{personaController.myUser.id}"
-							class="btn btn-info btn-md"> Editar </a>
-			</h:form>
-
-            </div>
-          </li>
-          <li class="l-section section">
-            <div class="about">
-              <div class="about--banner">
+<!-- Definicion del contenido respecto a la plantilla -->
+<ui:define name="contenido">COLOCAR IMAGENES DE LOS LOCALES</ui:define>
                 
-                <h4>Editar</h4>
-                <h:form>
-				#{personaController.loadDatosEditar(1)}
-				<h:outputLabel value="Name: " for="name" />
-					<h:inputText value="#{personaController.personas.nombre}" style="color: black"
-						id="name" class="form-control input-sm" />
-					<h:message for="name" errorStyle="color:red; display:block" />
-				<br/>	
-					
-				<h:outputLabel value="Apellido: " for="apellido" />
-					<h:inputText value="#{personaController.personas.apellido}" style="color: black"
-						id="apellido" class="form-control input-sm" />
-					<h:message for="apellido" errorStyle="color:red; display:block" />
-				<br/>
-					
-				<h:outputLabel value="Cedula: " for="cedula" />
-					<h:inputText value="#{personaController.personas.cedula}" style="color: black"
-						id="cedula" class="form-control input-sm" />
-					<h:message for="cedula" errorStyle="color:red; display:block" />
-				<br/>
-				
-				<h:outputLabel value="Correo: " for="correo" />
-					<h:inputText value="#{personaController.personas.correo}" style="color: black"
-						id="correo" class="form-control input-sm" />
-					<h:message for="correo" errorStyle="color:red; display:block" />
-				<br/>
-				
-				<h:commandButton action="#{personaController.modificar()}" value="Actualizar" class="btn btn-success btn-inline"/>
-					
-                </h:form>
-                
-              </div>
-            </div>
-          </li>
-          <li class="l-section section">
-            <div class="contact">
-              <div class="contact--lockup">
-                <div class="modal">
-                  <div class="modal--information">
-                    <p>Pawia 5, 31-154 Kraków, Poland</p>
-                    <a href="mailto:ouremail@gmail.com">ouremail@gmail.com</a>
-                    <a href="tel:+148126287560">+48 12 628 75 60</a>
-                  </div>
-                  <ul class="modal--options">
-                    <li><a href="#0">Bēhance</a></li>
-                    <li><a href="#0">dribbble</a></li>
-                    <li><a href="mailto:ouremail@gmail.com">Contact Us</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>         
-          
-        </ul>
-      </div>
-    </div>
-  </div>
-  <ul class="outer-nav">
-    <li class="is-active">Home</li>
-    <li>Datos informativos</li>
-    <li>Editar</li>
-    <li>Eventos</li>
-    <li>Salir</li>
-  </ul>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="resources/usuarionavegacion/assets/js/vendor/jquery-2.2.4.min.js"></script>')</script>
-<script src="resources/usuarionavegacion/assets/js/functions-min.js"></script>
-</body>
-</html>
+</ui:composition>

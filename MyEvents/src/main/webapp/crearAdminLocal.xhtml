@@ -3,179 +3,133 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="PlantillaAdmin.xhtml">
 
-<h:head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <meta name="description" content=""/>
-  <meta name="author" content=""/>
-  <title>Administrador MyEvents</title>
-  <!-- Bootstrap core CSS-->
-  <link href="resources/plantillaAdmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Custom fonts for this template-->
-  <link href="resources/plantillaAdmin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-  <!-- Page level plugin CSS-->
-  <link href="resources/plantillaAdmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"/>
-  <!-- Custom styles for this template-->
-  <link href="resources/plantillaAdmin/css/sb-admin.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
-</h:head>
+	<!-- Colocar el titulo en la pestana -->
+	<ui:define name="titulo">Crear Local</ui:define>
 
-	<f:metadata>
-	<f:viewParam name="id" value="#{localController.id2}"></f:viewParam>
+	<!-- Colocar el Breadcrumbs o seccion donde se encuentra -->
+	<ui:define name="breadcrums">Crear Salon de Recepciones</ui:define>
 
-	</f:metadata>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-
-    <a class="navbar-brand" href="index.html">Administrador #{personaController.myUser.correo}</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-      
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Inicio</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Mi Perfil</span>
-          </a>
-          
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Gestion de Salones</span>
-          </a>
-        </li>
-        
-
-      </ul>
+	<!-- Titulo del Contenido -->
+	<ui:define name="bienvenida">Creacion local de recepciones</ui:define>
 
 
-      
+	<ui:define name="contenido">
+		<f:metadata>
+			<f:viewParam name="id" value="#{localController.id2}"></f:viewParam>
+		</f:metadata>
 
 
-    </div>
-  </nav>
-  <div class="content-wrapper">
-    <div class="container-fluid">
+		<h:form id="formulario">
+			<center>
+				<h:panelGrid columns="1">
 
-				
-				
-				
-				<h:form id="formulario">
-	
-	
-	<center><h2>Ingreso de Salones de Eventos</h2></center>
-	<br/>
-	<br/>
+					<div class="alert alert-info">
+						<strong>Info!</strong> Los campos que contienen * son
+						obligatorios.
+					</div>
+
+					<h:outputLabel value="* Descripción:" for="descLocal" />
+					<h:inputTextarea id="descLocal"
+						value="#{localController.local.descripcion}" required="true"
+						requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
+					<h:message for="descLocal" />
+
+					<h:outputLabel value="* Nombre del Local:" for="nombLocal" />
+					<h:inputText id="nombLocal" value="#{localController.local.nombre}"
+						class="form-control" />
+					<h:message for="nombLocal" />
 
 
-	
-	<center>
+					<h:outputLabel value="* Capacidad:" for="capaLocal" />
+					<h:inputText id="capaLocal"
+						value="#{localController.local.capacidad}" class="form-control"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" />
+					<h:message for="capaLocal" />
 
-	
-	<h:panelGrid columns="1">
-	
-			<div class="alert alert-info">
-			    <strong>Info!</strong> Los campos que contienen * son obligatorios.
-			</div>
-		
-		<h:outputLabel value="* Descripción:" for="descLocal"/>
-		<h:inputTextarea id="descLocal" value="#{localController.local.descripcion}" required="true"   
-		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
-		<h:message for="descLocal"/>
-		
-				<h:outputLabel value="* Nombre del Local:" for="nombLocal"/>
-		<h:inputText id="nombLocal" value="#{localController.local.nombre}" class="form-control"/>
-		<h:message for="nombLocal"/>
-		
-		
-		<h:outputLabel value="* Capacidad:" for="capaLocal"/>
-		<h:inputText id="capaLocal" value="#{localController.local.capacidad}" class="form-control" 
-		 onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
-		<h:message for="capaLocal"/>
-		
-		<h:panelGrid columns="1">
+					<h:panelGrid columns="1">
 
 
 						<h:selectOneRadio value="#{localController.local.puntuacion}">
-						
-						<h:outputLabel value="Puntuación:" />
-						    
+
+							<h:outputLabel value="Puntuación:" />
+
 							<f:selectItem itemValue="1" itemLabel="Muy malo" />
-							
+
 							<f:selectItem itemValue="2" itemLabel="Malo" />
-						
+
 							<f:selectItem itemValue="3" itemLabel="Regular" />
-							
+
 							<f:selectItem itemValue="4" itemLabel="Bueno" />
-							
+
 							<f:selectItem itemValue="5" itemLabel="Excelente" />
-							
+
 						</h:selectOneRadio>
 
 
 					</h:panelGrid>
-		
-		<h:outputLabel value="* Comentario:" for="comeLocal"/>
-			
-		<h:inputTextarea id="comeLocal" value="#{localController.local.comentario}" required="true"   
-		requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
-		
-		<h:message for="comeLocal"/>
-		
-		<h:outputLabel value="* Costo del local:" />
-		<h:inputText id="Costo" value="#{localController.local.costo}" class="form-control"/>
-		
-		
-		
-		
-				
-		
 
-</h:panelGrid>
+					<h:outputLabel value="* Comentario:" for="comeLocal" />
 
-</center>
+					<h:inputTextarea id="comeLocal"
+						value="#{localController.local.comentario}" required="true"
+						requiredMessage="Address is required" cols="100" rows="5"></h:inputTextarea>
 
-<br/>
-	<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicación del salon de Eventos</i><br/><br/>
-	<div class="form-group">
-				<div id="map"
-					style="width: 1500px; height: 400px; background: yellow"></div>
-				<div class="row">
-					<div class="col-lg-4">
-					
-						<label>Latitud:</label>
-						<h:inputText value="#{localController.local.latitud}"
-							id="txtLatitud" class="form-control" pt:placeholder="Latitud" />
-						<h:message for="txtLatitud" />
+					<h:message for="comeLocal" />
+
+					<h:outputLabel value="* Costo del local:" />
+					<h:inputText id="Costo" value="#{localController.local.costo}"
+						class="form-control" />
+
+
+					<div class="form-group">
+						<h:outputLabel value="Seleccione una foto de perfil" />
+						<h:inputFile id="subidaFP" value="#{localController.fotoPerfil}" />
+						<h:message for="subidaFP" />
 					</div>
 
-					<div class="col-lg-4">
-						<label>Longitud:</label>
-						<h:inputText value="#{localController.local.longitud}"
-							id="txtLongitud" class="form-control" pt:placeholder="Longitud" />
-						<h:message for="txtLongitud" />
+
+
+
+				</h:panelGrid>
+
+			</center>
+
+			<br />
+			<i class="glyphicon glyphicon-pushpin"> * Seleccionar Ubicación
+				del salon de Eventos</i>
+			<br />
+			<br />
+
+			<center>
+				<div class="form-group">
+					<div id="map"
+						style="width: 1500px; height: 400px; background: yellow"></div>
+					<div class="row">
+						<div class="col-lg-6">
+
+							<label>Latitud:</label>
+							<h:inputText value="#{localController.local.latitud}"
+								id="txtLatitud" class="form-control" pt:placeholder="Latitud" />
+							<h:message for="txtLatitud" />
+						</div>
+
+						<div class="col-lg-6">
+							<label>Longitud:</label>
+							<h:inputText value="#{localController.local.longitud}"
+								id="txtLongitud" class="form-control" pt:placeholder="Longitud" />
+							<h:message for="txtLongitud" />
+						</div>
 					</div>
 				</div>
-			</div>
+			</center>
+			<br />
 
-		<br />
-		
-				
-		<center>
-			<script>
+
+			<center>
+				<script>
 			var map;
 			var markers = [];
 
@@ -231,19 +185,24 @@ function deleteMarkers() {
   markers = [];
 }
     </script>
-    </center>
+			</center>
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASLkk2gaelkLKJWMxWXf_mRH_Q4YKHdU0&amp;callback=initMap"></script>
-				
-				
-		
-		
-		<h:commandButton action="#{localController.insertarLocalAdmin()}" value="Guardar" actionListener="AccionesLocal"
-		class="btn btn-success" />
-		<h:messages globalOnly="true"/>
-		
-		
-		<script type="text/javascript">
+
+
+
+			<center>
+				<h:commandButton action="#{localController.insertarLocalAdmin()}"
+					value="Guardar" actionListener="AccionesLocal"
+					class="btn btn-success btn-lg" />
+				<h:messages globalOnly="true" />
+
+				<h:commandButton action="mainAdmin" value="Cancelar"
+					class="btn btn-danger btn-lg" />
+				<h:messages globalOnly="true" />
+			</center>
+
+			<script type="text/javascript">
 			var localizado = -1;
 
     if(navigator.geolocation) {
@@ -284,60 +243,9 @@ var geoOptions = {
 };
 
 </script>
-		
-	
-	</h:form>
 
 
-
-
-			</div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-  </div>
-</body>
+		</h:form>
+	</ui:define>
 
 </ui:composition>

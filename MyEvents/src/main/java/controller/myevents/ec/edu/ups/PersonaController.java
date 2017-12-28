@@ -3,18 +3,17 @@ package controller.myevents.ec.edu.ups;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
 import org.hibernate.validator.constraints.NotBlank;
 
 import dao.myevents.ec.edu.ups.PersonaDAO;
@@ -28,13 +27,9 @@ import validacionesnegocio.myevents.ec.edu.ups.Validacion;
  */
 @ManagedBean
 @SessionScoped
-public class PersonaController { 
-
-	/** The Constant PATTERN_EMAIL (validacion de la cedula). */
-	
-	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";   
-
+public class PersonaController {
+	@Inject
+	private Logger log;
 	
 	/** The personas. */
 	private Persona personas = null;
@@ -60,12 +55,10 @@ public class PersonaController {
 	/** The Loginexiste. */
 	private String Loginexiste;
 	
-	
 	/**
 	 * The nusuario.
 	 * Varibles donde se almacena los valores de la consulta maestro-detalles
 	 */
-	
 	private String nusuario;
 	
 	/** The nlocal. */
@@ -95,6 +88,13 @@ public class PersonaController {
 
 	/** The my user. */
 	private Persona myUser;
+	
+	/**The e nombre*/
+	private String enombre;
+	/**The e fecha*/
+	private String efecha;
+	/**The e descripcion*/
+	private String edescripcion;
 
 	/**
 	 * Inits the.
@@ -705,23 +705,56 @@ public class PersonaController {
 				}
 	 }
 	 
- 	/**
+	 /*GETER AND SETTERSS: Nombre y Fecha del Evento */
+ 	public String getEnombre() {
+		return enombre;
+	}
+
+	public void setEnombre(String enombre) {
+		this.enombre = enombre;
+	}
+
+	public String getEfecha() {
+		return efecha;
+	}
+
+	public void setEfecha(String efecha) {
+		this.efecha = efecha;
+	}
+
+	public String getEdescripcion() {
+		return edescripcion;
+	}
+
+	public void setEdescripcion(String edescripcion) {
+		this.edescripcion = edescripcion;
+	}
+
+	/**
  	 * Consulta local eventos.
  	 *
  	 * @return the string
  	 */
- 	
 	 public String consultaLocalEventos() {
-		 
-		 System.out.println("ID: "+idrecuprerar+" "+ "ENTRA");
+		 System.out.println("CONSULTA LOCAL EVENTO ID: "+idrecuprerar+" "+ "ENTRA");
 		 ListPerID = pdao.listPersonaID(idrecuprerar);
-		 for(Persona p: ListPerID) {
-			 System.out.println("CED===================================="+p.getCedula());
-			 nusuario = p.getNombre();
-			 nlocal = p.getLocales().get(0).getNombre();
-			 ndescripcion = p.getLocales().get(0).getDescripcion();
-			 ncapacidad = p.getLocales().get(0).getCapacidad();
-			 ncosto = p.getLocales().get(0).getCosto();
+		 //log.log(Level.SEVERE, "PersonaController [Nombre:"+ListPerID.get(0).getNombre()+", NombreSalon:"+ListPerID.get(0).getLocales()+"]");
+			 for(Persona p: ListPerID) {
+				 nusuario = p.getNombre();
+				 nlocal = p.getLocales().get(0).getNombre();
+				 ncapacidad = p.getLocales().get(0).getCapacidad();
+				 ndescripcion = p.getLocales().get(0).getDescripcion();
+				 ncosto = p.getLocales().get(0).getCosto();
+				 /*Propiedades referente a los eventos*/
+				 
+				 if(p.getLocales().get(0).getEvento().get(0).getNombre().equals("")) {
+					 enombre = "No hay registros";
+				 }else {
+					enombre = p.getLocales().get(0).getEvento().get(0).getNombre();
+					efecha = p.getLocales().get(0).getEvento().get(0).getFechaEvento().toString();
+					edescripcion = p.getLocales().get(0).getEvento().get(0).getDescripcion();
+				 }
+				 
 		 }
 		 return null;
 	 }
