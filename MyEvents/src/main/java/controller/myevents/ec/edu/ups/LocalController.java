@@ -75,7 +75,9 @@ public class LocalController {
 	
 
 	private Part fotoPerfil;	
-	private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
+	//private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
+	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imageness";					  
+
 	private String nombreArchivoPerfil;
   
 	/**
