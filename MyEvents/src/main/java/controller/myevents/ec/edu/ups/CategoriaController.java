@@ -53,6 +53,7 @@ public class CategoriaController {
 		loadCategoria();
 		catevelist = new ArrayList<CategoriaEventos>();
 		listCatID = new ArrayList<Categoria>();
+//		categorias = new ArrayList<Categoria>();
 	}
 
 
@@ -95,6 +96,8 @@ public class CategoriaController {
 	}
 
 
+	
+	
 	/**
 	 * Gets the id.
 	 *

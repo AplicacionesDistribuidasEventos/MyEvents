@@ -1,9 +1,11 @@
 package controller.myevents.ec.edu.ups;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.CategoriaDAO;
@@ -13,28 +15,25 @@ import modelo.myevents.ec.edu.ups.Categoria;
 import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventoController.
  */
 @ManagedBean
 public class EventoController {
-	
+
 	/** The evendao. */
 	@Inject
 	private EventoDAO evendao;
-	
+
 	/** The locdao. */
 	@Inject
 	private LocalDAO locdao;
-	
+
 	/** The catedao. */
 	@Inject
 	private CategoriaDAO catedao;
-	
-	
+
 	/** The evento. */
 
 	/*
@@ -42,42 +41,45 @@ public class EventoController {
 	 */
 
 	private Evento evento;
-	
+
 	/** The recupelocal. */
 	private Local recupelocal;
-	
+
 	/** The c. */
 	private Categoria c;
-	
+
 	/** The levento. */
 	private List<Evento> levento;
-	
+
 	/** The leventocercano. */
 	private List<Evento> leventocercano;
-	
+
 	/** The leventofecha. */
 	private List<Evento> leventofecha;
-	
+
 	/** The listado filtrado. */
-	//Busqueda de locales
+	// Busqueda de locales
 	private List<Evento> listadoFiltrado;
-	
+
 	/** The filtro. */
 	private String filtro;
-	
-	
+
 	/** The id. */
 	// Variables para controlar ID de la navegacion
-	 
+
 	private int id;
-	
+
 	/** The id 2. */
 	private int id2;
-	
+
 	/** The id 3. */
 	private int id3;
 
+	private List<Categoria> categorias;
+	private String selectcat;
 	
+	//variable statica
+	public static int idLocal=0;
 
 	/**
 	 * Inits the.
@@ -85,15 +87,32 @@ public class EventoController {
 
 	@PostConstruct
 	public void init() {
-		evento = new Evento(); 
+		evento = new Evento();
 		loadEvento();
-		
+		categorias = new ArrayList<Categoria>();
+		// devuelveLista();
 	}
-	
-	
-	/* Getters and Setters
+
+	/*
+	 * Getters and Setters
 	 */
-	
+
+	public String getSelectcat() {
+		return selectcat;
+	}
+
+	public void setSelectcat(String selectcat) {
+		this.selectcat = selectcat;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
 	/**
 	 * Gets the id 3.
 	 *
@@ -102,7 +121,6 @@ public class EventoController {
 	public int getId3() {
 		return id3;
 	}
-
 
 	/**
 	 * Gets the listado filtrado.
@@ -114,16 +132,15 @@ public class EventoController {
 		return listadoFiltrado;
 	}
 
-
 	/**
 	 * Sets the listado filtrado.
 	 *
-	 * @param listadoFiltrado the new listado filtrado
+	 * @param listadoFiltrado
+	 *            the new listado filtrado
 	 */
 	public void setListadoFiltrado(List<Evento> listadoFiltrado) {
 		this.listadoFiltrado = listadoFiltrado;
 	}
-
 
 	/**
 	 * Gets the filtro.
@@ -134,27 +151,27 @@ public class EventoController {
 		return filtro;
 	}
 
-
 	/**
 	 * Sets the filtro.
 	 *
-	 * @param filtro the new filtro
+	 * @param filtro
+	 *            the new filtro
 	 */
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
 	}
 
-
 	/**
 	 * Sets the id 3.
 	 *
-	 * @param id3 the new id 3
+	 * @param id3
+	 *            the new id 3
 	 */
 	public void setId3(int id3) {
 		this.id3 = id3;
-		
+
 	}
-	
+
 	/**
 	 * Gets the recupelocal.
 	 *
@@ -167,7 +184,8 @@ public class EventoController {
 	/**
 	 * Sets the recupelocal.
 	 *
-	 * @param recupelocal the new recupelocal
+	 * @param recupelocal
+	 *            the new recupelocal
 	 */
 	public void setRecupelocal(Local recupelocal) {
 		this.recupelocal = recupelocal;
@@ -185,7 +203,8 @@ public class EventoController {
 	/**
 	 * Sets the locdao.
 	 *
-	 * @param locdao the new locdao
+	 * @param locdao
+	 *            the new locdao
 	 */
 	public void setLocdao(LocalDAO locdao) {
 		this.locdao = locdao;
@@ -209,16 +228,15 @@ public class EventoController {
 		return evendao;
 	}
 
-
 	/**
 	 * Sets the evendao.
 	 *
-	 * @param evendao the new evendao
+	 * @param evendao
+	 *            the new evendao
 	 */
 	public void setEvendao(EventoDAO evendao) {
 		this.evendao = evendao;
 	}
-	
 
 	/**
 	 * Gets the id 2.
@@ -232,18 +250,18 @@ public class EventoController {
 	/**
 	 * Sets the id 2.
 	 *
-	 * @param id2 the new id 2
+	 * @param id2
+	 *            the new id 2
 	 */
 	public void setId2(int id2) {
 		this.id2 = id2;
 	}
-	
 
-		
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the new id
+	 * @param id
+	 *            the new id
 	 */
 
 	public void setId(int id) {
@@ -258,7 +276,6 @@ public class EventoController {
 
 	}
 
-
 	/**
 	 * Gets the evento.
 	 *
@@ -268,17 +285,15 @@ public class EventoController {
 		return evento;
 	}
 
-
 	/**
 	 * Sets the evento.
 	 *
-	 * @param evento the new evento
+	 * @param evento
+	 *            the new evento
 	 */
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-
-
 
 	/**
 	 * Gets the levento.
@@ -289,16 +304,15 @@ public class EventoController {
 		return levento;
 	}
 
-
 	/**
 	 * Sets the levento.
 	 *
-	 * @param levento the new levento
+	 * @param levento
+	 *            the new levento
 	 */
 	public void setLevento(List<Evento> levento) {
 		this.levento = levento;
 	}
-
 
 	/**
 	 * Gets the leventocercano.
@@ -309,16 +323,15 @@ public class EventoController {
 		return leventocercano;
 	}
 
-
 	/**
 	 * Sets the leventocercano.
 	 *
-	 * @param leventocercano the new leventocercano
+	 * @param leventocercano
+	 *            the new leventocercano
 	 */
 	public void setLeventocercano(List<Evento> leventocercano) {
 		this.leventocercano = leventocercano;
 	}
-
 
 	/**
 	 * Gets the leventofecha.
@@ -329,59 +342,58 @@ public class EventoController {
 		return leventofecha;
 	}
 
-
 	/**
 	 * Sets the leventofecha.
 	 *
-	 * @param leventofecha the new leventofecha
+	 * @param leventofecha
+	 *            the new leventofecha
 	 */
 	public void setLeventofecha(List<Evento> leventofecha) {
 		this.leventofecha = leventofecha;
 	}
-	
-	
+
 	/**
 	 * Load evento.
 	 */
 	public void loadEvento() {
-		
+
 		levento = evendao.listEvento();
 	}
-	
-	
+
 	/**
 	 * Load ID.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
 	public void loadID(int id) {
 		id2 = id;
 	}
-	
+
 	/**
 	 * Load C id.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
 	public void loadCId(int id) {
 		id3 = id;
-	} 
-	
-	
-	
+	}
+
 	/**
 	 * Load evento editar.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the string
 	 */
 	public String loadEventoEditar(int id) {
-		
+
 		evento = evendao.leerEvento(id);
-		
+
 		return "CrearEvento";
 	}
-	
+
 	/**
 	 * Insertar.
 	 *
@@ -392,7 +404,7 @@ public class EventoController {
 		loadEvento();
 		return "listarEventos";
 	}
-	
+
 	/**
 	 * Actualizar.
 	 *
@@ -402,83 +414,107 @@ public class EventoController {
 		evendao.updateEvento(evento);
 		return null;
 	}
-	
+
 	/**
 	 * Leer.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the string
 	 */
 	public String leer(int id) {
 		evento = evendao.leerEvento(id);
 		return null;
 	}
-	
+
 	/**
 	 * Eliminar.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the string
 	 */
 	public String eliminar(int id) {
 		evendao.deleteEvento(id);
 		return "eliminarEvento";
 	}
-	  
-	
+
 	/**
 	 * Lista eventos.
 	 *
 	 * @return the list
 	 */
-	public List<Evento> listaEventos(){
-		
+	public List<Evento> listaEventos() {
+
 		levento = evendao.listEvento();
 		return levento;
 	}
-	
-	
-	
-		/**
+
+	/**
 	 * Insertar evento local globa.
 	 *
 	 * @return the string
 	 */
-	public String insertarEventoLocalGloba(){ 
-
-
-			recupelocal=locdao.leerLocal(id2); 
-			recupelocal.getEvento().add(evento);
-			locdao.updateLocal(recupelocal); 
-			
-			return null;  
-		}
+	public String insertarEventoLocalGloba() {
+System.out.println("ID2: "+EventoController.idLocal);
+		evento.setCategoria(EventoController.ca);
 		
-		/**
-		 * Inserta categoria admin.
-		 *
-		 * @return the string
-		 */
-		public String insertaCategoriaAdmin(){
-			c = catedao.leerCategoria(id3);
-			//c.getEventos().add(evento);
-			catedao.actualizarCategoria(c);
-			return null;
-					
+System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
+//		recupelocal = locdao.leerLocal(id2);
+		recupelocal = locdao.selectLocal(EventoController.idLocal);
+		if(recupelocal!=null) {
+			System.out.print("No es nuloooooo");
 		}
-	
-		
-			/**
-			 * Buscar.
-			 *
-			 * @return the string
-			 */
-			public String buscar(){
-			
-				System.out.println("INGRESO AL METODO ==================");
-			listadoFiltrado = evendao.getEventosPorNombre(filtro);
-					
-			return null;
+		recupelocal.getEvento().add(evento);
+		locdao.updateLocal(recupelocal);
+
+		return null;
+	}
+
+	/**
+	 * Inserta categoria admin.
+	 *
+	 * @return the string
+	 */
+	public String insertaCategoriaAdmin() {
+		c = catedao.leerCategoria(id3);
+		// c.getEventos().add(evento);
+		catedao.actualizarCategoria(c);
+		return null;
+
+	}
+
+	/**
+	 * Buscar.
+	 *
+	 * @return the string
+	 */
+	public String buscar() {
+		listadoFiltrado = evendao.getEventosPorNombre(filtro);
+
+		return null;
+	}
+	public static Categoria ca=new Categoria();
+	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
+	public void categoriaSeleccionada() {
+		System.out.println("Entraaaaaaaaaaaaa al evt");
+		for(Categoria c : categorias) {
+			if(c.getNombre().equals(selectcat)) {
+				evento.setCategoria(c);
+				EventoController.ca=c;
+				System.out.println("categoria: "+evento.getCategoria().getNombre());
+			}
 		}
-	
+	}
+
+	public List<SelectItem> devuelveLista() {
+		List<SelectItem> lcategorias = new ArrayList<SelectItem>();
+		categorias = catedao.listCategoria();
+		System.out.println("SIZE CATEGORIAS " + categorias.size());
+		// for(Categoria c : categorias) {
+		for (int i = 0; i < categorias.size(); i++) {
+			lcategorias.add(new SelectItem(categorias.get(i).getNombre()));
+		}
+		return lcategorias;
+	}
 }

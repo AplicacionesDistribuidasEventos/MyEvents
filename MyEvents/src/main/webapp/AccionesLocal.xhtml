@@ -16,9 +16,9 @@
 	<ui:define name="bienvenida">Gestor Salones de Recepcion</ui:define>
 
 	<ui:define name="contenido">
-		<f:metadata>
+		<!--  <f:metadata>
 			<f:viewParam name="id" value="#{personaController.idEditUser}"></f:viewParam>
-		</f:metadata>
+		</f:metadata>-->
 
 
 		<h:form>
@@ -99,10 +99,16 @@
 					</f:facet>
 
 					<center>
-						<a href="CrearEventoLocalAdmin.xhtml?id=#{listalocales.codigo}"
+					
+					 <h:commandButton value="crear" action="CrearEventoLocalAdmin.xhtml" onclick="#{localController.seteaId(listalocales.codigo)}"
+							class="btn btn-primary btn-lg" >
+							<!-- <f:ajax execute="@this" listener="#{localController.seteaId(listalocales.codigo)}"></f:ajax>	-->
+							</h:commandButton>
+							
+						 <!--   <a href="CrearEventoLocalAdmin.xhtml?id=#{listalocales.codigo}"
 							class="btn btn-primary btn-lg"> <span
 							class="glyphicon glyphicon-refresh"></span> Crear
-						</a>
+						</a>-->
 					</center>
 
 					<center>
