@@ -100,7 +100,7 @@ public class CategoriaDAO {
 	 * @return the list
 	 */
 	public List<Categoria> listCategoria(){
-		
+		System.out.println("CARGAR CATEGORIASS");
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
 		List<Categoria> listado = query.getResultList();
 		for(Categoria c : listado) {

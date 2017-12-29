@@ -74,8 +74,8 @@ public class LocalController {
 	private String longituddes;
 	
 
-	private Part fotoPerfil;
-	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
+	private Part fotoPerfil;	
+	private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
 	private String nombreArchivoPerfil;
   
 	/**
@@ -142,6 +142,7 @@ public class LocalController {
 	public void setId(int id) {
 		this.id = id;
 		loadLocalEditar(id);
+		
 		loadId(id);
 		insertarLocalAdmin();
 	}
@@ -384,6 +385,18 @@ public class LocalController {
 	 * @return the string
 	 */
 	public String insertarLocalAdmin() {
+		if(fotoPerfil!=null){
+			saveFotoLocal();
+			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
+		}else{	
+			if(!local.getFotoPerfil().equals("imagenes/local1.jpg"))
+				{
+				local.setFotoPerfil(auxLocal.getFotoPerfil());			
+				}else{
+					local.setFotoPerfil("imagenes/local1.jpg");
+				}
+			
+		}
 		
 		p = pdao.selectPersona(id2);
 		p.getLocales().add(local);
@@ -484,6 +497,12 @@ public class LocalController {
 			// Show faces message?
 		}
 		return "";
+	}
+	
+	public void seteaId(int idL) {
+		System.out.println("Este es el id qeu se esta seteando" + idL);
+		EventoController.idLocal=idL;
+		System.out.println("Imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + EventoController.idLocal);
 	}
 	}
 

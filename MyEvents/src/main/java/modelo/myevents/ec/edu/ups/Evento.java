@@ -66,7 +66,8 @@ public class Evento {
 	
 
 	/** The categoria. */
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
 	
 	@Column(name="even_latiud")
