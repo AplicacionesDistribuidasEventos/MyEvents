@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
  
@@ -71,9 +72,27 @@ public class LocalDAO {
 	 */
 	
 	public Local leerLocal(int id) {
-		
+		System.out.println("Este es el famoso id: "+id); 
 		Local l = em.find(Local.class, id);
+		System.out.println(l.getNombre());
+		if(l!=null) {
+			System.out.print("No es nuloooooo");
+		}
 		return l;
+		
+	}
+	
+	public Local selectLocal(int id) {
+		
+		System.out.println("IDIDID IDIDID: "+id);
+		String jpql = "Select l FROM Local l WHERE l.codigo ='"+id+"'"; 
+		Query query = em.createQuery(jpql, Local.class);
+		Local local = (Local) query.getSingleResult();
+		System.out.println(local.getNombre());
+		if(local!=null) {
+			System.out.print("No es nuloooooo");
+		}
+		return local;
 		
 	}
 	

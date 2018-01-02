@@ -1,5 +1,6 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -65,16 +66,16 @@ public class Evento {
 	
 
 	/** The categoria. */
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
 	
-	@Column(name="even_latiud")
-	private double latitud;
+	//@Column(name="even_latiud")
+	//private double latitud;
 	
 	/** The longitud. */
-	@Column(name="even_longitud")
-	private double longitud;
-	
+	//@Column(name="even_longitud")
+	//private double longitud;
 	
 	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
 
@@ -87,7 +88,7 @@ public class Evento {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
-	private List<AsistenciaEvento> AsistenciaEventos;
+	private List<AsistenciaEvento> AsistenciaEventos = new ArrayList<>();
 	
 	
 	/**
