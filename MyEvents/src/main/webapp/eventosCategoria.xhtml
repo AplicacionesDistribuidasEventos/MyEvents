@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="plantillaUsuario.xhtml">
+
+	<!-- Definicion del titulo respecto a la plantilla -->
+	<ui:define name="titulo">MyEvents-Categorias Eventos</ui:define>
+
+	<!-- Defininionc del encabezado respecto a la plantilla -->
+	<ui:define name="encabezado">Eventos #{categoriaController.cabecera_cat}</ui:define>
+
+	<!-- Definicion del contenido respecto a la plantilla -->
+	<ui:define name="contenido">
+		<h:form>
+			<h:outputText value="El registro no contiene datos"
+				rendered="#{empty  categoriaController.catevelist}"></h:outputText>
+			<h:dataTable var="lEventos" style="color:black"
+				value="#{categoriaController.catevelist}" border="2" class="table">
+<!--
+				<h:column Style="color: black">
+					<f:facet name="header">Descripcion Categoria</f:facet>
+			#{lEventos.descripcion_cat}
+		</h:column>
+		 -->
+
+				<h:column Style="color: black">
+					<f:facet name="header">Evento</f:facet>
+			#{lEventos.descripcion_eve}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Costo</f:facet>
+			#{lEventos.costo}
+		</h:column>
+
+				<h:column Style="color: black">
+					<f:facet name="header">Fecha</f:facet>
+			#{lEventos.fecha}
+		</h:column>
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

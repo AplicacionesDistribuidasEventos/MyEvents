@@ -43,7 +43,19 @@ public class CategoriaController {
 	private List<Categoria> listCatID;
 	private List<CategoriaEventos> catevelist;
 	
+	private String cabecera_cat;
 	
+	
+	public String getCabecera_cat() {
+		return cabecera_cat;
+	}
+
+
+	public void setCabecera_cat(String cabecera_cat) {
+		this.cabecera_cat = cabecera_cat;
+	}
+
+
 	/**
 	 * Inits the.
 	 */
@@ -54,10 +66,12 @@ public class CategoriaController {
 		catevelist = new ArrayList<CategoriaEventos>();
 		listCatID = new ArrayList<Categoria>();
 //		categorias = new ArrayList<Categoria>();
+
 	}
 
 
 	public String datosCategoria(int codigo){
+
 //		catevelist.clear();
 		listCatID = catedao.listCategoriaID(codigo);
 		for(Categoria c : listCatID) {
@@ -83,6 +97,24 @@ public class CategoriaController {
 			}
 
 			catevelist.add(ce);
+		/*catevelist.clear();
+		listCatID = catedao.listCategoriaID(codigo);
+		CategoriaEventos ce;
+		for(Categoria c : listCatID) {
+			if(c.getEventos().isEmpty()) {
+				System.out.println("SIN EVENTOS");
+			}else {
+				for(Evento e : c.getEventos()) {
+					System.out.println("CARGADO EVENTOS SEGUN CATEGORIA");
+					ce = new CategoriaEventos();
+					cabecera_cat = c.getNombre();
+					ce.setDescripcion_eve(e.getDescripcion());
+					ce.setFecha(e.getFechaEvento().toString());
+					ce.setCosto(String.valueOf(e.getCosto()));
+					catevelist.add(ce);
+				}
+			}*/
+
 		}
 		return "eventosCategoria";
 	}
