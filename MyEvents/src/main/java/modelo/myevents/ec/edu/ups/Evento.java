@@ -70,7 +70,6 @@ public class Evento {
 	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
 	
-	
 	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
 
 	/** The salones. */
