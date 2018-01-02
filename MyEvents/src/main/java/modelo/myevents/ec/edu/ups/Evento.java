@@ -22,8 +22,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Evento.
  */
