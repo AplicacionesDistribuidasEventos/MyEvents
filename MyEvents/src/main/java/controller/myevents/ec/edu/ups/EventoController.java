@@ -530,7 +530,7 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 				evento.setCategoria(c);
 				EventoController.ca=c;
 				System.out.println("categoria: "+evento.getCategoria().getNombre());
-		//	}
+			}
 
 			} catch (Exception e) {
 				System.out.println("no existe categorias" + e.getMessage());

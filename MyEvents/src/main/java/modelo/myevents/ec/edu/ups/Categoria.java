@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,6 +47,7 @@ public class Categoria {
 	private String descipcion;
 	
 	/** The eventos. */
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="eve_cat_id", referencedColumnName="cat_id")
