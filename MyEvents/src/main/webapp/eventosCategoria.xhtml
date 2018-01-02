@@ -8,7 +8,7 @@
 	<ui:define name="titulo">MyEvents-Categorias Eventos</ui:define>
 
 	<!-- Defininionc del encabezado respecto a la plantilla -->
-	<ui:define name="encabezado">Eventos</ui:define>
+	<ui:define name="encabezado">Eventos #{categoriaController.cabecera_cat}</ui:define>
 
 	<!-- Definicion del contenido respecto a la plantilla -->
 	<ui:define name="contenido">
@@ -17,11 +17,12 @@
 				rendered="#{empty  categoriaController.catevelist}"></h:outputText>
 			<h:dataTable var="lEventos" style="color:black"
 				value="#{categoriaController.catevelist}" border="2" class="table">
-
+<!--
 				<h:column Style="color: black">
 					<f:facet name="header">Descripcion Categoria</f:facet>
 			#{lEventos.descripcion_cat}
 		</h:column>
+		 -->
 
 				<h:column Style="color: black">
 					<f:facet name="header">Evento</f:facet>
@@ -40,7 +41,5 @@
 
 			</h:dataTable>
 		</h:form>
-
 	</ui:define>
-
 </ui:composition>
