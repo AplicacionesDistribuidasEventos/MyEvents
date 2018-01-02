@@ -88,6 +88,7 @@ public class PersonaDAO {
 	 * @param p the p
 	 */
 	public void guardar (Persona p) {
+		try {
 		Persona aux = selectPersona(p.getId());
 		System.out.println("ID GUARDAR:" +p.getId());
 		if(aux!=null) {
@@ -95,6 +96,10 @@ public class PersonaDAO {
 		}else {
 			System.out.println("Grabando!");
 			insertPersona(p);	
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("coincidencia de datos" +e.getMessage());
 		}
 	}
 	
@@ -133,7 +138,12 @@ public class PersonaDAO {
 		}
 		return personas;
 	}
-	
+	/**
+	*Verificar cedula
+	*
+	*@param user the user
+	*@return Lista
+	*/
 	public List<Persona> existeCedula(String cedula) {
 		String jpql = "Select p from Persona p WHERE p.cedula = '"+cedula+"'";
 		TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);

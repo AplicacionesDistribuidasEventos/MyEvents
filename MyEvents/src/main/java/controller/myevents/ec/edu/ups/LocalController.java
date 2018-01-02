@@ -496,7 +496,7 @@ public class LocalController {
 			 
 
 		} catch (IOException e) {
-			// Show faces message?
+			System.out.println("Error inesperado al subir foto" + e.getMessage());
 		}
 		return "";
 	}

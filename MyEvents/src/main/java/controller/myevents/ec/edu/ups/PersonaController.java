@@ -446,6 +446,9 @@ public class PersonaController {
 	 */
 
 	public void crear() {
+		try {
+			
+		
 		if (coincidirContrasenia() == true) {
 			if (v.validarCedula(personas.getCedula()) == true) {
 				if (v.validarCorreo(personas.getCorreo()) == true) {
@@ -462,6 +465,7 @@ public class PersonaController {
 							this.conincidencia = "La cedula ya se encuentra registrada";
 						}
 					} else {
+						System.out.println("correo ya se encuentra registrado");
 						this.conincidencia = "El correo ya se encuentra registrado";
 					}
 				} else {
@@ -472,7 +476,12 @@ public class PersonaController {
 				this.conincidencia = "La cedula es incorrecta";
 			}
 		} else {
+			System.out.println("Contrasenias ingresadas son diferentes");
 			this.conincidencia = "Ingrese las mismas contrasenias";
+		}
+		} catch (Exception e) {
+			System.out.println("Error general al crear el usuario" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -485,11 +494,18 @@ public class PersonaController {
 	 */
 
 	public boolean coincidirContrasenia() {
+		try {
+		
 		if (personas.getContrasenia().equals(this.contrasenia)) {
 			return true;
 		} else {
 			return false;
 		}
+		
+		} catch (Exception e) {
+			System.out.println("Contrasenias diferentes"+ e.getMessage());
+		}
+		return false;
 	}
 
 	/**

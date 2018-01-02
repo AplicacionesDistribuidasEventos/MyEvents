@@ -455,21 +455,42 @@ public class EventoController {
 	 *
 	 * @return the string
 	 */
-	public String insertarEventoLocalGloba() {
+public String insertarEventoLocalGloba() {
+
 System.out.println("ID2: "+EventoController.idLocal);
 		evento.setCategoria(EventoController.ca);
 		
 System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 //		recupelocal = locdao.leerLocal(id2);
 		recupelocal = locdao.selectLocal(EventoController.idLocal);
+
+		try {
 		if(recupelocal!=null) {
+			System.out.print("No es nuloooooo");
+		}
+
+		else {
+			System.out.println("no existen categorias ingresadas");
+		}
+		recupelocal.getEvento().add(evento);
+		locdao.updateLocal(recupelocal);
+		
+
+		} catch (Exception e) {
+			System.out.println("falta categoria" + e.getMessage());
+		}
+		return null;
+	}
+
+		/*if(recupelocal!=null) {
 			System.out.print("No es nuloooooo");
 		}
 		recupelocal.getEvento().add(evento);
 		locdao.updateLocal(recupelocal);
 
 		return null;
-	}
+	}*/
+
 
 	/**
 	 * Inserta categoria admin.
@@ -497,14 +518,27 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 	public static Categoria ca=new Categoria();
 	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
 	public void categoriaSeleccionada() {
+		
 		System.out.println("Entraaaaaaaaaaaaa al evt");
 		for(Categoria c : categorias) {
+			try {
+
+		/*System.out.println("Entraaaaaaaaaaaaa al evt");
+		for(Categoria c : categorias) {*/
+
 			if(c.getNombre().equals(selectcat)) {
 				evento.setCategoria(c);
 				EventoController.ca=c;
 				System.out.println("categoria: "+evento.getCategoria().getNombre());
+		//	}
+
+			} catch (Exception e) {
+				System.out.println("no existe categorias" + e.getMessage());
 			}
 		}
+		
+		//}
+
 	}
 
 	public List<SelectItem> devuelveLista() {
