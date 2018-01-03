@@ -21,7 +21,6 @@ import modelo.myevents.ec.edu.ups.Persona;
 @ManagedBean
 public class CategoriaController {
 	
-	
 	/** The catedao. */
 	@Inject
 	private CategoriaDAO catedao;
