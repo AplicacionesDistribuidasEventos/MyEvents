@@ -111,6 +111,13 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
+	public List<Categoria> listSoloCategorias(){
+		System.out.println("Select solo Categorias");
+		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
+		List<Categoria> listado = query.getResultList();
+		return listado;
+	}
+	
 	
 	public List<Categoria> listCategoriaID(int id){
 		System.out.println("listCategoriaID "+id);

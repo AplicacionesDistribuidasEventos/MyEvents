@@ -9,7 +9,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import dao.myevents.ec.edu.ups.CategoriaDAO;
 import dao.myevents.ec.edu.ups.PersonaDAO;
+import modelo.myevents.ec.edu.ups.Categoria;
 import modelo.myevents.ec.edu.ups.Persona;
 
 @Path("usuarios")
@@ -17,13 +19,27 @@ public class UsuariosWSRest {
 	@Inject
 	private PersonaDAO pdao;
 	
+	@Inject
+	private CategoriaDAO cdao;
+	
 	/*Mostrar el listado de usuarios
 	 * */
 	@GET
-	@Path("listado-users")
+	@Path("/listado-users")
 	@Produces("application/json")
 	public List<Persona> listaPersona(){
-		return pdao.listPersonas();
+		List<Persona> lpersona = pdao.listPersonas();
+		return lpersona;
+	}
+	
+	/*Mostrar el listado de las categorias
+	 * */
+	@GET
+	@Path("/listado-categorias")
+	@Produces("application/json")
+	public List<Categoria> listaCategorias(){
+		List<Categoria> lcategorias = cdao.listSoloCategorias(); 
+		return lcategorias;
 	}
 	
 	
