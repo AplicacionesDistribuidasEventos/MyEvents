@@ -4,12 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
+
+import org.primefaces.event.FileUploadEvent;
 
 import dao.myevents.ec.edu.ups.LocalDAO;
 import dao.myevents.ec.edu.ups.PersonaDAO;
@@ -74,51 +79,114 @@ public class LocalController {
 	private String longituddes;
 	
 
-	private Part fotoPerfil;
+	/** The foto perfil. */
+	private Part fotoPerfil;	
+	
+	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
+	//private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
 	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imageness";					  
+
+	/** The nombre archivo perfil. */
 	private String nombreArchivoPerfil;
+	
+	
+	
+	/** The imagenes. */
+	private List<String> imagenes;
   
 	/**
 	 * Inits the.
+	 * Metodo para incializar los metodos de clase
 	 */
 	@PostConstruct
 	public void init() {
 		local = new Local(); 
 		loadLocal();
 		fotoPerfil=null;
+		listlocal=locdao.listlocal();
 		
 	}
 	
 
+	/**
+	 * Gets the imagenes.
+	 *
+	 * @return the imagenes
+	 */
+	public List<String> getImagenes() {
+		return imagenes;
+	}
+
+
+	/**
+	 * Sets the imagenes.
+	 *
+	 * @param imagenes the new imagenes
+	 */
+	public void setImagenes(List<String> imagenes) {
+		this.imagenes = imagenes;
+	}
+
+
+	/**
+	 * Gets the foto perfil.
+	 *
+	 * @return the foto perfil
+	 */
 	public Part getFotoPerfil() {
 		return fotoPerfil;
 	}
 
 
+	/**
+	 * Sets the foto perfil.
+	 *
+	 * @param fotoPerfil the new foto perfil
+	 */
 	public void setFotoPerfil(Part fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
 
 
 
+	/**
+	 * Gets the nombre archivo perfil.
+	 *
+	 * @return the nombre archivo perfil
+	 */
 	public String getNombreArchivoPerfil() {
 		return nombreArchivoPerfil;
 	}
 
 
 
+	/**
+	 * Sets the nombre archivo perfil.
+	 *
+	 * @param nombreArchivoPerfil the new nombre archivo perfil
+	 */
 	public void setNombreArchivoPerfil(String nombreArchivoPerfil) {
 		this.nombreArchivoPerfil = nombreArchivoPerfil;
 	}
 
 
 
+	/**
+	 * Gets the directorio perfil.
+	 *
+	 * @return the directorio perfil
+	 */
 	public String getDirectorioPerfil() {
 		return directorioPerfil;
 	}
 
 
 
+	/**
+	 * Sets the directorio perfil.
+	 *
+	 * @param directorioPerfil the new directorio perfil
+	 */
 	public void setDirectorioPerfil(String directorioPerfil) {
 		this.directorioPerfil = directorioPerfil;
 	}
@@ -142,6 +210,7 @@ public class LocalController {
 	public void setId(int id) {
 		this.id = id;
 		loadLocalEditar(id);
+		
 		loadId(id);
 		insertarLocalAdmin();
 	}
@@ -384,16 +453,14 @@ public class LocalController {
 	 * @return the string
 	 */
 	public String insertarLocalAdmin() {
+		
 		if(fotoPerfil!=null){
 			saveFotoLocal();
 			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
 		}else{	
-			if(!local.getFotoPerfil().equals("imagenes/local1.jpg"))
-				{
-				local.setFotoPerfil(auxLocal.getFotoPerfil());			
-				}else{
+			
 					local.setFotoPerfil("imagenes/local1.jpg");
-				}
+				
 			
 		}
 		
@@ -412,17 +479,14 @@ public class LocalController {
 	 * @return the string
 	 */
 	public String insertar() {
-		
+	
 		if(fotoPerfil!=null){
 			saveFotoLocal();
 			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
 		}else{	
-			if(!local.getFotoPerfil().equals("imagenes/local1.jpg"))
-				{
-				local.setFotoPerfil(auxLocal.getFotoPerfil());			
-				}else{
+			
 					local.setFotoPerfil("imagenes/local1.jpg");
-				}
+				
 			
 		}
 		
@@ -481,6 +545,7 @@ public class LocalController {
 	 *
 	 * @return the string
 	 */
+	
 	public String saveFotoLocal () {
 	
 		try (InputStream input = fotoPerfil.getInputStream()) {
@@ -497,9 +562,76 @@ public class LocalController {
 		}
 		return "";
 	}
+	
+	/**
+	 * Sets the ea id.
+	 *
+	 * @param idL the new ea id
+	 */
+	public void seteaId(int idL) {
+		System.out.println("Este es el id qeu se esta seteando" + idL);
+		EventoController.idLocal=idL;
+		System.out.println("Imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + EventoController.idLocal);
+	}
+	
+	/**
+	 * Cargar mapa.
+	 *
+	 * @param l the l
+	 * @return the string
+	 */
+	public String cargarMapa(Local l ){
+		auxLocal = l;
+		return("mapa_localidades");
+	}
+	
+	/**
+	 * Cargar archivo.
+	 *
+	 * @param event the event
+	 */
+	public void cargarArchivo(FileUploadEvent event) {
+	
+	
+		
+	local.setImagen(event.getFile().getContents());
+	
+	FacesMessage message= new FacesMessage("Exito", event.getFile().getFileName()+ "Cargadoo..");
+	FacesContext.getCurrentInstance().addMessage(null, message);
+	
 	}
 
+	/**
+	 * Registar img local.
+	 *
+	 * @param l the l
+	 * @return the string
+	 */
+	public String registarImgLocal(Local l){
+		
+	
+		
+		try {
+			
+			locdao.insertarLocal(l);
+			
+			
+			FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+                               "Local cadastrado com sucesso!"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			
+			System.out.println("entramoooooooooooo..........");
+		}
+			
+		
 
-
+    return null;
+}
+		
+}
 
 

@@ -28,7 +28,7 @@ public class EventoDAO {
 	/**
 	 * Actualizar evento.
 	 *
-	 * @param e the e
+	 * @param parameto e de la instancia de la entidad Evento
 	 */
 	public void guardarEvento(Evento e) {
 		
@@ -45,7 +45,7 @@ public class EventoDAO {
 	/**
 	 * Insertar evento.
 	 *
-	 * @param e the e
+	 * @param e de la entidad Evento
 	 */
 	public void insertarEvento(Evento e) {
 		em.persist(e);		
@@ -79,8 +79,8 @@ public class EventoDAO {
 	
 	/**
 	 * Delete evento.
-	 *
-	 * @param id the id
+	 *Remueve un evento haciendo uso de JPA
+	 * @param envio del parametro ID
 	 */
 	
 	public void deleteEvento (int id) {
@@ -91,13 +91,16 @@ public class EventoDAO {
 	/**
 	 * List evento.
 	 *
-	 * @return the list
+	 * @return De una coleccion tipo Evento
 	 */
 	
 	public List<Evento> listEvento(){
 		String sql = "Select e from Evento e";
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
 		List<Evento> levento = query.getResultList();
+		for(Evento eve : levento) {
+			eve.getAsistenciaEventos().size();
+		}
 		return levento;
 	}
 	

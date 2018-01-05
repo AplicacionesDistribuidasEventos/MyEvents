@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+
+<ui:composition template="PlantillaUsuario.xhtml">
+
+<ui:define name="pageTitle">MAPA</ui:define>
+
+<ui:define name="contenido">
+		<h:form enctype="multipart/form-data">
+
+<h:head>
+	<title>MAPAS</title>
+
+
+<script type="text/javascript"
+   src="https://maps.googleapis.com/maps/api/js?sensor=true">
+</script> 
+		
+
+
+</h:head>
+
+
+<h:body bgcolor="white">
+
+<h2>Ruta hacia la localidad: #{localController.auxLocal.nombre}</h2>
+<h4>#{localController.auxLocal.latitud} #{localController.auxLocal.longitud}</h4>
+	<h:form id="formulario">
+
+
+		<h:panelGroup id="mapGroup">
+
+			<h:inputHidden id="latitud" value="#{localController.latitud}" />
+			<h:inputHidden id="longitud" value="#{localController.longitud}" />
+	
+	
+	<m:map id="map" width="1900px" height="600px" type="G_NORMAL_MAP"
+				latitude="-2.8788134" longitude="-79.0023418"
+				enableScrollWheelZoom="true" renderOnwindowLoad="true" zoom="13"
+				jsVariable="map1">
+
+				<m:marker latitude="#{localController.latitud}"
+					longitude="#{localController.longitud}">
+					<m:icon
+						imageURL="http://www.myiconfinder.com/uploads/iconsets/256-256-a5485b563efc4511e0cd8bd04ad0fe9e.png" />
+					<m:htmlInformationWindow id="window2"
+						htmlText="Mi Ubicacion" />
+				</m:marker>
+			
+				<ui:repeat var="item" varStatus="status"
+					value="#{localController.listlocal}">
+					<m:marker latitude="#{item.latitud}"  longitude="#{item.longitud}" >
+						<m:htmlInformationWindow id="window2" htmlText="#{item.nombre}"  onclick="cambiar()" />
+					</m:marker>
+				</ui:repeat>
+				
+				<m:direction attachNodeId="steps"
+					fromAddress="#{localController.latitud} ,#{localController.longitud}"
+					toAddress="#{localController.auxLocal.latitud},#{localController.auxLocal.longitud}"
+					style="width:50%;heigth:480px" travelMode="G_TRAVEL_MODE_DRIVING" />
+			</m:map>
+		</h:panelGroup>
+	</h:form>
+	<center>
+		<h1>RUTA A SEGUIR</h1>
+		<div id="steps" style="width: 600px; heigth: 400px"></div>
+	</center>
+	<script type="text/javascript">
+//function geoFindMe() {
+    if(navigator.geolocation) {
+
+    	 
+        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
+    } else {
+        alert("Geolocation services are not supported by your web browser.");
+    }
+//}
+
+function cambiar(){
+	alert("hola");
+}
+
+function success(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var altitude = position.coords.altitude;
+    var accuracy = position.coords.accuracy;
+    document.getElementById("formulario:latitud").value=position.coords.latitude;
+    document.getElementById("formulario:longitud").value=position.coords.longitude;
+    if(#{localController.longitud}=="-1"){
+    	document.getElementById("formulario").submit();
+    }
+    
+	
+}
+
+function error(error) {
+    alert("Unable to retrieve your location due to " + error.code + ": " + error.message);
+}
+
+var geoOptions = {
+    enableHighAccuracy: true,
+    maximumAge: 30000,
+    timeout: 27000
+};
+
+</script>
+
+
+</h:body>
+</h:form>
+</ui:define>
+</ui:composition>
+</html>

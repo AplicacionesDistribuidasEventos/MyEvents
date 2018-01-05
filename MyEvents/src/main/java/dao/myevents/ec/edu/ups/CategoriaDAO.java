@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import modelo.myevents.ec.edu.ups.*;
 
@@ -99,9 +100,28 @@ public class CategoriaDAO {
 	 * @return the list
 	 */
 	public List<Categoria> listCategoria(){
-		
+		System.out.println("CARGAR CATEGORIASS");
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
 		List<Categoria> listado = query.getResultList();
+		for(Categoria c : listado) {
+			if(!c.getEventos().isEmpty()) {
+				c.getEventos().size();	
+			}
+		}
+		return listado;
+	}
+	
+	
+	public List<Categoria> listCategoriaID(int id){
+		System.out.println("listCategoriaID "+id);
+		String jpql = "SELECT c FROM Categoria c WHERE c.id = '"+id+"'";
+		TypedQuery<Categoria> query = em.createQuery(jpql, Categoria.class);
+		List<Categoria> listado = query.getResultList();
+		for(Categoria c : listado) {
+			if(!c.getEventos().isEmpty()) {
+				c.getEventos().size();	
+			}
+		}
 		return listado;
 	}
 	

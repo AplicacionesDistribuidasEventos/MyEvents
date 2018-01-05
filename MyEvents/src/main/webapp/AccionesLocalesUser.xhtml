@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="PlantillaAdmin.xhtml">
+	template="PlantillaUsuario.xhtml">
 
 	<!-- Colocar el titulo en la pestana -->
 	<ui:define name="titulo">Crear Eventos</ui:define>
@@ -27,10 +27,7 @@
 				styleClass="table table-striped table-bordered">
 
 
-				<h:column Style="color: black">
-					<f:facet name="header">Codigo</f:facet>
-			#{listalocales.codigo}
-		</h:column>
+				
 
 				<h:column Style="color: black">
 					<f:facet name="header">Nombre</f:facet>
@@ -42,10 +39,6 @@
 			#{listalocales.descripcion}
 		</h:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Capacidad</f:facet>
-			#{listalocales.capacidad}
-		</h:column>
 
 				<h:column Style="color: black">
 					<f:facet name="header">Puntuacion</f:facet>
@@ -62,15 +55,6 @@
 			#{listalocales.costo}
 		</h:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Latitud</f:facet>
-			#{listalocales.latitud}
-		</h:column>
-
-				<h:column Style="color: black">
-					<f:facet name="header">Longitud</f:facet>
-			#{listalocales.longitud}
-		</h:column>
 
 
 				<h:column Style="color: black">
@@ -80,36 +64,7 @@
 					<!-- <h:commandButton value="Editar" class="btn btn-danger"
 						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
 
-					<center>
-						<a href="editaLocalAdmin.xhtml?id=#{listalocales.codigo}"
-							class="btn btn-warning btn-lg"> <span
-							class="glyphicon glyphicon-refresh"></span> Editar
-						</a>
-					</center>
-
-					<center>
-						<span class="glyphicon glyphicon-refresh"></span>
-					</center>
-				</h:column>
-
-
-				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">
-						<center>Agregar Evento</center>
-					</f:facet>
-
-					<center>
 					
-					 <h:commandButton value="crear" action="CrearEventoLocalAdmin.xhtml" onclick="#{localController.seteaId(listalocales.codigo)}"
-							class="btn btn-primary btn-lg" >
-							<!-- <f:ajax execute="@this" listener="#{localController.seteaId(listalocales.codigo)}"></f:ajax>	-->
-							</h:commandButton>
-							
-						 <!--   <a href="CrearEventoLocalAdmin.xhtml?id=#{listalocales.codigo}"
-							class="btn btn-primary btn-lg"> <span
-							class="glyphicon glyphicon-refresh"></span> Crear
-						</a>-->
-					</center>
 
 					<center>
 						<span class="glyphicon glyphicon-refresh"></span>
@@ -117,10 +72,11 @@
 				</h:column>
 
 
+				
 				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">Accion Eliminar</f:facet>
-					<h:commandButton value="Eliminar" class="btn btn-danger btn-lg"
-						action="#{localController.eliminar(listalocales.codigo)}" />
+					<f:facet name="header" Style="color: black">Mapa</f:facet>
+					<h:commandButton value="Encuentrame" class="btn btn-danger btn-lg"
+						action="#{localController.cargarMapa(listalocales)}" />
 				</h:column>
 			</h:dataTable>
 		</h:form>

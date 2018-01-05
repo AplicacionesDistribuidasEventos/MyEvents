@@ -1,10 +1,22 @@
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
 	template="PlantillaAdmin.xhtml">
+
+<head>
+ 
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+</head>
+
 
 	<!-- Colocar el titulo en la pestana -->
 	<ui:define name="titulo">Agregar evento</ui:define>
@@ -24,64 +36,124 @@
 	</f:metadata>
 
 	<ui:define name="contenido">
-		<center>
-			<h:form enctype="multipart/form-data" id="formulario">
-				<div class="alert alert-info">
+	<div class="alert alert-info">
 					<strong>Info!</strong> Los campos que contienen * son obligatorios.
 				</div>
+		<center>
+			<h:form enctype="multipart/form-data" id="formulario">
+				
 
 
 				<h:panelGrid columns="3">
 
 
 
-					<h:outputLabel value="* Nombre del Evento:" for="nombEvento" />
-					<h:inputText id="nombEvento"
+					<p:outputLabel value="* Nombre del Evento:"  />
+					<p:inputText id="nombEvento"
 						value="#{eventoController.evento.nombre}" class="form-control"
-						style="color:blue" pt:placeholder="Nombre del Evento" />
-					<h:message for="nombEvento" />
+						style="color:black" pt:placeholder="Nombre del Evento" 
+						required="true" requiredMessage="Ingrese el nombre del evento!" />
+					
+	<p:message
+     style="color: red;
+     font-family: 'New Century Schoolbook', serif;
+     font-style: oblique;
+     text-decoration: text-decoration:" id="warning1" 
+     for="nombEvento" errorClass="errorMessage"/>
 
 
 
-					<h:outputLabel value="* Fecha del Evento: " for="fechaEvento" />
-					<h:inputText id="fecha"
-						value="#{eventoController.evento.fechaEvento}"
-						class="form-control" style="color:blue"
-						pt:placeholder="yyyy/mm/dd">
-						<f:convertDateTime pattern="yyyy/mm/dd" />
-					</h:inputText>
-					<h:message for="fechaEvento" />
+					
+					
+							<p:outputLabel value="* Fecha del Evento: "  />
+							<p:calendar value="#{eventoController.evento.fechaEvento}" pattern="MM/dd/yyyy"/>		
+				
+	<br/>
 
-					<h:outputLabel value="* Costo del Evento" for="costoEvento" />
-					<h:inputText id="Costo" value="#{eventoController.evento.costo}"
+					<p:outputLabel value="* Costo del Evento"  />
+					<p:inputText id="Costo" value="#{eventoController.evento.costo}"
 						class="form-control"
-						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" />
-					<h:message for="costoEvento" />
+						required="true" requiredMessage="Ingrese el costo del evento!"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" 
+						pt:placeholder="$ 0.0"/>
+				
+				
+	<p:message
+     style="color: red;
+     font-family: 'New Century Schoolbook', serif;
+     font-style: oblique;
+     text-decoration: text-decoration:" id="warning3" 
+     for="Costo" errorClass="errorMessage"/>
+     
+     
+     
+     
+     <p:outputLabel value="* Seleccione una categoria"  />
+				
+				<p:selectOneMenu value="#{eventoController.selectcat}">
+				<f:ajax execute="@this" listener="#{eventoController.categoriaSeleccionada()}"></f:ajax>
+					<f:selectItem itemLabel="Seleciones" />
+					<f:selectItems value="#{eventoController.devuelveLista()}" />
+				</p:selectOneMenu>
+     
+     
 				</h:panelGrid>
 
 
 				<span class="glyphicon glyphicon-pencil"></span>
-				<h:outputLabel value="* Descripcion:" for="descEvento" />
+				<p:outputLabel id="descrip" value="* Descripcion:" />
 				<!--  <h:inputText id="descEvento" value="#{eventoController.evento.descripcion}" class="form-control" style="color:blue" pt:placeholder="Descripcion del Evento"/>-->
 				<br />
-				<h:inputTextarea id="descEvento"
+				<p:inputTextarea id="descEvento"
 					value="#{eventoController.evento.descripcion}" required="true"
-					requiredMessage="Ingrese una descripcion" cols="100" rows="5"></h:inputTextarea>
-				<h:message for="descEvento" />
-				<br />
-				<br />
+					requiredMessage="Ingrese una descripcion!" cols="100" rows="5"/>
+				
+
+	<p:message
+     style="color: red;
+     font-family: 'New Century Schoolbook', serif;
+     font-style: oblique;
+     text-decoration: text-decoration:" id="warning4" 
+     for="descEvento" errorClass="errorMessage" />
+				
+				
+					
+				
 				<h:commandButton
 					action="#{eventoController.insertarEventoLocalGloba()}"
-					value="Guardar" class="btn btn-success btn-lg"></h:commandButton>
+					value="Guardar" class="btn btn-success btn-lg" onclick="PF('dlg1').show();"/>
+				<!--  	
+					<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+			    	<h:outputText value="Se agrego exitosamente!" />
+				</p:dialog>-->
+					
+					
 
-				<h:commandButton action="mainAdmin" value="Cancelar"
-					class="btn btn-danger btn-lg"></h:commandButton>
-				<h:messages globalOnly="true" />
+
+				
+
+
+				
+
+
+
+
 			</h:form>
+			
 		</center>
+		
+		<h:form><center><h:commandButton action="mainAdmin" value="Cancelar"
+					class="btn btn-danger btn-lg"></h:commandButton>
+				<h:messages globalOnly="true" /></center></h:form>
 	</ui:define>
 
-
-
+				
 
 </ui:composition>
+
+
+
+
+
+
+						
