@@ -78,7 +78,6 @@ public class LocalController {
 	/** The longituddes. */
 	private String longituddes;
 	
-
 	/** The foto perfil. */
 	private Part fotoPerfil;	
 	
@@ -86,10 +85,7 @@ public class LocalController {
 	//private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
 	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imageness";					  
 
-	/** The nombre archivo perfil. */
 	private String nombreArchivoPerfil;
-	
-	
 	
 	/** The imagenes. */
 	private List<String> imagenes;
@@ -444,8 +440,6 @@ public class LocalController {
 		id2 = id;
 	} 
 
-
-	
 	
 	/**
 	 * Guardar local admin.
@@ -461,7 +455,6 @@ public class LocalController {
 			
 					local.setFotoPerfil("imagenes/local1.jpg");
 				
-			
 		}
 		
 		p = pdao.selectPersona(id2);
@@ -471,7 +464,6 @@ public class LocalController {
 		
 	}
 
-	
 	
 	/**
 	 * Guardar local.
@@ -558,7 +550,7 @@ public class LocalController {
 			 
 
 		} catch (IOException e) {
-			// Show faces message?
+			System.out.println("Error inesperado al subir foto" + e.getMessage());
 		}
 		return "";
 	}
@@ -591,9 +583,7 @@ public class LocalController {
 	 * @param event the event
 	 */
 	public void cargarArchivo(FileUploadEvent event) {
-	
-	
-		
+
 	local.setImagen(event.getFile().getContents());
 	
 	FacesMessage message= new FacesMessage("Exito", event.getFile().getFileName()+ "Cargadoo..");

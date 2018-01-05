@@ -88,7 +88,7 @@ public class EventoController {
 	
 	private String grabado;
 	
-	/** The id local Variable Estatica. */
+	//variable statica
 	public static int idLocal=0;
 
 	/**
@@ -103,12 +103,9 @@ public class EventoController {
 		// devuelveLista();
 	}
 
-	
-
 	public String getGrabado() {
 		return grabado;
 	}
-
 
 
 	public void setGrabado(String grabado) {
@@ -116,15 +113,10 @@ public class EventoController {
 	}
 
 
-
-	/**
-	 * Gets the selectcat.
-	 *
-	 * @return the selectcat
-	 */
 	public String getSelectcat() {
 		return selectcat;
 	}
+
 
 	/**
 	 * Sets the selectcat.
@@ -135,6 +127,7 @@ public class EventoController {
 		this.selectcat = selectcat;
 	}
 
+
 	/**
 	 * Gets the categorias.
 	 *
@@ -143,6 +136,7 @@ public class EventoController {
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
+
 
 	/**
 	 * Sets the categorias.
@@ -461,6 +455,9 @@ public class EventoController {
 	 * @param envio de parametro id para
 	 * eliminarlo a traves del id
 	 * @return null no existe navegabilidad a trves de JSF 
+	 * @param id
+	 *            the id
+	 * @return the string
 	 */
 	public String leer(int id) {
 		evento = evendao.leerEvento(id);
@@ -473,6 +470,9 @@ public class EventoController {
 	 * @param envio de parametro id para
 	 * eliminarlo a traves del id
 	 * @return navegacion en JSF al eliminar un evento
+	 * @param id
+	 *            the id
+	 * @return the string
 	 */
 	public String eliminar(int id) {
 		evendao.deleteEvento(id);
@@ -496,26 +496,44 @@ public class EventoController {
 	 *agregar la cateogoria a ese evento
 	 * @return URl de navegacion con la cosulta de eventos y locales por persona
 	 */
-	public String insertarEventoLocalGloba() {
-			
-		System.out.println("ID2: "+EventoController.idLocal);
+public String insertarEventoLocalGloba() {
+
+System.out.println("ID2: "+EventoController.idLocal);
 		evento.setCategoria(EventoController.ca);
 		
-				System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
+System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 //		recupelocal = locdao.leerLocal(id2);
-					
 		recupelocal = locdao.selectLocal(EventoController.idLocal);
-		System.out.print("No es nuloooooo");
-	
+
+		try {
+		if(recupelocal!=null) {
+			System.out.print("No es nuloooooo");
+		}
+
+		else {
+			System.out.println("no existen categorias ingresadas");
+		}
 		recupelocal.getEvento().add(evento);
 		locdao.updateLocal(recupelocal);
 		
-	
-		return "consulEventLocPers";
+
+		} catch (Exception e) {
+			System.out.println("falta categoria" + e.getMessage());
+		}
+		//return null;
+    return "consulEventLocPers";
 	}
 
-	
-	
+		/*if(recupelocal!=null) {
+			System.out.print("No es nuloooooo");
+		}
+		recupelocal.getEvento().add(evento);
+		locdao.updateLocal(recupelocal);
+
+		return null;
+	}*/
+
+
 	/**
 	 * Inserta categoria admin.
 	 *
@@ -530,32 +548,39 @@ public class EventoController {
 	}
 
 	/**
-	 * Método buscar.
+	 * Buscar.
 	 *
-	 * @return un String de listado de eventos por nombre atraves de un variable filtro
-	 * almacenada en un listadoFiltrado.
+	 * @return the string
 	 */
 	public String buscar() {
 		listadoFiltrado = evendao.getEventosPorNombre(filtro);
 
 		return null;
 	}
-	
-	/** The ca. */
+
 	public static Categoria ca=new Categoria();
-	
-	/**Método para Seleccionar una categoria desde SelectItem en JSF
-	 * ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO.
-	 */
+	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
 	public void categoriaSeleccionada() {
+		
 		System.out.println("Entraaaaaaaaaaaaa al evt");
 		for(Categoria c : categorias) {
+			try {
+
+		/*System.out.println("Entraaaaaaaaaaaaa al evt");
+		for(Categoria c : categorias) {*/
 			if(c.getNombre().equals(selectcat)) {
 				evento.setCategoria(c);
 				EventoController.ca=c;
 				System.out.println("categoria: "+evento.getCategoria().getNombre());
 			}
+        
+        } catch (Exception e) {
+				System.out.println("no existe categorias" + e.getMessage());
+			}
 		}
+		
+		//}
+
 	}
 
 	/**Meotodo devueleve, utilizafo para obtener un lista de categorias y cargarlas en un SelectItem
@@ -588,4 +613,5 @@ public class EventoController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
+
 }

@@ -22,8 +22,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Evento.
  */
@@ -69,8 +67,6 @@ public class Evento {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
-	
-	
 	
 	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
 

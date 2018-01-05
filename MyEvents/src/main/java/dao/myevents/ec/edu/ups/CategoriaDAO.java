@@ -111,6 +111,32 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
+	public List<Categoria> listSoloCategorias(){
+		System.out.println("Select solo Categorias");
+		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
+		List<Categoria> listado = query.getResultList();
+		for(Categoria c : listado) {
+			if(!c.getEventos().isEmpty()) {
+				c.getEventos().size();	
+			}
+		}
+		return listado;
+	}
+	
+	
+	public List<Categoria> listCategoriaID(int id){
+		System.out.println("listCategoriaID "+id);
+		String jpql = "SELECT c FROM Categoria c WHERE c.id = '"+id+"'";
+		TypedQuery<Categoria> query = em.createQuery(jpql, Categoria.class);
+		List<Categoria> listado = query.getResultList();
+		for(Categoria c : listado) {
+			if(!c.getEventos().isEmpty()) {
+				c.getEventos().size();	
+			}
+		}
+		return listado;
+	}
+	
 	
 	public List<Categoria> listCategoriaID(int id){
 		System.out.println("listCategoriaID "+id);

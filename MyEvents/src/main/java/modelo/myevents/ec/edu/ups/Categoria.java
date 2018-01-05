@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,8 +46,10 @@ public class Categoria {
 	@Column(name="cat_descripcion")
 	private String descipcion;
 	
-	/** The eventos. */
-	@OneToMany(fetch=FetchType.EAGER)
+
+	//@OneToMany(fetch=FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="eve_cat_id", referencedColumnName="cat_id")
 	private List<Evento> eventos;
