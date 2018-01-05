@@ -138,18 +138,5 @@ public class CategoriaDAO {
 	}
 	
 	
-	public List<Categoria> listCategoriaID(int id){
-		System.out.println("listCategoriaID "+id);
-		String jpql = "SELECT c FROM Categoria c WHERE c.id = '"+id+"'";
-		TypedQuery<Categoria> query = em.createQuery(jpql, Categoria.class);
-		List<Categoria> listado = query.getResultList();
-		for(Categoria c : listado) {
-			if(!c.getEventos().isEmpty()) {
-				c.getEventos().size();	
-			}
-		}
-		return listado;
-	}
 	
-	
-}
+}//fin clase CategoriaDAO
