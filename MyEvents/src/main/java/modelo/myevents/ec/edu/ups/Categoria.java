@@ -46,7 +46,8 @@ public class Categoria {
 	@Column(name="cat_descripcion")
 	private String descipcion;
 	
-	/** The eventos. */
+
+	//@OneToMany(fetch=FetchType.EAGER)
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea

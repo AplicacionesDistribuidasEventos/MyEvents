@@ -1,5 +1,6 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,8 @@ import javax.validation.constraints.Size;
  * */
 @Entity
 @Table(name="LOCAL")
-public class Local {
+public class Local implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	/** The codigo. */
 	@Id
@@ -69,10 +71,12 @@ public class Local {
 	private String fotoPerfil;
 	
 	/** The latitud. */
-	private double latitud;
+	private String latitud;
 	
 	/** The longitud. */
-	private double longitud;
+	private String longitud;
+	
+	private byte[] imagen;
 	
 	
 	/** The evento. */
@@ -82,6 +86,14 @@ public class Local {
 	
 	
 	
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
 	/**
 	 * Gets the foto perfil.
 	 *
@@ -244,43 +256,44 @@ public class Local {
 		this.comentario = comentario;
 	}
 	
+	
+	
 	/**
 	 * Gets the latitud.
 	 *
 	 * @return the latitud
 	 */
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
-	
+
 	/**
 	 * Sets the latitud.
 	 *
 	 * @param latitud the new latitud
 	 */
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
-	
+
 	/**
 	 * Gets the longitud.
 	 *
 	 * @return the longitud
 	 */
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
-	
+
 	/**
 	 * Sets the longitud.
 	 *
 	 * @param longitud the new longitud
 	 */
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
-	
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

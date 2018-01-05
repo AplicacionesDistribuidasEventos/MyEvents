@@ -1,12 +1,17 @@
 package controller.myevents.ec.edu.ups;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+
+import org.primefaces.event.SelectEvent;
 
 import dao.myevents.ec.edu.ups.CategoriaDAO;
 import dao.myevents.ec.edu.ups.EventoDAO;
@@ -75,8 +80,13 @@ public class EventoController {
 	/** The id 3. */
 	private int id3;
 
+	/** The categorias. */
 	private List<Categoria> categorias;
+	
+	/** The selectcat. */
 	private String selectcat;
+	
+	private String grabado;
 	
 	//variable statica
 	public static int idLocal=0;
@@ -93,22 +103,46 @@ public class EventoController {
 		// devuelveLista();
 	}
 
-	/*
-	 * Getters and Setters
-	 */
+	public String getGrabado() {
+		return grabado;
+	}
+
+
+	public void setGrabado(String grabado) {
+		this.grabado = grabado;
+	}
+
 
 	public String getSelectcat() {
 		return selectcat;
 	}
 
+
+	/**
+	 * Sets the selectcat.
+	 *
+	 * @param selectcat the new selectcat
+	 */
 	public void setSelectcat(String selectcat) {
 		this.selectcat = selectcat;
 	}
 
+
+	/**
+	 * Gets the categorias.
+	 *
+	 * @return the categorias
+	 */
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
 
+
+	/**
+	 * Sets the categorias.
+	 *
+	 * @param categorias the new categorias
+	 */
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
@@ -395,9 +429,9 @@ public class EventoController {
 	}
 
 	/**
-	 * Insertar.
-	 *
-	 * @return the string
+	 * Metodo Insertar.
+	 *Agrega un evento
+	 * @return URL de redireccion listarEventos
 	 */
 	public String insertar() {
 		evendao.guardarEvento(evento);
@@ -408,7 +442,7 @@ public class EventoController {
 	/**
 	 * Actualizar.
 	 *
-	 * @return the string
+	 * @return URL null no existe navegabilidad a trves de JSF
 	 */
 	public String actualizar() {
 		evendao.updateEvento(evento);
@@ -418,6 +452,9 @@ public class EventoController {
 	/**
 	 * Leer.
 	 *
+	 * @param envio de parametro id para
+	 * eliminarlo a traves del id
+	 * @return null no existe navegabilidad a trves de JSF 
 	 * @param id
 	 *            the id
 	 * @return the string
@@ -430,6 +467,9 @@ public class EventoController {
 	/**
 	 * Eliminar.
 	 *
+	 * @param envio de parametro id para
+	 * eliminarlo a traves del id
+	 * @return navegacion en JSF al eliminar un evento
 	 * @param id
 	 *            the id
 	 * @return the string
@@ -442,7 +482,7 @@ public class EventoController {
 	/**
 	 * Lista eventos.
 	 *
-	 * @return the list
+	 * @return una lista de eventos
 	 */
 	public List<Evento> listaEventos() {
 
@@ -452,8 +492,9 @@ public class EventoController {
 
 	/**
 	 * Insertar evento local globa.
-	 *
-	 * @return the string
+	 *Metodo para recuperar el idLocal para cargar el evento dentro del local y
+	 *agregar la cateogoria a ese evento
+	 * @return URl de navegacion con la cosulta de eventos y locales por persona
 	 */
 public String insertarEventoLocalGloba() {
 
@@ -479,7 +520,8 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 		} catch (Exception e) {
 			System.out.println("falta categoria" + e.getMessage());
 		}
-		return null;
+		//return null;
+    return "consulEventLocPers";
 	}
 
 		/*if(recupelocal!=null) {
@@ -515,6 +557,7 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 
 		return null;
 	}
+
 	public static Categoria ca=new Categoria();
 	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
 	public void categoriaSeleccionada() {
@@ -525,14 +568,13 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 
 		/*System.out.println("Entraaaaaaaaaaaaa al evt");
 		for(Categoria c : categorias) {*/
-
 			if(c.getNombre().equals(selectcat)) {
 				evento.setCategoria(c);
 				EventoController.ca=c;
 				System.out.println("categoria: "+evento.getCategoria().getNombre());
 			}
-
-			} catch (Exception e) {
+        
+        } catch (Exception e) {
 				System.out.println("no existe categorias" + e.getMessage());
 			}
 		}
@@ -541,6 +583,12 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 
 	}
 
+	/**Meotodo devueleve, utilizafo para obtener un lista de categorias y cargarlas en un SelectItem
+	 * desde JSF.
+	 * 
+	 *
+	 * @return URL de las lista de categorias
+	 */
 	public List<SelectItem> devuelveLista() {
 		List<SelectItem> lcategorias = new ArrayList<SelectItem>();
 		categorias = catedao.listCategoria();
@@ -551,4 +599,19 @@ System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
 		}
 		return lcategorias;
 	}
+	public String retornoMenuAdmin() {
+		return "mainAdmin";
+	}
+	
+	/**
+	 * On date select.
+	 *Metodo para selecionar un mapa atravez de primefaces
+	 * @param event
+	 */
+	public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+
 }

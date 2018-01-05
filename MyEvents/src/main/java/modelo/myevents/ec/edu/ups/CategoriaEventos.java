@@ -5,6 +5,7 @@ public class CategoriaEventos {
 	private String descripcion_eve;
 	private String fecha;
 	private String costo;
+
 	/*Nombre de la categoria*/
 	private String categoria;
 	
@@ -15,15 +16,15 @@ public class CategoriaEventos {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-/*
-	public String getDescripcion_cat() {
+
+/*public String getDescripcion_cat() {
 		return descripcion_cat;
 	}
 
 	public void setDescripcion_cat(String descripcion_cat) {
 		this.descripcion_cat = descripcion_cat;
-	}
-*/
+	}*/
+
 	public String getDescripcion_eve() {
 		return descripcion_eve;
 	}
@@ -53,7 +54,6 @@ public class CategoriaEventos {
 		return "CategoriaEventos [descripcion_cat=" + descripcion_cat + ", descripcion_eve=" + descripcion_eve
 				+ ", fecha=" + fecha + ", costo=" + costo + ", categoria=" + categoria + "]";
 	}
-	
 	
 
 }

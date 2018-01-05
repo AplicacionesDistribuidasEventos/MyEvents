@@ -86,7 +86,7 @@
 
 
 					
-<div class="form-group">
+			<div class="form-group">
 				<h:outputLabel value="Seleccione una foto de perfil" />
 				<h:inputFile id="subidaFP" value="#{localController.fotoPerfil}"/>
 				<h:message for="subidaFP" />
@@ -200,12 +200,9 @@ function deleteMarkers() {
 				<h:commandButton action="#{localController.insertarLocalAdmin()}"
 					value="Guardar" actionListener="AccionesLocal"
 					class="btn btn-success btn-lg" />
-				<h:messages globalOnly="true" />
+				<h:messages globalOnly="true" /></center>
 
-				<h:commandButton action="mainAdmin" value="Cancelar"
-					class="btn btn-danger btn-lg" />
-				<h:messages globalOnly="true" />
-			</center>
+				<br />
 
 			<script type="text/javascript">
 			var localizado = -1;
@@ -251,6 +248,15 @@ var geoOptions = {
 
 
 		</h:form>
+		
+		<h:form>
+		<center>
+				<h:commandButton action="mainAdmin" value="Cancelar"
+					class="btn btn-danger btn-lg" />
+					</center>
+					</h:form>
+					<br />
 	</ui:define>
+		
 
 </ui:composition>

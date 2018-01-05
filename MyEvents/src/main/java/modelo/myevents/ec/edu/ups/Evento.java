@@ -54,7 +54,7 @@ public class Evento {
 	/** The costo. */
 	
 	@Column(name="even_costo")
-	private double costo;
+	private String costo;
 	
 	/** The fecha evento. */
 	@Column(name="even_fechaEvento")
@@ -174,12 +174,14 @@ public class Evento {
 	}
 
 	
+	
+
 	/**
 	 * Gets the costo.
 	 *
 	 * @return the costo
 	 */
-	public double getCosto() {
+	public String getCosto() {
 		return costo;
 	}
 
@@ -188,7 +190,7 @@ public class Evento {
 	 *
 	 * @param costo the new costo
 	 */
-	public void setCosto(double costo) {
+	public void setCosto(String costo) {
 		this.costo = costo;
 	}
 
