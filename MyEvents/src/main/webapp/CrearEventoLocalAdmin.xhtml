@@ -128,29 +128,16 @@
 				</p:dialog>-->
 					
 					
-
-
 		
 				<h:commandButton action="mainAdmin" value="Cancelar"
 					class="btn btn-danger btn-lg"></h:commandButton>
 				<h:messages globalOnly="true" />
-
-				<h5 style="color: white">Seleccione Una categoria</h5>
-				
-				<h:selectOneMenu value="#{eventoController.selectcat}">
-				<f:ajax execute="@this" listener="#{eventoController.categoriaSeleccionada()}"></f:ajax>
-					<f:selectItem itemLabel="Seleciones" />
-					<f:selectItems value="#{eventoController.devuelveLista()}" />
-				</h:selectOneMenu>
 
 
 			</h:form>
 			
 		</center>
 		
-		<h:form><center><h:commandButton action="mainAdmin" value="Cancelar"
-					class="btn btn-danger btn-lg"></h:commandButton>
-				<h:messages globalOnly="true" /></center></h:form>
 	</ui:define>
 
 				
