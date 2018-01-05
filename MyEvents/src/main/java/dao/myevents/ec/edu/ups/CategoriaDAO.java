@@ -137,6 +137,5 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
-	
-	
+
 }//fin clase CategoriaDAO
