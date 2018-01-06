@@ -152,4 +152,4 @@ public class CategoriaDAO {
 	}
 	
 	
-}
+}//fin clase CategoriaDAO
