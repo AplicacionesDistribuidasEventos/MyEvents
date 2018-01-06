@@ -26,13 +26,20 @@
 
 	<!-- Titulo del Contenido -->
 	<ui:define name="bienvenida">Ingreso del Evento</ui:define>
-
+<!--
 	<f:metadata>
 		<f:viewParam name="id" value="#{eventoController.id2}"></f:viewParam>
 	</f:metadata>
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{eventoController.id2}"></f:viewParam>
+	</f:metadata>
+-->
+
+	<!-- FMETADATA: para el paso del ID cuando vamos a CREAR EVENTO A UN LOCAL de una respectiva persona -->
+	<f:metadata>
+		<f:viewParam name="idlcev" value="#{eventoController.idlcev}"></f:viewParam>
+		<f:event listener="#{eventoController.before()}" type="preRenderView"></f:event>
 	</f:metadata>
 
 	<ui:define name="contenido">
@@ -132,6 +139,8 @@
 				<h:commandButton action="mainAdmin" value="Cancelar"
 					class="btn btn-danger btn-lg"></h:commandButton>
 				<h:messages globalOnly="true" />
+
+				<h5 style="color: white">Seleccione Una categoria</h5>
 
 
 			</h:form>

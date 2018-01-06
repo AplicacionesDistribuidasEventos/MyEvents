@@ -69,36 +69,33 @@ public class CategoriaController {
 
 	}
 
-
+/*DATOS CATEGORIA PARA EL USUARIO
+ * */
 	public String datosCategoria(int codigo){
-
-//		catevelist.clear();
-	/*	listCatID = catedao.listCategoriaID(codigo);
+		catevelist.clear();
+		CategoriaEventos ce = new CategoriaEventos();
+		listCatID = catedao.listCategoriaID(codigo);
 		for(Categoria c : listCatID) {
-			CategoriaEventos ce = new CategoriaEventos();
-			ce.setDescripcion_cat(c.getDescipcion());
-			System.out.println("NEXT CE DESC "+c.getDescipcion());
-			ce.setCategoria(c.getNombre());
 			System.out.println("NEXT CE NOM "+c.getNombre());
 			if(c.getEventos().isEmpty()) {
-				System.out.println("SIN EVENTOS");
-				ce.setDescripcion_eve("");
+				ce = new CategoriaEventos();
+//				ce.setDescripcion_eve(c.getDescipcion());
+				ce.setCategoria(c.getNombre());
+				ce.setDescripcion_eve("No contiene registros");
 				ce.setFecha("");
 				ce.setCosto("");
+				catevelist.add(ce);
 			}else {
 				for(Evento e : c.getEventos()) {
+					ce = new CategoriaEventos();
+					ce.setCategoria(c.getNombre());
 					ce.setDescripcion_eve(e.getDescripcion());
-					System.out.println("NEXT CE EDESC "+e.getDescripcion());
 					ce.setFecha(e.getFechaEvento().toString());
-					System.out.println("NEXT CE EFECH "+e.getFechaEvento().toString());
 					ce.setCosto(String.valueOf(e.getCosto()));
-					System.out.println("NEXT CE COST "+String.valueOf(e.getCosto()));
+					catevelist.add(ce);
 				}
 			}
-
-			catevelist.add(ce);*/
-
-
+/*
 		catevelist.clear();
 		listCatID = catedao.listCategoriaID(codigo);
 		CategoriaEventos ce;
@@ -116,7 +113,7 @@ public class CategoriaController {
 					catevelist.add(ce);
 				}
 			}
-
+*/
 		}
 		return "eventosCategoria";
 	}

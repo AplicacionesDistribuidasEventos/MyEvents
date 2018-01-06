@@ -768,11 +768,12 @@ public class PersonaController {
 	}
 
 	/**
-	 * Consulta local eventos.
+	 * Consulta local eventos: Retorna los eventos que se van a sucitar en cada uno de los salones de eventos, lo visualiza su respectivo propietario(ADMIN)
 	 *
 	 * @return the string
 	 */
 	public String consultaLocalEventos() {
+		PersonaLocalEvento ple = new PersonaLocalEvento();
 		plelist.clear();
 //		System.out.println("CONSULTA LOCAL EVENTO ID: " + idrecuprerar + " " + "ENTRA");
 		ListPerID = pdao.listPersonaID(idrecuprerar);
@@ -781,17 +782,18 @@ public class PersonaController {
 		for (Persona p : ListPerID) {
 			/* Segundo FOR: a partir de 'p', obtengo el objeto evento */
 			for (Local l : p.getLocales()) {
-				PersonaLocalEvento ple = new PersonaLocalEvento();
-				ple.setL_nombre(l.getNombre());
-				ple.setL_descripcion(l.getDescripcion());
-				ple.setL_capacidad(l.getCapacidad());
-				ple.setL_costo(l.getCosto());
+				
 				/* Condicionamiento cuando no hay ningun evento, agrego campos pro default */
 				if (l.getEvento().isEmpty()) {
-					System.out.println("LOCAL SIN EVENTOS");
-					ple.setE_nombre("Ningun Registro");
+					ple = new PersonaLocalEvento();
+					ple.setL_nombre(l.getNombre());
+					ple.setL_descripcion(l.getDescripcion());
+					ple.setL_capacidad(l.getCapacidad());
+					ple.setL_costo(l.getCosto());
+					ple.setE_nombre("No ha registrado eventos");
 					ple.setE_descripcion(" ");
 					ple.setE_fecha(" ");
+					plelist.add(ple);
 				} else {
 					/* Tercer FOR: a partir de 'l' obtengo el objeto Evento */
 					for (Evento ev : l.getEvento()) {
@@ -799,14 +801,19 @@ public class PersonaController {
 						 * Declaro un objeto para setear cada uno de los objeto y finalmente agregarlos
 						 * en la lista respectiva
 						 */
-
+						ple = new PersonaLocalEvento();
+						ple.setL_nombre(l.getNombre());
+						ple.setL_descripcion(l.getDescripcion());
+						ple.setL_capacidad(l.getCapacidad());
+						ple.setL_costo(l.getCosto());
 						ple.setE_nombre(ev.getNombre());
 						ple.setE_descripcion(ev.getDescripcion());
 						ple.setE_fecha(ev.getFechaEvento().toString());
+						plelist.add(ple);
 					}
 				}
 				/* Anadiendo cada uno de los objetos a la lista */
-				plelist.add(ple);
+				
 			}
 		}
 		return null;

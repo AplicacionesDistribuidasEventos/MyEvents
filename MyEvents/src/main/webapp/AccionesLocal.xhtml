@@ -72,56 +72,62 @@
 			#{listalocales.longitud}
 		</h:column>
 
-
 				<h:column Style="color: black">
 					<f:facet name="header" Style="color: black">
-						<center>Accion Editar</center>
+						<center>Evento</center>
 					</f:facet>
-					<!-- <h:commandButton value="Editar" class="btn btn-danger"
-						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
+
 
 					<center>
-						<a href="editaLocalAdmin.xhtml?id=#{listalocales.codigo}"
+						<a href="editarlocaladmin.xhtml?id=#{listalocales.codigo}"
 							class="btn btn-warning btn-lg"> <span
 							class="glyphicon glyphicon-refresh"></span> Editar
 						</a>
 					</center>
-
+				
+<!--
+					<center>
+						<h:link value="Editar" outcome="editarlocaladmin" class="btn btn-warning btn-lg">
+							<f:param name="idlel" value="#{listalocales.codigo}"></f:param>
+						</h:link>
+					</center>
+-->
 					<center>
 						<span class="glyphicon glyphicon-refresh"></span>
 					</center>
 				</h:column>
-
 
 				<h:column Style="color: black">
 					<f:facet name="header" Style="color: black">
-						<center>Agregar Evento</center>
+						<center>Evento</center>
 					</f:facet>
-
+<!--					
 					<center>
-					
-					 <h:commandButton value="crear" action="CrearEventoLocalAdmin.xhtml" onclick="#{localController.seteaId(listalocales.codigo)}"
-							class="btn btn-primary btn-lg" >
-							<!-- <f:ajax execute="@this" listener="#{localController.seteaId(listalocales.codigo)}"></f:ajax>	-->
-							</h:commandButton>
-							
-						 <!--   <a href="CrearEventoLocalAdmin.xhtml?id=#{listalocales.codigo}"
+						<a href="CrearEventoLocalAdmin.xhtml?id=#{listalocales.codigo}"
 							class="btn btn-primary btn-lg"> <span
 							class="glyphicon glyphicon-refresh"></span> Crear
-						</a>-->
+						</a>
 					</center>
-
+-->
 					<center>
-						<span class="glyphicon glyphicon-refresh"></span>
+						<h:link value="Crear" outcome="CrearEventoLocalAdmin" class="btn btn-primary btn-lg">
+							<f:param name="idlcev" value="#{listalocales.codigo}"></f:param>
+						</h:link>
+					</center>
+					<center>
 					</center>
 				</h:column>
-
 
 				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">Accion Eliminar</f:facet>
-					<h:commandButton value="Eliminar" class="btn btn-danger btn-lg"
-						action="#{localController.eliminar(listalocales.codigo)}" />
+					<f:facet name="header" Style="color: black">
+						<center>Evento</center>
+					</f:facet>
+					<center>
+						<h:commandButton value="Eliminar" class="btn btn-danger btn-lg"
+							action="#{localController.eliminar(listalocales.codigo)}" />
+					</center>
 				</h:column>
+
 			</h:dataTable>
 		</h:form>
 	</ui:define>
