@@ -67,15 +67,18 @@ public class Local implements Serializable{
 	private String comentario;
 	
 	/** The foto. */
-	@Column(name="even_fotografia")
+	@Column(name="local_fotografia")
 	private String fotoPerfil;
 	
 	/** The latitud. */
+	@Column(name="local_latitud")
 	private String latitud;
 	
 	/** The longitud. */
+	@Column(name="local_longitud")
 	private String longitud;
 	
+	@Column(name="local_imagen")
 	private byte[] imagen;
 	
 	

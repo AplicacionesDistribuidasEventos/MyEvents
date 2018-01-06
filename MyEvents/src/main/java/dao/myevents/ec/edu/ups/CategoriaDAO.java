@@ -123,7 +123,7 @@ public class CategoriaDAO {
 		return listado;
 	}
 	
-	
+	/*
 	public List<Categoria> listCategoriaID(int id){
 		System.out.println("listCategoriaID "+id);
 		String jpql = "SELECT c FROM Categoria c WHERE c.id = '"+id+"'";
@@ -136,7 +136,7 @@ public class CategoriaDAO {
 		}
 		return listado;
 	}
-	
+	*/
 	
 	public List<Categoria> listCategoriaID(int id){
 		System.out.println("listCategoriaID "+id);

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -82,13 +81,26 @@ public class LocalController {
 	private Part fotoPerfil;	
 	
 	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
-	//private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
-	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imageness";					  
+	//private String directorioPerfil= "C:\Users\sesla\git\MyEvents\MyEvents\src\main\webapp\imagenes";
+	private String directorioPerfil="C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
 
 	private String nombreArchivoPerfil;
 	
 	/** The imagenes. */
 	private List<String> imagenes;
+	
+	/**
+	 * The idlocal: Recuperado para la posible utilizacion para la edicion de un
+	 * local
+	 * 
+	 */
+	public static int idLocalel;
+	
+	/**
+	 * The idl: Establece los Getters and Setters recepta el id que viene dado del
+	 * JSF para la respectiva edicion del local
+	 */
+	private int idlel = 0;
   
 	/**
 	 * Inits the.
@@ -100,9 +112,33 @@ public class LocalController {
 		loadLocal();
 		fotoPerfil=null;
 		listlocal=locdao.listlocal();
-		
 	}
 	
+	/*
+	 * Permite tomar el ID enviado de local, previamente a EDITAR
+	 * 
+	 * */
+	/*
+	public void before() {
+		if (!FacesContext.getCurrentInstance().isPostback()) {
+			System.out.println("PreRenderView: view parameters are available here");
+			System.out.println("IDLEL: " + idlel);
+			LocalController.idLocalel = idlel;
+		}
+	}
+	*/
+
+	public int getIdlel() {
+		return idlel;
+	}
+
+	public void setIdlel(int idlel) {
+		this.idlel = idlel;
+		loadLocalEditar(idlel);
+	}
+
+
+
 
 	/**
 	 * Gets the imagenes.
@@ -205,7 +241,7 @@ public class LocalController {
 	 */
 	public void setId(int id) {
 		this.id = id;
-		loadLocalEditar(id);
+//		loadLocalEditar(id);
 		
 		loadId(id);
 		insertarLocalAdmin();
@@ -420,14 +456,17 @@ public class LocalController {
 		listlocal=locdao.listlocal();
 	}
 	
+	
+
+
 	/**
 	 * Load local editar.
 	 *
 	 * @param id the id
 	 * @return the string
 	 */
-	public String loadLocalEditar(int id) {
-		local = locdao.leerLocal(id);
+	public String loadLocalEditar(int idledit) {
+		local = locdao.leerLocal(idledit);
 		return "CrearLocal";
 	}
 	
@@ -562,8 +601,8 @@ public class LocalController {
 	 */
 	public void seteaId(int idL) {
 		System.out.println("Este es el id qeu se esta seteando" + idL);
-		EventoController.idLocal=idL;
-		System.out.println("Imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + EventoController.idLocal);
+		LocalController.idLocalel=idL;	
+		System.out.println("Imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + LocalController.idLocalel);
 	}
 	
 	/**

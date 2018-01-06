@@ -88,9 +88,20 @@ public class EventoController {
 	
 	private String grabado;
 	
-	//variable statica
-	public static int idLocal=0;
+	/**
+	 * The idlocal: Recuperado para la posible utilizacion en la creacion de un
+	 * evento
+	 */
+	public static int idLocalce;
+	
 
+
+	/**
+	 * The idl: Establece los Getters and Setters recepta el id que viene dado del
+	 * JSF para la respectiva creacion del evento
+	 */
+	private int idlcev = 0;
+	
 	/**
 	 * Inits the.
 	 */
@@ -101,6 +112,27 @@ public class EventoController {
 		loadEvento();
 		categorias = new ArrayList<Categoria>();
 		// devuelveLista();
+	}
+	
+	/*
+	 * Permite tomar el ID enviado de local, previamente a anadirle un evento
+	 * 
+	 * */
+	public void before() {
+		if (!FacesContext.getCurrentInstance().isPostback()) {
+			System.out.println("PreRenderView: view parameters are available here");
+			System.out.println("Id: " + idlcev);
+			EventoController.idLocalce = idlcev;
+//			EventoController.idLocalel = idlel;
+		}
+	}
+
+	public int getIdlcev() {
+		return idlcev;
+	}
+
+	public void setIdlcev(int idlcev) {
+		this.idlcev = idlcev;
 	}
 
 	public String getGrabado() {
@@ -498,12 +530,11 @@ public class EventoController {
 	 */
 public String insertarEventoLocalGloba() {
 
-System.out.println("ID2: "+EventoController.idLocal);
+System.out.println("ID2: "+EventoController.idLocalce);
 		evento.setCategoria(EventoController.ca);
 		
 System.out.println("Eventoooooooooooooooo "+evento.getCategoria().getNombre());
-//		recupelocal = locdao.leerLocal(id2);
-		recupelocal = locdao.selectLocal(EventoController.idLocal);
+		recupelocal = locdao.selectLocal(EventoController.idLocalce);
 
 		try {
 		if(recupelocal!=null) {
