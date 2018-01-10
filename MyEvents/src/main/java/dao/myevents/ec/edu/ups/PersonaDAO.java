@@ -51,6 +51,17 @@ public class PersonaDAO {
 	 */
 	public Persona selectPersona(int id) {
 		Persona p = em.find(Persona.class, id);
+		if(!p.getAeventos().isEmpty()) {
+			p.getAeventos().size();
+		}
+		if(!p.getSrecepciones().isEmpty()) {
+			p.getSrecepciones().size();
+		}
+		return p;
+	}
+	
+	public Persona elejirPersona(int id) {
+		Persona p = em.find(Persona.class, id);
 		return p;
 	}
 
@@ -90,8 +101,8 @@ public class PersonaDAO {
 	 */
 	
 	public void guardar (Persona p) {
-		try {
 		Persona aux = selectPersona(p.getId());
+		try {
 		System.out.println("ID GUARDAR:" +p.getId());
 		if(aux!=null) {
 			updatePersona(p);

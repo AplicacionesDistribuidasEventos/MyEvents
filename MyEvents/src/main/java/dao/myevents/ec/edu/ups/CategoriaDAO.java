@@ -77,6 +77,9 @@ public class CategoriaDAO {
 	public Categoria leerCategoria(int id){
 		
 		Categoria c = em.find(Categoria.class, id);
+		if(!c.getEventos().isEmpty()) {
+			c.getEventos().size();
+		}
 		return c;
 		
 	}

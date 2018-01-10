@@ -277,7 +277,8 @@ public class PersonaController {
 						if (pdao.existeCedula(personas.getCedula()).size() == 0) {
 							personas.setPerfil("USUARIO");
 							personas.setEstado("A");
-							pdao.guardar(personas);
+//							pdao.guardar(personas);
+							pdao.insertPersona(personas);
 							inicializar();
 							init();
 							this.conincidencia = "Grabado exitoso!";

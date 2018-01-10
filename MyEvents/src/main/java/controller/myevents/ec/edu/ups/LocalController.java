@@ -56,8 +56,7 @@ public class LocalController {
 	private Part fotoPerfil;	
 	
 	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
-	//private String directorioPerfil= "C:\Users\sesla\git\MyEvents\MyEvents\src\main\webapp\imagenes";
-	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
+	private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
 	/** Variable que contendra el nombre del archivo */
 	private String nombreArchivoPerfil;
 	private List<String> imagenes;
