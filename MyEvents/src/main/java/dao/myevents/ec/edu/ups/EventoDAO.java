@@ -20,15 +20,16 @@ import modelo.myevents.ec.edu.ups.Evento;
 @Stateless
 public class EventoDAO {
 
-	/** The em. */
+	/** Inyeccion de dependencias para el manejo de JPA */
 	@Inject
 	private EntityManager em;
 	
 	
 	/**
-	 * Actualizar evento.
+	 * Guardar el evento si existe el evento se actualiza o sino el evento se inserta
+	 * a través de la variables aux.
 	 *
-	 * @param parameto e de la instancia de la entidad Evento
+	 * @param aevento the aevento
 	 */
 	public void guardarEvento(Evento e) {
 		
@@ -43,20 +44,19 @@ public class EventoDAO {
 	
 	
 	/**
-	 * Insertar evento.
+	 * Insert A evento.
 	 *
-	 * @param e de la entidad Evento
+	 * @param ae del Evento
 	 */
 	public void insertarEvento(Evento e) {
 		em.persist(e);		
 	}
 	
 	/**
-	 * Update evento.
+	 * Actualiza el evento a traves del em.merge
 	 *
-	 * @param e the e
+	 * @param e del Evento
 	 */
-	
 	public void updateEvento(Evento e) {
 		System.out.println("Updating............"+e.getCodigo()+
 				e.getNombre());
@@ -64,12 +64,11 @@ public class EventoDAO {
 	} 
 	
 	/**
-	 * Leer evento.
+	 * leerEvento
 	 *
-	 * @param id the id
-	 * @return the evento
+	 * @param id
+	 * @return el evento encontrado a traves del id.
 	 */
-	
 	public Evento leerEvento(int id) {
 		
 		Evento e = em.find(Evento.class, id);

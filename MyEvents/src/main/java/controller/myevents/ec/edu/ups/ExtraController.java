@@ -103,12 +103,12 @@ public class ExtraController {
 		this.extras = extras;
 	}
 	
-/////////////Controller mantenimiento
+
 
 	/**
- * Load extra.
- */
-public void loadExtra(){
+	 *	 Load extra.
+	 */
+	public void loadExtra(){
 		
 		extras = extdao.listExtra();
 	}	
@@ -117,7 +117,7 @@ public void loadExtra(){
 	 * Load extra editar.
 	 *
 	 * @param id the id
-	 * @return the string
+	 * @return URl de navegación en JSF hacia listadoExtraAcciones.xhtml
 	 */
 	public String loadExtraEditar(int id){
 		
@@ -125,7 +125,7 @@ public void loadExtra(){
 		extra = extdao.leerExtra(id);
 		return "listadoExtraAcciones";
 		
-	}//fin editar
+	}
 	
 	/**
 	 * Elimina extra.
@@ -141,20 +141,17 @@ public void loadExtra(){
 	}
 	
 	/**
-	 * Guardar.
+	 * Guardar. La entidad extras de los locales.
 	 *
 	 * @return the string
 	 */
 	public String guardar(){
 		
-		System.out.println(extra);
-		
-		//PracticaDAO pdao= new PracticaDAO(); no es valido
-		
+		System.out.println(extra);		
 		extdao.guardarExtra(extra);
 		loadExtra();
 		
-		//return null;
+		
 		return "listadoExtra";
 	}
 }

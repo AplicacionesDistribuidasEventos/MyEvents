@@ -1,8 +1,9 @@
 package servicios.myevents.ec.edu.ups;
 
 public class Respuesta {
-	/*Permite establecer codigos con sus respectivos mensajes
-	 **/
+	
+	/**Permite establecer codigos con sus respectivos mensajes  */
+	
 	private int codigo;
 	private String mensaje;
 	

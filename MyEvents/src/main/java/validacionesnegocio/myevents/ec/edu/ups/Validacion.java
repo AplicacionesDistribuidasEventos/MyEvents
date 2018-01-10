@@ -5,15 +5,26 @@ import java.util.regex.Pattern;
 
 import controller.myevents.ec.edu.ups.PersonaController;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Validacion.
+ */
 public class Validacion {
+	
+	/** The Constant PATTERN_EMAIL. */
 	/*
 	 * Variable para la validacion de la cedula
 	 */
 	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";  
 	
-	/*Metodo util en la validacion de la cedula
-	 * */
+	/**
+	 * Validar cedula. Metodo util en la validacion de la cedula
+	 *
+	 * @param cedula the cedula
+	 * @return true, if successful
+	 */
+	
 	public boolean validarCedula(String cedula) {
 		System.out.println("CEDULA:  "+cedula);
 		String ced = cedula;
@@ -53,8 +64,13 @@ public class Validacion {
 		}
 	}
 	
-	/*Metodo para la validacion de un correo electronico
-	 * */
+	/**
+	 * Validar correo. Metodo para la validacion de un correo electronico
+	 *
+	 * @param correo the correo
+	 * @return true, if successful
+	 */
+
 	public boolean validarCorreo(String correo) {
 		System.out.println("CORREO:  "+correo);
 		String email = correo;

@@ -28,72 +28,44 @@ import modelo.myevents.ec.edu.ups.Persona;
 public class LocalController {
 
 	
-	/** The locdao. */
+	/** Inyeccion de dependecias a los DAO que se van a utilizar */
 	@Inject
 	private LocalDAO locdao;
 	
-	/** The pdao. */
 	@Inject
 	private PersonaDAO pdao;
 	
 
-	/** The local. */
+	/** Variables definidas para el manejo de los Locales */
 	private Local local; 
-	
-	/** The p. */
 	private Persona p ;
-	
-	
-
-	/** The listlocal. */
 	private List<Local> listlocal;
-	
-	/** The aux local. */
 	private Local auxLocal;
-	
-	/** The id. */
-	
 	private int id;
-	
-	/** The id 2. */
 	private int id2;
-
-	/** The latitud. */
 	
+	/** Variables para el manejo de mapas */
 	private String latitud="-1";
-	
-	/** The longitud. */
 	private String longitud="-1"; 
-	
-	/** The descripcion. */
 	private String descripcion;
-	
-	/** The elegimos. */
 	private String elegimos;
-	
-	/** The latituddes. */
 	private String latituddes;
-	
-	/** The longituddes. */
 	private String longituddes;
 	
-	/** The foto perfil. */
+	/** Variable donde se alamcenara la URL del path de la imagen en la BD */
 	private Part fotoPerfil;	
 	
 	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
 	//private String directorioPerfil= "C:\Users\sesla\git\MyEvents\MyEvents\src\main\webapp\imagenes";
-	private String directorioPerfil="C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
-
+	private String directorioPerfil="C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
+	/** Variable que contendra el nombre del archivo */
 	private String nombreArchivoPerfil;
-	
-	/** The imagenes. */
 	private List<String> imagenes;
 	
 	/**
 	 * The idlocal: Recuperado para la posible utilizacion para la edicion de un
-	 * local
-	 * 
-	 */
+	 * local */
+	  	 
 	public static int idLocalel;
 	
 	/**
@@ -103,7 +75,7 @@ public class LocalController {
 	private int idlel = 0;
   
 	/**
-	 * Inits the.
+	 * init().
 	 * Metodo para incializar los metodos de clase
 	 */
 	@PostConstruct
@@ -114,19 +86,9 @@ public class LocalController {
 		listlocal=locdao.listlocal();
 	}
 	
-	/*
-	 * Permite tomar el ID enviado de local, previamente a EDITAR
-	 * 
-	 * */
-	/*
-	public void before() {
-		if (!FacesContext.getCurrentInstance().isPostback()) {
-			System.out.println("PreRenderView: view parameters are available here");
-			System.out.println("IDLEL: " + idlel);
-			LocalController.idLocalel = idlel;
-		}
-	}
-	*/
+	/**
+	 * Geters y Seters de las variables definidas.
+	 */
 
 	public int getIdlel() {
 		return idlel;
@@ -137,333 +99,155 @@ public class LocalController {
 		loadLocalEditar(idlel);
 	}
 
-
-
-
-	/**
-	 * Gets the imagenes.
-	 *
-	 * @return the imagenes
-	 */
 	public List<String> getImagenes() {
 		return imagenes;
 	}
 
-
-	/**
-	 * Sets the imagenes.
-	 *
-	 * @param imagenes the new imagenes
-	 */
 	public void setImagenes(List<String> imagenes) {
 		this.imagenes = imagenes;
 	}
 
-
-	/**
-	 * Gets the foto perfil.
-	 *
-	 * @return the foto perfil
-	 */
 	public Part getFotoPerfil() {
 		return fotoPerfil;
 	}
 
-
-	/**
-	 * Sets the foto perfil.
-	 *
-	 * @param fotoPerfil the new foto perfil
-	 */
 	public void setFotoPerfil(Part fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
-
-
-
-	/**
-	 * Gets the nombre archivo perfil.
-	 *
-	 * @return the nombre archivo perfil
-	 */
+	
 	public String getNombreArchivoPerfil() {
 		return nombreArchivoPerfil;
 	}
 
-
-
-	/**
-	 * Sets the nombre archivo perfil.
-	 *
-	 * @param nombreArchivoPerfil the new nombre archivo perfil
-	 */
 	public void setNombreArchivoPerfil(String nombreArchivoPerfil) {
 		this.nombreArchivoPerfil = nombreArchivoPerfil;
 	}
 
 
-
-	/**
-	 * Gets the directorio perfil.
-	 *
-	 * @return the directorio perfil
-	 */
 	public String getDirectorioPerfil() {
 		return directorioPerfil;
 	}
-
-
-
-	/**
-	 * Sets the directorio perfil.
-	 *
-	 * @param directorioPerfil the new directorio perfil
-	 */
+	
 	public void setDirectorioPerfil(String directorioPerfil) {
 		this.directorioPerfil = directorioPerfil;
 	}
 
-
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 	
 	/**
-	 * Sets the id.
+	 * Seteamos el método insertarLocalAdmin() para manejar con el ID
 	 *
 	 * @param id the new id
 	 */
 	public void setId(int id) {
 		this.id = id;
-//		loadLocalEditar(id);
-		
 		loadId(id);
 		insertarLocalAdmin();
 	}
 	
-	/**
-	 * Gets the local.
-	 *
-	 * @return the local
-	 */
 	public Local getLocal() {
 		return local;
 	}
 	
-	/**
-	 * Sets the local.
-	 *
-	 * @param local the new local
-	 */
 	public void setLocal(Local local) {
 		this.local = local;
 	}
 	
-	/**
-	 * Gets the locdao.
-	 *
-	 * @return the locdao
-	 */
 	public LocalDAO getLocdao() {
 		return locdao;
 	}
 	
-	/**
-	 * Sets the locdao.
-	 *
-	 * @param locdao the new locdao
-	 */
 	public void setLocdao(LocalDAO locdao) {
 		this.locdao = locdao;
 	}
 	
-	/**
-	 * Gets the listlocal.
-	 *
-	 * @return the listlocal
-	 */
 	public List<Local> getListlocal() {
 		return listlocal;
 	}
 	
-	/**
-	 * Sets the listlocal.
-	 *
-	 * @param listlocal the new listlocal
-	 */
 	public void setListlocal(List<Local> listlocal) {
 		this.listlocal = listlocal;
 	}
 	
-	/**
-	 * Gets the aux local.
-	 *
-	 * @return the aux local
-	 */
 	public Local getAuxLocal() {
 		return auxLocal;
 	}
 	
-	/**
-	 * Sets the aux local.
-	 *
-	 * @param auxLocal the new aux local
-	 */
 	public void setAuxLocal(Local auxLocal) {
 		this.auxLocal = auxLocal;
 	}
 	
-	/**
-	 * Gets the latitud.
-	 *
-	 * @return the latitud
-	 */
 	public String getLatitud() {
 		return latitud;
 	}
 	
-	/**
-	 * Sets the latitud.
-	 *
-	 * @param latitud the new latitud
-	 */
 	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 	
-	/**
-	 * Gets the longitud.
-	 *
-	 * @return the longitud
-	 */
 	public String getLongitud() {
 		return longitud;
 	}
 	
-	/**
-	 * Sets the longitud.
-	 *
-	 * @param longitud the new longitud
-	 */
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 	
-	/**
-	 * Gets the descripcion.
-	 *
-	 * @return the descripcion
-	 */
+
 	public String getDescripcion() {
 		return descripcion;
 	}
 	
-	/**
-	 * Sets the descripcion.
-	 *
-	 * @param descripcion the new descripcion
-	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	
-	/**
-	 * Gets the elegimos.
-	 *
-	 * @return the elegimos
-	 */
 	public String getElegimos() {
 		return elegimos;
 	}
 	
-	/**
-	 * Sets the elegimos.
-	 *
-	 * @param elegimos the new elegimos
-	 */
 	public void setElegimos(String elegimos) {
 		this.elegimos = elegimos;
 	}
 	
-	/**
-	 * Gets the latituddes.
-	 *
-	 * @return the latituddes
-	 */
 	public String getLatituddes() {
 		return latituddes;
 	}
 	
-	/**
-	 * Sets the latituddes.
-	 *
-	 * @param latituddes the new latituddes
-	 */
 	public void setLatituddes(String latituddes) {
 		this.latituddes = latituddes;
 	}
 	
-	/**
-	 * Gets the longituddes.
-	 *
-	 * @return the longituddes
-	 */
 	public String getLongituddes() {
 		return longituddes;
 	}
 	
-	/**
-	 * Sets the longituddes.
-	 *
-	 * @param longituddes the new longituddes
-	 */
 	public void setLongituddes(String longituddes) {
 		this.longituddes = longituddes;
 	}
 
-
-	/**
-	 * Gets the id 2.
-	 *
-	 * @return the id 2
-	 */
 	public int getId2() {
 		return id2;
 	}
   
-
-	/**
-	 * Sets the id 2.
-	 *
-	 * @param id2 the new id 2
-	 */
 	public void setId2(int id2) {
 		this.id2 = id2;
 		
 	} 
 
-
-	/**
-	 * Load local.
-	 */
 	public void loadLocal() {
 		listlocal=locdao.listlocal();
 	}
 	
-	
-
 
 	/**
-	 * Load local editar.
+	 * Load local editar. Este método es llamado para hacer la edicion de local.
+	 * Método utilozado para el SUPERADMIN.
 	 *
 	 * @param id the id
-	 * @return the string
+	 * @return navegabilidad a traves de JSF CreaLocal.xhtml 
 	 */
 	public String loadLocalEditar(int idledit) {
 		local = locdao.leerLocal(idledit);
@@ -471,7 +255,8 @@ public class LocalController {
 	}
 	
 	/**
-	 * Load id.
+	 * Recuperar el Id de la navegabilidad del local con id2 para 
+	 * manejar el viewParam.
 	 *
 	 * @param id the id
 	 */
@@ -481,9 +266,11 @@ public class LocalController {
 
 	
 	/**
-	 * Guardar local admin.
-	 *
-	 * @return the string
+	 * insertarLocalAdmin(). Método para ingresar un local referente a la personas logueada al sistema.
+	 * Por lo que se utiliza el dao de la persona para actualizar el registro. 
+	 *Inicalmente se carga una foto de perfil por defecto si en el caso no se eligiera.
+	 *Método utilizado para el Admin del local.
+	 * @return URL de navegabilidad hacia AccionesLocal.xhtml el cual contiene las acciones sobre ese local.
 	 */
 	public String insertarLocalAdmin() {
 		
@@ -505,9 +292,10 @@ public class LocalController {
 
 	
 	/**
-	 * Guardar local.
+	 * Guardar local. Método para insertar unicamente un local.
+	 * Utilizado para el SUPERADMIN.
 	 *
-	 * @return the string
+	 * @return URL null se renderiza la misma pagina.
 	 */
 	public String insertar() {
 	
@@ -528,9 +316,9 @@ public class LocalController {
 	}
 
 	/**
-	 * Actualizar.
+	 * Actualizar.Método para actulizar un local.
 	 *
-	 * @return the string
+	 * @return URL null se renderiza la misma pagina.
 	 */
 	public String actualizar() {
 		locdao.updateLocal(local);
@@ -539,7 +327,7 @@ public class LocalController {
 	}
 	
 	/**
-	 * Leer.
+	 * Leer.Este metodo lee cada local por ID recibido.
 	 *
 	 * @param id the id
 	 * @return the string
@@ -562,9 +350,9 @@ public class LocalController {
 	}
 	
 	/**
-	 * Lista locales.
+	 * Lista locales. Contiene un lista de todos los locales ingresados que son leidos desde la BD.
 	 *
-	 * @return the list
+	 * @return una lista de todos los locales.
 	 */
 	public List<Local> listaLocales(){
 		listlocal = locdao.listlocal();
@@ -572,7 +360,9 @@ public class LocalController {
 	}
 	
 	/**
-	 * Save foto local.
+	 * Save foto local. Método para almacenar una copia a traves de la propiedad InputStream y File.copy.
+	 * enviando como parámeto @directorioPerfil , @nombreArchivoPerfil, utilizados para almacenar la URL
+	 * en la BD.
 	 *
 	 * @return the string
 	 */
@@ -595,17 +385,17 @@ public class LocalController {
 	}
 	
 	/**
-	 * Sets the ea id.
+	 * Método para setear un ID.
 	 *
-	 * @param idL the new ea id
+	 * @param idL
 	 */
 	public void seteaId(int idL) {
 		System.out.println("Este es el id qeu se esta seteando" + idL);
 		LocalController.idLocalel=idL;	
-		System.out.println("Imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + LocalController.idLocalel);
+		System.out.println("Imprimee" + LocalController.idLocalel);
 	}
 	
-	/**
+	/**AUN EN DESARROLLOO.
 	 * Cargar mapa.
 	 *
 	 * @param l the l

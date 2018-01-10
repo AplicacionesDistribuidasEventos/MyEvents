@@ -17,14 +17,15 @@ import modelo.myevents.ec.edu.ups.*;
 @Stateless
 public class CategoriaDAO {
 	
-	/** The em. */
+	/** Inyeccion de dependencias para el manejo de JPA */
 	@Inject
 	private EntityManager em;
 	
 	/**
-	 * Actualizar categoria.
+	 * Guardar el Categoria si existe la Categoria se actualiza o sino la Categoria se inserta
+	 * a través de la variables aux.
 	 *
-	 * @param c the c
+	 * @param aevento the aevento
 	 */
 	public void guardarCategoria(Categoria c){
 		
@@ -46,7 +47,7 @@ public class CategoriaDAO {
 	/**
 	 * Insetar categoria.
 	 *
-	 * @param c the c
+	 * @param c de Categoria.
 	 */
 	public void insetarCategoria(Categoria c){
 		
@@ -56,9 +57,9 @@ public class CategoriaDAO {
 	
 
 	/**
-	 * Actualizar categoria.
+	 * Actualiza la categoria a traves del em.merge
 	 *
-	 * @param c the c
+	 * @param c de Categoria
 	 */
 	public void actualizarCategoria(Categoria c){
 		
@@ -82,11 +83,10 @@ public class CategoriaDAO {
 	
 
 	/**
-	 * Eliminar categoria.
+	 * Eliminar categoria segun el id enviado.
 	 *
-	 * @param id the id
+	 * @param id
 	 */
-	
 	public void eliminarCategoria(int id){
 		
 		Categoria c = leerCategoria(id);
@@ -95,9 +95,9 @@ public class CategoriaDAO {
 	}
 	
 	/**
-	 * List categoria.
+	 * listCategoria()
 	 *
-	 * @return the list
+	 * @return Listado de todos las categorias.
 	 */
 	public List<Categoria> listCategoria(){
 		System.out.println("CARGAR CATEGORIASS");
@@ -110,7 +110,11 @@ public class CategoriaDAO {
 		}
 		return listado;
 	}
-	
+	/**
+	 * listSoloCategorias()
+	 *
+	 * @return Listado de todos las categorias.
+	 */
 	public List<Categoria> listSoloCategorias(){
 		System.out.println("Select solo Categorias");
 		Query query = em.createQuery("SELECT c FROM Categoria c", Categoria.class);
@@ -137,7 +141,11 @@ public class CategoriaDAO {
 		return listado;
 	}
 	*/
-	
+	/**
+	 * listCategoriaID enviando como parametor id
+	 *
+	 * @return Listado de todos las categorias segun el id.
+	 */
 	public List<Categoria> listCategoriaID(int id){
 		System.out.println("listCategoriaID "+id);
 		String jpql = "SELECT c FROM Categoria c WHERE c.id = '"+id+"'";
