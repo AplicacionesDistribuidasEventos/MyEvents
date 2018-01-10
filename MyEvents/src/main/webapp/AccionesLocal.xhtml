@@ -26,12 +26,18 @@
 				value="#{localController.listaLocales()}" border="2" class="table"
 				styleClass="table table-striped table-bordered">
 
-
-				<h:column Style="color: black">
+		<h:column Style="color: black">
 					<f:facet name="header">Codigo</f:facet>
 			#{listalocales.codigo}
 		</h:column>
 
+				
+		<h:column Style="color: black">
+					<f:facet name="header">Salon</f:facet>
+			 <img src="#{listalocales.fotoPerfil}" class="img-rounded"  width="125" height="125"/>
+		</h:column>
+           
+		
 				<h:column Style="color: black">
 					<f:facet name="header">Nombre</f:facet>
 			#{listalocales.nombre}
@@ -42,10 +48,6 @@
 			#{listalocales.descripcion}
 		</h:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Capacidad</f:facet>
-			#{listalocales.capacidad}
-		</h:column>
 
 				<h:column Style="color: black">
 					<f:facet name="header">Puntuacion</f:facet>
@@ -62,15 +64,7 @@
 			#{listalocales.costo}
 		</h:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Latitud</f:facet>
-			#{listalocales.latitud}
-		</h:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Longitud</f:facet>
-			#{listalocales.longitud}
-		</h:column>
 
 				<h:column Style="color: black">
 					<f:facet name="header" Style="color: black">

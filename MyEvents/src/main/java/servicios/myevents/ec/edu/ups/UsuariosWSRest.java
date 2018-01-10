@@ -10,20 +10,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import dao.myevents.ec.edu.ups.CategoriaDAO;
+import dao.myevents.ec.edu.ups.LocalDAO;
 import dao.myevents.ec.edu.ups.PersonaDAO;
 import modelo.myevents.ec.edu.ups.Categoria;
+import modelo.myevents.ec.edu.ups.Local;
 import modelo.myevents.ec.edu.ups.Persona;
 
 @Path("usuarios")
 public class UsuariosWSRest {
+	
+	/** Inyeccion de dependecias */
 	@Inject
 	private PersonaDAO pdao;
-	
 	@Inject
 	private CategoriaDAO cdao;
+	@Inject
+	private LocalDAO locdao;
 	
-	/*Mostrar el listado de usuarios
-	 * */
+	
+	/**Mostrar el listado de usuarios
+	 */
 	@GET
 	@Path("/listado-users")
 	@Produces("application/json")
@@ -32,8 +38,8 @@ public class UsuariosWSRest {
 		return lpersona;
 	}
 	
-	/*Mostrar el listado de las categorias
-	 * */
+	/**Mostrar el listado de las categorias
+	 */
 	@GET
 	@Path("/listado-categorias")
 	@Produces("application/json")
@@ -43,8 +49,8 @@ public class UsuariosWSRest {
 	}
 	
 	
-	/*Guardar Usuario
-	 * */
+	/**Guardar Usuario
+	 */
 	@POST
 	@Path("crear-usuarios")
 	@Produces("application/json")
@@ -67,8 +73,8 @@ public class UsuariosWSRest {
 	}
 	
 	
-	/*Utilizado para el login
-	 * */
+	/**Utilizado para el login
+	 */
 	@POST
 	@Path("login")
 	@Produces("application/json")
@@ -77,5 +83,14 @@ public class UsuariosWSRest {
 		return pdao.login(p.getCorreo(), p.getContrasenia());
 	}
 	
+	/**Mostrar el listado de los locales
+	 */
+	@GET
+	@Path("/listado-locales")
+	@Produces("application/json")
+	public List<Local> listlocal(){
+		List<Local> listlocales = locdao.listlocal(); 
+		return listlocales;
+	}
 
 }

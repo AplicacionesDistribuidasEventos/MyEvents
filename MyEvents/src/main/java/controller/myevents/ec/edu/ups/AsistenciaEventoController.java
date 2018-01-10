@@ -19,21 +19,21 @@ import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 @ManagedBean
 public class AsistenciaEventoController {
 	
-	/** The asistenciaevento. */
-	private AsistenciaEvento asistenciaevento;
-	
-	/** The lasistenciaevento. */
-	private List<AsistenciaEvento> lasistenciaevento;
-	
-	/** The id. */
-	private int id;
-	
-	/** The aedao. */
+	/** Inyeccion de dependecias a los DAO que se van a utilizar */
 	@Inject
 	private AsistenciaEventoDAO aedao;
 	
+	/** Variables definidas para el manejo de los Locales */
+	private int id;
+	
+	/** Variables de lista y de objetos utilizados */
+	private AsistenciaEvento asistenciaevento;
+	private List<AsistenciaEvento> lasistenciaevento;
+	
+	
 	/**
-	 * Inits the.
+	 * init().
+	 * Metodo para incializar los metodos de clase
 	 */
 	@PostConstruct
 	public void init() {
@@ -42,67 +42,38 @@ public class AsistenciaEventoController {
 	}
 	
 	/**
-	 * Gets the id.
-	 *
-	 * @return the id
+	 * Geters y Seters de las variables definidas.
 	 */
 	public int getId() {
 		return id;
 	}
-	
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
+
 	public void setId(int id) {
 		this.id = id;
 		cargarEstado(id);
 	}
 
 
-
-	/**
-	 * Gets the asistenciaevento.
-	 *
-	 * @return the asistenciaevento
-	 */
-
 	public AsistenciaEvento getAsistenciaevento() {
 		return asistenciaevento;
 	}
 	
-	/**
-	 * Sets the asistenciaevento.
-	 *
-	 * @param asistenciaevento the new asistenciaevento
-	 */
 	public void setAsistenciaevento(AsistenciaEvento asistenciaevento) {
 		this.asistenciaevento = asistenciaevento;
 	}
 	
-	/**
-	 * Gets the lasistenciaevento.
-	 *
-	 * @return the lasistenciaevento
-	 */
 	public List<AsistenciaEvento> getLasistenciaevento() {
 		return lasistenciaevento;
 	}
 	
-	/**
-	 * Sets the lasistenciaevento.
-	 *
-	 * @param lasistenciaevento the new lasistenciaevento
-	 */
 	public void setLasistenciaevento(List<AsistenciaEvento> lasistenciaevento) {
 		this.lasistenciaevento = lasistenciaevento;
 	}
 
 	/**
-	 * Crear.
+	 * Crear. Inserta las AsistenciaEventos del local
 	 *
-	 * @return the string
+	 * @return URL de navegacion
 	 */
 	public String crear() {
 		//aedao.insertAEvento(asistenciaevento);
@@ -111,10 +82,10 @@ public class AsistenciaEventoController {
 	}
 	
 	/**
-	 * Leer.
+	 * Leer. Método para leer el codigo de la entidad AsistenciaEvento
 	 *
-	 * @param id the id
-	 * @return the string
+	 * @param id
+	 * @return null
 	 */
 	public String leer(int id) {
 		asistenciaevento = aedao.selectAEvento(id);
@@ -122,10 +93,10 @@ public class AsistenciaEventoController {
 	}
 	
 	/**
-	 * Eliminar.
+	 * Eliminar. Aistencia evento
 	 *
 	 * @param id the id
-	 * @return the string
+	 * @return null
 	 */
 	public String eliminar(int id) {
 		aedao.removeAEvento(id);
@@ -135,7 +106,7 @@ public class AsistenciaEventoController {
 	/**
 	 * Lista asistencia evento.
 	 *
-	 * @return the list
+	 * @return the list de todas las asitencias
 	 */
 	public List<AsistenciaEvento> listaAsistenciaEvento() {
 		lasistenciaevento = aedao.listAEvento();

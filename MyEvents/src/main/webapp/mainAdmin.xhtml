@@ -19,19 +19,49 @@
       
 <ui:define name="contenido">
 
-<h:form>
+<h:form enctype="multipart/form-data">
  
-       <p:fileUpload fileUploadListener="#{localController.cargarArchivo()}" mode="advanced" dragDropSupport="false"
-                  sizeLimit="1000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                  
-        <p:commandButton value="Subir" icon="ui-icon-star" action="#{localController.registarImgLocal()}" >
-                  </p:commandButton>
-                  
-            <p:galleria value="#{localController.imagenes}" var="image" panelWidth="500"
-                  panelHeight="313" showCaption="true">
-                  <p:graphicImage value="temp/#{image}"
-                       alt="Image Description for #{image}" title="#{image}" />
-            </p:galleria>
+      
+            
+          <h2>Mis salones</h2>
+			<br/>
+            <br/>
+			<h:dataTable value="#{personaController.listLocales}" var="locales"
+				class="table" styleClass="table table-striped table-bordered">
+			<h:column Style="color: black">
+					<f:facet name="header">Salon</f:facet>
+			 <img src="#{locales.fotoPerfil}" class="img-rounded"  width="125" height="125"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nombre del Salon</f:facet>
+				#{locales.nombre}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Capacidad</f:facet>
+				#{locales.capacidad} 
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Costo</f:facet> 
+				#{locales.costo}      
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Descripcion</f:facet>
+				#{locales.descripcion}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Puntuacion</f:facet>
+				#{locales.puntuacion}
+				</h:column>
+ 
+			</h:dataTable>
+
+			
+            
        </h:form>
 
 

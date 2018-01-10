@@ -21,43 +21,30 @@ import modelo.myevents.ec.edu.ups.Persona;
 @ManagedBean
 public class CategoriaController {
 	
-	/** The catedao. */
+	/** Inyeccion de dependecias a los DAO que se van a utilizar */
 	@Inject
 	private CategoriaDAO catedao;
 	
-	/** The edao. */
 	@Inject
 	private EventoDAO edao;
 	
-	/** The categoria. */
-	private Categoria categoria = null;
-	
-	/** The categorias. */
-	private List<Categoria> categorias;
-	
-	/** The id. */
+	/** Variables definidas para el manejo de los Locales */
 	private int id;
-
-	/*Recuperar los objetos eventos segun la categoria*/
-	private List<Categoria> listCatID;
-	private List<CategoriaEventos> catevelist;
-	
 	private String cabecera_cat;
 
+
+	/** Variables de lista y de objetos utilizados */
+	private Categoria categoria = null;
+	private List<Categoria> categorias;
+	private List<CategoriaEventos> catevelist;
+	
+	/**Recuperar los objetos eventos segun la categoria*/
+	private List<Categoria> listCatID;
 	
 	
-	public String getCabecera_cat() {
-		return cabecera_cat;
-	}
-
-
-	public void setCabecera_cat(String cabecera_cat) {
-		this.cabecera_cat = cabecera_cat;
-	}
-
-
 	/**
-	 * Inits the.
+	 * init().
+	 * Metodo para incializar los metodos de clase
 	 */
 	@PostConstruct
 	public void init(){
@@ -68,9 +55,68 @@ public class CategoriaController {
 //		categorias = new ArrayList<Categoria>();
 
 	}
+	
+	/**
+	 * Geters y Seters de las variables definidas.
+	 */
+	public String getCabecera_cat() {
+		return cabecera_cat;
+	}
 
-/*DATOS CATEGORIA PARA EL USUARIO
- * */
+
+	public void setCabecera_cat(String cabecera_cat) {
+		this.cabecera_cat = cabecera_cat;
+	}
+
+
+	public List<CategoriaEventos> getCatevelist() {
+		return catevelist;
+	}
+
+	public void setCatevelist(List<CategoriaEventos> catevelist) {
+		this.catevelist = catevelist;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+		loadCategoriaEditar(id);//parametros
+	}
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+	
+	public void loadCategoria(){
+		
+		categorias = catedao.listCategoria();
+	}
+	
+
+	/**
+	 * Datos categoria.
+	 *
+	 * @param codigo the codigo
+	 * @return the string
+	 */
+	/**DATOS CATEGORIA PARA EL USUARIO
+	 */
 	public String datosCategoria(int codigo){
 		catevelist.clear();
 		CategoriaEventos ce = new CategoriaEventos();
@@ -118,88 +164,13 @@ public class CategoriaController {
 		return "eventosCategoria";
 	}
 	
-	public List<CategoriaEventos> getCatevelist() {
-		return catevelist;
-	}
-
-	public void setCatevelist(List<CategoriaEventos> catevelist) {
-		this.catevelist = catevelist;
-	}
-
-
-	
-	
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
-	public void setId(int id) {
-		this.id = id;
-		loadCategoriaEditar(id);//parametros
-	}
-	
-	/**
-	 * Gets the categoria.
-	 *
-	 * @return the categoria
-	 */
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	
-	/**
-	 * Sets the categoria.
-	 *
-	 * @param categoria the new categoria
-	 */
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	
-	/**
-	 * Gets the categorias.
-	 *
-	 * @return the categorias
-	 */
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	/**
-	 * Sets the categorias.
-	 *
-	 * @param categorias the new categorias
-	 */
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-	
-	/**
-	 * Load categoria.
-	 */
-	public void loadCategoria(){
-		
-		categorias = catedao.listCategoria();
-	}
 	
 	
 	/**
 	 * Load categoria editar.
 	 *
 	 * @param id the id
-	 * @return the string
+	 * @return URL para cargar las categorias listadoCategoriaAcciones.xhtml
 	 */
 	public String loadCategoriaEditar(int id){
 		
@@ -213,7 +184,7 @@ public class CategoriaController {
 	 * Elimina categoria.
 	 *
 	 * @param id the id
-	 * @return the string
+	 * @return URL para eliminar la categoria en JSF segun el parámetro enviado id.
 	 */
 	public String eliminaCategoria(int id){
 		
@@ -223,9 +194,9 @@ public class CategoriaController {
 	}
 	
 	/**
-	 * Guardar.
+	 * Guardar. Método para insertar categorias.
 	 *
-	 * @return the string
+	 * @return URl para ver el listado de las categorias insertadas definidas en listadoCategoria.xhtml
 	 */
 	public String guardar(){
 		
@@ -236,7 +207,6 @@ public class CategoriaController {
 		//return null;
 		return "listadoCategoria";
 	}
-	
 
 	/**
 	 * Agrega categoria.
@@ -245,11 +215,9 @@ public class CategoriaController {
 	 */
 
 	public String agregaCategoria(){
-		
 		categoria.getEventos().add(new Evento());
 		return null;
 	}
-	
 	
 
 }

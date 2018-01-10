@@ -17,37 +17,37 @@ import modelo.myevents.ec.edu.ups.Persona;
 @Stateless
 public class PersonaDAO {
 
-	/** The em. */
+	/** Inyeccion de dependencias para el manejo de JPA */
 	@Inject
 	private EntityManager em;
 
 
 	/**
-	 * Insert persona.
+	 * insertPersona
 	 *
-	 * @param p the p
+	 * @param p de Persona
 	 */
+
 	
 	public void insertPersona(Persona p) {
 		em.persist(p);
 	}
 
 	/**
-	 * Update persona.
+	 * Actualiza la persona a traves del em.merge
 	 *
-	 * @param p the p
+	 * @param p de Persona
 	 */
-	
 	public void updatePersona(Persona p) {
 		System.out.println("Updating..."+p.getId()+p.getCorreo()+p.getContrasenia());
 		em.merge(p);
 	}
 	
 	/**
-	 * Select persona.
+	 * selectAEvento
 	 *
-	 * @param id the id
-	 * @return the persona
+	 * @param id
+	 * @return la persona encontrado a traves del id.
 	 */
 	public Persona selectPersona(int id) {
 		Persona p = em.find(Persona.class, id);
@@ -57,7 +57,7 @@ public class PersonaDAO {
 	/**
 	 * Delete persona.
 	 *
-	 * @param id the id
+	 * @param id 
 	 */
 	
 	public void deletePersona(int id) {
@@ -68,7 +68,7 @@ public class PersonaDAO {
 	/**
 	 * List personas.
 	 *
-	 * @return the list
+	 * @return una list de personas
 	 */
 	
 	public List<Persona> listPersonas() {
@@ -83,10 +83,12 @@ public class PersonaDAO {
 	}
 	
 	/**
-	 * Guardar.
+	 * Guardar la persona si existe la persona se actualiza o sino la persona se inserta
+	 * a través de la variables aux.
 	 *
-	 * @param p the p
+	 * @param p persona.
 	 */
+	
 	public void guardar (Persona p) {
 		try {
 		Persona aux = selectPersona(p.getId());
@@ -104,11 +106,11 @@ public class PersonaDAO {
 	}
 	
 	/**
-	 * Login.
+	 * Login. SQL para encontrar a la personas a través de los parámetros.
 	 *
 	 * @param user the user
 	 * @param pass the pass
-	 * @return the list
+	 * @return una list de personas con esos parámetros
 	 */
 	public List<Persona> login(String user, String pass) {
 		String sql = "Select p from Persona p WHERE p.correo = '"+user+"' AND p.contrasenia='"+pass+"'";

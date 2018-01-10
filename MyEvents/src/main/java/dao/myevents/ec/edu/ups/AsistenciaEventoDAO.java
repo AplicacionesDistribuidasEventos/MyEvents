@@ -16,13 +16,14 @@ import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 @Stateless
 public class AsistenciaEventoDAO {
 
-	/** The em. */
+	/** Inyeccion de dependencias para el manejo de JPA */
 	@Inject
 	private EntityManager em;
 	
 
 	/**
-	 * Actualizar AsistenciaEvento.
+	 * Guardar el evento si existe el eventoAsis se actualiza o sino el evento se inserta
+	 * a través de la variables aux.
 	 *
 	 * @param aevento the aevento
 	 */
@@ -38,9 +39,9 @@ public class AsistenciaEventoDAO {
 	
 
 	/**
-	 * Insert A evento.
+	 * Insert A eventoAsis.
 	 *
-	 * @param ae the ae
+	 * @param ae de AsistenciaEvento
 	 */
 	public void insertAEvento(AsistenciaEvento ae) {
 		em.persist(ae);
@@ -49,9 +50,9 @@ public class AsistenciaEventoDAO {
 
 
 	/**
-	 * Update A evento.
+	 * Actualiza el eventoAsis a traves del em.merge
 	 *
-	 * @param ae the ae
+	 * @param ae de AsistenciaEvento
 	 */
 	public void updateAEvento(AsistenciaEvento ae) {
 		em.merge(ae);
@@ -59,9 +60,9 @@ public class AsistenciaEventoDAO {
 	}
 
 	/**
-	 * Removes the A evento.
+	 * Eliminar el eventoAsis segun el id enviado.
 	 *
-	 * @param id the id
+	 * @param id
 	 */
 	public void removeAEvento(int id) {
 		em.remove(selectAEvento(id));
@@ -70,10 +71,10 @@ public class AsistenciaEventoDAO {
 
 
 	/**
-	 * Select A evento.
+	 * selectAEvento
 	 *
-	 * @param id the id
-	 * @return the asistencia evento
+	 * @param id
+	 * @return el eventoAsis encontrado a traves del id.
 	 */
 	public AsistenciaEvento selectAEvento(int id) {
 		AsistenciaEvento aevento = em.find(AsistenciaEvento.class, id);
@@ -81,9 +82,9 @@ public class AsistenciaEventoDAO {
 	}
 
 	/**
-	 * List A evento.
+	 * listAEvento()
 	 *
-	 * @return the list
+	 * @return Listado de todos los eventos
 	 */
 	public List<AsistenciaEvento> listAEvento() {
 		String sql = "select aev from AsistenciaEvento aev";
