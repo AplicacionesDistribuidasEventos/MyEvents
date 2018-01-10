@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import dao.myevents.ec.edu.ups.CategoriaDAO;
 import dao.myevents.ec.edu.ups.EventoDAO;
+import dao.myevents.ec.edu.ups.PersonaDAO;
+import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 import modelo.myevents.ec.edu.ups.Categoria;
 import modelo.myevents.ec.edu.ups.CategoriaEventos;
 import modelo.myevents.ec.edu.ups.Evento;
@@ -19,15 +23,13 @@ import modelo.myevents.ec.edu.ups.Persona;
  * The Class CategoriaController.
  */
 @ManagedBean
+@SessionScoped
 public class CategoriaController {
 	
 	/** Inyeccion de dependecias a los DAO que se van a utilizar */
 	@Inject
 	private CategoriaDAO catedao;
-	
-	@Inject
-	private EventoDAO edao;
-	
+
 	/** Variables definidas para el manejo de los Locales */
 	private int id;
 	private String cabecera_cat;
@@ -117,10 +119,10 @@ public class CategoriaController {
 	 */
 	/**DATOS CATEGORIA PARA EL USUARIO
 	 */
-	public String datosCategoria(int codigo){
+	public String datosCategoria(int codig){
 		catevelist.clear();
 		CategoriaEventos ce = new CategoriaEventos();
-		listCatID = catedao.listCategoriaID(codigo);
+		listCatID = catedao.listCategoriaID(codig);
 		for(Categoria c : listCatID) {
 			System.out.println("NEXT CE NOM "+c.getNombre());
 			if(c.getEventos().isEmpty()) {
@@ -135,33 +137,16 @@ public class CategoriaController {
 				for(Evento e : c.getEventos()) {
 					ce = new CategoriaEventos();
 					ce.setCategoria(c.getNombre());
-					ce.setDescripcion_eve(e.getDescripcion());
-					ce.setFecha(e.getFechaEvento().toString());
-					ce.setCosto(String.valueOf(e.getCosto()));
-					catevelist.add(ce);
-				}
-			}
-/*
-		catevelist.clear();
-		listCatID = catedao.listCategoriaID(codigo);
-		CategoriaEventos ce;
-		for(Categoria c : listCatID) {
-			if(c.getEventos().isEmpty()) {
-				System.out.println("SIN EVENTOS");
-			}else {
-				for(Evento e : c.getEventos()) {
-					System.out.println("CARGADO EVENTOS SEGUN CATEGORIA");
-					ce = new CategoriaEventos();
 					cabecera_cat = c.getNombre();
+					ce.setCodigo_eve(e.getCodigo());
 					ce.setDescripcion_eve(e.getDescripcion());
 					ce.setFecha(e.getFechaEvento().toString());
 					ce.setCosto(String.valueOf(e.getCosto()));
 					catevelist.add(ce);
 				}
 			}
-*/
 		}
-		return "eventosCategoria";
+		return "eventosCategoria.xhtml";
 	}
 	
 	
@@ -218,7 +203,6 @@ public class CategoriaController {
 		categoria.getEventos().add(new Evento());
 		return null;
 	}
-	
 
 }
 

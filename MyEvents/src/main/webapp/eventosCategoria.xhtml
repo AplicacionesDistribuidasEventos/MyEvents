@@ -12,17 +12,12 @@
 
 	<!-- Definicion del contenido respecto a la plantilla -->
 	<ui:define name="contenido">
+
+
+
 		<h:form>
-			<h:outputText value="El registro no contiene datos"
-				rendered="#{empty  categoriaController.catevelist}"></h:outputText>
 			<h:dataTable var="lEventos" style="color:black"
 				value="#{categoriaController.catevelist}" border="2" class="table">
-<!--
-				<h:column Style="color: black">
-					<f:facet name="header">Descripcion Categoria</f:facet>
-			#{lEventos.descripcion_cat}
-		</h:column>
-		 -->
 
 				<h:column Style="color: black">
 					<f:facet name="header">Evento</f:facet>
@@ -39,7 +34,20 @@
 			#{lEventos.fecha}
 		</h:column>
 
+				<h:column>
+					<f:facet name="header">Asistencia</f:facet>
+					<h:commandButton
+						action="#{asistenciaEventoController.confirmarEstadoAsistencia(lEventos.codigo_eve,true)}"
+						value="Asistire"></h:commandButton>
+					<h:commandButton
+						action="#{asistenciaEventoController.confirmarEstadoAsistencia(lEventos.codigo_eve,false)}"
+						value="No asistire"></h:commandButton>
+				</h:column>
+
 			</h:dataTable>
 		</h:form>
+
+
+
 	</ui:define>
 </ui:composition>

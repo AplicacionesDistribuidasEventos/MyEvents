@@ -92,6 +92,20 @@ public class AsistenciaEventoDAO {
 		List<AsistenciaEvento> laevento = query.getResultList();
 		return laevento;
 	}
+	
+	public int maxId() {
+		String jpql = "Select ae from AsistenciaEvento ae";
+		TypedQuery<AsistenciaEvento> q = em.createQuery(jpql, AsistenciaEvento.class);
+		List<AsistenciaEvento> ael = q.getResultList();
+		if(ael.size()==0) {
+			return 1;
+		}else {
+			String jpqlm = "Select max(ae.codigo) From AsistenciaEvento ae";
+			int id = (int) em.createQuery(jpqlm).getSingleResult();
+			int idnew = id + 1;
+			return idnew;
+		}
+	}
 
 	
 }

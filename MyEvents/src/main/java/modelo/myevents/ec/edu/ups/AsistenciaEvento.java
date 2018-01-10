@@ -18,7 +18,7 @@ public class AsistenciaEvento {
 	/** The codigo. */
 	@Id
 	@Column(name="aev_codigo")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int codigo;
 	
 	/** The estado. */

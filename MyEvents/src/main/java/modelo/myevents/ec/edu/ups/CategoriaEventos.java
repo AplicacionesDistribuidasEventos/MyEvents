@@ -1,13 +1,22 @@
 package modelo.myevents.ec.edu.ups;
 
 public class CategoriaEventos {
-	private String descripcion_cat;
+	private int codigo_eve;
+//	private String descripcion_cat;
 	private String descripcion_eve;
 	private String fecha;
 	private String costo;
 
 	/*Nombre de la categoria*/
 	private String categoria;
+	
+	public int getCodigo_eve() {
+		return codigo_eve;
+	}
+
+	public void setCodigo_eve(int codigo_eve) {
+		this.codigo_eve = codigo_eve;
+	}
 	
 	public String getCategoria() {
 		return categoria;
@@ -16,14 +25,6 @@ public class CategoriaEventos {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
-/*public String getDescripcion_cat() {
-		return descripcion_cat;
-	}
-
-	public void setDescripcion_cat(String descripcion_cat) {
-		this.descripcion_cat = descripcion_cat;
-	}*/
 
 	public String getDescripcion_eve() {
 		return descripcion_eve;
@@ -51,9 +52,8 @@ public class CategoriaEventos {
 
 	@Override
 	public String toString() {
-		return "CategoriaEventos [descripcion_cat=" + descripcion_cat + ", descripcion_eve=" + descripcion_eve
-				+ ", fecha=" + fecha + ", costo=" + costo + ", categoria=" + categoria + "]";
+		return "CategoriaEventos [codigo_eve=" + codigo_eve + ", descripcion_eve=" + descripcion_eve + ", fecha="
+				+ fecha + ", costo=" + costo + ", categoria=" + categoria + "]";
 	}
-	
 
 }
