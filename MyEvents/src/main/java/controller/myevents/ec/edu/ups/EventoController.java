@@ -245,7 +245,7 @@ public class EventoController {
 	 */
 	public String loadEventoEditar(int id) {
 
-		evento = evendao.leerEvento(id);
+		evento = evendao.leerEventoSalones(id);
 
 		return "CrearEvento";
 	}

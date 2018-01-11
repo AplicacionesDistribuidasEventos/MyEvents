@@ -74,6 +74,13 @@ public class EventoDAO {
 		return e;
 
 	}
+	
+	public Evento leerEventoSalones(int id) {
+
+		Evento e = em.find(Evento.class, id);
+		return e;
+
+	}
 
 	/**
 	 * Delete evento. Remueve un evento haciendo uso de JPA
