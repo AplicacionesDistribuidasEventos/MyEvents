@@ -71,9 +71,15 @@ public class PersonaDAO {
 	 * @param id 
 	 */
 	
-	public void deletePersona(int id) {
+	public boolean deletePersona(int id) {
 		Persona p = selectPersona(id);
-		em.remove(p);
+		try {
+			em.remove(p);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
