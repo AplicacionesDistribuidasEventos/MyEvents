@@ -142,4 +142,18 @@ public class EventosWSREST {
 		r.setMensaje("No se establecio");
 		return r;
 	}
+
+	/**
+	 * WS: Devuelve un listado de todos los eventos
+	 * Produce un Coleccion de tipo JSON
+	 * http://localhost:8080/MyEvents/rs/eventos/listado-eventos
+	 * */
+	@GET
+	@Path("/listado-eventos")
+	@Produces("application/json")
+	public List<Evento> getListadoEventos(){
+		List<Evento> eventos = new ArrayList<Evento>();
+		eventos = edao.listEvento();
+		return eventos;
+	}
 }
