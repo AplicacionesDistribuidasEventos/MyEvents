@@ -128,11 +128,12 @@ public class CategoriaController {
 			if(c.getEventos().isEmpty()) {
 				ce = new CategoriaEventos();
 //				ce.setDescripcion_eve(c.getDescipcion());
-				ce.setCategoria(c.getNombre());
+/*				ce.setCategoria(c.getNombre());
 				ce.setDescripcion_eve("No contiene registros");
 				ce.setFecha("");
 				ce.setCosto("");
 				catevelist.add(ce);
+*/				
 			}else {
 				for(Evento e : c.getEventos()) {
 					ce = new CategoriaEventos();
