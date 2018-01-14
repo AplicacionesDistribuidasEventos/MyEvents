@@ -78,7 +78,7 @@ public class Persona {
 	 /*Listado Tipo Locales, unidireccional
 	  * */
 
-
+	
 	 /** The locales. */
  	/*Listado Tipo Locales, unidireccional
 	  * */
@@ -304,13 +304,6 @@ public class Persona {
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
 				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
 	}
-
-	/*@Override
-	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
-				+ ", aeventos="  + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
-	}*/
 	
 	
 	
