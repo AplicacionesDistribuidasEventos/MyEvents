@@ -614,7 +614,7 @@ public class PersonaController {
 	/**
 	 * Consulta local eventos: Retorna los eventos que se van a sucitar en cada uno de los salones de eventos, 
 	 * lo visualiza su respectivo propietario(ADMIN)
-	 *
+	 * Variable global: plelist, que contiene los eventos y es cargada en el formulario
 	 * @return the string
 	 */
 	public String consultaLocalEventos() {

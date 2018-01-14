@@ -58,9 +58,8 @@ public class Evento {
 	
 	/** The fecha evento. */
 	@Column(name="even_fechaEvento")
-	@Temporal(value= TemporalType.DATE)
 	@NotNull 
-	private Date fechaEvento;
+	private String fechaEvento;
 	
 
 	/** The categoria. */
@@ -194,25 +193,17 @@ public class Evento {
 		this.costo = costo;
 	}
 
-	/**
-	 * Gets the fecha evento.
-	 *
-	 * @return the fecha evento
-	 */
-	public Date getFechaEvento() {
+
+	
+	
+
+	public String getFechaEvento() {
 		return fechaEvento;
 	}
 
-	/**
-	 * Sets the fecha evento.
-	 *
-	 * @param fechaEvento the new fecha evento
-	 */
-	public void setFechaEvento(Date fechaEvento) {
+	public void setFechaEvento(String fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
-	
-	
 
 	/**
 	 * Gets the asistencia eventos.
@@ -250,21 +241,11 @@ public class Evento {
 		this.salones = salones;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", AsistenciaEventos="
-				+ AsistenciaEventos + "]";
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", categoria="
+				+ categoria + ", salones=" + salones + ", AsistenciaEventos=" + AsistenciaEventos + "]";
 	}
-
-	/*@Override
-	public String toString() {
-		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
-	}*/
 			
 }
