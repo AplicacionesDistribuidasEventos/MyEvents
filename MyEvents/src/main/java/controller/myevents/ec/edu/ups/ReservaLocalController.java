@@ -7,23 +7,23 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
-import dao.myevents.ec.edu.ups.SalonRecepcionDAO;
-import modelo.myevents.ec.edu.ups.SalonRecepcion;
+import dao.myevents.ec.edu.ups.ReservaLocalDAO;
+import modelo.myevents.ec.edu.ups.ReservaLocal;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SalonRecepcionController.
  */
 @ManagedBean
-public class SalonRecepcionController {
+public class ReservaLocalController {
 	
 	/** Inyeccion de dependencias */
 	@Inject
-	private SalonRecepcionDAO srdao;
+	private ReservaLocalDAO srdao;
 	
 	/** Variables definidas para el manejo del SalonRecepcion*/
-	private SalonRecepcion salonrecepcion;
-	private List<SalonRecepcion> lsalonrecepcion;
+	private ReservaLocal salonrecepcion;
+	private List<ReservaLocal> lsalonrecepcion;
 	private int id;
 	
 	/**
@@ -31,7 +31,7 @@ public class SalonRecepcionController {
 	 */
 	@PostConstruct
 	public void init() {
-		salonrecepcion = new SalonRecepcion();
+		salonrecepcion = new ReservaLocal();
 		listaSalonRecepcion();
 	}
 	
@@ -49,19 +49,19 @@ public class SalonRecepcionController {
 		cargarEstado(id);
 	}
 
-	public SalonRecepcion getSalonrecepcion() {
+	public ReservaLocal getSalonrecepcion() {
 		return salonrecepcion;
 	}
 	
-	public void setSalonrecepcion(SalonRecepcion salonrecepcion) {
+	public void setSalonrecepcion(ReservaLocal salonrecepcion) {
 		this.salonrecepcion = salonrecepcion;
 	}
 	
-	public List<SalonRecepcion> getLsalonrecepcion() {
+	public List<ReservaLocal> getLsalonrecepcion() {
 		return lsalonrecepcion;
 	}
 	
-	public void setLsalonrecepcion(List<SalonRecepcion> lsalonrecepcion) {
+	public void setLsalonrecepcion(List<ReservaLocal> lsalonrecepcion) {
 		this.lsalonrecepcion = lsalonrecepcion;
 	}
 	
@@ -91,7 +91,7 @@ public class SalonRecepcionController {
 	 *
 	 * @return una lista de tipo lsalonrecepcion
 	 */
-	public List<SalonRecepcion> listaSalonRecepcion() {
+	public List<ReservaLocal> listaSalonRecepcion() {
 		lsalonrecepcion =srdao.listSRecepcion();
 		return lsalonrecepcion;
 	}

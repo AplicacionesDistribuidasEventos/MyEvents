@@ -67,13 +67,6 @@ public class Evento {
 	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
 	
-	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
-
-	/** The salones. */
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
-	private List<SalonRecepcion> salones;
-	
 	/** The Asistencia eventos. */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
@@ -222,30 +215,13 @@ public class Evento {
 	public void setAsistenciaEventos(List<AsistenciaEvento> asistenciaEventos) {
 		AsistenciaEventos = asistenciaEventos;
 	}
-  
-  	/**
-	   * Gets the salones.
-	   *
-	   * @return the salones
-	   */
-	  public List<SalonRecepcion> getSalones() {
-		return salones;
-	}
-
-	/**
-	 * Sets the salones.
-	 *
-	 * @param salones the new salones
-	 */
-	public void setSalones(List<SalonRecepcion> salones) {
-		this.salones = salones;
-	}
 
 	@Override
 	public String toString() {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
 				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", categoria="
-				+ categoria + ", salones=" + salones + ", AsistenciaEventos=" + AsistenciaEventos + "]";
+				+ categoria + ", AsistenciaEventos=" + AsistenciaEventos + "]";
 	}
-			
+  
+  	
 }

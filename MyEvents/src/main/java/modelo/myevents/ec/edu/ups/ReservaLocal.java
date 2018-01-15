@@ -12,18 +12,21 @@ import javax.persistence.Table;
  * The Class SalonRecepcion.
  */
 @Entity
-@Table(name="SALONRECEPCION")
-public class SalonRecepcion {
+@Table(name="RESERVAlOCAL")
+public class ReservaLocal {
 	
 	/** The id. */
 	@Id
-	@Column(name="sare_id")
+	@Column(name="id_reserva")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
 	/** The estado. */
-	@Column(name="sare_estado")
+	@Column(name="estado_reserva")
 	private String estado;
+	
+	@Column(name="fecha_reserva")
+	private String fechaReserva;
 
 	/**
 	 * Gets the id.
@@ -62,12 +65,20 @@ public class SalonRecepcion {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public String getFechaReserva() {
+		return fechaReserva;
+	}
+
+	public void setFechaReserva(String fechaReserva) {
+		this.fechaReserva = fechaReserva;
+	}
+
 	@Override
 	public String toString() {
-		return "SalonRecepcion [id=" + id + ", estado=" + estado + "]";
-	}		
+		return "ReservaLocal [id=" + id + ", estado=" + estado + ", fechaReserva=" + fechaReserva + "]";
+	}
+
+
 }
