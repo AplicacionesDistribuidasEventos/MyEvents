@@ -37,12 +37,6 @@ public class Extra {
 	@Size(min=3,max=300)
 	private String descipcion;
 	
-	/** The salrecepciones. */
-	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.EAGER)
-	@JoinColumn(name="sal_rec_ext_fk", referencedColumnName="ext_id")
-	private List<SalonRecepcion> salrecepciones;
-
-	
 	/**
 	 * Gets the id.
 	 *
@@ -101,37 +95,6 @@ public class Extra {
 	public void setDescipcion(String descipcion) {
 		this.descipcion = descipcion;
 	}
-	
-	
 
-
-	/**
-	 * Gets the salrecepciones.
-	 *
-	 * @return the salrecepciones
-	 */
-	public List<SalonRecepcion> getSalrecepciones() {
-		return salrecepciones;
-	}
-
-
-	/**
-	 * Sets the salrecepciones.
-	 *
-	 * @param salrecepciones the new salrecepciones
-	 */
-	public void setSalrecepciones(List<SalonRecepcion> salrecepciones) {
-		this.salrecepciones = salrecepciones;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Extra [id=" + id + ", nombre=" + nombre + ", descipcion=" + descipcion + ", salrecepciones="
-				+ salrecepciones + "]";
-	}
 }
 

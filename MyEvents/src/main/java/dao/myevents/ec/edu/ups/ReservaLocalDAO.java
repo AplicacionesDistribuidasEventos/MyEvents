@@ -6,14 +6,14 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import modelo.myevents.ec.edu.ups.SalonRecepcion;
+import modelo.myevents.ec.edu.ups.ReservaLocal;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SalonRecepcionDAO.
  */
 @Stateless
-public class SalonRecepcionDAO {
+public class ReservaLocalDAO {
 	
 	
 	/** The em. */
@@ -27,8 +27,8 @@ public class SalonRecepcionDAO {
 	 * @param srecepcion the srecepcion
 	 */
 	
-	public void guardar(SalonRecepcion srecepcion) {
-		SalonRecepcion aux = selectSRecepcion(srecepcion.getId());
+	public void guardar(ReservaLocal srecepcion) {
+		ReservaLocal aux = selectSRecepcion(srecepcion.getId());
 		if(aux!=null) {
 			updateSRecepcion(srecepcion);
 		}else {
@@ -43,7 +43,7 @@ public class SalonRecepcionDAO {
 	 * @param sr the sr
 	 */
 
-	public void insertarSRecepcion(SalonRecepcion sr){
+	public void insertarSRecepcion(ReservaLocal sr){
 		em.merge(sr);
 		System.out.println("Salon-Recepcion Grabado");		
 	}
@@ -55,7 +55,7 @@ public class SalonRecepcionDAO {
 	 * @param sr the sr
 	 */
 	
-	public void updateSRecepcion(SalonRecepcion sr) {
+	public void updateSRecepcion(ReservaLocal sr) {
 		em.merge(sr);
 		System.out.println("Salon-Recepcion Update");
 	}
@@ -80,8 +80,8 @@ public class SalonRecepcionDAO {
 	 * @return the salon recepcion
 	 */
   
-	public SalonRecepcion selectSRecepcion(int id) {
-		SalonRecepcion  srecepcion = em.find(SalonRecepcion.class, id);
+	public ReservaLocal selectSRecepcion(int id) {
+		ReservaLocal  srecepcion = em.find(ReservaLocal.class, id);
 		return srecepcion;
 	}
 
@@ -92,10 +92,10 @@ public class SalonRecepcionDAO {
 	 * @return the list
 	 */
 
-	public List<SalonRecepcion> listSRecepcion() {
+	public List<ReservaLocal> listSRecepcion() {
 		String sql = "select slr from SalonRecepcion slr";
-		TypedQuery<SalonRecepcion> query = em.createQuery(sql, SalonRecepcion.class);
-		List<SalonRecepcion> lsrecepcion = query.getResultList();
+		TypedQuery<ReservaLocal> query = em.createQuery(sql, ReservaLocal.class);
+		List<ReservaLocal> lsrecepcion = query.getResultList();
 		return lsrecepcion;
 	}
 

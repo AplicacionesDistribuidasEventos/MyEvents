@@ -90,8 +90,8 @@ public class Persona {
  	/*Listado Tipo Salon Recepciones, unidireccional
 	  * */
 	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
-	@JoinColumn(name="per_sal_fk", referencedColumnName="per_id")
-	private List<SalonRecepcion> srecepciones=new ArrayList<>();
+	@JoinColumn(name="per_reserv_fk", referencedColumnName="per_id")
+	private List<ReservaLocal> reservaLocal=new ArrayList<>();
 
 
 
@@ -277,35 +277,22 @@ public class Persona {
 		this.locales = locales;
 	}
 
-	/**
-	 * Gets the srecepciones.
-	 *
-	 * @return the srecepciones
-	 */
-	public List<SalonRecepcion> getSrecepciones() {
-		return srecepciones;
+	
+
+	public List<ReservaLocal> getReservaLocal() {
+		return reservaLocal;
 	}
 
-	/**
-	 * Sets the srecepciones.
-	 *
-	 * @param srecepciones the new srecepciones
-	 */
-	public void setSrecepciones(List<SalonRecepcion> srecepciones) {
-		this.srecepciones = srecepciones;
+	public void setReservaLocal(List<ReservaLocal> reservaLocal) {
+		this.reservaLocal = reservaLocal;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
-				+ ", aeventos=" + aeventos + ", locales=" + locales + ", srecepciones=" + srecepciones + "]";
+				+ ", aeventos=" + aeventos + ", locales=" + locales + ", reservaLocal=" + reservaLocal + "]";
 	}
-	
-	
-	
+
 
 }

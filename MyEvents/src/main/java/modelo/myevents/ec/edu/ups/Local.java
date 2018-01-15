@@ -1,6 +1,7 @@
 package modelo.myevents.ec.edu.ups;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -82,10 +83,15 @@ public class Local implements Serializable{
 	private byte[] imagen;
 	
 	
-	/** The evento. */
+	/** Relacion de uno a mucho dentre el local y eventos */
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="loc_eve_fk", referencedColumnName="local_codigo")
 	private List<Evento> evento ;
+	
+	/** Relacion de uno a mucho entre el local y Reserva del Local*/
+	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+	@JoinColumn(name="loc_reserv_fk", referencedColumnName="local_codigo")
+	private List<ReservaLocal> reseervaLocales; 
 	
 	
 	
@@ -296,19 +302,23 @@ public class Local implements Serializable{
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
+	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public List<ReservaLocal> getReseervaLocales() {
+		return reseervaLocales;
+	}
+
+	public void setReseervaLocales(List<ReservaLocal> reseervaLocales) {
+		this.reseervaLocales = reseervaLocales;
+	}
+
 	@Override
 	public String toString() {
 		return "Local [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", capacidad="
 				+ capacidad + ", costo=" + costo + ", puntuacion=" + puntuacion + ", comentario=" + comentario
-				+ ", latitud=" + latitud + ", longitud=" + longitud + "]";
+				+ ", fotoPerfil=" + fotoPerfil + ", latitud=" + latitud + ", longitud=" + longitud + ", imagen="
+				+ Arrays.toString(imagen) + ", evento=" + evento + ", reseervaLocales=" + reseervaLocales + "]";
 	}
 
-	
-	
-	
 	
 }
