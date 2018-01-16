@@ -47,7 +47,6 @@ public class EventoController {
 	private List<Evento> levento;
 	private List<Evento> leventocercano;
 	private List<Evento> leventofecha;
-	private String fechaEvento;
 
 	/** The listado filtrado. */
 	// Busqueda de locales
@@ -173,16 +172,6 @@ public class EventoController {
 		return id2;
 	}
 	
-
-	
-
-	public String getFechaEvento() {
-		return fechaEvento;
-	}
-
-	public void setFechaEvento(String fechaEvento) {
-		this.fechaEvento = fechaEvento;
-	}
 
 	public void setId2(int id2) {
 		this.id2 = id2;
@@ -350,7 +339,7 @@ public class EventoController {
 		
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
-		fechaEvento  = evento.getFechaEvento();
+//		String fechaEvento  = evento.getFechaEvento();
 		Date fechaEvento = new Date();
 		String fechaFormato = formatter.format(fechaEvento);
 			
@@ -389,11 +378,12 @@ public class EventoController {
 	 *
 	 * @return the string
 	 */
+	/*
 	public String buscar() {
 		listadoFiltrado = evendao.getEventosPorNombre(filtro);
 		return null;
 	}
-
+*/
 	public static Categoria ca=new Categoria();
 	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
 	public void categoriaSeleccionada() {
