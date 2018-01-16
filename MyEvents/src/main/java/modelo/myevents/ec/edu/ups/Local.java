@@ -320,5 +320,4 @@ public class Local implements Serializable{
 				+ Arrays.toString(imagen) + ", evento=" + evento + ", reseervaLocales=" + reseervaLocales + "]";
 	}
 
-	
 }
