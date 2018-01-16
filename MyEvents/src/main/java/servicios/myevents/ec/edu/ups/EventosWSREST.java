@@ -156,4 +156,55 @@ public class EventosWSREST {
 		eventos = edao.listEvento();
 		return eventos;
 	}
+	
+	/**
+	 * 
+	 * @param id_usuario
+	 * @return
+	 * 
+	 * http://localhost:8080/MyEvents/rs/eventos/reporte-Aeventos?id_usuario=2
+	 */
+	
+	@GET
+	@Path("/reporte-Aeventos")
+	@Produces("application/json")
+	public List<Evento> getConsulAsisEveUser(@QueryParam("id_usuario") int id_usuario){
+		
+		List<Evento> ev1 = edao.listEvento();
+		List<Evento> ev2 = new ArrayList<Evento>();
+		Persona auxpersonas = pdao.selectPersona(id_usuario);
+		
+		if (!auxpersonas.getAeventos().isEmpty()) {
+			/** Primer FOR: Recorro la Asistencia evento */
+			for (AsistenciaEvento aevent : auxpersonas.getAeventos()) {		
+				/**2da Condición: Recupero el estado = true*/
+				if (aevent.getEstado().equals("true")) {
+					
+					/**Recorro los eventos con ev1*/
+					for (Evento eve :ev1) {
+						/**3ra Condición: verifico si la lista de AsistenciaEventos de eventos se encuentra llena*/
+						if (!eve.getAsistenciaEventos().isEmpty()) {
+							/**Recorro AsistenciaEvento para obtener el id */
+							for (AsistenciaEvento aeE : eve.getAsistenciaEventos()) {
+								/**4ta Condicion: Comparo que el id sea el mismo y mando a guardar eve en una lista ev2 de eventos*/
+								if (aevent.getCodigo() == aeE.getCodigo()) {
+			
+									ev2.add(eve);
+									
+									//System.out.println("Persona con el estado" + "" + aevent.getEstado());
+								}
+							}
+						}
+					}
+				}
+			}
+			System.out.println(" Encontrando..."+ ""+ev2);
+			
+		}
+		
+		
+		return ev2;
+	}
+	
+	
 }

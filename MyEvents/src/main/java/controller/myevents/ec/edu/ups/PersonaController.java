@@ -16,11 +16,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.hibernate.validator.constraints.NotBlank;
 
+import dao.myevents.ec.edu.ups.EventoDAO;
 import dao.myevents.ec.edu.ups.PersonaDAO;
+import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 import modelo.myevents.ec.edu.ups.Persona;
 import modelo.myevents.ec.edu.ups.PersonaLocalEvento;
+import modelo.myevents.ec.edu.ups.ReservaLocal;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 import validacionesnegocio.myevents.ec.edu.ups.Validacion;
 
@@ -31,12 +34,14 @@ import validacionesnegocio.myevents.ec.edu.ups.Validacion;
 @ManagedBean
 @SessionScoped
 public class PersonaController {
-	
+
 	/** Inyeccion de dependecias a los DAO que se van a utilizar */
 	@Inject
 	private Logger log;
 	@Inject
 	private PersonaDAO pdao;
+	@Inject
+	private EventoDAO evendao;
 
 	/** Variables de lista y de objetos utilizados */
 	private Persona personas = null;
@@ -59,23 +64,36 @@ public class PersonaController {
 	private String enombre;
 	private String efecha;
 	private String edescripcion;
+	private Persona auxpersonas;
 	/**
 	 * The nusuario. Varibles donde se almacena los valores de la consulta
 	 * maestro-detalles
 	 */
 	private String nusuario;
-	
-	/**PARA OBTENER EL LISTADO PERSONA y el listado de todos los objetos definidos en PERSONA, LOCAL, EVENTO*/
+
+	/**
+	 * PARA OBTENER EL LISTADO PERSONA y el listado de todos los objetos definidos
+	 * en PERSONA, LOCAL, EVENTO
+	 */
 	private List<Persona> ListPerID;
 	private List<PersonaLocalEvento> plelist;
 	private List<Persona> lpersonas;
-
+	private List<Local> auxListlocales;
+	private List<Evento> ev2 = new ArrayList<Evento>();
 	
-	/** `Variable utilizada la almacenar los locales que pertences unicamente al ADMIN del local */
+	/**
+	 * `Variable utilizada la almacenar los locales que pertences unicamente al
+	 * ADMIN del local
+	 */
 	private List<Local> listLocales;
 
 	/**
-	 *  Metodo para inicializar los metodos e instancias.
+	 * Variable tipo list para obtener los eventos en la que asistiran los usuarios
+	 */
+	private List<Evento> eventosList;
+
+	/**
+	 * Metodo para inicializar los metodos e instancias.
 	 */
 	@PostConstruct
 	public void init() {
@@ -83,17 +101,56 @@ public class PersonaController {
 		lpersonas = listaPersonas();
 		ListPerID = new ArrayList<Persona>();
 		plelist = new ArrayList<PersonaLocalEvento>();
+		eventosList = new ArrayList<Evento>();
+		auxListlocales = new ArrayList<Local>();
 		v = new Validacion();
 		consultaLocalEventos();
 		listLocales = new ArrayList<Local>();
 		consultarLocalesADMIN(id);
+		//consulAsisEvenUser();
+		ev2 = new ArrayList<Evento>();
+		
 	}
 
 	/**
 	 * Geters y Seters de las variables definidas.
 	 */
+	
+	
 	public String getNusuario() {
 		return nusuario;
+	}
+
+	public Persona getAuxpersonas() {
+		return auxpersonas;
+	}
+
+	public void setAuxpersonas(Persona auxpersonas) {
+		this.auxpersonas = auxpersonas;
+	}
+
+	public List<Evento> getEventosList() {
+		return eventosList;
+	}
+
+	public void setEventosList(List<Evento> eventosList) {
+		this.eventosList = eventosList;
+	}
+
+	public List<Local> getAuxListlocales() {
+		return auxListlocales;
+	}
+
+	public void setAuxListlocales(List<Local> auxListlocales) {
+		this.auxListlocales = auxListlocales;
+	}
+
+	public List<Evento> getEv2() {
+		return ev2;
+	}
+
+	public void setEv2(List<Evento> ev2) {
+		this.ev2 = ev2;
 	}
 
 	public List<Local> getListLocales() {
@@ -112,27 +169,22 @@ public class PersonaController {
 		return nlocal;
 	}
 
-	
 	public void setNlocal(String nlocal) {
 		this.nlocal = nlocal;
 	}
-
 
 	public String getNdescripcion() {
 		return ndescripcion;
 	}
 
-	
 	public void setNdescripcion(String ndescripcion) {
 		this.ndescripcion = ndescripcion;
 	}
 
-	
 	public String getNcapacidad() {
 		return ncapacidad;
 	}
 
-	
 	public void setNcapacidad(String ncapacidad) {
 		this.ncapacidad = ncapacidad;
 	}
@@ -150,9 +202,10 @@ public class PersonaController {
 	}
 
 	/**
-	 * Sets the idrecuprerar.
-	 *Metodo para setear el idrecuperar 
-	 * @param idrecuprerar para recuperar el id de persona para navegailidad.           
+	 * Sets the idrecuprerar. Metodo para setear el idrecuperar
+	 * 
+	 * @param idrecuprerar
+	 *            para recuperar el id de persona para navegailidad.
 	 */
 
 	public void setIdrecuprerar(int idrecuprerar) {
@@ -193,7 +246,7 @@ public class PersonaController {
 	public void setLoginexiste(String loginexiste) {
 		Loginexiste = loginexiste;
 	}
-	
+
 	public Persona getPersonas() {
 		return personas;
 	}
@@ -227,7 +280,7 @@ public class PersonaController {
 	 * Sets the id edit user.
 	 *
 	 * @param idEditUser
-	 * the new id edit user
+	 *            the new id edit user
 	 */
 	public void setIdEditUser(int idEditUser) {
 		this.idEditUser = idEditUser;
@@ -262,44 +315,46 @@ public class PersonaController {
 	/**
 	 * Crear. Creacion del objeto Persona condicinamiento segun las sentencias de
 	 * validacion. Método utiliza ajax através de JSF.
-	 * @param coincidencia: Muestra mensajes de validacion en los campos mencionados para el registro de usuarios
+	 * 
+	 * @param coincidencia:
+	 *            Muestra mensajes de validacion en los campos mencionados para el
+	 *            registro de usuarios
 	 */
 
 	public void crear() {
 		try {
-			
-		
-		if (coincidirContrasenia() == true) {
-			if (v.validarCedula(personas.getCedula()) == true) {
-				if (v.validarCorreo(personas.getCorreo()) == true) {
-					// SI ESQUE EXISTE UN MISMO EMAIL
-					if (pdao.verificaCorreo(personas.getCorreo()).size() == 0) {
-						if (pdao.existeCedula(personas.getCedula()).size() == 0) {
-							personas.setPerfil("USUARIO");
-							personas.setEstado("A");
-//							pdao.guardar(personas);
-							pdao.insertPersona(personas);
-							inicializar();
-							init();
-							this.conincidencia = "Grabado exitoso!";
+
+			if (coincidirContrasenia() == true) {
+				if (v.validarCedula(personas.getCedula()) == true) {
+					if (v.validarCorreo(personas.getCorreo()) == true) {
+						// SI ESQUE EXISTE UN MISMO EMAIL
+						if (pdao.verificaCorreo(personas.getCorreo()).size() == 0) {
+							if (pdao.existeCedula(personas.getCedula()).size() == 0) {
+								personas.setPerfil("USUARIO");
+								personas.setEstado("A");
+								// pdao.guardar(personas);
+								pdao.insertPersona(personas);
+								inicializar();
+								init();
+								this.conincidencia = "Grabado exitoso!";
+							} else {
+								this.conincidencia = "La cedula ya se encuentra registrada";
+							}
 						} else {
-							this.conincidencia = "La cedula ya se encuentra registrada";
+							System.out.println("correo ya se encuentra registrado");
+							this.conincidencia = "El correo ya se encuentra registrado";
 						}
 					} else {
-						System.out.println("correo ya se encuentra registrado");
-						this.conincidencia = "El correo ya se encuentra registrado";
+						this.conincidencia = "El formato del correo es incorrecto";
 					}
 				} else {
-					this.conincidencia = "El formato del correo es incorrecto";
+					System.out.println("Cedula incorrecta");
+					this.conincidencia = "La cedula es incorrecta";
 				}
 			} else {
-				System.out.println("Cedula incorrecta");
-				this.conincidencia = "La cedula es incorrecta";
+				System.out.println("Contrasenias ingresadas son diferentes");
+				this.conincidencia = "Ingrese las mismas contrasenias";
 			}
-		} else {
-			System.out.println("Contrasenias ingresadas son diferentes");
-			this.conincidencia = "Ingrese las mismas contrasenias";
-		}
 		} catch (Exception e) {
 			System.out.println("Error general al crear el usuario" + e.getMessage());
 			e.printStackTrace();
@@ -316,15 +371,15 @@ public class PersonaController {
 
 	public boolean coincidirContrasenia() {
 		try {
-		
-		if (personas.getContrasenia().equals(this.contrasenia)) {
-			return true;
-		} else {
-			return false;
-		}
-		
+
+			if (personas.getContrasenia().equals(this.contrasenia)) {
+				return true;
+			} else {
+				return false;
+			}
+
 		} catch (Exception e) {
-			System.out.println("Contrasenias diferentes"+ e.getMessage());
+			System.out.println("Contrasenias diferentes" + e.getMessage());
 		}
 		return false;
 	}
@@ -381,8 +436,9 @@ public class PersonaController {
 	 * Metodo Leer. Dirije a el archivo crearPersona, dado como parametro un Id
 	 * 
 	 * @param id
-	 *            
-	 * @return direccionalidad en JSP crearPersonas, método utilizado para el SUPERADMIN.
+	 * 
+	 * @return direccionalidad en JSP crearPersonas, método utilizado para el
+	 *         SUPERADMIN.
 	 */
 
 	public String leer(int id) {
@@ -416,7 +472,7 @@ public class PersonaController {
 		lpersonas = pdao.listPersonas();
 		return lpersonas;
 	}
-	
+
 	/* GETER AND SETTERSS: Nombre y Fecha del Evento */
 	public String getEnombre() {
 		return enombre;
@@ -449,11 +505,12 @@ public class PersonaController {
 	public void setPlelist(List<PersonaLocalEvento> plelist) {
 		this.plelist = plelist;
 	}
-	
+
 	public void loadid(int id) {
 		idrecuprerar = id;
 
 	}
+
 	public void loadidUser(int id) {
 		idEditUser = id;
 	}
@@ -461,9 +518,9 @@ public class PersonaController {
 	/**
 	 * Load datos editar.
 	 *
-	 * @param id int id
-	 * Obtener las personas segun su rol y cargar la pagina.
-	 *           
+	 * @param id
+	 *            int id Obtener las personas segun su rol y cargar la pagina.
+	 * 
 	 * @return URL de navegabilidad
 	 */
 
@@ -485,7 +542,7 @@ public class PersonaController {
 	 * session, FacesContext acceso tanto al contexto de JSF como HTTP.
 	 */
 	public static int idUsuario;
-	
+
 	public void iniciarSesion() {
 		if (pdao.login(personas.getCorreo(), personas.getContrasenia()).size() != 0) {
 			HttpSession session = SessionUtils.getSession();
@@ -497,11 +554,10 @@ public class PersonaController {
 					pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getEstado());
 			this.Loginexiste = " ";
 			FacesContext contex = FacesContext.getCurrentInstance();
-			
-			List<Persona> pers =pdao.login(personas.getCorreo(), personas.getContrasenia());
+
+			List<Persona> pers = pdao.login(personas.getCorreo(), personas.getContrasenia());
 			idUsuario = pers.get(0).getId();
 
-			
 			if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("USUARIO")) {
 
 				System.out.println("CONTEXTO USER");
@@ -523,7 +579,7 @@ public class PersonaController {
 			} else if (pdao.login(personas.getCorreo(), personas.getContrasenia()).get(0).getPerfil().equals("ADMIN")) {
 				// FacesContext contexAS= FacesContext.getCurrentInstance();
 				System.out.println("CONTEXTO ADMINN");
-				
+
 				consultarLocalesADMIN(idUsuario);
 				System.out.println("consulta local adminn" + idUsuario);
 
@@ -585,10 +641,9 @@ public class PersonaController {
 	}
 
 	/**
-	 * Verifica sesion.
-	 * Metodo para comparar la sesion entre los diferentes usuarios en la aplicacion web
+	 * Verifica sesion. Metodo para comparar la sesion entre los diferentes usuarios
+	 * en la aplicacion web
 	 */
-
 
 	public void verificaSesion() {
 		HttpSession session = SessionUtils.getSession();
@@ -610,25 +665,27 @@ public class PersonaController {
 		}
 	}
 
-	
 	/**
-	 * Consulta local eventos: Retorna los eventos que se van a sucitar en cada uno de los salones de eventos, 
-	 * lo visualiza su respectivo propietario(ADMIN)
-	 * Variable global: plelist, que contiene los eventos y es cargada en el formulario
+	 * Consulta local eventos: Retorna los eventos que se van a sucitar en cada uno
+	 * de los salones de eventos, lo visualiza su respectivo propietario(ADMIN)
+	 * Variable global: plelist, que contiene los eventos y es cargada en el
+	 * formulario
+	 * 
 	 * @return the string
 	 */
 	public String consultaLocalEventos() {
 		PersonaLocalEvento ple = new PersonaLocalEvento();
 		plelist.clear();
-//		System.out.println("CONSULTA LOCAL EVENTO ID: " + idrecuprerar + " " + "ENTRA");
+		// System.out.println("CONSULTA LOCAL EVENTO ID: " + idrecuprerar + " " +
+		// "ENTRA");
 		ListPerID = pdao.listPersonaID(idrecuprerar);
 
-		/* PRIMER FOR: Recupero todo el Objeto Persona, Local, Evento */
+		/** PRIMER FOR: Recupero todo el Objeto Persona, Local, Evento */
 		for (Persona p : ListPerID) {
-			/* Segundo FOR: a partir de 'p', obtengo el objeto evento */
+			/** Segundo FOR: a partir de 'p', obtengo el objeto evento */
 			for (Local l : p.getLocales()) {
-				
-				/* Condicionamiento cuando no hay ningun evento, agrego campos pro default */
+
+				/** Condicionamiento cuando no hay ningun evento, agrego campos pro default */
 				if (l.getEvento().isEmpty()) {
 					ple = new PersonaLocalEvento();
 					ple.setL_nombre(l.getNombre());
@@ -640,9 +697,9 @@ public class PersonaController {
 					ple.setE_fecha(" ");
 					plelist.add(ple);
 				} else {
-					/* Tercer FOR: a partir de 'l' obtengo el objeto Evento */
+					/** Tercer FOR: a partir de 'l' obtengo el objeto Evento */
 					for (Evento ev : l.getEvento()) {
-						/*
+						/**
 						 * Declaro un objeto para setear cada uno de los objeto y finalmente agregarlos
 						 * en la lista respectiva
 						 */
@@ -657,45 +714,115 @@ public class PersonaController {
 						plelist.add(ple);
 					}
 				}
-				/* Anadiendo cada uno de los objetos a la lista */
-				
+				/** Anadiendo cada uno de los objetos a la lista */
+
 			}
 		}
 		return null;
 	}
 
-	
 	/**
-	 * consultarLocalesADMIN, recuperar una lista de los locales segun el ADMIN
-	 * @param idUsuario, id. 
-	 * @return listado de locales segun el ADMIN dentro de IniciarSesion, lo llamamos dentro de Accioneslocal.xhtml
+	 * consultarLocalesADMIN, recuperar una lista de los locales segun el ADMIN.
+	 * 
+	 * Creamo una lista tipo personas "lpersonas" que contendra una consulta del usuario filtrado por el id. Recorremos
+	 * la persona con lpersonas, ya obtenido las personas, recorremos los locales obteniendo una lista de locale con 
+	 * p.getLoclaes(). Para obtener los eventos, instanciamos un obj de tipo Local l para setear los campos que se mostraran
+	 * en la consulta y agregamos a una nueva lista de tipo locales.
+	 * 
+	 * @param idUsuario, id.
+	 *            
+	 * @return listado de locales segun el ADMIN dentro de IniciarSesion, lo
+	 *         llamamos dentro de Accioneslocal.xhtml
 	 */
 
 	public String consultarLocalesADMIN(int id) {
-		
-		listLocales.clear();
-			
-			lpersonas = pdao.listPersonaID(id);
-			for (Persona p : lpersonas) {
-				for(Local loc : p.getLocales()) {
-					Local l = new Local();
-						l.setNombre(loc.getNombre());
-						l.setCapacidad(loc.getCapacidad());
-						l.setCosto(loc.getCosto());
-						l.setDescripcion(loc.getDescripcion());
-						l.setPuntuacion(loc.getPuntuacion()); 
-						l.setFotoPerfil(loc.getFotoPerfil());
-						l.setCodigo(loc.getCodigo());
-						l.setComentario(loc.getComentario());
-						
-						
-						listLocales.add(l);	
-						
-					}
-				System.out.println("Lista de los locales que me imprime son:" + "" + listLocales);	
-					}
 
-			
-			return null;
+		listLocales.clear();
+
+		lpersonas = pdao.listPersonaID(id);
+		for (Persona p : lpersonas) {
+			for (Local loc : p.getLocales()) {
+				Local l = new Local();
+				l.setNombre(loc.getNombre());
+				l.setCapacidad(loc.getCapacidad());
+				l.setCosto(loc.getCosto());
+				l.setDescripcion(loc.getDescripcion());
+				l.setPuntuacion(loc.getPuntuacion());
+				l.setFotoPerfil(loc.getFotoPerfil());
+				l.setCodigo(loc.getCodigo());
+				l.setComentario(loc.getComentario());
+
+				listLocales.add(l);
+
+			}
+			System.out.println("Lista de los locales que me imprime son:" + "" + listLocales);
 		}
+
+		return null;
+	}
+
+	/**
+	 * consultaAsisEvenUser.
+	 * Método utilizado para obtener un reporte de la asistencia que el usuario asistirá a los diferentes eventos.
+	 * Creamos una lista de tipo personas y pasamos como parametro idUsuario el cual nos recupera el id al loguearse.
+	 *  Verificamos si la lista de Aeventos se encuentra llena, recorremos con otro for la lista Aeventos y mandamos
+	 * una condicion en el que el estado=true para obtener los eventos asistidos del usuario. Para obtener el evento  
+	 * 	instanciamos un obj de tipo Evento y recorremos la lista eventos ev1, verificamos con una condicion si los 
+	 * eventos se encuentran llenos recorremos la Asistencia evento donde el codigo de AsistEvento = asistenciaEvento 
+	 * que se recupero del evento. Agregamos a una nueva lista ev2.
+	 *
+	 *@param idUsuario, contiene el id de la persona.
+	 *
+	 * @return null para la navegacion me renderiza la misma pagina en JSF.
+	 */
+	
+	
+	
+	public String consulAsisEvenUser() {
+
+		ev2.clear();
+		
+		List<Evento> ev1 = evendao.listEvento();
+		ev2 = new ArrayList<Evento>();
+		
+		/**Busco a la persona por el ID haciendo uso del DAO.*/
+		auxpersonas = pdao.selectPersona(idUsuario);
+		// auxListpersonas = pdao.listPersonaID(id);
+		//Si recupera id del Usuario
+		System.out.println("ASISTENCIAS-USUARIO"+ " " +idUsuario);
+		/**
+		 * 1ra Concidcion: verifico si la lista de AsistenciaEventos de personas se encuentra
+		 * llena
+		 */
+		if (!auxpersonas.getAeventos().isEmpty()) {
+			/** Primer FOR: Recorro la Asistencia evento */
+			for (AsistenciaEvento aevent : auxpersonas.getAeventos()) {		
+				/**2da Condición: Recupero el estado = true*/
+				if (aevent.getEstado().equals("true")) {
+					
+					/**Recorro los eventos con ev1*/
+					for (Evento eve :ev1) {
+						/**3ra Condición: verifico si la lista de AsistenciaEventos de eventos se encuentra llena*/
+						if (!eve.getAsistenciaEventos().isEmpty()) {
+							/**Recorro AsistenciaEvento para obtener el id */
+							for (AsistenciaEvento aeE : eve.getAsistenciaEventos()) {
+								/**4ta Condicion: Comparo que el id sea el mismo y mando a guardar eve en una lista ev2 de eventos*/
+								if (aevent.getCodigo() == aeE.getCodigo()) {
+			
+									ev2.add(eve);
+									
+									//System.out.println("Persona con el estado" + "" + aevent.getEstado());
+								}
+							}
+						}
+					}
+				}
+			}
+			System.out.println(" Encontrando..."+ ""+ev2);
+
+		}
+
+		return null;
+	}
+
 }

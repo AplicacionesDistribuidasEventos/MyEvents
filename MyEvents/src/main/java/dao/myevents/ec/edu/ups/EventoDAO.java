@@ -111,8 +111,11 @@ public class EventoDAO {
 		List<Evento> levento = query.getResultList();
 		for (Evento eve : levento) {
 			if(!eve.getAsistenciaEventos().isEmpty()) {
+
 				eve.getAsistenciaEventos().size();	
 			}
+
+		}
 		}
 		return levento;
 	}
