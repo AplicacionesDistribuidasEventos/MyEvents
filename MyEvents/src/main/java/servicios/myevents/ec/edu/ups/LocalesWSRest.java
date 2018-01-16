@@ -164,6 +164,7 @@ public class LocalesWSRest {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		Date fechasave = formatter.parse(f);
+//		String nFormato = formatter.format(fechasave);
 
 		List<Local> locales = locdao.listlocal();
 		List<Local> lreservados = new ArrayList<Local>();
@@ -171,8 +172,8 @@ public class LocalesWSRest {
 		for(Local l : locales) {
 			if(!l.getReseervaLocales().isEmpty()) {
 				for(ReservaLocal rl : l.getReseervaLocales()) {
-					System.out.println("COMPARACION:  "+rl.getFechaReserva().toString()+".equals("+fechasave+")");
-					if(rl.getEstado().equals("true") && rl.getFechaReserva().equals(fechasave)) {
+					System.out.println("COMPARACION:  "+rl.getFechaReserva().toString()+".equals("+f+")");
+					if(rl.getEstado().equals("true") && rl.getFechaReserva().toString().equals(f)) {
 						lreservados.add(l);
 					}
 				}	

@@ -436,4 +436,5 @@ public class EventoController {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
+
 }

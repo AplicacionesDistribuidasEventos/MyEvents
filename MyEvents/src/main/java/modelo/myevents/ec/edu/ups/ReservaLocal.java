@@ -1,29 +1,37 @@
 package modelo.myevents.ec.edu.ups;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SalonRecepcion.
  */
 @Entity
-@Table(name="SALONRECEPCION")
-public class SalonRecepcion {
+@Table(name="RESERVAlOCAL")
+public class ReservaLocal {
 	
 	/** The id. */
 	@Id
-	@Column(name="sare_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name="id_reserva")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
 	/** The estado. */
-	@Column(name="sare_estado")
+	@Column(name="estado_reserva")
 	private String estado;
+	
+	@Column(name="fecha_reserva")
+	@Temporal(value=TemporalType.DATE)
+	private Date fechaReserva;
 
 	/**
 	 * Gets the id.
@@ -63,11 +71,18 @@ public class SalonRecepcion {
 		this.estado = estado;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Date getFechaReserva() {
+		return fechaReserva;
+	}
+
+	public void setFechaReserva(Date fechaReserva) {
+		this.fechaReserva = fechaReserva;
+	}
+
 	@Override
 	public String toString() {
-		return "SalonRecepcion [id=" + id + ", estado=" + estado + "]";
-	}		
+		return "ReservaLocal [id=" + id + ", estado=" + estado + ", fechaReserva=" + fechaReserva + "]";
+	}
+
+
 }

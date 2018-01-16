@@ -49,13 +49,8 @@
 		<!-- One -->
 		<section id="one">
 			<ul class="actions">
-				<center>
-					<header class="major">
-						<h2>
-							<!-- Se define el nombre de la pagina en la cual se encuentra -->
-							<ui:insert name="encabezado">Bienvenido a MyEvents</ui:insert>
-						</h2>
-					</header>
+			
+					
 
 					<li><a href="editUser.xhtml?id=#{personaController.myUser.id}"
 						class="button">Editar Perfil</a></li>
@@ -66,8 +61,18 @@
 					<br/>
 					<li><a href="EventosAsistidos.xhtml" class="button">Eventos asistidos</a></li>
 					<li><a href="reservarSalones.xhtml" class="button">ReservarSalones</a></li>
+
 					
-				</center>
+					<li><a href="reporteUsuario.xhtml" class="button">Cosulte eventos que asistirá</a></li>
+				
+        <!--******************PRUEBA DE CONSULTAR LA ASISTENCIA -->	
+        <!--
+					<h:form>
+        			<li><h:commandButton action="#{personaController.consulAsisEvenUser()}" value="Consultar"/></li>
+        			</h:form>
+					
+					-->
+				
 			</ul>
 		</section>
 		<section id="two">
@@ -472,4 +477,5 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
