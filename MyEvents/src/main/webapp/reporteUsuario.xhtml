@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:hs="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="PlantillaUsuario.xhtml">
+
+	<!-- Colocar el titulo en la pestana -->
+	<ui:define name="titulo">Crear Eventos</ui:define>
+
+	<!-- Colocar el Breadcrumbs o seccion donde se encuentra -->
+	<ui:define name="breadcrums">Gestion de Salones</ui:define>
+
+	<!-- Titulo del Contenido -->
+	<ui:define name="bienvenida">Gestor Salones de Recepcion</ui:define>
+		
+	<ui:define name="contenido">
+	<h:form>
+
+	<h:dataTable var="reportUser" style="color:black"
+				value="#{personaController.ev2}" border="2" class="table"
+				styleClass="table table-striped table-bordered">
+			
+			
+				<h:column Style="color: black">
+					<f:facet name="header">Evento</f:facet>
+					#{reportUser.nombre}
+				</h:column>
+			
+				<h:column Style="color: black">
+					<f:facet name="header">Descripcion</f:facet>
+					#{reportUser.descripcion}
+				</h:column>
+			
+				<h:column Style="color: black">
+					<f:facet name="header">Fecha evento</f:facet>
+					#{reportUser.fechaEvento}
+				</h:column>
+				
+				<h:column Style="color: black">
+					<f:facet name="header">Costo evento</f:facet>
+					#{reportUser.costo}
+				</h:column>
+				
+			
+			</h:dataTable>
+	</h:form>
+	</ui:define>
+
+</ui:composition>
+	

@@ -105,7 +105,9 @@ public class EventoDAO {
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
 		List<Evento> levento = query.getResultList();
 		for (Evento eve : levento) {
+			if(!eve.getAsistenciaEventos().isEmpty()) {
 			eve.getAsistenciaEventos().size();
+		}
 		}
 		return levento;
 	}
