@@ -61,7 +61,7 @@ public class UsuariosWSRest {
 		try {
 			p.setPerfil("USUARIO");
 			p.setEstado("A");
-			pdao.guardar(p);
+			pdao.insertPersona(p);
 			r.setCodigo(1);
 			r.setMensaje("Grabado Exitosamente");
 			return r;

@@ -78,6 +78,12 @@ public class LocalDAO {
 		if(l!=null) {
 			System.out.print("No es nuloooooo");
 		}
+		if(!l.getReseervaLocales().isEmpty()) {
+			l.getReseervaLocales().size();
+		}
+		if(!l.getEvento().isEmpty()) {
+			l.getEvento().size();
+		}
 		return l;
 		
 	}
@@ -89,6 +95,12 @@ public class LocalDAO {
 		Query query = em.createQuery(jpql, Local.class);
 		Local local = (Local) query.getSingleResult();
 		System.out.println(local.getNombre());
+		if(!local.getReseervaLocales().isEmpty()) {
+			local.getReseervaLocales().size();
+		}
+		if(!local.getEvento().isEmpty()) {
+			local.getEvento().size();	
+		}
 		if(local!=null) {
 			System.out.print("No es nuloooooo");
 		}
@@ -117,6 +129,14 @@ public class LocalDAO {
 		String sql = "Select l from Local l";
 		TypedQuery<Local> query = em.createQuery(sql, Local.class);
 		List<Local> llocal = query.getResultList();
+		for(Local l : llocal) {
+			if(!l.getReseervaLocales().isEmpty()) {
+				l.getReseervaLocales().size();
+			}
+			if(!l.getEvento().isEmpty()) {
+				l.getEvento().size();
+			}
+		}
 		return llocal;
 	}
 	

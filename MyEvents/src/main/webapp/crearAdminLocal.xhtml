@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
 	template="PlantillaAdmin.xhtml">
 
 	<!-- Colocar el titulo en la pestana -->
@@ -85,21 +86,22 @@
 						class="form-control" />
 
 
-					
+				 
+            
+
+				<!--  ************	SUBIR IMAGEN PARA EL PERFIL DEL LOCAL O DEL USUARIO -->
+				
 			<div class="form-group">
 				<h:outputLabel value="Seleccione una foto de perfil" />
 				<h:inputFile id="subidaFP" value="#{localController.fotoPerfil}"/>
 				<h:message for="subidaFP" />
 			</div>
 			
-
+			
 
 
 				</h:panelGrid>
 
-
-			
-				
 			</center>
 
 			<br />

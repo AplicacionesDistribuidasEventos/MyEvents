@@ -54,8 +54,8 @@ public class PersonaDAO {
 		if(!p.getAeventos().isEmpty()) {
 			p.getAeventos().size();
 		}
-		if(!p.getSrecepciones().isEmpty()) {
-			p.getSrecepciones().size();
+		if(!p.getReservaLocal().isEmpty()) {
+			p.getReservaLocal().size();
 		}
 		return p;
 	}
@@ -94,7 +94,7 @@ public class PersonaDAO {
 		List<Persona> lpersonas = query.getResultList();
 		for(Persona p : lpersonas) {
 			p.getAeventos().size();
-			p.getSrecepciones().size();
+			p.getReservaLocal().size();
 		}
 		return lpersonas;
 	}
@@ -135,7 +135,7 @@ public class PersonaDAO {
 		List<Persona> personas = query.getResultList();
 		for(Persona p : personas) {
 			p.getAeventos().size();
-			p.getSrecepciones().size();
+			p.getReservaLocal().size();
 		}
 		return personas;
 	}
@@ -153,7 +153,7 @@ public class PersonaDAO {
 		List<Persona>personas=query.getResultList();
 		for(Persona p : personas) {
 			p.getAeventos().size();
-			p.getSrecepciones().size();
+			p.getReservaLocal().size();
 		}
 		return personas;
 	}
@@ -169,7 +169,7 @@ public class PersonaDAO {
 		List<Persona> personas = query.getResultList();
 		for(Persona p : personas) {
 			p.getAeventos().size();
-			p.getSrecepciones().size();
+			p.getReservaLocal().size();
 		}
 		return personas;
 	}

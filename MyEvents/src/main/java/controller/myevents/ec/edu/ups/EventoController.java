@@ -2,6 +2,8 @@ package controller.myevents.ec.edu.ups;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -169,6 +171,7 @@ public class EventoController {
 	public int getId2() {
 		return id2;
 	}
+	
 
 	public void setId2(int id2) {
 		this.id2 = id2;
@@ -313,7 +316,8 @@ public class EventoController {
 	/**
 	 * Insertar evento local globa.
 	 *Metodo para recuperar el idLocal para cargar el evento dentro del local y
-	 *agregar la cateogoria a ese evento
+	 *agregar la cateogoria a ese evento.
+	 *Dar formato a la fecha String del modelo Evento.
 	 * @return URl de navegacion con la cosulta de eventos y locales por persona
 	 */
 	public String insertarEventoLocalGloba() {
@@ -332,14 +336,26 @@ public class EventoController {
 		else {
 			System.out.println("no existen categorias ingresadas");
 		}
+		
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+//		String fechaEvento  = evento.getFechaEvento();
+		Date fechaEvento = new Date();
+		String fechaFormato = formatter.format(fechaEvento);
+			
+		
+		System.out.println("si me transformaaaaaaaaaa : "+""+fechaFormato);
+		
+		evento.setFechaEvento(fechaFormato);
 		recupelocal.getEvento().add(evento);
+		
 		locdao.updateLocal(recupelocal);
 		
 
 		} catch (Exception e) {
 			System.out.println("falta categoria" + e.getMessage());
 		}
-	
+		
 		return "consulEventLocPers";
 	}
 
@@ -362,11 +378,12 @@ public class EventoController {
 	 *
 	 * @return the string
 	 */
+	/*
 	public String buscar() {
 		listadoFiltrado = evendao.getEventosPorNombre(filtro);
 		return null;
 	}
-
+*/
 	public static Categoria ca=new Categoria();
 	/**ESTABLEZCO LA CATEGORIA QUE SE SELECCIONADO*/
 	public void categoriaSeleccionada() {
@@ -410,12 +427,12 @@ public class EventoController {
 	
 	/**
 	 * On date select.
-	 *Metodo para selecionar un calendario a travez de primefaces
+	 *Metodo que me devuelve un efento de la fecha seleccionada a tarves de ajax.
 	 * @param event
 	 */
 	public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 

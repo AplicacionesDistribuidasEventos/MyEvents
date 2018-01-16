@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The Class Evento.
@@ -58,9 +60,8 @@ public class Evento {
 	
 	/** The fecha evento. */
 	@Column(name="even_fechaEvento")
-	@Temporal(value= TemporalType.DATE)
 	@NotNull 
-	private Date fechaEvento;
+	private String fechaEvento;
 	
 
 	/** The categoria. */
@@ -68,14 +69,8 @@ public class Evento {
 	@JoinColumn(name="eve_cat_id")
 	private Categoria categoria;
 	
-	//relaciones entre evento a salon de recepciones y de evento a asistencia evento
-
-	/** The salones. */
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-	@JoinColumn(name="eve_rec_fk", referencedColumnName="even_codigo")
-	private List<SalonRecepcion> salones;
-	
 	/** The Asistencia eventos. */
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
@@ -194,25 +189,17 @@ public class Evento {
 		this.costo = costo;
 	}
 
-	/**
-	 * Gets the fecha evento.
-	 *
-	 * @return the fecha evento
-	 */
-	public Date getFechaEvento() {
+
+	
+	
+
+	public String getFechaEvento() {
 		return fechaEvento;
 	}
 
-	/**
-	 * Sets the fecha evento.
-	 *
-	 * @param fechaEvento the new fecha evento
-	 */
-	public void setFechaEvento(Date fechaEvento) {
+	public void setFechaEvento(String fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
-	
-	
 
 	/**
 	 * Gets the asistencia eventos.
@@ -231,40 +218,13 @@ public class Evento {
 	public void setAsistenciaEventos(List<AsistenciaEvento> asistenciaEventos) {
 		AsistenciaEventos = asistenciaEventos;
 	}
-  
-  	/**
-	   * Gets the salones.
-	   *
-	   * @return the salones
-	   */
-	  public List<SalonRecepcion> getSalones() {
-		return salones;
-	}
 
-	/**
-	 * Sets the salones.
-	 *
-	 * @param salones the new salones
-	 */
-	public void setSalones(List<SalonRecepcion> salones) {
-		this.salones = salones;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", AsistenciaEventos="
-				+ AsistenciaEventos + "]";
+				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + ", categoria="
+				+ categoria + ", AsistenciaEventos=" + AsistenciaEventos + "]";
 	}
-
-	/*@Override
-	public String toString() {
-		return "Evento [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", foto="
-				+ Arrays.toString(foto) + ", costo=" + costo + ", fechaEvento=" + fechaEvento + "]";
-	}*/
-			
+  
+  	
 }

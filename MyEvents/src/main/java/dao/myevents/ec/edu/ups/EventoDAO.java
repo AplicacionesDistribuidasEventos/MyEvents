@@ -77,8 +77,13 @@ public class EventoDAO {
 	
 	public Evento leerEventoSalones(int id) {
 
-		Evento e = em.find(Evento.class, id);
-		return e;
+		Evento eve = em.find(Evento.class, id);
+		/*
+			if(!eve.getAsistenciaEventos().isEmpty()) {
+				eve.getAsistenciaEventos().size();
+			}
+			*/
+		return eve;
 
 	}
 
@@ -105,7 +110,9 @@ public class EventoDAO {
 		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
 		List<Evento> levento = query.getResultList();
 		for (Evento eve : levento) {
-			eve.getAsistenciaEventos().size();
+			if(!eve.getAsistenciaEventos().isEmpty()) {
+				eve.getAsistenciaEventos().size();	
+			}
 		}
 		return levento;
 	}
@@ -117,17 +124,18 @@ public class EventoDAO {
 	 *            the filtro
 	 * @return the eventos por nombre
 	 */
-
+/*
 	public List<Evento> getEventosPorNombre(String filtro) {
 		String sql = "SELECT p FROM Evento p " + "WHERE nombre like ? ";
 
 		Query q = em.createQuery(sql, Evento.class);
 		q.setParameter(1, "%" + filtro + "%");
 		List<Evento> alumno = q.getResultList();
+		
 		return alumno;
 
 	}
-
+*/
 	/**
 	 * List persona ID (Recuperar lista de personas por el id enviado).
 	 *

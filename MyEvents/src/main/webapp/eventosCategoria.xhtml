@@ -16,8 +16,9 @@
 
 
 		<h:form>
+		<h:outputText value="No se encuentran registros" rendered="#{empty categoriaController.catevelist}" />
 			<h:dataTable var="lEventos" style="color:black"
-				value="#{categoriaController.catevelist}" border="2" class="table">
+				value="#{categoriaController.catevelist}" border="2" class="table" rendered="#{not empty categoriaController.catevelist}">
 
 				<h:column Style="color: black">
 					<f:facet name="header">Evento</f:facet>

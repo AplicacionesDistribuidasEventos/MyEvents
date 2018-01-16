@@ -56,7 +56,9 @@ public class LocalController {
 	private Part fotoPerfil;	
 	
 	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
-	private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";					  
+	//private String directorioPerfil= "C:\\Users\\sesla\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";	
+	//private String directorioPerfil= "C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";	
+	private String directorioPerfil= "/var/www/html/MyEvents/upload";
 	/** Variable que contendra el nombre del archivo */
 	private String nombreArchivoPerfil;
 	private List<String> imagenes;
@@ -275,10 +277,10 @@ public class LocalController {
 		
 		if(fotoPerfil!=null){
 			saveFotoLocal();
-			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
+			local.setFotoPerfil("upload/"+nombreArchivoPerfil);
 		}else{	
 			
-					local.setFotoPerfil("imagenes/local1.jpg");
+					local.setFotoPerfil("upload/local1.jpg");
 				
 		}
 		
@@ -300,10 +302,10 @@ public class LocalController {
 	
 		if(fotoPerfil!=null){
 			saveFotoLocal();
-			local.setFotoPerfil("imagenes/"+nombreArchivoPerfil);
+			local.setFotoPerfil("upload/"+nombreArchivoPerfil);
 		}else{	
 			
-					local.setFotoPerfil("imagenes/local1.jpg");
+					local.setFotoPerfil("upload/local1.jpg");
 				
 			
 		}
