@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:hs="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui" template="plantillaUsuario.xhtml">
+	<!-- Definicion del titulo respecto a la plantilla -->
+	<ui:define name="titulo">MyEvents - Usuario</ui:define>
+
+	<!-- Defininionc del encabezado respecto a la plantilla -->
+	<ui:define name="encabezado">Bienvenido a MyEvents.</ui:define>
+
+	<!-- Definicion del contenido respecto a la plantilla -->
+	<ui:define name="contenido">
+
+		<h:form id="list">
+			<p:outputLabel value="* Buscar en la fecha: " />
+			<p:calendar
+				value="#{reservaLocalController.reservalocal.fechaReserva}"
+				pattern="dd/MM/yyyy" showButtonPanel="true" showOn="button"
+				navigator="true">
+				<p:ajax event="dateSelect"
+					listener="#{reservaLocalController.cargarLocalesSReserva()}"
+					update="llibres"></p:ajax>
+			</p:calendar>
+
+			<p:dataTable id="llibres" var="localeslibres" style="color:black"
+				value="#{reservaLocalController.localeslibres}" border="2"
+				class="table" styleClass="table table-striped table-bordered">
+
+
+				<p:column Style="color: black">
+					<f:facet name="header">Nombre</f:facet>
+			#{localeslibres.nombre}
+		</p:column>
+
+				<p:column Style="color: black">
+					<f:facet name="header">Capacidad</f:facet>
+			#{localeslibres.capacidad}
+		</p:column>
+
+				<p:column Style="color: black">
+					<f:facet name="header">Costo</f:facet>
+			#{localeslibres.costo}
+		</p:column>
+
+				<p:column Style="color: black">
+					<f:facet name="header">Descripcion</f:facet>
+			#{localeslibres.descripcion}
+		</p:column>
+
+				<p:column Style="color: black">
+					<f:facet name="header">Local</f:facet>
+					<img src="#{localeslibres.fotoPerfil}" class="img-rounded"
+						width="125" height="125" />
+				</p:column>
+
+				<p:column Style="color: black">
+					<f:facet name="header">Accion</f:facet>
+					<p:commandButton action="#{reservaLocalController.Reservar(localeslibres.codigo)}" value="Reservar" id="btnReserva" update=":list:llibres"/>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+
+	</ui:define>
+
+
+</ui:composition>
