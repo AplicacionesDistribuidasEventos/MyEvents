@@ -116,7 +116,6 @@ public class EventoDAO {
 			}
 
 		}
-		}
 		return levento;
 	}
 
