@@ -34,16 +34,16 @@
 			<attribute name="owner.project.facets" value="jboss.m2"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/jasperreports-5.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/commons-javaflow-20060411.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/poi-3.7-20101029.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/commons-beanutils-1.8.2.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/iText-2.1.7.js2.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/png-encoder-1.5.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/gmaps4jsf-core-3.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="/home/edwin/git/MyEvents/MyEvents/Libraries/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/commons-beanutils-1.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/gmaps4jsf-core-3.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/iText-2.1.7.js2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/jasperreports-5.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/png-encoder-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sesla/git/MyEvents/MyEvents/Libraries/poi-3.7-20101029.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

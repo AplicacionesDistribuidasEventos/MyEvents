@@ -24,7 +24,9 @@
 					listener="#{reservaLocalController.cargarLocalesSReserva()}"
 					update="llibres"></p:ajax>
 			</p:calendar>
-
+			<center>
+				<h1>Salones disponibles</h1>
+			</center>
 			<p:dataTable id="llibres" var="localeslibres" style="color:black"
 				value="#{reservaLocalController.localeslibres}" border="2"
 				class="table" styleClass="table table-striped table-bordered">
@@ -58,7 +60,9 @@
 
 				<p:column Style="color: black">
 					<f:facet name="header">Accion</f:facet>
-					<p:commandButton action="#{reservaLocalController.Reservar(localeslibres.codigo)}" value="Reservar" id="btnReserva" update=":list:llibres"/>
+					<p:commandButton
+						action="#{reservaLocalController.Reservar(localeslibres.codigo)}"
+						value="Reservar" id="btnReserva" update=":list:llibres" />
 				</p:column>
 
 			</p:dataTable>

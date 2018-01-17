@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:hs="http://xmlns.jcp.org/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="PlantillaUsuario.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="PlantillaUsuario.xhtml">
 
 	<!-- Colocar el titulo en la pestana -->
 	<ui:define name="titulo">Crear Eventos</ui:define>
@@ -16,72 +16,81 @@
 	<ui:define name="bienvenida">Gestor Salones de Recepcion</ui:define>
 
 	<ui:define name="contenido">
-		<!--  <f:metadata>
-			<f:viewParam name="id" value="#{personaController.idEditUser}"></f:viewParam>
-		</f:metadata>-->
 
+		<h:form>
+			<p:inputText id="entrada" placeholder="Busqueda por nombre..."
+				value="#{localController.palabra}">
+				<p:ajax event="keyup" listener="#{localController.filtroLocales()}"
+					update="tabla-filtros">
+				</p:ajax>
+			</p:inputText>
+			<center>
+				<h1>Salones de Reservas</h1>
+			</center>
+			<center>
+				<p:dataTable var="listalocales" style="color:black"
+					id="tabla-filtros" value="#{localController.listaLocales()}"
+					border="2" class="table"
+					styleClass="table table-striped table-bordered">
 
-		<h:form><center>
-			<h:dataTable var="listalocales" style="color:black"
-				value="#{localController.listaLocales()}" border="2" class="table"
-				styleClass="table table-striped table-bordered">
+					<p:column Style="color: black">
+						<f:facet name="header">Salon</f:facet>
+						<img src="#{listalocales.fotoPerfil}" class="img-rounded"
+							width="125" height="125" />
+					</p:column>
 
-		<h:column Style="color: black">
-					<f:facet name="header">Salon</f:facet>
-			 <img src="#{listalocales.fotoPerfil}" class="img-rounded"  width="125" height="125"/>
-		</h:column>
-           
-				<h:column Style="color: black">
-					<f:facet name="header">Nombre</f:facet>
+					<p:column Style="color: black">
+						<f:facet name="header">Nombre</f:facet>
 			#{listalocales.nombre}
-		</h:column>
+		</p:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Descripcion</f:facet>
+					<p:column Style="color: black">
+						<f:facet name="header">Descripcion</f:facet>
 			#{listalocales.descripcion}
-		</h:column>
+		</p:column>
 
 
-				<h:column Style="color: black">
-					<f:facet name="header">Puntuacion</f:facet>
+					<p:column Style="color: black">
+						<f:facet name="header">Puntuacion</f:facet>
 			#{listalocales.puntuacion}
-		</h:column>
+		</p:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Comentario</f:facet>
+					<p:column Style="color: black">
+						<f:facet name="header">Comentario</f:facet>
 			#{listalocales.comentario}
-		</h:column>
+		</p:column>
 
-				<h:column Style="color: black">
-					<f:facet name="header">Costo</f:facet>
+					<p:column Style="color: black">
+						<f:facet name="header">Costo</f:facet>
 			#{listalocales.costo}
-		</h:column>
+		</p:column>
 
 
 
-				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">
-						<center>Accion Editar</center>
-					</f:facet>
-					<!-- <h:commandButton value="Editar" class="btn btn-danger"
+					<p:column Style="color: black">
+						<f:facet name="header" Style="color: black">
+							<center>Accion Editar</center>
+						</f:facet>
+						<!-- <h:commandButton value="Editar" class="btn btn-danger"
 						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
 
-					
-
-					<center>
-						<span class="glyphicon glyphicon-refresh"></span>
-					</center>
-				</h:column>
 
 
-				
-				<h:column Style="color: black">
-					<f:facet name="header" Style="color: black">Mapa</f:facet>
-					<h:commandButton value="Encuentrame" class="btn btn-danger btn-lg"
-						action="#{localController.cargarMapa(listalocales)}" />
-				</h:column>
-			</h:dataTable>
+						<center>
+							<span class="glyphicon glyphicon-refresh"></span>
+						</center>
+					</p:column>
+
+
+
+					<p:column Style="color: black">
+						<f:facet name="header" Style="color: black">Mapa</f:facet>
+						<h:commandButton value="Encuentrame" class="btn btn-danger btn-lg"
+							action="#{localController.cargarMapa(listalocales)}" />
+					</p:column>
+				</p:dataTable>
 			</center>
+
 		</h:form>
 	</ui:define>
 
