@@ -5,8 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	template = "PlantillaAdmin.xhtml">
 
-<!-- Colocar el titulo en la pestana -->
-<ui:define name="titulo">Pagina Administrador</ui:define>
+<!-- Colocar el titulo en la pestana --> 
+<ui:define name="titulo">Pagina Administrador</ui:define> 
 
 <!-- Colocar el Breadcrumbs o seccion donde se encuentra -->
 <ui:define name="breadcrums">Principal Administrador</ui:define>
@@ -19,12 +19,14 @@
       
 <ui:define name="contenido">
 
-<h:form enctype="multipart/form-data">
- 
-      
+<h:form name="myform" enctype="multipart/form-data"> 
+
             
           <h2>Mis salones</h2>
 			<br/>
+			<h:commandButton  value="LISTAR RESERVAS" action="#{personaController.consulLocalReservAdmin()}" class="btn btn-info"/>
+			
+            <br/>
             <br/>
 			<h:dataTable value="#{personaController.listLocales}" var="locales"
 				class="table" styleClass="table table-striped table-bordered">
@@ -59,22 +61,11 @@
 				</h:column>
  
 			</h:dataTable>
-
-			
-            
+        
        </h:form>
-
-
 </ui:define>
 
 </ui:composition>
-
-
-
-
-
-
-			
 
 
 
