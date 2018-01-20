@@ -3,26 +3,24 @@ package controller.myevents.ec.edu.ups;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
 import org.hibernate.validator.constraints.NotBlank;
-
 import dao.myevents.ec.edu.ups.EventoDAO;
+import dao.myevents.ec.edu.ups.LocalDAO;
 import dao.myevents.ec.edu.ups.PersonaDAO;
+import dao.myevents.ec.edu.ups.ReservaLocalDAO;
 import modelo.myevents.ec.edu.ups.AsistenciaEvento;
 import modelo.myevents.ec.edu.ups.Evento;
 import modelo.myevents.ec.edu.ups.Local;
 import modelo.myevents.ec.edu.ups.Persona;
 import modelo.myevents.ec.edu.ups.PersonaLocalEvento;
+import modelo.myevents.ec.edu.ups.PersonaLocalReserva;
 import modelo.myevents.ec.edu.ups.ReservaLocal;
 import utilidades.myevents.ec.edu.ups.SessionUtils;
 import validacionesnegocio.myevents.ec.edu.ups.Validacion;
@@ -42,6 +40,10 @@ public class PersonaController {
 	private PersonaDAO pdao;
 	@Inject
 	private EventoDAO evendao;
+	@Inject
+	private LocalDAO locdao;
+	@Inject
+	private ReservaLocalDAO reservaDAO;
 
 	/** Variables de lista y de objetos utilizados */
 	private Persona personas = null;
@@ -65,6 +67,7 @@ public class PersonaController {
 	private String efecha;
 	private String edescripcion;
 	private Persona auxpersonas;
+	private Persona auxlistAmdinID= new Persona();
 	/**
 	 * The nusuario. Varibles donde se almacena los valores de la consulta
 	 * maestro-detalles
@@ -76,7 +79,14 @@ public class PersonaController {
 	 * en PERSONA, LOCAL, EVENTO
 	 */
 	private List<Persona> ListPerID;
+	
+	
+	/**Vista de PersonaLocalEventp*/
 	private List<PersonaLocalEvento> plelist;
+	
+	/**Vista de PersonaLocalReserva*/
+	private List<PersonaLocalReserva> plreserva;
+	
 	private List<Persona> lpersonas;
 	private List<Local> auxListlocales;
 	private List<Evento> ev2 = new ArrayList<Evento>();
@@ -98,15 +108,17 @@ public class PersonaController {
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
-		lpersonas = listaPersonas();
+		lpersonas = listaPersonas(); 
 		ListPerID = new ArrayList<Persona>();
 		plelist = new ArrayList<PersonaLocalEvento>();
+		plreserva = new ArrayList<PersonaLocalReserva>();
 		eventosList = new ArrayList<Evento>();
 		auxListlocales = new ArrayList<Local>();
 		v = new Validacion();
 		consultaLocalEventos();
 		listLocales = new ArrayList<Local>();
 		consultarLocalesADMIN(id);
+		auxlistAmdinID= new Persona();
 		//consulAsisEvenUser();
 		ev2 = new ArrayList<Evento>();
 		
@@ -199,6 +211,14 @@ public class PersonaController {
 
 	public int getIdrecuprerar() {
 		return idrecuprerar;
+	}
+
+	public List<PersonaLocalReserva> getPlreserva() {
+		return plreserva;
+	}
+
+	public void setPlreserva(List<PersonaLocalReserva> plreserva) {
+		this.plreserva = plreserva;
 	}
 
 	/**
@@ -301,6 +321,14 @@ public class PersonaController {
 
 	public void setMyUser(Persona myUser) {
 		this.myUser = myUser;
+	}
+
+	public Persona getAuxlistAmdinID() {
+		return auxlistAmdinID;
+	}
+
+	public void setAuxlistAmdinID(Persona auxlistAmdinID) {
+		this.auxlistAmdinID = auxlistAmdinID;
 	}
 
 	/**
@@ -555,6 +583,7 @@ public class PersonaController {
 			this.Loginexiste = " ";
 			FacesContext contex = FacesContext.getCurrentInstance();
 
+			/**Obtengo el id de persona con una variable estatica*/
 			List<Persona> pers = pdao.login(personas.getCorreo(), personas.getContrasenia());
 			idUsuario = pers.get(0).getId();
 
@@ -787,7 +816,7 @@ public class PersonaController {
 		
 		/**Busco a la persona por el ID haciendo uso del DAO.*/
 		auxpersonas = pdao.selectPersona(idUsuario);
-		// auxListpersonas = pdao.listPersonaID(id);
+		
 		//Si recupera id del Usuario
 		System.out.println("ASISTENCIAS-USUARIO"+ " " +idUsuario);
 		/**
@@ -825,4 +854,54 @@ public class PersonaController {
 		return null;
 	}
 
+	/**
+	 * ConsultaLocalReservAdmin()
+	 * Este metodo muestra los locales reservados de ese administrador, se crea una vista con los atributos de
+	 * los locales y reservas para obtener en una vista las dos entidades, para mostrar creamos un objeto de tipo
+	 * persona que contendra el id, recorremos una lista de locales de ese misma persona, enviamos una condicion
+	 * de que si la reserva se encuentra llena la recorremos y otra concidcion si las reservas contienen un estado
+	 * igual true. 
+	 * @return una consulta de los locales reservados de ese administrador, la consulta renderiza
+	 * la misma pagina en JSF.
+	 */
+	
+	public String consulLocalReservAdmin() {
+		init();
+		/** Instancio la vista */
+		PersonaLocalReserva vista = new PersonaLocalReserva();
+		/** Limpia la lista */
+		plreserva.clear();
+		auxlistAmdinID = pdao.selectPersona(idUsuario);
+		if (!auxlistAmdinID.getLocales().isEmpty()) {
+			for (Local lo : auxlistAmdinID.getLocales()) {
+
+				System.out.println("locales ADMIN" + "" + lo);
+
+				if (!lo.getReseervaLocales().isEmpty()) {
+					for (ReservaLocal res : lo.getReseervaLocales()) {
+						if (res.getEstado().equals("true")) {
+
+							vista = new PersonaLocalReserva();
+
+							/** Atributos de locales */
+							vista.setL_nombre(lo.getNombre());
+							vista.setL_descripcion(lo.getDescripcion());
+							vista.setL_fotoPerfil(lo.getFotoPerfil());
+
+							/** Atributo de ReservaLocal */
+							vista.setRes_estado(res.getEstado());
+							vista.setRes_fechaReserva(res.getFechaReserva());
+							plreserva.add(vista);
+
+						}
+					}
+				}
+			}
+			System.out.println("SALONES RESERVADOS SON " + "" + plreserva);
+
+		}
+
+		return "consulReservaAdmin";
+	}
+	
 }
