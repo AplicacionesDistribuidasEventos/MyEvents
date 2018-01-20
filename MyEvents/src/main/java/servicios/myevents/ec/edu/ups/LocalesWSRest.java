@@ -183,6 +183,33 @@ public class LocalesWSRest {
 		return lreservados;
 	}
 	
+	/**
+	 * WS para la busqueda de los locales por palabra
+	 * palabra: Hace referencia al nombre del local
+	 * http://localhost:8080/MyEvents/rs/locales/busqueda-nombre-local?palabra=caballo
+	 * */
+	@GET
+	@Path("/busqueda-nombre-local")
+	@Produces("application/json")
+	public List<Local> filtroLocales(@QueryParam("palabra") String palabra) {
+		List<Local> llocales = new ArrayList<Local>();
+		List<Local>filtro = new ArrayList<Local>();
+		System.out.println("PALABRAAA:   " + palabra);
+		llocales = locdao.listlocal();
+		filtro.clear();
+		boolean activado = false;
+		if (!palabra.isEmpty()) {
+			activado = true;
+			for (Local l : llocales) {
+				if (l.getNombre().toUpperCase().contains(palabra.toUpperCase())) {
+					filtro.add(l);
+				} else {
+					// si no han habido coincidencias
+				}
+			}
+		} 
+		return filtro;
+	}
 
 	
 }
