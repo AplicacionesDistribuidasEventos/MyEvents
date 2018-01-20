@@ -18,6 +18,8 @@
 	<ui:define name="contenido">
 	<h:form>
 
+<h:outputLabel value="El registro no contiene datos"
+				rendered="#{empty  personaController.ev2}"/>
 	<h:dataTable var="reportUser" style="color:black"
 				value="#{personaController.ev2}" border="2" class="table"
 				styleClass="table table-striped table-bordered">

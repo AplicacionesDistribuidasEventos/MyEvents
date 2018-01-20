@@ -93,7 +93,12 @@ public class Persona {
 	@JoinColumn(name="per_reserv_fk", referencedColumnName="per_id")
 	private List<ReservaLocal> reservaLocal=new ArrayList<>();
 
-
+	 /** The srecepciones. */
+	/*Listado Tipo Salon Recepciones, unidireccional
+	  * */
+	@OneToMany(cascade=(javax.persistence.CascadeType.ALL),fetch=FetchType.LAZY)
+	@JoinColumn(name="per_com_fk", referencedColumnName="per_id")
+	private List<Comentario> comentarios=new ArrayList<>();
 
 	/**
 	 * Gets the id.
@@ -287,12 +292,20 @@ public class Persona {
 		this.reservaLocal = reservaLocal;
 	}
 
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", correo=" + correo + ", perfil=" + perfil + ", contrasenia=" + contrasenia + ", estado=" + estado
-				+ ", aeventos=" + aeventos + ", locales=" + locales + ", reservaLocal=" + reservaLocal + "]";
+				+ ", aeventos=" + aeventos + ", locales=" + locales + ", reservaLocal=" + reservaLocal
+				+ ", comentarios=" + comentarios + "]";
 	}
-
 
 }

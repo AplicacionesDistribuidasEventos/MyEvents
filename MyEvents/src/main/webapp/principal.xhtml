@@ -4,7 +4,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:hs="http://xmlns.jcp.org/jsf/html"
-	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"> 
 <h:head>
 <!--
 New Event
@@ -101,16 +102,36 @@ http://www.templatemo.com/tm-486-new-event
 	<div class="container">
 		<div class="row">
 
-			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-				<h3>MISION</h3>
-				<p>Ofrecer a los usurios una herramienta que les facilite la busqueda de salones de recepciones para realizar eventos dentro de la ciudad de Cuenca</p>
-				<h3>VISION</h3>
-				<p>Ser una de las herramientas mas utilizadas y disponibles a nivel de red para ofrecer un servicio de calidad a los usuarios</p>
-			</div>
-					
-			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-				<img src="images/overview-img.jpg" class="img-responsive" alt="Overview"/>
-			</div>
+				<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+					<h3>MISION</h3>
+					<p>Desarrollar soluciones informáticas practicas, creativas y
+						adaptables destinada a satisfacer necesidades de personas e
+						instituciones que requieren alquilar salones de eventos,
+						discotecas y brindarles información de eventos dentro de la ciudad
+						de Cuenca, aprovechando al máximo los cambios tecnológicos.</p>
+					<h3>VISION</h3>
+					<p>Ser la primera aplicación reconocida en el mercado por sus
+						referencia duraderas y confiables por parte de sus clientes;
+						además de brindar soluciones rápidas y oportunas.</p>
+				</div>
+
+				<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
+				<img src="images/overview-img.jpg" class="img-responsive" alt="Eventos"/>
+
+				<!-- LISTADO DE IMAGENES DE LOS LOCALES QUE SE ENCUENTRAN ALMACENADOS EN LA BASE DE DATOS -->
+					<div class="_ba2wq3">
+						<h:dataTable id="leventos" var="leventos"
+							value="#{eventoController.EventosIndex()}" class="table">
+							<h:column>
+								<div class="_1vnfy6mv">
+									<h4 style="color: rgb(218, 67, 56);">#{leventos.nombre} · $ #{leventos.costo}</h4>
+									<h5 style="color: rgb(16, 138, 168);">#{leventos.descripcion}</h5>
+									<h5 style="color: rgb(30, 67, 88);">Fecha: #{leventos.fechaEvento} </h5>
+								</div>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
 
 		</div>
 	</div>
@@ -182,70 +203,40 @@ http://www.templatemo.com/tm-486-new-event
 
 			<div class="col-md-12 col-sm-12 wow bounceIn">
 				<div class="section-title">
-					<h2>Creative Speakers</h2>
-					<p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
+					<h2>Nuestros Locales</h2>
+					<p>Puedes adquirir unas de nuestros mejores salones como oferta.</p>
 				</div>
 			</div>
 
-			<!-- Testimonial Owl Carousel section
+				<!-- Testimonial Owl Carousel section
 			================================================== -->
-			<div id="owl-speakers" class="owl-carousel">
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-					<div class="speakers-wrapper">
-						<img src="images/speakers-img1.jpg" class="img-responsive" alt="speakers"/>
-							<div class="speakers-thumb">
-								<h3>Jenny Green</h3>
-								<h6>UI Designer</h6>
-							</div>
-					</div>
-				</div>
+				<h:form id="form">
+					<p:carousel value="#{localController.localImagenes()}"
+						headerText="Salones mas visitados..." var="limagenes"
+						itemStyle="text-align:center" responsive="true">
+						<p:panelGrid columns="2" style="width:100%;margin:0px 0px"
+							columnClasses="label,value" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<f:facet name="header">
+								<center><img src="#{limagenes.fotoPerfil}" class="img-responsive"
+									width="100" height="100" /></center>
+							</f:facet>
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="images/speakers-img2.jpg" class="img-responsive" alt="speakers"/>
-							<div class="speakers-thumb">
-								<h3>David Yoon</h3>
-								<h6>Creative Director</h6>
-							</div>
-					</div>
-				</div>
+							<h3 style="color: rgb(218, 67, 56);">#{limagenes.nombre}</h3>
+							<h3 style="color: rgb(218, 67, 56);">$ #{limagenes.costo}</h3>
+							<h3 style="color: rgb(16, 138, 168);">#{limagenes.descripcion}</h3>
+							<h3 style="color: rgb(30, 67, 88);">Capacidad:
+								#{limagenes.capacidad}</h3>
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-					<div class="speakers-wrapper">
-						<img src="images/speakers-img3.jpg" class="img-responsive" alt="speakers"/>
-							<div class="speakers-thumb">
-								<h3>Je Mary Lee</h3>
-								<h6>Web Specialist</h6>
-							</div>
-					</div>
-				</div>
+						</p:panelGrid>
+					</p:carousel>
+				</h:form>
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="images/speakers-img4.jpg" class="img-responsive" alt="speakers"/>
-							<div class="speakers-thumb">
-								<h3>Johnathan Doe</h3>
-								<h6>Frontend Dev</h6>
-							</div>
-					</div>
-				</div>
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="images/speakers-img5.jpg" class="img-responsive" alt="speakers"/>
-							<div class="speakers-thumb">
-								<h3>Elite Hamilton</h3>
-								<h6>Marketing Guru</h6>
-							</div>
-					</div>
-				</div>
-				
+
 			</div>
-
-		</div>
-	</div>
-</section>
+					</div></section>
 </ui:insert>
 
 <ui:insert name="program">
