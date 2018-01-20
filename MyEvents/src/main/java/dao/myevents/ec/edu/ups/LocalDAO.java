@@ -1,6 +1,7 @@
 package dao.myevents.ec.edu.ups;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -72,17 +73,17 @@ public class LocalDAO {
 	 */
 	
 	public Local leerLocal(int id) {
-		System.out.println("Este es el famoso id: "+id); 
+		//System.out.println("Este es el famoso id: "+id); 
 		Local l = em.find(Local.class, id);
-		System.out.println(l.getNombre());
-		if(l!=null) {
-			System.out.print("No es nuloooooo");
-		}
+		//System.out.println(l.getNombre());
 		if(!l.getReseervaLocales().isEmpty()) {
 			l.getReseervaLocales().size();
 		}
 		if(!l.getEvento().isEmpty()) {
 			l.getEvento().size();
+		}
+		if(!l.getComentarios().isEmpty()) {
+			l.getComentarios().size();
 		}
 		return l;
 		
@@ -135,6 +136,30 @@ public class LocalDAO {
 			}
 			if(!l.getEvento().isEmpty()) {
 				l.getEvento().size();
+			}
+		}
+		return llocal;
+	}
+	
+	/**
+	 * Listlocal. 3 elementos Local
+	 *
+	 * @return the list
+	 */
+
+	public List<Local> listLocalPrincipal(){
+		String sql = "Select l from Local l";
+		TypedQuery<Local> query = em.createQuery(sql, Local.class);
+		List<Local> llocal = query.setMaxResults(2).getResultList();
+		for(Local l : llocal) {
+			if(!l.getReseervaLocales().isEmpty()) {
+				l.getReseervaLocales().size();
+			}
+			if(!l.getEvento().isEmpty()) {
+				l.getEvento().size();
+			}
+			if(!l.getComentarios().isEmpty()) {
+				l.getComentarios().size();
 			}
 		}
 		return llocal;

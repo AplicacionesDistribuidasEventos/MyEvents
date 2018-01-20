@@ -118,6 +118,21 @@ public class EventoDAO {
 		}
 		return levento;
 	}
+	
+	public List<Evento> listEventoPrincipal() {
+		String sql = "Select e from Evento e";
+		TypedQuery<Evento> query = em.createQuery(sql, Evento.class);
+		List<Evento> levento = query.setMaxResults(3).getResultList();
+		for (Evento eve : levento) {
+			if(!eve.getAsistenciaEventos().isEmpty()) {
+
+				eve.getAsistenciaEventos().size();	
+			}
+
+		}
+		return levento;
+	}
+	
 
 	/**
 	 * Gets the eventos por nombre.

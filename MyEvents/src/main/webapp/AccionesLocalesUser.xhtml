@@ -65,29 +65,18 @@
 			#{listalocales.costo}
 		</p:column>
 
-
-
 					<p:column Style="color: black">
-						<f:facet name="header" Style="color: black">
-							<center>Accion Editar</center>
-						</f:facet>
-						<!-- <h:commandButton value="Editar" class="btn btn-danger"
-						action="#{eventoController.loadEventoEditar(listaeventos.codigo)}" /> -->
-
-
-
-						<center>
-							<span class="glyphicon glyphicon-refresh"></span>
-						</center>
+						<f:facet name="header" Style="color: black">Detalles</f:facet>
+						<p:commandButton value="Mas Detalles" class="btn btn-danger btn-lg"
+							action="#{localController.cargarPerfilLocal(listalocales.codigo)}" />
 					</p:column>
-
-
 
 					<p:column Style="color: black">
 						<f:facet name="header" Style="color: black">Mapa</f:facet>
-						<h:commandButton value="Encuentrame" class="btn btn-danger btn-lg"
+						<p:commandButton value="Encuentrame" class="btn btn-danger btn-lg"
 							action="#{localController.cargarMapa(listalocales)}" />
 					</p:column>
+
 				</p:dataTable>
 			</center>
 

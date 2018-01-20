@@ -435,6 +435,15 @@ public class EventoController {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
+	
+	
+	/**	PERMITE COLOCAR 3 IMAGENES DE PERFIL EN LA PANTALLA DE INICIO
+	 * */
+	public List<Evento> EventosIndex() {
+		List<Evento> eventoinicio = new ArrayList<Evento>();
+		eventoinicio = evendao.listEventoPrincipal();
+		return eventoinicio;
+	}
 
 
 }

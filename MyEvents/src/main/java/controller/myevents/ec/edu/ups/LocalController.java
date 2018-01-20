@@ -10,6 +10,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
@@ -26,6 +28,7 @@ import modelo.myevents.ec.edu.ups.Persona;
  * The Class LocalController.
  */
 @ManagedBean
+@SessionScoped
 public class LocalController {
 
 	/** Inyeccion de dependecias a los DAO que se van a utilizar */
@@ -36,7 +39,7 @@ public class LocalController {
 	private PersonaDAO pdao;
 
 	/** Variables definidas para el manejo de los Locales */
-	private Local local;
+	private Local local = new Local();;
 	private Persona p;
 	private List<Local> listlocal;
 	private Local auxLocal;
@@ -52,7 +55,7 @@ public class LocalController {
 	private String longituddes;
 
 	/** Variable donde se alamcenara la URL del path de la imagen en la BD */
-	private Part fotoPerfil;
+	private Part fotoPerfil = null;
 
 	/** The directorio perfil. Almacena la url donde se alamcenara la imagen */
 	// private String directorioPerfil=
@@ -82,14 +85,14 @@ public class LocalController {
 	 */
 	private String palabra;
 
+	private List<Local> localesPerfil = new ArrayList<Local>();
+
 	/**
 	 * init(). Metodo para incializar los metodos de clase
 	 */
 	@PostConstruct
 	public void init() {
-		local = new Local();
 		loadLocal();
-		fotoPerfil = null;
 		listlocal = locdao.listlocal();
 	}
 
@@ -279,6 +282,14 @@ public class LocalController {
 		id2 = id;
 	}
 
+	public List<Local> getLocalesPerfil() {
+		return localesPerfil;
+	}
+
+	public void setLocalesPerfil(List<Local> localesPerfil) {
+		this.localesPerfil = localesPerfil;
+	}
+
 	/**
 	 * insertarLocalAdmin(). Método para ingresar un local referente a la personas
 	 * logueada al sistema. Por lo que se utiliza el dao de la persona para
@@ -448,7 +459,7 @@ public class LocalController {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Lista locales. Contiene un lista de todos los locales ingresados que son
 	 * leidos desde la BD.
@@ -457,40 +468,61 @@ public class LocalController {
 	 */
 
 	public List<Local> listaLocales() {
-		if(activado==false) {
-			listlocal = locdao.listlocal();	
+		if (activado == false) {
+			listlocal = locdao.listlocal();
 			System.out.println("CARGA TODA LA LISTA");
-		}else {
+		} else {
 			listlocal = filtroLocales();
 			System.out.println("FILTRANDO");
 		}
 		return listlocal;
 	}
 
-	/**Metodo utilizado para el filtrado de los locales por nombre
-	 * */
+	/**
+	 * Metodo utilizado para el filtrado de los locales por nombre
+	 */
 	static List<Local> filtro;
-	static boolean activado ;
+	static boolean activado;
+
 	public List<Local> filtroLocales() {
 		List<Local> llocales = new ArrayList<Local>();
 		filtro = new ArrayList<Local>();
-		System.out.println("PALABRAAA:   "+palabra);
+		System.out.println("PALABRAAA:   " + palabra);
 		llocales = locdao.listlocal();
 		filtro.clear();
 		activado = false;
-		if(!palabra.isEmpty()) {
+		if (!palabra.isEmpty()) {
 			activado = true;
-			for(Local l : llocales) {
-				if(l.getNombre().toUpperCase().contains(palabra.toUpperCase())) {
-					filtro.add(l);				
-				}else {
-					//si no han habido coincidencias
+			for (Local l : llocales) {
+				if (l.getNombre().toUpperCase().contains(palabra.toUpperCase())) {
+					filtro.add(l);
+				} else {
+					// si no han habido coincidencias
 				}
 			}
-		}else {
+		} else {
 			listaLocales();
-		}	
+		}
 		return filtro;
 	}
-	
+
+	/**
+	 * PERMITE COLOCAR 3 IMAGENES DE PERFIL EN LA PANTALLA DE INICIO
+	 */
+	public List<Local> localImagenes() {
+		List<Local> localinicio = new ArrayList<Local>();
+		localinicio = locdao.listLocalPrincipal();
+		System.out.println("LCOCALINICIO:   " + localinicio);
+		return localinicio;
+	}
+
+	public static int id_loc_com;
+
+	public String cargarPerfilLocal(int id) {
+		id_loc_com = id;
+		local = locdao.leerLocal(id);
+		localesPerfil.add(local);
+		return "perfilLocal";
+	}
+
 }

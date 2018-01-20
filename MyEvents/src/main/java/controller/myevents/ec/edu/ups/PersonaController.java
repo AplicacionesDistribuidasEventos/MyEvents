@@ -637,7 +637,7 @@ public class PersonaController {
 	public String cerrarSesion() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
-		return "index.xhtml";
+		return "index";
 	}
 
 	/**
