@@ -57,6 +57,9 @@ public class PersonaDAO {
 		if(!p.getReservaLocal().isEmpty()) {
 			p.getReservaLocal().size();
 		}
+		if(!p.getComentarios().isEmpty()) {
+			p.getComentarios().size();
+		}
 		return p;
 	}
 	
@@ -95,6 +98,9 @@ public class PersonaDAO {
 		for(Persona p : lpersonas) {
 			p.getAeventos().size();
 			p.getReservaLocal().size();
+			if(!p.getComentarios().isEmpty()) {
+				p.getComentarios().size();
+			}
 		}
 		return lpersonas;
 	}

@@ -1,6 +1,7 @@
 package modelo.myevents.ec.edu.ups;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +45,6 @@ public class Local implements Serializable{
 	/** The descripcion. */
 	@Column(name="local_descripcion")
 	@NotNull 
-	@Size(min=5,max=50)
 	private String descripcion;
 	
 	/** The capacidad. */
@@ -93,7 +93,10 @@ public class Local implements Serializable{
 	@JoinColumn(name="loc_reserv_fk", referencedColumnName="local_codigo")
 	private List<ReservaLocal> reseervaLocales; 
 	
-	
+	/** Relacion de uno a mucho entre el local y Reserva del Local*/
+	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+	@JoinColumn(name="loc_com_fk", referencedColumnName="local_codigo")
+	private List<Comentario> comentarios = new ArrayList<Comentario>(); 
 	
 	public byte[] getImagen() {
 		return imagen;
@@ -312,12 +315,21 @@ public class Local implements Serializable{
 		this.reseervaLocales = reseervaLocales;
 	}
 
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 	@Override
 	public String toString() {
 		return "Local [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", capacidad="
 				+ capacidad + ", costo=" + costo + ", puntuacion=" + puntuacion + ", comentario=" + comentario
 				+ ", fotoPerfil=" + fotoPerfil + ", latitud=" + latitud + ", longitud=" + longitud + ", imagen="
-				+ Arrays.toString(imagen) + ", evento=" + evento + ", reseervaLocales=" + reseervaLocales + "]";
+				+ Arrays.toString(imagen) + ", evento=" + evento + ", reseervaLocales=" + reseervaLocales
+				+ ", comentarios=" + comentarios + "]";
 	}
 
 }
