@@ -101,13 +101,20 @@
         <!-- First declare the APIs we depend on and need for compilation. All 
             of them are provided by JBoss WildFly -->
 
-        <!-- Import the CDI API, we use provided scope as the API is included in 
-            JBoss WildFly -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+	<!-- Import the CDI API, we use provided scope as the API is included in 
+		JBoss WildFly -->
+	<dependency>
+		<groupId>javax.enterprise</groupId>
+		<artifactId>cdi-api</artifactId>
+		<scope>provided</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>net.bootsfaces</groupId>
+		<artifactId>bootsfaces</artifactId>
+		<version>1.2.0</version>
+		<scope>compile</scope>
+	</dependency>
         
         
 
