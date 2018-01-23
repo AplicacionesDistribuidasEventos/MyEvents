@@ -524,5 +524,11 @@ public class LocalController {
 		localesPerfil.add(local);
 		return "perfilLocal";
 	}
+	
+	/**METODO UTILIZADO PARA CARGAR EL CAROUSEL E INDICAR TODOS LOS LOCALES DISPONIBLES
+	 * */
+	public List<Local> obtlocales(){
+		return locdao.listlocal();
+	}
 
 }
