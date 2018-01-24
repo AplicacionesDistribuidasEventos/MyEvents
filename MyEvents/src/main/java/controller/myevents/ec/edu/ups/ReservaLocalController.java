@@ -24,6 +24,7 @@ import dao.myevents.ec.edu.ups.PersonaDAO;
 import dao.myevents.ec.edu.ups.ReservaLocalDAO;
 import modelo.myevents.ec.edu.ups.Local;
 import modelo.myevents.ec.edu.ups.Persona;
+import modelo.myevents.ec.edu.ups.PersonaLocalReserva;
 import modelo.myevents.ec.edu.ups.ReservaLocal;
 
 // TODO: Auto-generated Javadoc
@@ -46,6 +47,8 @@ public class ReservaLocalController {
 	@Inject
 	private PersonaDAO pdao;
 	
+	private ReservaLocal reservaLaux;
+	
 	private List<Local> localSinR = new ArrayList<Local>();
 	
 	/** Variables definidas para el manejo del SalonRecepcion*/
@@ -61,6 +64,8 @@ public class ReservaLocalController {
 	@PostConstruct
 	public void init() {
 		reservalocal = new ReservaLocal();
+		reservaLaux = new ReservaLocal();
+
 		//listaSalonRecepcion();
 	}
 	
@@ -69,10 +74,22 @@ public class ReservaLocalController {
 	 * Geters y Seters de las variables definidas y ha ser utilizadas.
 	 */
   
+	
+	
 	public int getId() {
 		return id;
 	}
 	
+	public ReservaLocal getReservaLaux() {
+		return reservaLaux;
+	}
+
+
+	public void setReservaLaux(ReservaLocal reservaLaux) {
+		this.reservaLaux = reservaLaux;
+	}
+
+
 	public void setId(int id) {
 		this.id = id;
 		cargarEstado(id);
@@ -245,35 +262,18 @@ System.out.println("LOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: RRRRRRRRRRRRCCCCCCCCC")
 	
 	/**PERMITE QUITAR LAS RESERVAS POR PARTE DEL ADMINISTRADOR Y USUARIO
 	 * */
-	public void QuitarResera(int id) {
-		//System.out.println("ID: "+id);
-		int idu = PersonaController.idUsuario;
-		int idl = id;
-		ReservaLocal rl = new ReservaLocal();
-		int Mid = rldao.maxId();
-		/**ESTABLEZCO LA TABLA INTERMEDIA
-		 * */
-		rl.setId(Mid);
-		rl.setEstado("false");
-		rl.setFechaReserva(fechaR);
-		rldao.insertarSRecepcion(rl);
+
+	public String QuitarResera(int id) {
 		
-		/**OBTENGO EL OBJETO PERSONA
-		 * */
-		Persona p = pdao.selectPersona(idu);
+		reservaLaux = rldao.selectSRecepcion(id);
 		
-		/**OBTENGO EL OBJETO LOCAL
-		 * */
-		Local l = ldao.leerLocal(idl);
-		
-		p.getReservaLocal().add(rl);
-		l.getReseervaLocales().add(rl);
-		pdao.updatePersona(p);
-		ldao.updateLocal(l);
-		System.out.println("VA A RESERVAR--   us:"+idu+",   idl:"+idl+",   fechaR:"+fechaR);
-		/**REFRESCANDO LOCALES
-		 * */
-		localeslibres=cargarLocalesSReserva();
+		System.out.println("ID RESERVAS" + "" + reservaLaux);
+		reservaLaux.setEstado("false");	
+		rldao.updateSRecepcion(reservaLaux);
+		System.out.println(reservaLaux + "miooooooooo");
+	
+		return null;
+
 	}
 	
 

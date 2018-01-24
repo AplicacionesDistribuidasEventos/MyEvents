@@ -44,8 +44,19 @@
 				#{adminreserva.res_fechaReserva}      
 				</h:column>
  
+ 				
+ 				<h:column>
+					<f:facet name="header" Style="color: black">
+						<center>Reserva</center>
+					</f:facet>
+					<center>
+						<h:commandButton value="Eliminar Reserva" class="btn btn-danger btn-lg"
+							action="#{reservaLocalController.QuitarResera(adminreserva.res_id)}" />
+					</center>
+				</h:column>
+ 
 			</h:dataTable>
-			<h:commandButton action="mainAdmin" value="Principal"
+			<h:commandButton action="mainAdmin.xhtml" value="Principal"
 				class="btn btn-info" />
 		
 		
