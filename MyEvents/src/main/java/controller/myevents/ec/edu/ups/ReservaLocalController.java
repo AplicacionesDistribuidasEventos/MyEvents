@@ -65,6 +65,7 @@ public class ReservaLocalController {
 	public void init() {
 		reservalocal = new ReservaLocal();
 		reservaLaux = new ReservaLocal();
+
 		//listaSalonRecepcion();
 	}
 	
@@ -261,6 +262,7 @@ System.out.println("LOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: RRRRRRRRRRRRCCCCCCCCC")
 	
 	/**PERMITE QUITAR LAS RESERVAS POR PARTE DEL ADMINISTRADOR Y USUARIO
 	 * */
+
 	public String QuitarResera(int id) {
 		
 		reservaLaux = rldao.selectSRecepcion(id);
@@ -271,6 +273,7 @@ System.out.println("LOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: RRRRRRRRRRRRCCCCCCCCC")
 		System.out.println(reservaLaux + "miooooooooo");
 	
 		return null;
+
 	}
 	
 

@@ -123,8 +123,7 @@ public class ReservaLocalDAO {
 		rlfalse = query.getResultList();
 		return rlfalse;
 	}
-	
-	
+		
 	public List<ReservaLocal> resLocasID(int id) {
 		String jpql = "Select r from ReservaLocal e WHERE r.codigo = '" + id + "' ";
 		TypedQuery<ReservaLocal> query = em.createQuery(jpql, ReservaLocal.class);
@@ -133,6 +132,4 @@ public class ReservaLocalDAO {
 		return reslocal;
 	}
 		
-
 } // fin de la clase 
-

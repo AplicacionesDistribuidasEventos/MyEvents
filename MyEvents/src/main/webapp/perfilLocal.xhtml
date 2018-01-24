@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="PlantillaUsuario.xhtml">
+	<!-- Colocar el titulo en la pestana -->
+	<ui:define name="titulo">Crear Eventos</ui:define>
+
+	<!-- Colocar el Breadcrumbs o seccion donde se encuentra -->
+	<ui:define name="breadcrums">Gestion de Salones</ui:define>
+
+	<!-- Titulo del Contenido -->
+	<ui:define name="bienvenida">Gestor Salones de Recepcion</ui:define>
+
+	<ui:define name="contenido">
+
+		<!-- PROPIEDADES DEL LOCAL -->
+		<div>
+			<h:form id="f_lcomentarios">
+
+				<center>
+					<img src="#{localController.local.fotoPerfil}" class="img-rounded"
+						width="1000" height="400" />
+				</center>
+				<center>
+					<span style="color: black; font-style: bold">#{localController.local.nombre}</span>
+				</center>
+				<span>#{localController.local.descripcion}</span>
+				<br />
+				<a>$ #{localController.local.costo} por dia</a>
+				<br />
+				<span>Capacidad: #{localController.local.capacidad} personas</span>
+				<div>
+					<h3>Comentarios:</h3>
+					<h:outputLabel value="No hay comentarios para este Salon"
+						rendered="#{empty  comentarioController.listPLC()}"/>
+					<h:dataTable var="listaComentarios"
+						value="#{comentarioController.listPLC()}" class="table" id="t_comentarios">
+						<h:column>
+							<span>#{listaComentarios.nombre_p}
+								#{listaComentarios.apellido_p}</span>
+							<br />
+							<span>#{listaComentarios.fecha_c}</span>
+							<h4>#{listaComentarios.comentario}</h4>
+						</h:column>
+					</h:dataTable>
+				</div>
+ 			</h:form>
+		</div>
+
+		<div>
+			<h:form id="form_comentario">			
+				<span>Deja tu comentario</span>
+				<h:inputText value="#{comentarioController.comentario.descripcion}" pt:placeholder="Ingrese su comentario"/>
+
+				<h:commandButton action="#{comentarioController.insertarComentario()}"
+					value="Comentar" />
+					 
+					<h:button onclick="#{comentarioController.insertarComentario()}" value=""></h:button>
+ 
+			</h:form>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

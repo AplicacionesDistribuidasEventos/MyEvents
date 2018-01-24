@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The Class Evento.
@@ -68,6 +70,7 @@ public class Evento {
 	private Categoria categoria;
 	
 	/** The Asistencia eventos. */
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	//cedula como se va a llamar en la otra tabla, el id de la tabla donde se crea
 	@JoinColumn(name="aev_even_id", referencedColumnName="even_codigo")
@@ -223,5 +226,5 @@ public class Evento {
 				+ categoria + ", AsistenciaEventos=" + AsistenciaEventos + "]";
 	}
   
-  	
+ 	
 }
