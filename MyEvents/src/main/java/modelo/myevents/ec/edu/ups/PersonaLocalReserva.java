@@ -1,7 +1,7 @@
 package modelo.myevents.ec.edu.ups;
 
 import java.util.Date;
-
+ 
 public class PersonaLocalReserva {
 	
 	/**Atributos para vista de LOCALES*/
