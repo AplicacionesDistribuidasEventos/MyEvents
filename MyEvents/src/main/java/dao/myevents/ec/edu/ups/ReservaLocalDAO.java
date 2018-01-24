@@ -1,10 +1,12 @@
 package dao.myevents.ec.edu.ups;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import modelo.myevents.ec.edu.ups.ReservaLocal;
 
@@ -91,14 +93,46 @@ public class ReservaLocalDAO {
 	 *
 	 * @return the list
 	 */
-
+/*
 	public List<ReservaLocal> listSRecepcion() {
 		String sql = "select slr from SalonRecepcion slr";
 		TypedQuery<ReservaLocal> query = em.createQuery(sql, ReservaLocal.class);
 		List<ReservaLocal> lsrecepcion = query.getResultList();
 		return lsrecepcion;
 	}
-
+*/	
+	
+	public int maxId() {
+		String jpql = "Select rl FROM ReservaLocal rl";
+		TypedQuery<ReservaLocal> q = em.createQuery(jpql, ReservaLocal.class);
+		List<ReservaLocal> rll = q.getResultList();
+		if(rll.size()==0) {
+			return 1;
+		}else {
+			String jpqlm = "Select max(rl.id) FROM ReservaLocal rl";
+			int id = (int) em.createQuery(jpqlm).getSingleResult();
+			int idnew = id+1;
+			return idnew;
+		}
+	}
+	
+	public List<ReservaLocal>localesRTrue(){
+		List<ReservaLocal>rlfalse = new ArrayList<ReservaLocal>();
+		String jpql = "Select rl FROM ReservaLocal rl WHERE rl.estado = 'true'";
+		Query query = em.createQuery(jpql, ReservaLocal.class);
+		rlfalse = query.getResultList();
+		return rlfalse;
+	}
+	
+	
+	public List<ReservaLocal> resLocasID(int id) {
+		String jpql = "Select r from ReservaLocal e WHERE r.codigo = '" + id + "' ";
+		TypedQuery<ReservaLocal> query = em.createQuery(jpql, ReservaLocal.class);
+		List<ReservaLocal> reslocal = query.getResultList();
+		
+		return reslocal;
+	}
+		
 
 } // fin de la clase 
 

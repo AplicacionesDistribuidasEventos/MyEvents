@@ -87,6 +87,7 @@ public class PersonaController {
 	/**Vista de PersonaLocalReserva*/
 	private List<PersonaLocalReserva> plreserva;
 	
+	private List<ReservaLocal> listadoreservaLoc;
 	private List<Persona> lpersonas;
 	private List<Local> auxListlocales;
 	private List<Evento> ev2 = new ArrayList<Evento>();
@@ -121,6 +122,7 @@ public class PersonaController {
 		auxlistAmdinID= new Persona();
 		//consulAsisEvenUser();
 		ev2 = new ArrayList<Evento>();
+		listadoreservaLoc = new ArrayList<ReservaLocal>();
 		
 	}
 
@@ -129,8 +131,17 @@ public class PersonaController {
 	 */
 	
 	
+	
 	public String getNusuario() {
 		return nusuario;
+	}
+
+	public List<ReservaLocal> getListadoreservaLoc() {
+		return listadoreservaLoc;
+	}
+
+	public void setListadoreservaLoc(List<ReservaLocal> listadoreservaLoc) {
+		this.listadoreservaLoc = listadoreservaLoc;
 	}
 
 	public Persona getAuxpersonas() {
@@ -889,6 +900,7 @@ public class PersonaController {
 							vista.setL_fotoPerfil(lo.getFotoPerfil());
 
 							/** Atributo de ReservaLocal */
+							vista.setRes_id(res.getId());
 							vista.setRes_estado(res.getEstado());
 							vista.setRes_fechaReserva(res.getFechaReserva());
 							plreserva.add(vista);
@@ -904,4 +916,5 @@ public class PersonaController {
 		return "consulReservaAdmin"; 
 	}
 	
+
 }
