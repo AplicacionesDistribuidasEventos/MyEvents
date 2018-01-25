@@ -82,6 +82,8 @@ public class Local implements Serializable{
 	@Column(name="local_imagen")
 	private byte[] imagen;
 	
+	@Column(name="local_telefono")
+	private String telefono;
 	
 	/** Relacion de uno a mucho dentre el local y eventos */
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
@@ -323,13 +325,21 @@ public class Local implements Serializable{
 		this.comentarios = comentarios;
 	}
 
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	@Override
 	public String toString() {
 		return "Local [codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", capacidad="
 				+ capacidad + ", costo=" + costo + ", puntuacion=" + puntuacion + ", comentario=" + comentario
 				+ ", fotoPerfil=" + fotoPerfil + ", latitud=" + latitud + ", longitud=" + longitud + ", imagen="
-				+ Arrays.toString(imagen) + ", evento=" + evento + ", reseervaLocales=" + reseervaLocales
-				+ ", comentarios=" + comentarios + "]";
+				+ Arrays.toString(imagen) + ", telefono=" + telefono + ", evento=" + evento + ", reseervaLocales="
+				+ reseervaLocales + ", comentarios=" + comentarios + "]";
 	}
 
 }
