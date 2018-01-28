@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="PlantillaUsuario.xhtml">
+	template="plantillaUsuario.xhtml">
 	<!-- Colocar el titulo en la pestana -->
 	<ui:define name="titulo">Crear Eventos</ui:define>
 
@@ -52,13 +52,14 @@
 		<div>
 			<h:form id="form_comentario">			
 				<span>Deja tu comentario</span>
-				<h:inputText value="#{comentarioController.comentario.descripcion}" pt:placeholder="Ingrese su comentario"/>
+				<h:inputText value="#{comentarioController.comentario.descripcion}" id="icomentario" pt:placeholder="Ingrese su comentario"/>
 
 				<h:commandButton action="#{comentarioController.insertarComentario()}"
-					value="Comentar" />
+					value="Comentar">
+					
+					</h:commandButton>
 					 
-					<h:button onclick="#{comentarioController.insertarComentario()}" value=""></h:button>
- 
+					
 			</h:form>
 		</div>
 
