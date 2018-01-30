@@ -109,7 +109,7 @@ public class PersonaController {
 	@PostConstruct
 	public void init() {
 		personas = new Persona();
-		lpersonas = listaPersonas(); 
+		lpersonas = new ArrayList<Persona>();
 		ListPerID = new ArrayList<Persona>();
 		plelist = new ArrayList<PersonaLocalEvento>();
 		plreserva = new ArrayList<PersonaLocalReserva>();
@@ -118,7 +118,7 @@ public class PersonaController {
 		v = new Validacion();
 		consultaLocalEventos();
 		listLocales = new ArrayList<Local>();
-		consultarLocalesADMIN(id);
+//		consultarLocalesADMIN(id);
 		auxlistAmdinID= new Persona();
 		//consulAsisEvenUser();
 		ev2 = new ArrayList<Evento>();
@@ -506,12 +506,12 @@ public class PersonaController {
 	 *
 	 * @return una lista de todas la personas.
 	 */
-
+/*
 	public List<Persona> listaPersonas() {
 		lpersonas = pdao.listPersonas();
 		return lpersonas;
 	}
-
+*/
 	/* GETER AND SETTERSS: Nombre y Fecha del Evento */
 	public String getEnombre() {
 		return enombre;
@@ -620,7 +620,7 @@ public class PersonaController {
 				// FacesContext contexAS= FacesContext.getCurrentInstance();
 				System.out.println("CONTEXTO ADMINN");
 
-				consultarLocalesADMIN(idUsuario);
+				consultarLocalesADMIN();
 				System.out.println("consulta local adminn" + idUsuario);
 
 				try {
@@ -775,11 +775,11 @@ public class PersonaController {
 	 *         llamamos dentro de Accioneslocal.xhtml
 	 */
 
-	public String consultarLocalesADMIN(int id) {
+	public List<Local> consultarLocalesADMIN() {
 
 		listLocales.clear();
 
-		lpersonas = pdao.listPersonaID(id);
+		lpersonas = pdao.listPersonaID(idUsuario);
 		for (Persona p : lpersonas) {
 			for (Local loc : p.getLocales()) {
 				Local l = new Local();
@@ -798,7 +798,7 @@ public class PersonaController {
 			System.out.println("Lista de los locales que me imprime son:" + "" + listLocales);
 		}
 
-		return null;
+		return listLocales;
 	}
 
 	/**
@@ -876,8 +876,8 @@ public class PersonaController {
 	 * la misma pagina en JSF.
 	 */
 	
-	public String consulLocalReservAdmin() {
-		init();
+	public List<PersonaLocalReserva> consulLocalReservAdmin() {
+		//init();
 		/** Instancio la vista */
 		PersonaLocalReserva vista = new PersonaLocalReserva();
 		/** Limpia la lista */
@@ -913,7 +913,7 @@ public class PersonaController {
 
 		}
 
-		return "consulReservaAdmin"; 
+		return plreserva; 
 	}
 	
 

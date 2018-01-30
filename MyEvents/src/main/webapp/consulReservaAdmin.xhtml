@@ -26,7 +26,7 @@
 		<h:outputText value="El registro no contiene datos"
 				rendered="#{empty  personaController.plreserva}"></h:outputText>
 		
-		<h:dataTable value="#{personaController.plreserva}" var="adminreserva"
+		<h:dataTable value="#{personaController.consulLocalReservAdmin()}" var="adminreserva"
 				class="table" rendered="#{not empty personaController.plreserva}">
 
 				<h:column>
@@ -50,8 +50,8 @@
 						<center>Reserva</center>
 					</f:facet>
 					<center>
-						<h:commandButton value="Eliminar Reserva" class="btn btn-danger btn-lg"
-							action="#{reservaLocalController.QuitarResera(adminreserva.res_id)}" />
+						<h:commandButton value="Denegar Reserva" class="btn btn-danger btn-lg"
+							action="#{reservaLocalController.QuitarResera(adminreserva.res_id)}" actionListener="consulReservaAdmin.xhtml"/>
 					</center>
 				</h:column>
  
