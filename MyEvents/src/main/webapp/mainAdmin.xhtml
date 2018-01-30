@@ -24,11 +24,11 @@
             
           <h2>Mis salones</h2>
 			<br/>
-			<h:commandButton  value="LISTAR RESERVAS" action="#{personaController.consulLocalReservAdmin()}" class="btn btn-info"/>
+			<h:commandButton  value="LISTAR RESERVAS" actionListener="#{personaController.consulLocalReservAdmin()}" action="consulReservaAdmin" class="btn btn-info"/>
 			
             <br/>
             <br/>
-			<h:dataTable value="#{personaController.listLocales}" var="locales"
+			<h:dataTable value="#{personaController.consultarLocalesADMIN()}" var="locales"
 				class="table" styleClass="table table-striped table-bordered">
 			<h:column Style="color: black">
 					<f:facet name="header">Salon</f:facet>

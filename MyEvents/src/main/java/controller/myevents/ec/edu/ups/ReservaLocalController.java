@@ -263,7 +263,7 @@ System.out.println("LOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: RRRRRRRRRRRRCCCCCCCCC")
 	/**PERMITE QUITAR LAS RESERVAS POR PARTE DEL ADMINISTRADOR Y USUARIO
 	 * */
 
-	public String QuitarResera(int id) {
+	public void QuitarResera(int id) {
 		
 		reservaLaux = rldao.selectSRecepcion(id);
 		
@@ -271,8 +271,9 @@ System.out.println("LOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: RRRRRRRRRRRRCCCCCCCCC")
 		reservaLaux.setEstado("false");	
 		rldao.updateSRecepcion(reservaLaux);
 		System.out.println(reservaLaux + "miooooooooo");
-	
-		return null;
+//		PersonaController pcon = new PersonaController();
+//		pcon.consulLocalReservAdmin();
+//		return "consulReservaAdmin" ;
 
 	}
 	
