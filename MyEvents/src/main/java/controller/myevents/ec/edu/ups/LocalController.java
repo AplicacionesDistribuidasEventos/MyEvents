@@ -63,6 +63,7 @@ public class LocalController {
 	// private String directorioPerfil=
 	// "C:\\Users\\asus\\git\\MyEvents\\MyEvents\\src\\main\\webapp\\imagenes";
 	private String directorioPerfil = "/var/www/html/MyEvents/upload";
+	//private String directorioPerfil = "http://35.227.34.90/MyEvents/upload/";
 	/** Variable que contendra el nombre del archivo */
 	private String nombreArchivoPerfil;
 	private List<String> imagenes;
@@ -303,10 +304,10 @@ public class LocalController {
 
 		if (fotoPerfil != null) {
 			saveFotoLocal();
-			local.setFotoPerfil("upload/" + nombreArchivoPerfil);
+			local.setFotoPerfil("http://www.myeventsapp2018.com/MyEvents/upload/" + nombreArchivoPerfil);
 		} else {
 
-			local.setFotoPerfil("upload/local1.jpg");
+			local.setFotoPerfil("http://www.myeventsapp2018.com/MyEvents/upload/local1.jpg");
 
 		}
 
@@ -327,10 +328,10 @@ public class LocalController {
 
 		if (fotoPerfil != null) {
 			saveFotoLocal();
-			local.setFotoPerfil("upload/" + nombreArchivoPerfil);
+			local.setFotoPerfil("http://www.myeventsapp2018.com/MyEvents/upload/" + nombreArchivoPerfil);
 		} else {
 
-			local.setFotoPerfil("upload/local1.jpg");
+			local.setFotoPerfil("http://www.myeventsapp2018.com/MyEvents/upload/local1.jpg");
 
 		}
 
@@ -394,7 +395,7 @@ public class LocalController {
 			System.out.println("Uploaded file successfully saved in " + fotoPerfil);
 
 		} catch (IOException e) {
-			System.out.println("Error inesperado al subir foto" + e.getMessage());
+			System.out.println("Error inesperado al subir foto: " + e.getMessage());
 		}
 		return "";
 	}
